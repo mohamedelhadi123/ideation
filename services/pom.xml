@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+
+    <groupId>org.exoplatform.addons.ideation</groupId>
+    <artifactId>ideation</artifactId>
+    <version>1.0.x-SNAPSHOT</version>
+    </parent>
+    <artifactId>ideation-services</artifactId>
+    <packaging>jar</packaging>
+    <name>eXo ideation :: Backend Services</name>
+    <description>eXo ideation services</description>
+
+    <dependencies>
+        <!-- Others third party -->
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Portal & ECMS & Social -->
+        <dependency>
+            <groupId>org.exoplatform.commons</groupId>
+            <artifactId>commons-webui-ext</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.ecms</groupId>
+            <artifactId>ecms-core-webui-explorer</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <!--<scope>test</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>jmock</groupId>
+            <artifactId>jmock</artifactId>
+            <version>1.0.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.xsl</include>
+                    <include>**/*.dtd</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.drl</include>
+                    <include>**/*.doc</include>
+                    <include>**/*.xls</include>
+                    <include>**/*.ppt</include>
+                    <include>**/*.txt</include>
+                    <include>**/*.jar</include>
+                    <include>**/*.pom</include>
+                    <include>**/*.sha1</include>
+                    <include>**/*.conf</include>
+                    <include>**/*.gtmpl</include>
+                    <include>**/*.gif</include>
+                    <include>**/*.jpg</include>
+                    <include>**/*.png</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>com.jcabi</groupId>
+                <artifactId>jcabi-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
