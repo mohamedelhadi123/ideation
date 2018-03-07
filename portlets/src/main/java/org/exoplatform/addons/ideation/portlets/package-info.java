@@ -21,19 +21,14 @@
 @Application(defaultController = IdeationController.class)
 @Portlet
 
-/**
- @Scripts(
- {
- //@Script(value = "javascript/jquery-3.2.1.min.js", id = "jquery",location = AssetLocation.SERVER),
- //@Script(value = "javascript/vue.esm.browser.js", id = "vuejs",location = AssetLocation.SERVER, header = true),
- //@Script(value = "javascript/categories.js", id = "categoriesjs",location = AssetLocation.SERVER,depends = "vuejs")
+@Stylesheets(
+        {
+                @Stylesheet(value = "/org/exoplatform/addons/ideation/portlets/assets/global.css", location = AssetLocation.APPLICATION, id = "global")
+        }
 
- }
- )
- */
+)
 @Bindings(
         {
-                @Binding(value = org.exoplatform.services.organization.OrganizationService.class),
                 @Binding(value = org.exoplatform.ideation.service.IdeaService.class)
 
         }
@@ -44,6 +39,7 @@ package org.exoplatform.addons.ideation.portlets;
 
 
 import juzu.Application;
+import juzu.asset.AssetLocation;
 import juzu.plugin.asset.*;
 import juzu.plugin.binding.Binding;
 import juzu.plugin.binding.Bindings;

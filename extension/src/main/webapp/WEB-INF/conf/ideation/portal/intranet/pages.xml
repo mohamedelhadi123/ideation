@@ -21,14 +21,14 @@
   -->
 <page-set>
   <page>
-    <name>Ideation</name>
+    <name>ideation</name>
     <title>Ideation</title>
     <access-permissions>*:/platform/administrators</access-permissions>
     <edit-permission>*:/platform/administrators</edit-permission>
     <show-max-window>false</show-max-window>
     <portlet-application>
       <portlet>
-        <application-ref>Ideation-portlets</application-ref>
+        <application-ref>ideation-portlets</application-ref>
         <portlet-ref>IdeationControllerApplication</portlet-ref>
       </portlet>
       <access-permissions>Everyone</access-permissions>

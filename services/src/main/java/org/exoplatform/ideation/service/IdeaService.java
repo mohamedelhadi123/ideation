@@ -5,17 +5,17 @@ import org.exoplatform.ideation.dao.IdeaDAO;
 
 public class IdeaService {
 
-    protected final IdeaDAO IdeaDao;
+    protected final IdeaDAO ideaDao;
 
     public IdeaService(IdeaDAO IdeaDao) {
 
-        this.IdeaDao = IdeaDao;
+        this.ideaDao = IdeaDao;
 
     }
 
     public IdeaEntity createIdea (IdeaEntity IdeaEntity) {
 
-        IdeaEntity IdeaE = IdeaDao.create(IdeaEntity);
+        IdeaEntity IdeaE = ideaDao.create(IdeaEntity);
 
         return IdeaE;
 
@@ -23,7 +23,7 @@ public class IdeaService {
 
     public IdeaEntity updateIdea (IdeaEntity IdeaEntity) {
 
-        IdeaEntity IdeaE = IdeaDao.update(IdeaEntity);
+        IdeaEntity IdeaE = ideaDao.update(IdeaEntity);
 
         return IdeaE;
 
@@ -31,12 +31,12 @@ public class IdeaService {
 
     public void deleteIdea (IdeaEntity IdeaEntity) {
 
-        IdeaDao.delete(IdeaEntity);
+        ideaDao.delete(IdeaEntity);
 
     }
 
     public IdeaEntity findIdeaByTitle(String IdeaTitle) {
 
-        return IdeaDao.findIdeaByTitle(IdeaTitle);
+        return ideaDao.findIdeaByTitle(IdeaTitle);
     }
 }

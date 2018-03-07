@@ -7,11 +7,11 @@
   <priority>1</priority>
   <page-nodes>
     <node>
-      <uri>Ideation</uri>
-      <name>Ideation</name>
-      <label xml:lang="en"> Ideation</label>
+      <uri>ideation</uri>
+      <name>ideation</name>
+      <label xml:lang="en">Ideation</label>
       <visibility>DISPLAYED</visibility>
-      <page-reference>portal::intranet::Ideation</page-reference>
+      <page-reference>portal::intranet::ideation</page-reference>
     </node>
   </page-nodes>
 </node-navigation>

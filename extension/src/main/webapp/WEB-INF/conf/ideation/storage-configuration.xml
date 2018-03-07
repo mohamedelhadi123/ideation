@@ -13,7 +13,7 @@
     <component>
         <type>org.exoplatform.ideation.dao.IdeaDAO</type>
     </component>
-<component>
+    <component>
         <type>org.exoplatform.ideation.service.IdeaService</type>
     </component>
 
@@ -27,7 +27,7 @@
             <init-params>
                 <values-param>
                     <name>changelogs</name>
-                    <description>Change logs of ideation </description>
+                    <description>Change logs of ideation</description>
                     <value>db/changelog/ideations.db.changelog-1.0.0.xml</value>
                 </values-param>
             </init-params>
