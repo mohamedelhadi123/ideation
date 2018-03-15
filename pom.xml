@@ -32,7 +32,7 @@
     <version>1.0.x-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>eXo ideation</name>
-    <description>eXo ideation extension</description>
+    <description>eXo ideation extension (PR for ideation)</description>
 
     <modules>
         <module>services</module>
@@ -53,7 +53,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <org.exoplatform.depmgt.version>13-RC01</org.exoplatform.depmgt.version>
-        <org.exoplatform.platform.version>5.0.0-RC09</org.exoplatform.platform.version>
+        <org.exoplatform.platform.version>5.0.0-RC10</org.exoplatform.platform.version>
         <!-- Juzu Version -->
         <juzu.version>1.1.0</juzu.version>
         <!-- for tests -->
@@ -102,12 +102,6 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>1.10.19</version>
-                <!--<scope>test</scope>-->
             </dependency>
         </dependencies>
     </dependencyManagement>

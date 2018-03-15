@@ -14,5 +14,45 @@
     <packaging>war</packaging>
     <name>eXo Ideation :: Extension Webapp</name>
     <description>eXo Ideation portal extension</description>
-
+<dependencies>
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>javax.inject</groupId>
+        <artifactId>javax.inject</artifactId>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>javax.portlet</groupId>
+        <artifactId>portlet-api</artifactId>
+        <scope>provided</scope>
+    </dependency>
+</dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.drl</include>
+                    <include>**/*.doc</include>
+                    <include>**/*.xls</include>
+                    <include>**/*.ppt</include>
+                    <include>**/*.txt</include>
+                    <include>**/*.jar</include>
+                    <include>**/*.pom</include>
+                    <include>**/*.sha1</include>
+                    <include>**/*.conf</include>
+                    <include>**/*.gtmpl</include>
+                    <include>**/*.gif</include>
+                    <include>**/*.jpg</include>
+                    <include>**/*.png</include>
+                </includes>
+            </resource>
+        </resources>
+        <finalName>ideation-extension</finalName>
+    </build>
 </project>

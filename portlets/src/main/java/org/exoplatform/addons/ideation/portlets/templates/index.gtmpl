@@ -1,3 +1,19 @@
-<div id="ideation">
-      <h2>Test</h2>
-</div>
+      <div id="ideation">
+
+                                    <h2>
+                                          <span>Add new idea</span>
+                                    </h2>
+
+                                    <form>
+                                                <label>idea title</label>
+                                                <input class="input-xxlarge" type="text" placeholder="" v-bind="title">
+                                                <label>idea Description</label>
+                                                <textarea rows="5" v-bind="description"></textarea>
+                                              <input v-model="description">
+                                              <p>{{description}}</p>
+                                          <div>
+                                                <button class="btn btn-primary" @click="addidea">Add</button>
+                                          </div>
+                                    </form>
+
+      </div>

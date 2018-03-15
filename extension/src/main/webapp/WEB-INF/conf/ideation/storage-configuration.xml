@@ -11,7 +11,7 @@
     </component>
     <!-- Badges storage (JPA) -->
     <component>
-        <type>org.exoplatform.ideation.dao.IdeaDAO</type>
+        <type>org.exoplatform.ideation.storage.dao.IdeaDAO</type>
     </component>
     <component>
         <type>org.exoplatform.ideation.service.IdeaService</type>

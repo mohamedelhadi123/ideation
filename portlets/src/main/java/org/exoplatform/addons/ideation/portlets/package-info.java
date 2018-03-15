@@ -17,9 +17,10 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-
 @Application(defaultController = IdeationController.class)
 @Portlet
+
+
 
 @Stylesheets(
         {
@@ -27,8 +28,11 @@
         }
 
 )
+
 @Bindings(
         {
+                @Binding(value = org.exoplatform.services.organization.OrganizationService.class),
+
                 @Binding(value = org.exoplatform.ideation.service.IdeaService.class)
 
         }
@@ -45,3 +49,4 @@ import juzu.plugin.binding.Binding;
 import juzu.plugin.binding.Bindings;
 import juzu.plugin.less.Less;
 import juzu.plugin.portlet.Portlet;
+

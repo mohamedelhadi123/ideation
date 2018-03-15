@@ -1,37 +1,37 @@
 package org.exoplatform.ideation.service;
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
-import org.exoplatform.ideation.dao.IdeaDAO;
+import org.exoplatform.ideation.storage.dao.IdeaDAO;
 
 
 public class IdeaService {
 
     protected final IdeaDAO ideaDao;
 
-    public IdeaService(IdeaDAO IdeaDao) {
+    public IdeaService(IdeaDAO ideaDao) {
 
-        this.ideaDao = IdeaDao;
+        this.ideaDao = ideaDao;
 
     }
 
-    public IdeaEntity createIdea (IdeaEntity IdeaEntity) {
+    public IdeaEntity createIdea (IdeaEntity ideaEntity) {
 
-        IdeaEntity IdeaE = ideaDao.create(IdeaEntity);
+        IdeaEntity IdeaE = ideaDao.create(ideaEntity);
 
         return IdeaE;
 
     }
 
-    public IdeaEntity updateIdea (IdeaEntity IdeaEntity) {
+    public IdeaEntity updateIdea (IdeaEntity ideaEntity) {
 
-        IdeaEntity IdeaE = ideaDao.update(IdeaEntity);
+        IdeaEntity IdeaE = ideaDao.update(ideaEntity);
 
         return IdeaE;
 
     }
 
-    public void deleteIdea (IdeaEntity IdeaEntity) {
+    public void deleteIdea (IdeaEntity ideaEntity) {
 
-        ideaDao.delete(IdeaEntity);
+        ideaDao.delete(ideaEntity);
 
     }
 
@@ -39,4 +39,10 @@ public class IdeaService {
 
         return ideaDao.findIdeaByTitle(IdeaTitle);
     }
+
+    public IdeaEntity findIdeaById(Long IdeaId) {
+
+        return ideaDao.findIdeaById(IdeaId);
+    }
 }
+

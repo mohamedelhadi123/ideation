@@ -24,6 +24,7 @@
         <portlet-info>
             <title>Geoloc</title>
             <short-title>Geoloc</short-title>
+            <keywords>Administration</keywords>
         </portlet-info>
         <portlet-preferences>
             <preference>

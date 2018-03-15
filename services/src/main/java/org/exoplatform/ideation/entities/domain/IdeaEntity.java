@@ -34,6 +34,10 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
                         query = "SELECT idea FROM Idea idea where idea.title = :ideaTitle"
                 ),
                 @NamedQuery(
+                        name = "Idea.findIdeaById",
+                        query = "SELECT idea FROM Idea idea where idea.id = :ideaId"
+                ),
+                @NamedQuery(
                         name = "Idea.deleteIdeaByTitle",
                         query = "DELETE FROM Idea Idea WHERE Idea.title = :ideaTitle "
                 ),
