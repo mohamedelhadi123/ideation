@@ -1,6 +1,9 @@
 package org.exoplatform.ideation.service;
+import com.arjuna.ats.internal.jdbc.drivers.modifiers.list;
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
 import org.exoplatform.ideation.storage.dao.IdeaDAO;
+
+import java.util.ArrayList;
 
 
 public class IdeaService {
@@ -44,5 +47,6 @@ public class IdeaService {
 
         return ideaDao.findIdeaById(IdeaId);
     }
-}
 
+
+}

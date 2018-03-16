@@ -15,7 +15,7 @@ package org.exoplatform.ideation.DAO;
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/ .
  */
-
+/*
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ideation.TestUtils;
 import org.exoplatform.ideation.storage.dao.IdeaDAO;
@@ -59,5 +59,5 @@ public class TestIdeaEntity {
     }
 
 }
-
+*/
 

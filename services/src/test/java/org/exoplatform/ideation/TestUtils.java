@@ -23,24 +23,14 @@ public class TestUtils {
 
     public static long EXISTING_idea_ID = 1;
 
-    public static void initH2DB() throws SQLException,
+    public static void initOrclDB() throws SQLException,
             ClassNotFoundException, LiquibaseException {
 
-        Class.forName("com.mysql.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost", "root", "");
+        Class.forName("oracle.jdbc.OracleDriver");
+        conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "adelbase", "gtn");
 
         initDB();
     }
-
-    public static void initHSQLDB() throws LiquibaseException, SQLException,
-            ClassNotFoundException {
-
-        Class.forName("com.mysql.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost", "root", "");
-
-        initDB();
-    }
-
     private static void initDB() throws LiquibaseException {
         Database database = DatabaseFactory.getInstance()
                 .findCorrectDatabaseImplementation(new JdbcConnection(conn));
@@ -49,10 +39,6 @@ public class TestUtils {
         liquibase.update((String)null);
     }
 
-    public static void closeDB() throws LiquibaseException, SQLException {
-        liquibase.rollback(1000, null);
-        conn.close();
-    }
 
     public static IdeaEntity getDefaultIdea() {
         IdeaEntity idea = new IdeaEntity();
@@ -60,9 +46,7 @@ public class TestUtils {
         idea.setTitle("Default idea");
         idea.setCreatedBy("root");
         idea.setCreatedTime(new Date());
-        System.out.println(idea);
+        System.out.println(idea.getTitle());
         return idea;
     }
-
-
 }

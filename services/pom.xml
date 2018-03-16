@@ -27,6 +27,17 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.exoplatform.core</groupId>
+            <artifactId>exo.core.component.organization.api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.ws</groupId>
+            <artifactId>exo.ws.rest.core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Portal & ECMS & Social -->
         <dependency>
             <groupId>org.exoplatform.commons</groupId>

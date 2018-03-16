@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+*.iml
+.idea
+LICENSE
+.idea/dataSources.local.xml
+.idea/workspace.xml
+extension/target/
+packaging/target/
+portlets/target/
+services/target/
+start.bat

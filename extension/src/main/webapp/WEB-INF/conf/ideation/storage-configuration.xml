@@ -16,7 +16,9 @@
     <component>
         <type>org.exoplatform.ideation.service.IdeaService</type>
     </component>
-
+    <component>
+        <type>rest.TestRest</type>
+    </component>
     <!-- ideation  storage layout (Liquebase initializer) -->
     <external-component-plugins>
         <target-component>org.exoplatform.commons.api.persistence.DataInitializer</target-component>
