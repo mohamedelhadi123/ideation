@@ -27,23 +27,23 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
 @NamedQueries({
                 @NamedQuery(
                         name = "Idea.getAllIdeas",
-                        query = "SELECT idea FROM IDEA idea"
+                        query = "SELECT idea FROM Idea idea"
                 ),
                 @NamedQuery(
                         name = "Idea.findIdeaByTitle",
-                        query = "SELECT idea FROM IDEA idea where idea.title = :ideaTitle"
+                        query = "SELECT idea FROM Idea idea where idea.title = :ideaTitle"
                 ),
                 @NamedQuery(
                         name = "Idea.findIdeaById",
-                        query = "SELECT idea FROM IDEA idea where idea.id = :ideaId"
+                        query = "SELECT idea FROM Idea idea where idea.id = :ideaId"
                 ),
                 @NamedQuery(
                         name = "Idea.deleteIdeaByTitle",
-                        query = "DELETE FROM IDEA Idea WHERE Idea.title = :ideaTitle "
+                        query = "DELETE FROM Idea Idea WHERE Idea.title = :ideaTitle "
                 ),
                 @NamedQuery(
                         name = "Idea.deleteIdeaById",
-                        query = "DELETE FROM IDEA idea WHERE idea.id = :ideaId "
+                        query = "DELETE FROM Idea idea WHERE idea.id = :ideaId "
                 )
 
 })

@@ -20,10 +20,15 @@
 @Application(defaultController = IdeationController.class)
 @Portlet
 
+@Scripts(
+        {       @Script(value = "jquery-3.2.1.min.js", id = "jquery"),
+                @Script(value = "ideas.js", id = "ideajs" , depends = "jquery"),
 
-
+        }
+)
 @Stylesheets(
         {
+
                 @Stylesheet(value = "/org/exoplatform/addons/ideation/portlets/assets/global.css", location = AssetLocation.APPLICATION, id = "global")
         }
 

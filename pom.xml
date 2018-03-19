@@ -52,14 +52,27 @@
         <maven.compiler.optimize>true</maven.compiler.optimize>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- eXo Modules -->
+        <!-- **************************************** -->
+        <!-- Dependencies versions                    -->
+        <!-- **************************************** -->
         <org.exoplatform.depmgt.version>13-RC01</org.exoplatform.depmgt.version>
-        <org.exoplatform.platform.version>5.0.0-RC10</org.exoplatform.platform.version>
-        <!-- Juzu Version -->
-        <juzu.version>1.1.0</juzu.version>
+        <org.exoplatform.platform.version>5.0.0-RC13</org.exoplatform.platform.version>
         <!-- for tests -->
         <junit.version>4.12</junit.version>
-    </properties>
+        <!-- Liquibase stack -->
+        <org.liquibase.version>3.5.5</org.liquibase.version>
+        <org.liquibase-hibernate4.version>3.6</org.liquibase-hibernate4.version>
+        <org.javassist.version>3.20.0-GA</org.javassist.version>
+        <validation-api.version>1.1.0.Final</validation-api.version>
+        <xml-apis.version>1.4.01</xml-apis.version>
 
+        <profile.liquibase/>
+        <!-- MySQL driver-->
+        <mysql.version>5.1.23</mysql.version>
+        <!-- Juzu Version -->
+        <juzu.version>1.1.0</juzu.version>
+    </properties>
     <dependencyManagement>
         <dependencies>
             <!-- Import versions of external dependencies to use -->
@@ -105,4 +118,70 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+    <profiles>
+        <profile>
+            <id>liquibase</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.liquibase</groupId>
+                        <artifactId>liquibase-maven-plugin</artifactId>
+                        <version>${org.liquibase.version}</version>
+                        <configuration>
+                            <changeLogFile>services/src/main/resources/db/changelog/ideations.db.changelog-1.0.0-master.xml</changeLogFile>
+                            <diffChangeLogFile>services/src/main/resources/db/changelog/ideations.db.changelog-1.0.0-${maven.build.timestamp}.xml</diffChangeLogFile>
+                            <outputChangeLogFile>services/src/main/resources/db/changelog/ideations.db.changelog-1.0.0.xml</outputChangeLogFile>
+                            <driver>oracle.jdbc.OracleDriver</driver>
+                            <url>jdbc:oracle:thin:@localhost:1521:XE</url>
+                            <defaultSchemaName>tribe</defaultSchemaName>
+                            <username>adelbase</username>
+                            <password>gtn</password>
+                            <referenceUrl>hibernate:ejb3:exo-pu?hibernate.ejb.naming_strategy=org.hibernate.cfg.ImprovedNamingStrategy</referenceUrl>
+                            <verbose>true</verbose>
+                            <logging>debug</logging>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.javassist</groupId>
+                                <artifactId>javassist</artifactId>
+                                <version>${org.javassist.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.liquibase</groupId>
+                                <artifactId>liquibase-core</artifactId>
+                                <version>${org.liquibase.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.liquibase.ext</groupId>
+                                <artifactId>liquibase-hibernate4</artifactId>
+                                <version>${org.liquibase-hibernate4.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>javax.validation</groupId>
+                                <artifactId>validation-api</artifactId>
+                                <version>${validation-api.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>mysql</groupId>
+                                <artifactId>mysql-connector-java</artifactId>
+                                <!-- Replace with the version of the MySQL driver you want to use -->
+                                <version>${mysql.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.exoplatform.commons</groupId>
+                                <artifactId>commons-component-common</artifactId>
+                                <version>${org.exoplatform.platform.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>xml-apis</groupId>
+                                <artifactId>xml-apis</artifactId>
+                                <version>${xml-apis.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
 </project>

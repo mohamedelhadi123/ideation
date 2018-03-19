@@ -48,7 +48,6 @@
             <as>jQuery</as>
         </depends>
     </module>
-
     <module>
         <name>vuejs</name>
         <as>vuejs</as>

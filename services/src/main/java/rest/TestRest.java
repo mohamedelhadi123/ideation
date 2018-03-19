@@ -23,10 +23,9 @@ public class TestRest implements ResourceContainer {
 
     public String hello(@PathParam("title") String title) {
         IdeaEntity ideaEntity = new IdeaEntity() ;
-        ideaEntity.setTitle("helloooo");
-        IdeaDAO ideaDAO = new IdeaDAO();
-        ideaEntity = ideaDAO.create(ideaEntity);
-            return "Hello " + ideaEntity.toString();
+        ideaEntity.setTitle(title);
+
+            return "Hello " + ideaEntity.getTitle();
 
         }
 }
