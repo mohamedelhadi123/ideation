@@ -23,23 +23,13 @@
                   xsi:schemaLocation="http://www.exoplatform.org/xml/ns/gatein_resources_1_4 http://www.exoplatform.org/xml/ns/gatein_resources_1_4"
                   xmlns="http://www.exoplatform.org/xml/ns/gatein_resources_1_4">
 
- <!--
+
     <portlet>
         <name>IdeationControllerApplication</name>
-        <module>
-            <depends>
-                <module>ideation</module>
-            </depends>
-        </module>
-    </portlet>
     <module>
-        <name>ideation</name>
         <script>
             <path>/js/ideas.js</path>
         </script>
-        <depends>
-            <module>vuejs</module>
-        </depends>
         <depends>
             <module>juzu-ajax</module>
         </depends>
@@ -48,12 +38,6 @@
             <as>jQuery</as>
         </depends>
     </module>
-    <module>
-        <name>vuejs</name>
-        <as>vuejs</as>
-        <script>
-            <path>/js/vue.js</path>
-        </script>
-    </module>
-    -->
+    </portlet>
+
 </gatein-resources>

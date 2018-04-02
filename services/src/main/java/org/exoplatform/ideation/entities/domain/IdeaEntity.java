@@ -2,6 +2,7 @@ package org.exoplatform.ideation.entities.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -23,7 +24,7 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
 
 @Entity(name = "Idea")
 @ExoEntity
-@Table(name = "IDEA")
+@Table(name = "IDEA_IDEAS")
 @NamedQueries({
                 @NamedQuery(
                         name = "Idea.getAllIdeas",
@@ -52,16 +53,14 @@ public class IdeaEntity implements Serializable {
     @Id
     @Column(name = "IDEA_ID")
     private long  id;
+    @Column(name = "RATE")
     private long rate;
+    @Column(name = "TITLE")
     private String title;
+    @Column(name = "DESCRIPTION")
     private String description;
+    @Column(name = "STATUS")
     private String status;
-
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "Idea_Idea_COWORKERS",
-            joinColumns = @JoinColumn(name = "Idea_ID"))
-    private Set<String> coworker = new HashSet<String>();
-
     @Column(name = "CREATED_BY")
     private String createdBy;
 
@@ -106,6 +105,7 @@ public class IdeaEntity implements Serializable {
 
 
 
+
     public String getCreatedBy() {
         return createdBy;
     }
@@ -122,30 +122,31 @@ public class IdeaEntity implements Serializable {
         this.createdTime = createdTime;
     }
 
-    public Set<String> getCoworker() {
-        return coworker;
-    }
-
-    public void setCoworker(Set<String> coworker) {
-        this.coworker = coworker;
-    }
 
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
-        IdeaEntity IdeaEntity = (org.exoplatform.ideation.entities.domain.IdeaEntity) o;
+        IdeaEntity badgeEntity = (IdeaEntity) o;
+        return !(badgeEntity.getId() == 0 || getId() == 0) && Objects.equals(getId(), badgeEntity.getId());
+    }
 
-        if (id != IdeaEntity.id) return false;
-        if (coworker != null ? !coworker.equals(IdeaEntity.coworker) : IdeaEntity.coworker != null) return false;
-        if (createdBy != null ? !createdBy.equals(IdeaEntity.createdBy) : IdeaEntity.createdBy != null) return false;
-        if (createdTime != null ? !createdTime.equals(IdeaEntity.createdTime) : IdeaEntity.createdTime != null) return false;
-        if (description != null ? !description.equals(IdeaEntity.description) : IdeaEntity.description != null) return false;
-        if (status != null ? !status.equals(IdeaEntity.status) : IdeaEntity.status != null) return false;
-        if (title != null ? !title.equals(IdeaEntity.title) : IdeaEntity.title != null) return false;
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
 
-        return true;
+    @Override
+    public String toString() {
+        return "Badge{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                "}";
     }
 }

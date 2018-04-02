@@ -10,7 +10,7 @@
         <portlet-class>juzu.bridge.portlet.JuzuPortlet</portlet-class>
         <init-param>
             <name>juzu.app_name</name>
-            <value>org.exoplatform.addons.ideation.portlets</value>
+            <value>org.exoplatform.addons.ideation.portlets.ideations</value>
         </init-param>
         <init-param>
             <name>juzu.run_mode</name>

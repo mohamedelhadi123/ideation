@@ -8,13 +8,13 @@ public class IdeaDTO {
     protected Long id;
 
     @NotBlank
-    @Size(min = 10, max = 50)
+    @Size(min = 1, max = 50)
     protected String title;
 
-    @Size(min = 10, max = 256)
+    @Size(min = 1, max = 256)
     protected String description;
 
-    @Size(min = 10, max = 256)
+    @Size(min = 1, max = 256)
     protected String status;
 
     protected int rate;

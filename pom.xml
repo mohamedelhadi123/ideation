@@ -66,10 +66,10 @@
         <org.javassist.version>3.20.0-GA</org.javassist.version>
         <validation-api.version>1.1.0.Final</validation-api.version>
         <xml-apis.version>1.4.01</xml-apis.version>
-        <h2database.version>1.4.192</h2database.version>
 
         <profile.liquibase/>
         <!-- MySQL driver-->
+        <mysql.version>5.1.23</mysql.version>
         <mysql.version>5.1.23</mysql.version>
         <!-- Juzu Version -->
         <juzu.version>1.1.0</juzu.version>
@@ -84,6 +84,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
             <!-- Import versions from platform project -->
             <dependency>
                 <groupId>org.exoplatform.platform</groupId>
@@ -103,12 +109,6 @@
                 <artifactId>ideation-portlets</artifactId>
                 <version>${project.version}</version>
                 <type>war</type>
-            </dependency>
-            <dependency>
-                <groupId>com.h2database</groupId>
-                <artifactId>h2</artifactId>
-                <version>${h2database.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.exoplatform.addons.ideation</groupId>

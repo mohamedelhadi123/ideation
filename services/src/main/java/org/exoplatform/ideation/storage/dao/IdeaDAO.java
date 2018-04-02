@@ -16,7 +16,7 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
     public IdeaEntity findIdeaByTitle(String IdeaTitle) throws PersistenceException {
 
         TypedQuery<IdeaEntity> query = getEntityManager().createNamedQuery("Idea.findIdeaByTitle", IdeaEntity.class)
-                .setParameter("IdeaTitle", IdeaTitle);
+                .setParameter("ideaTitle", IdeaTitle);
 
         try {
             return query.getSingleResult();
@@ -29,7 +29,7 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
     public IdeaEntity findIdeaById(Long IdeaId) throws PersistenceException {
 
         TypedQuery<IdeaEntity> query = getEntityManager().createNamedQuery("Idea.findIdeaById", IdeaEntity.class)
-                .setParameter("IdeaId", IdeaId);
+                .setParameter("ideaId", IdeaId);
 
         try {
             return query.getSingleResult();

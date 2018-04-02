@@ -19,32 +19,34 @@
 
 @Application(defaultController = IdeationController.class)
 @Portlet
+@Bindings(
+        {
+                @Binding(value = org.exoplatform.services.organization.OrganizationService.class),
+                @Binding(value = org.exoplatform.ideation.service.IdeaService.class)
 
+        }
+)
 @Scripts(
-        {       @Script(value = "jquery-3.2.1.min.js", id = "jquery"),
-                @Script(value = "ideas.js", id = "ideajs" , depends = "jquery"),
-
+        {
+                @Script(value="juzu-ajax.js",id = "juzuajax"),
+                @Script(value = "jquery-3.2.1.min.js", id = "jquery"),
+                @Script(value = "ideas.js", id = "ideajs" , depends = {"jquery","juzuajax"})
         }
 )
 @Stylesheets(
         {
 
-                @Stylesheet(value = "/org/exoplatform/addons/ideation/portlets/assets/global.css", location = AssetLocation.APPLICATION, id = "global")
+                @Stylesheet(value = "/org/exoplatform/addons/ideation/portlets/ideations/assets/global.css", location = AssetLocation.APPLICATION, id = "global"),
+                //@Stylesheet(value = "/org/exoplatform/addons/ideation/portlets/admin/assets/global.css", location = AssetLocation.APPLICATION, id = "global"),
+
         }
 
 )
 
-@Bindings(
-        {
-                @Binding(value = org.exoplatform.services.organization.OrganizationService.class),
 
-                @Binding(value = org.exoplatform.ideation.service.IdeaService.class)
-
-        }
-)
 @Less(value = {"global.less"}, minify = true)
 @Assets("*")
-package org.exoplatform.addons.ideation.portlets;
+package org.exoplatform.addons.ideation.portlets.ideations;
 
 
 import juzu.Application;
