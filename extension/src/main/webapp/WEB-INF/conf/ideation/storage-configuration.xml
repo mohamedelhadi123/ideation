@@ -11,10 +11,11 @@
     </component>
     <!-- Badges storage (JPA) -->
     <component>
-        <type>org.exoplatform.ideation.storage.dao.IdeaDAO</type>
+    <type>org.exoplatform.ideation.storage.dao.jpa.IdeaDAO</type>
     </component>
     <component>
-        <type>org.exoplatform.ideation.service.IdeaService</type>
+        <key>org.exoplatform.ideation.service.IdeaService</key>
+        <type>org.exoplatform.ideation.service.impl.IdeaServiceImpl</type>
     </component>
     <component>
         <type>rest.TestRest</type>

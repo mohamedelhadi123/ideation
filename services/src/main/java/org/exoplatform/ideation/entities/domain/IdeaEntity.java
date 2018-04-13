@@ -34,6 +34,7 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
                         name = "Idea.findIdeaByTitle",
                         query = "SELECT idea FROM Idea idea where idea.title = :ideaTitle"
                 ),
+
                 @NamedQuery(
                         name = "Idea.findIdeaById",
                         query = "SELECT idea FROM Idea idea where idea.id = :ideaId"
@@ -63,6 +64,7 @@ public class IdeaEntity implements Serializable {
     private String status;
     @Column(name = "CREATED_BY")
     private String createdBy;
+
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED_TIME")

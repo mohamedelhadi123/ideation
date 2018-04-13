@@ -1,52 +1,34 @@
 package org.exoplatform.ideation.service;
-import com.arjuna.ats.internal.jdbc.drivers.modifiers.list;
+
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
-import org.exoplatform.ideation.storage.dao.IdeaDAO;
+import org.exoplatform.ideation.entities.dto.IdeaDTO;
 
 import java.util.List;
 
 
-public class IdeaService {
+public interface IdeaService {
 
-    protected final IdeaDAO ideaDao;
 
-    public IdeaService(IdeaDAO ideaDao) {
+    public IdeaEntity createIdea (IdeaEntity ideaEntity) ;
 
-        this.ideaDao = ideaDao;
+    public List<IdeaDTO> getAllIdeas();
 
-    }
+    public IdeaEntity updateIdea (IdeaEntity ideaEntity);
 
-    public IdeaEntity createIdea (IdeaEntity ideaEntity) {
 
-        IdeaEntity IdeaE = ideaDao.create(ideaEntity);
+    public IdeaDTO save(IdeaDTO entity, boolean newIde);
 
-        return IdeaE;
+    public void deleteIdea (IdeaEntity ideaEntity);
 
-    }
 
-    public IdeaEntity updateIdea (IdeaEntity ideaEntity) {
 
-        IdeaEntity IdeaE = ideaDao.update(ideaEntity);
+    public IdeaEntity findIdeaByTitle(String IdeaTitle) ;
 
-        return IdeaE;
 
-    }
 
-    public void deleteIdea (IdeaEntity ideaEntity) {
+    public IdeaEntity findIdeaById(Long IdeaId) ;
 
-        ideaDao.delete(ideaEntity);
 
-    }
-
-    public IdeaEntity findIdeaByTitle(String IdeaTitle) {
-
-        return ideaDao.findIdeaByTitle(IdeaTitle);
-    }
-
-    public IdeaEntity findIdeaById(Long IdeaId) {
-
-        return ideaDao.findIdeaById(IdeaId);
-    }
 
 
 }

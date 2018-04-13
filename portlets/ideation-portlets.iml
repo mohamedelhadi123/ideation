@@ -40,9 +40,9 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.fasterxml.jackson.core:jackson-core:2.3.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.3.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.3.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.core:exo.core.component.organization.api:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.kernel:exo.kernel.component.cache:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.core:exo.core.component.security.core:5.0.0-RC10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.core:exo.core.component.organization.api:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.kernel:exo.kernel.component.cache:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.core:exo.core.component.security.core:5.0.0-RC13" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.hibernate:hibernate-core:4.2.21.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: antlr:antlr:2.7.7" level="project" />
@@ -53,13 +53,12 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.thoughtworks.xstream:xstream:1.4.10" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.ogce:xpp3:1.1.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: jakarta-regexp:jakarta-regexp:1.4" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.web.controller:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.portal:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.common:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.kernel:exo.kernel.component.ext.cache.impl.infinispan.v8:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.logging:jboss-logging:3.3.0.Final" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.core:exo.core.component.database:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.identity:5.0.0-RC10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.web.controller:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.portal:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.common:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.kernel:exo.kernel.component.ext.cache.impl.infinispan.v8:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.core:exo.core.component.database:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.identity:5.0.0-RC13" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.picketlink.idm:picketlink-idm-core:1.4.6.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.picketlink.idm:picketlink-idm-common:1.4.6.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: log4j:log4j:1.2.17" level="project" />
@@ -73,7 +72,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.infinispan:infinispan-commons:8.2.6.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.infinispan:infinispan-core:8.2.6.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.marshalling:jboss-marshalling-osgi:2.0.0.Beta3" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.gatein.common:common-logging:2.2.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.gatein.common:common-logging:2.2.2.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.gatein.mop:mop-api:1.3.2.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.gatein.mop:mop-spi:1.3.2.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.gatein.mop:mop-core:1.3.2.Final" level="project" />
@@ -91,26 +90,26 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.commons:commons-lang3:3.3.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.json:json:20070829" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.staxnav:staxnav.core:0.9.8" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.webui.portal:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.kernel:exo.kernel.commons:5.0.0-RC10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.webui.portal:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.kernel:exo.kernel.commons:5.0.0-RC13" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: eu.medsea.mimeutil:mime-util:2.1.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.slf4j:jcl-over-slf4j:1.7.18" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.slf4j:slf4j-api:1.7.18" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.kernel:exo.kernel.component.common:5.0.0-RC10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.kernel:exo.kernel.component.common:5.0.0-RC13" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.quartz-scheduler:quartz:2.2.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.mail:mail:1.4.7" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.jgroups:jgroups:3.6.13.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-dbcp:commons-dbcp:1.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-pool:commons-pool:1.6" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.resources:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.webui.core:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.webui.framework:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.scripting:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.webui.portlet:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.web.server:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.web.api:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.webui.eXo:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.web.oauth-common:5.0.0-RC10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.resources:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.webui.core:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.webui.framework:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.scripting:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.webui.portlet:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.web.server:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.web.api:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.webui.eXo:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.web.oauth-common:5.0.0-RC13" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.picketlink.idm:picketlink-idm-api:1.4.6.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.twitter4j:twitter4j-core:3.0.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.scribe:scribe:1.3.5" level="project" />
@@ -123,7 +122,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.11" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.apis:google-api-services-plus:v1-rev69-1.14.2-beta" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.apis:google-api-services-oauth2:v2-rev36-1.14.2-beta" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.application-registry:5.0.0-RC10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.application-registry:5.0.0-RC13" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.shindig:shindig-gadgets:2.5.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: caja:caja:r5054" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.googlecode.json-simple:json-simple:1.1.1" level="project" />
@@ -143,19 +142,17 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.httpcomponents:httpcore:4.3.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-logging:commons-logging:1.1.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.chromattic:chromattic.ext:1.3.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.pc:pc-api:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.pc:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.gatein.common:common-common:2.2.2.Final" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.pc:pc-portlet:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.pc:pc-federation:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.pc:pc-bridge:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.wci:wci-wci:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.jcr:exo.jcr.component.ext:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.jcr:exo.jcr.component.core:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.kernel:exo.kernel.component.command:5.0.0-RC10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.pc:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.pc:pc-portlet:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.pc:pc-federation:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.pc:pc-bridge:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.wci:wci-wci:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.jcr:exo.jcr.component.ext:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.jcr:exo.jcr.component.core:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.kernel:exo.kernel.component.command:5.0.0-RC13" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-chain:commons-chain:1.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-digester:commons-digester:2.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.core:exo.core.component.document:5.0.0-RC10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.core:exo.core.component.document:5.0.0-RC13" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.pdfbox:pdfbox:1.8.11" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.pdfbox:fontbox:1.8.11" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.pdfbox:jempbox:1.8.11" level="project" />
@@ -198,13 +195,13 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.antlr:antlr-runtime:3.5" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.antlr:stringtemplate:3.2.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.infinispan:infinispan-cachestore-jdbc:8.2.6.Final" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.ws:exo.ws.rest.ext:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.core:exo.core.component.xml-processing:5.0.0-RC10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.ws:exo.ws.rest.ext:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.core:exo.core.component.xml-processing:5.0.0-RC13" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: net.sf.jtidy:jtidy:r938" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.core:exo.core.component.script.groovy:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.ws:exo.ws.commons:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.ws:exo.ws.rest.core:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.ws:exo.ws.frameworks.json:5.0.0-RC10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.core:exo.core.component.script.groovy:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.ws:exo.ws.commons:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.ws:exo.ws.rest.core:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.ws:exo.ws.frameworks.json:5.0.0-RC13" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.ws.rs:jsr311-api:1.1.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.annotation:jsr250-api:1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.shindig:shindig-common:2.5.2" level="project" />
@@ -219,8 +216,8 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.tomcat:el-api:6.0.41" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.tomcat:jasper-el:6.0.41" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: xml-apis:xml-apis:1.4.01" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.gadgets-core:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.web.security:5.0.0-RC10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.gadgets-core:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.web.security:5.0.0-RC13" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.shindig:shindig-features:2.5.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.shindig:shindig-social-api:2.5.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.geronimo.specs:geronimo-stax-api_1.0_spec:1.0.1" level="project" />
@@ -230,16 +227,25 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.gatein.captcha:simplecaptcha:1.1.1.Final-gatein-4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.jhlabs:filters:2.0.235" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.gatein.api:gatein-api:1.0.1.Final" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.api:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.web.resources:5.0.0-RC10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.api:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.gatein.portal:exo.portal.component.web.resources:5.0.0-RC13" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.javascript:closure-compiler:v20131014" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: args4j:args4j:2.0.16" level="project" />
     <orderEntry type="module" module-name="ideation-services" scope="PROVIDED" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.hibernate:hibernate-entitymanager:4.2.21.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.logging:jboss-logging:3.3.0.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.javassist:javassist:3.20.0-GA" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:1.0.1.Final" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.mockito:mockito-all:1.10.19" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.commons:commons-juzu:5.0.0-RC10" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.kernel:exo.kernel.container:5.0.0-RC10" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.liquibase:liquibase-core:3.4.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: mysql:mysql-connector-java:5.1.23" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.commons:commons-juzu:5.0.0-RC13" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.exoplatform.kernel:exo.kernel.container:5.0.0-RC13" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-beanutils:commons-beanutils:1.8.3" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.jibx:jibx-run:1.2.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.enterprise:cdi-api:1.0-SP4" level="project" />
+    <orderEntry type="library" name="Maven: org.exoplatform.gatein.pc:pc-api:5.1.x-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.gatein.common:common-common:2.2.2.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.gatein.pc:pc-api:2.4.1.CR01" level="project" />
   </component>
 </module>

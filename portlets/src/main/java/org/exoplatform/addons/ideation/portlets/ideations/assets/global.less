@@ -67,14 +67,16 @@ body{
   position: fixed;
   z-index:1;
   top:0;
+  right: 60px;
   height: 100%;
   width:100%;
+  left: 40px;
   overflow: auto;
 }
 
 .modal-contentt{
-  background-color:#f4f4f4;
-  margin: 20% auto;
+  background-color:#ffffff;
+  margin: 5% auto;
   width:40%;
   animation-name:modalopen;
   animation-duration:1s;
@@ -85,13 +87,14 @@ body{
 }
 
 .modal-headerr{
-  background:cornflowerblue;
+  background:white;
   padding:15px;
   color:#fff;
 }
 
 .modal-bodyy{
   padding:10px 20px;
+
 }
 
 .modal-footerr{
@@ -102,10 +105,12 @@ body{
 }
 
 .closeBtn{
-  color:#ccc;
+  position: relative;
+  top: -18px;
+  color:#1b1b1b;
   float: right;
-  font-size:30px;
-  color:#fff;
+  font-size:45px;
+
 }
 
 .closeBtn:hover,.closeBtn:focus{
@@ -118,3 +123,23 @@ body{
   from{ opacity: 0}
   to {opacity: 1}
 }
+.feeds {
+  height: 85vh;
+  width: 75vw;
+  background: #fff;
+  position: fixed;
+  bottom: 5px;
+  overflow-y: scroll;
+}
+.feedItem {
+  width: 90%;
+  height: 20vh;
+  margin: auto auto 15px auto;
+  background-color: #f5f3f3;
+  background-image: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 23px,
+          rgba(255, 255, 255, 0.5) 4px,
+          rgba(255, 255, 255, 0.5) 40px
+  )}

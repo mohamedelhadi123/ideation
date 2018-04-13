@@ -1,7 +1,8 @@
-package org.exoplatform.ideation.storage.dao;
+package org.exoplatform.ideation.storage.dao.jpa;
 
-import org.exoplatform.ideation.entities.domain.IdeaEntity;
 import org.exoplatform.commons.persistence.impl.GenericDAOJPAImpl;
+import org.exoplatform.ideation.entities.domain.IdeaEntity;
+
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;

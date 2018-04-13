@@ -2,9 +2,11 @@ package org.exoplatform.addons.ideation.portlets.ideations;
 
 import juzu.*;
 import juzu.plugin.jackson.Jackson;
+import juzu.request.RequestContext;
 import juzu.template.Template;
 import org.exoplatform.addons.ideation.portlets.commons.BaseController;
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
+import org.exoplatform.ideation.entities.dto.IdeaDTO;
 import org.exoplatform.ideation.service.IdeaService;
 import org.exoplatform.commons.juzu.ajax.Ajax;
 import juzu.request.SecurityContext;
@@ -15,7 +17,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import javax.inject.Inject;
 import javax.portlet.PortletPreferences;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 
 public class IdeationController extends BaseController {
@@ -25,17 +30,34 @@ public class IdeationController extends BaseController {
     @Path("index.gtmpl")
     Template indexTemplate;
 
+
+    @Inject
+    @Path("create_idea.gtmpl")
+    Template create_ideaTemplate;
+
     @Inject
     PortletPreferences portletPreferences;
+
+
+
+
 
     @Inject
     IdeaService ideaService;
 
 
     @View
-    public Response.Content index() {
-        return indexTemplate.with().ok();
+    public Response.Content index(RequestContext requestContext,SecurityContext securityContext) {
+        Map<String, Object> parameters = new HashMap<>();
+        String currentUser = securityContext.getRemoteUser();
+
+        parameters.put("currentUser",currentUser);
+
+        return indexTemplate.with(parameters).ok();
     }
+
+
+
 
     @Resource(method = HttpMethod.POST)
     @Ajax
@@ -44,6 +66,8 @@ public class IdeationController extends BaseController {
         if (currentUser == null) {
             return Response.status(401).body("You must login to create new Idea");
         }
+        JSONObject user = new JSONObject();
+        user.put("username",currentUser);
         JSONArray ideasJson = new JSONArray();
         return Response.ok(ideasJson.toString()).withMimeType("application/json; charset=UTF-8").withHeader("Cache-Control", "no-cache");
     }
@@ -64,12 +88,13 @@ public class IdeationController extends BaseController {
 
     @Resource(method = HttpMethod.POST)
     @Ajax
-    public Response add(String title,String description, SecurityContext securityContext) throws JSONException {
+    public Response add(String title,String description,String owner, SecurityContext securityContext) throws JSONException {
 
         //--- Get context pref each time we refresh the page
         //TODO should be used once
-        //--- build a Idea
+        //--- build an Idea
         IdeaEntity cEntity = new IdeaEntity();
+        IdeaDTO entity = new IdeaDTO(cEntity);
         cEntity.setTitle(title);
         cEntity.setDescription(description);
         String currentUser = securityContext.getRemoteUser();
@@ -83,20 +108,35 @@ public class IdeationController extends BaseController {
 
     @Resource(method = HttpMethod.POST)
     @Ajax
-    public Response update(String id, String title, SecurityContext securityContext) throws JSONException {
+
+    public Response update(String id, String title,String description, SecurityContext securityContext) throws JSONException {
 
         //--- Get context pref each time we refresh the page
         //TODO should be used once
         //--- build a Idea
         IdeaEntity cEntity = ideaService.findIdeaById(Long.parseLong(id));
         cEntity.setTitle(title);
-
+        cEntity.setDescription(description);
         //--- Delete Idea
         IdeaEntity cEntityPersisted = ideaService.updateIdea(cEntity);
         JSONObject json = new JSONObject(cEntityPersisted);
 
         return Response.ok(json.toString()).withMimeType("application/json; charset=UTF-8").withHeader("Cache-Control", "no-cache");
     }
+
+    @MimeType.JSON
+    @Jackson
+    @Ajax
+    public List<IdeaDTO> getAllIdeas(){
+        try {
+        List<IdeaDTO> ideas = ideaService.getAllIdeas() ;
+        return ideas;
+    } catch (Throwable e) {
+        log.error(e);
+        return null;
+    }
+    }
+
 
 
     @Ajax
