@@ -22,8 +22,8 @@ import java.util.*;
 
 
 public class IdeationAdministrationController {
-    @SessionScoped
-    private static Log log = ExoLogger.getLogger(org.exoplatform.addons.ideation.portlets.ideaFront.IdeaFrontController.class);
+
+    protected static Log log = ExoLogger.getLogger(IdeationAdministrationController.class);
 
     ResourceBundle bundle;
 
