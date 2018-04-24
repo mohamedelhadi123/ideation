@@ -20,16 +20,13 @@
 
             <textarea class=" input-xxlarge" id="txtDescription" rows="4" cols="50" ng-model="newIdea.description" placeholder="add description"></textarea>
         </div>
-                <br>
-
-
                 <label>
             <select>
                 <option ng-repeat="state in states"> {{state.abbrev}}
                 </option>
             </select>
         </label>
-                <br>
+
         <span ng-repeat="attachement in attachements" class="attachementName">
 <a class="column-item column-title" data-placement="bottom"
    href='{{attachement.url}}'><i
@@ -58,7 +55,9 @@
 <br><br>
 
     <button type="button" class="btn btn-primary" id="submit" ng-click="saveIdea(newIdea)">Confirm</button>
-        <button type="button" class="btn btn-default Cancel">Cancel</button>
+     <button type="button" class="btn btn-success"  ng-click="saveDraft(newIdea)">Save</button>
+
+                <button type="button" class="btn btn-default Cancel">Cancel</button>
 
 </form>
         </div>
