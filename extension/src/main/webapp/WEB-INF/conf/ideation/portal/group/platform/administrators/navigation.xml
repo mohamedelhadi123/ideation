@@ -6,10 +6,9 @@
     <page-nodes>
         <node>
             <uri>manage-ideas</uri>
-            <name>manage-ideas</name>
-            <label>Manage ideas</label>
-            <label xml:lang="en">Manage ideas</label>
-            <label xml:lang="fr">Manage ideas</label>
+            <name>Manage Ideas</name>
+            <label xml:lang="en">Manage Ideas</label>
+            <label xml:lang="fr">Manage Ideas</label>
             <page-reference>group::/platform/administrators::manage-ideas</page-reference>
         </node>
     </page-nodes>
