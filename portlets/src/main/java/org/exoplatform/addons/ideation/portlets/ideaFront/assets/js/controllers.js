@@ -156,6 +156,36 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
         };
 
+        $scope.saveDraft = function() {
+            $http({
+                data : $scope.newIdea,
+                method : 'POST',
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                url : ideaFrontContainer.jzURL('IdeaFrontController.saveDraft')
+            }).then(function successCallback(data) {
+                $scope.loadIdeas();
+                //  $scope.setResultMessage($scope.i18n.thanks, "success");
+            }, function errorCallback(data) {
+                //  $scope.setResultMessage($scope.i18n.defaultError, "error");
+            });
+
+        };
+
+        $scope.loadContext = function () {
+            $http({
+                method: 'GET',
+                url: ideaFrontContainer.jzURL('IdeaFrontController.getContext')
+            }).then(function successCallback(data) {
+                $scope.currentUser = data.data.currentUser;
+                $scope.currentUserAvatar = data.data.currentUserAvatar;
+                $scope.currentUserName = data.data.currentUserName;
+                deferred.resolve(data);
+            }, function errorCallback(data) {
+                $scope.setResultMessage($scope.i18n.defaultError, "error");
+            });
+        };
 
         $scope.loadComments = function () {
             $http({
@@ -167,9 +197,6 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
                 url: ideaFrontContainer.jzURL('IdeaFrontController.getComments')
             }).then(function successCallback(data) {
                 $scope.comments = data.data;
-//                $timeout(function() {
-//                    $scope.setResultMessage(data, "success")
-//                }, 1000);
             }, function errorCallback(data) {
                 $scope.setResultMessage($scope.i18n.defaultError, "error");
             });

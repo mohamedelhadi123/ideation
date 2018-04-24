@@ -9,7 +9,7 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.gatein.common:common-common:2.2.2.Final" />
           <element id="library" level="project" name="Maven: org.gatein.common:common-logging:2.2.2.Final" />
-          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/exoplatform/gatein/pc/pc-api/5.1.x-SNAPSHOT/pc-api-5.1.x-20180419.085218-46.jar" output-file-name="pc-api-5.1.x-SNAPSHOT.jar" />
+          <element id="file-copy" path="$MAVEN_REPOSITORY$/org/exoplatform/gatein/pc/pc-api/5.1.x-SNAPSHOT/pc-api-5.1.x-20180422.125417-48.jar" output-file-name="pc-api-5.1.x-SNAPSHOT.jar" />
           <element id="library" level="project" name="Maven: org.gatein.pc:pc-api:2.4.1.CR01" />
         </element>
       </element>
