@@ -1,23 +1,21 @@
 package org.exoplatform.ideation.service.impl;
-
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
 import org.exoplatform.ideation.entities.dto.IdeaDTO;
 import org.exoplatform.ideation.service.IdeaService;
 import org.exoplatform.ideation.storage.dao.jpa.IdeaDAO;
-
-
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
-import javax.inject.Inject;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 public class IdeaServiceImpl implements IdeaService {
     private static final Log LOG = ExoLogger.getExoLogger(IdeaServiceImpl.class);
-
-
 
     private IdeaDAO ideaDao = new IdeaDAO();
 
@@ -37,18 +35,23 @@ public class IdeaServiceImpl implements IdeaService {
 
     }
 
-    public void deleteIdea(IdeaEntity ideaEntity) {
-
-        ideaDao.delete(ideaEntity);
-
-    }
 
     public IdeaEntity findIdeaByTitle(String IdeaTitle) {
 
         return ideaDao.findIdeaByTitle(IdeaTitle);
     }
 
+    public void delete(IdeaDTO entity) {
+        if (entity == null) {
+            throw new IllegalStateException("Parameter 'entity' = + "+entity+ " or 'entity.id' is null");
+        }
+        ideaDao.delete(convert(entity));
+    }
+
+
     public IdeaDTO save(IdeaDTO entity, boolean newIde) {
+        entity.setCreatedTime(new Date());
+
         if (entity == null) {
             throw new IllegalStateException("Parameter 'entity' is null");
         }
@@ -81,8 +84,11 @@ public class IdeaServiceImpl implements IdeaService {
     private IdeaEntity convert(IdeaDTO dto) {
         IdeaEntity entity = new IdeaEntity();
         entity.setId(dto.getId());
+        entity.setCreatedTime(dto.getCreatedTime());
         entity.setTitle(dto.getTitle());
         entity.setDescription(dto.getDescription());
+        entity.setCreatedBy(dto.getCreatedBy());
+
         return entity;
     }
 
@@ -91,6 +97,9 @@ public class IdeaServiceImpl implements IdeaService {
         dto.setId(entity.getId());
         dto.setTitle(entity.getTitle());
         dto.setDescription(entity.getDescription());
+        dto.setCreatedBy(entity.getCreatedBy());
+        dto.setCreatedTime(entity.getCreatedTime());
+
         return dto;
     }
 

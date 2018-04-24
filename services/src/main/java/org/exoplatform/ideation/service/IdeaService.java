@@ -18,7 +18,7 @@ public interface IdeaService {
 
     public IdeaDTO save(IdeaDTO entity, boolean newIde);
 
-    public void deleteIdea (IdeaEntity ideaEntity);
+    public void delete(IdeaDTO entity);
 
 
 

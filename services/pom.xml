@@ -45,6 +45,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.exoplatform.social</groupId>
+            <artifactId>social-component-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.exoplatform.ecms</groupId>
             <artifactId>ecms-core-webui-explorer</artifactId>
             <scope>provided</scope>
@@ -110,6 +115,12 @@
         <dependency>
             <groupId>org.juzu</groupId>
             <artifactId>juzu-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.8</version>
+            <scope>provided</scope>
         </dependency>
 
 

@@ -10,22 +10,45 @@
     <property name="autoIncrement" value="true" dbms="mysql"/>
     <changeSet author="IDEATION" id="1.0.0-1" dbms="mysql">
         <createSequence sequenceName="SEQ_IDEATION_IDEAS_IDEA_ID" startValue="1"/>
-        <!-- Definition of IDEATION_VOTES table -->
-        <createTable tableName="IDEATION_VOTE">
-            <column name="VOTE_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
-                <constraints primaryKey="true" primaryKeyName="PK_IDEATION_VOTE" nullable="false"/>
+
+
+        <!-- Definition of IDEATION_IDEA table -->
+        <createTable tableName="IDEA_IDEAS">
+            <column name="IDEA_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
+                <constraints primaryKey="true" primaryKeyName="PK_IDEA" nullable="false"/>
             </column>
-            <column name="AUTHOR" type="NVARCHAR(100)">
+            <column name="TITLE" type="NVARCHAR(250)">
                 <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="NVARCHAR(2000)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="STATUS" type="NVARCHAR(100)" defaultValue="0">
+                <constraints nullable="true"/>
+            </column>
+            <column name="CREATED_BY" type="NVARCHAR(50)">
+                <constraints nullable="true"/>
             </column>
             <column name="CREATED_TIME" type="TIMESTAMP">
                 <constraints nullable="true"/>
             </column>
         </createTable>
 
-
-
-
+        <!-- Definition of IDEATION_LIKES table -->
+        <createTable tableName="IDEATION_LIKE">
+            <column name="LIKE_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
+                <constraints primaryKey="true" primaryKeyName="PK_IDEATION_LIKE" nullable="false"/>
+            </column>
+            <column name="AUTHOR" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="IDEA_ID" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="FK_LIKE_IDEATION_01" references="IDEA_IDEAS(IDEA_ID)"/>
+            </column>
+            <column name="CREATED_TIME" type="TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
         <!-- Definition of IDEATION_USER_SETTINGS table -->
         <createTable tableName="IDEATION_USER_SETTINGS">
             <column name="USERNAME" type="NVARCHAR(50)">
@@ -48,51 +71,21 @@
             <column name="AUTHOR" type="NVARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
+            <column name="IDEA_ID" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="FK_FAV_IDEATION_01" references="IDEA_IDEAS(IDEA_ID)"/>
+            </column>
             <column name="CREATED_TIME" type="TIMESTAMP">
                 <constraints nullable="true"/>
             </column>
         </createTable>
 
-
-
-
-        <!-- Definition of IDEATION_IDEA table -->
-        <createTable tableName="IDEA_IDEAS">
-            <column name="IDEA_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
-                <constraints primaryKey="true" primaryKeyName="PK_IDEA" nullable="false"/>
-            </column>
-            <column name="TITLE" type="NVARCHAR(250)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="DESCRIPTION" type="NVARCHAR(2000)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="RATE" type="INTEGER" defaultValue="0">
-                <constraints nullable="true"/>
-            </column>
-            <column name="STATUS" type="NVARCHAR(100)" defaultValue="0">
-                <constraints nullable="true"/>
-            </column>
-            <column name="CREATED_BY" type="NVARCHAR(50)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="CREATED_TIME" type="TIMESTAMP">
-                <constraints nullable="true"/>
-            </column>
-            <column name="CONTEXT" type="NVARCHAR(255)">
-                <constraints nullable="true"/>
-            </column>
-            <column name="VOTE_ID" type="BIGINT">
-                <constraints foreignKeyName="FK_IDEA_IDEATION_VOTE_01" references="IDEATION_VOTE(VOTE_ID)" nullable="true"/>
-            </column>
-            <column name="FAV_ID" type="BIGINT">
-                <constraints foreignKeyName="FK_IDEA_IDEATION_FAV_01" references="IDEATION_FAV(FAV_ID)" nullable="true"/>
-            </column>
-        </createTable>
         <!-- Definition of IDEATION_COWORKER table -->
         <createTable tableName="IDEATION_COWORKERS">
+            <column name="CWK_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
+                <constraints primaryKey="true" primaryKeyName="PK_IDEATION_CWK" nullable="false"/>
+            </column>
             <column name="IDEA_ID" type="BIGINT">
-                <constraints foreignKeyName="FK_IDE_COWKR_IDE_01" references="IDEA_IDEAS(IDEA_ID)" nullable="false"/>
+                <constraints foreignKeyName="FK_IDE_CWK_IDE_01" references="IDEA_IDEAS(IDEA_ID)" nullable="false"/>
             </column>
             <column name="COWORKER" type="NVARCHAR(50)">
                 <constraints nullable="false"/>
@@ -113,7 +106,7 @@
                 <constraints nullable="true"/>
             </column>
             <column name="IDEA_ID" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="FK_COMMENT_IDEATION_01" references="IDEA_IDEAS(IDEA_ID)"/>
+
             </column>
         </createTable>
         <!-- Definition of IDEATION_LOGS table -->
@@ -134,22 +127,6 @@
             </column>
             <column name="CREATED_TIME" type="BIGINT">
                 <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <!-- Definition of IDEATION_FOLLOWERS table -->
-        <createTable tableName="IDEATION_FOLLOWS">
-            <column name="FOLLOW_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
-                <constraints primaryKey="true" primaryKeyName="PK_IDEATION_FOLLOWS" nullable="false"/>
-            </column>
-            <column name="AUTHOR" type="NVARCHAR(100)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="CREATED_TIME" type="TIMESTAMP">
-                <constraints nullable="true"/>
-            </column>
-            <column name="IDEA_ID" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="FK_FOLLOW_IDEATION_01" references="IDEA_IDEAS(IDEA_ID)"/>
             </column>
         </createTable>
 

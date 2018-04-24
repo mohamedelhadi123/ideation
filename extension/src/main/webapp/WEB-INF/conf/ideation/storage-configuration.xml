@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-
-
 <configuration
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.exoplatform.org/xml/ns/kernel_1_2.xsd http://www.exoplatform.org/xml/ns/kernel_1_2.xsd"
@@ -11,14 +9,18 @@
     </component>
     <!-- Badges storage (JPA) -->
     <component>
-    <type>org.exoplatform.ideation.storage.dao.jpa.IdeaDAO</type>
-    </component>
-    <component>
         <key>org.exoplatform.ideation.service.IdeaService</key>
         <type>org.exoplatform.ideation.service.impl.IdeaServiceImpl</type>
     </component>
     <component>
+        <type>org.exoplatform.ideation.service.impl.CommentService</type>
+    </component>
+    <component>
         <type>rest.TestRest</type>
+    </component>
+    <component>
+        <key>org.exoplatform.social.core.processor.I18NActivityProcessor</key>
+        <type>org.exoplatform.social.core.processor.I18NActivityProcessor</type>
     </component>
     <!-- ideation  storage layout (Liquebase initializer) -->
     <external-component-plugins>

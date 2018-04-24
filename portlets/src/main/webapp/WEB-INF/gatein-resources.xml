@@ -25,7 +25,7 @@
 
 
     <portlet>
-        <name>IdeationControllerApplication</name>
+        <name>IdeaFrontControllerPortlet</name>
     <module>
         <script>
             <path>/js/ideas.js</path>

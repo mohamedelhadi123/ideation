@@ -2,7 +2,6 @@ package org.exoplatform.ideation.storage.dao.jpa;
 
 import org.exoplatform.commons.persistence.impl.GenericDAOJPAImpl;
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
-
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
@@ -54,8 +53,10 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
 
     }
 
+
+
     public int deleteIdeaById(int ideaId) throws PersistenceException {
-        return getEntityManager().createNamedQuery("Idea.deleteIdeaById")
+        return getEntityManager().createNamedQuery("Idea.deleteIdeaById",Long.class)
                 .setParameter("ideaId", ideaId)
                 .executeUpdate();
 

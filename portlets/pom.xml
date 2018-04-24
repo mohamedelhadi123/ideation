@@ -90,6 +90,11 @@
             <artifactId>exo.core.component.organization.api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.exoplatform.social</groupId>
+            <artifactId>social-component-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <!-- Gatein deps-->
         <dependency>
             <groupId>org.exoplatform.gatein.portal</groupId>
@@ -116,6 +121,7 @@
             <artifactId>commons-juzu</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.exoplatform.gatein.pc</groupId>
             <artifactId>pc-api</artifactId>
