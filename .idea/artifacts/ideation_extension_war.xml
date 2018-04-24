@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="ideation-extension:war">
-    <output-path>$PROJECT_DIR$/extension/target</output-path>
-    <root id="archive" name="ideation-extension.war">
-      <element id="artifact" artifact-name="ideation-extension:war exploded" />
-    </root>
-  </artifact>
-</component>

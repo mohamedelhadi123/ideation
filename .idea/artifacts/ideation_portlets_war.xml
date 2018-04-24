@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="ideation-portlets:war">
-    <output-path>$PROJECT_DIR$/portlets/target</output-path>
-    <root id="archive" name="ideation-portlets.war">
-      <element id="artifact" artifact-name="ideation-portlets:war exploded" />
-    </root>
-  </artifact>
-</component>
