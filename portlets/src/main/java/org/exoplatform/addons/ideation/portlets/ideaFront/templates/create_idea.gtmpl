@@ -1,0 +1,66 @@
+    <div class=" panel panel-primary">
+        <div class="panel-body">
+            <form id="ideaForm">
+
+            <label><input type="hidden" ng-model="newIdea.id"></label>
+        <div class="form-group">
+
+            <input class=" input-xxlarge" id="txtTitle" type="Title" ng-model="newIdea.title" placeholder="add title"/>
+        </div>
+              <br>
+
+        <div class="form-group">
+
+        <input class=" input-xxlarge" type="owner" readonly="readonly" value="${currentUser}"/>
+        </div>
+                <br>
+
+
+                <div class="form-group">
+
+            <textarea class=" input-xxlarge" id="txtDescription" rows="4" cols="50" ng-model="newIdea.description" placeholder="add description"></textarea>
+        </div>
+                <br>
+
+
+                <label>
+            <select>
+                <option ng-repeat="state in states"> {{state.abbrev}}
+                </option>
+            </select>
+        </label>
+                <br>
+        <span ng-repeat="attachement in attachements" class="attachementName">
+<a class="column-item column-title" data-placement="bottom"
+   href='{{attachement.url}}'><i
+        class="uiIcon16x16File{{(attachement.name.substr(attachement.name.lastIndexOf('.') + 1).toLowerCase()).substring(0, 1).toUpperCase() + (attachement.name.substr(attachement.name.lastIndexOf('.') + 1).toLowerCase()).substring(1)}}"></i>{{attachement.name}}</a>
+<a class="inline-block-hide" data-placement="left" data-original-title="Delete "
+   ng-click="deleteAttachement(attachement.name)">
+<i class="uiIconClose uiIconLightGray"></i>
+</a>
+</span>
+        <div style="font:status-bar">
+            <div ng-show="f.progress >= 0">{{f.name}}</div>
+            <div ng-show="errFile.$error">Cannot upload {{f.name}} : {{errFile.$error}}
+                {{errFile.$errorParam}}
+            </div>
+            <span class="progress" ng-show="f.progress >= 0">
+<div style="width:{{f.progress}}%"
+     ng-bind="f.progress + '%'"></div>
+</span>
+        </div>
+
+        <a class="actionIcon inline-block-hide attachement"
+           ngf-select="uploadFiles($file, $invalidFiles) " ngf-max-size="25MB " ng-click="deleteAttachement(attachement.name)">
+            <i class="uiIconUpload uiIconLightGray"></i>
+        </a>
+
+<br><br>
+
+    <button type="button" class="btn btn-primary" id="submit" ng-click="saveIdea(newIdea)">Confirm</button>
+        <button type="button" class="btn btn-default Cancel">Cancel</button>
+
+</form>
+        </div>
+
+    </div>

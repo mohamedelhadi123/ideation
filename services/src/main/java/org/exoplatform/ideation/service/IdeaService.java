@@ -1,42 +1,34 @@
 package org.exoplatform.ideation.service;
+
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
-import org.exoplatform.ideation.dao.IdeaDAO;
+import org.exoplatform.ideation.entities.dto.IdeaDTO;
+
+import java.util.List;
 
 
-public class IdeaService {
+public interface IdeaService {
 
-    protected final IdeaDAO ideaDao;
 
-    public IdeaService(IdeaDAO IdeaDao) {
+    public IdeaEntity createIdea (IdeaEntity ideaEntity) ;
 
-        this.ideaDao = IdeaDao;
+    public List<IdeaDTO> getAllIdeas();
 
-    }
+    public IdeaEntity updateIdea (IdeaEntity ideaEntity);
 
-    public IdeaEntity createIdea (IdeaEntity IdeaEntity) {
 
-        IdeaEntity IdeaE = ideaDao.create(IdeaEntity);
+    public IdeaDTO save(IdeaDTO entity, boolean newIde);
 
-        return IdeaE;
+    public void delete(IdeaDTO entity);
 
-    }
 
-    public IdeaEntity updateIdea (IdeaEntity IdeaEntity) {
 
-        IdeaEntity IdeaE = ideaDao.update(IdeaEntity);
+    public IdeaEntity findIdeaByTitle(String IdeaTitle) ;
 
-        return IdeaE;
 
-    }
 
-    public void deleteIdea (IdeaEntity IdeaEntity) {
+    public IdeaEntity findIdeaById(Long IdeaId) ;
 
-        ideaDao.delete(IdeaEntity);
 
-    }
 
-    public IdeaEntity findIdeaByTitle(String IdeaTitle) {
 
-        return ideaDao.findIdeaByTitle(IdeaTitle);
-    }
 }

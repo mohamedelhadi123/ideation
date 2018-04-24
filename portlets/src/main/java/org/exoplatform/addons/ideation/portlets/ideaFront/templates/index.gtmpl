@@ -1,0 +1,97 @@
+<div id="ideaFront" style="display: none;">
+    <div ng-controller="ideaFrontCtrl" id="ideaFrontCtrl">
+            <h2>Ideation</h2>
+            <!-- Button trigger modal -->
+            <button id="modalBtn" class="button" style="position: relative; top : -50px; left: -343px;">Create Idea</button>
+            <div id="simpleModal" class="modall">
+                <div class="modal-contentt">
+                    <div class="modal-headerr">
+                        <span class="closeBtn">&times;</span>
+                        <div style="position: relative; left: 110px; top:20px;">
+                            <h2>What's your idea ?</h2>
+                        </div>
+                    </div>
+                    <div class="modal-bodyy" style="position: relative; left: 85px;">
+                     #{include path=create_idea.gtmpl /}
+                    </div>
+                </div>
+            </div>
+
+            <div ng-repeat="idea in ideas| orderBy:orderByField:reverseSort">
+                <div class="container content">
+                    <div class="comments-container">
+                        <ul id="comments-list" class="comments-list" style="position: relative; right: 190px;">
+                            <li>
+                                <div class="comment-main-level">
+                                    <!-- Avatar -->
+                                    <div class="comment-avatar"><img src="/eXoSkin/skin/images/system/UserAvtDefault.png" alt=""></div>
+                                    <div class="comment-box">
+                                        <div class="comment-head">
+                                            <h6 class="comment-name by-author"><a href="/portal/intranet/profile/">${currentUser}</a></h6>
+                                            <span>{{idea.createdTime | date:'dd-MM-yyyy HH:mm'}}</span>
+                                            <br>
+                                            <br>
+                                            <h4><strong>{{idea.title}}</strong></h4>
+                                            <i class="fa fa-reply"></i>
+                                            <i class="fa fa-heart"></i>
+                                        </div>
+                                        <div class="comment-content">
+                                            {{idea.description}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+            </div>
+
+    <!--    <div class="commentRight">
+            <div class="commentInputBox ">
+                <div class="commentInput">
+                    <textarea title="Add your comment..." name="comment"  ng-model="newComment.commentText" cols="30" rows="10" class="textarea"></textarea>
+                </div>
+                <input type="hidden" ng-model="newComment.Id">
+            </div>
+        </div>
+
+    <div class="clearfix">
+        <div style="position:relative; right: 635px; top: -50px;">
+            <button type="button" class="btn pull-right btn-primary"
+                    ng-click="saveComment(newComment)">Comment
+            </button>
+        </div>
+    </div>
+
+    </div>
+
+    <div ng-repeat="comment in comments" class="commentItem" data-commentid="comment.Id">
+                    <div class="commentRight">
+                        <p class="contentComment">
+                            {{comment.commentText}}
+                            {{comment.Id}}
+                        </p>
+                    </div>
+            <input type="hidden" ng-model="comment.ideaId" value="idea.id">
+        </div>
+                <div class="inputContainer">
+                    <div class="commentItem commentFormBox">
+                        <div class="clearfix" style="position: relative; left: 52px;">
+                            <div class="commmentLeft pull-left" style="
+    position:  relative;
+    right: 5px;
+">
+                                <a class="avatarXSmall"
+                                   href="/portal/intranet/profile/">
+                                    <img src="/eXoSkin/skin/images/system/UserAvtDefault.png"
+                                         alt="Root Root">
+                                </a>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+-->
+    </div>
+</div>

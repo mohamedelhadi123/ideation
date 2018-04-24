@@ -32,7 +32,7 @@
     <version>1.0.x-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>eXo ideation</name>
-    <description>eXo ideation extension</description>
+    <description>eXo ideation extension (PR for ideation)</description>
 
     <modules>
         <module>services</module>
@@ -52,14 +52,28 @@
         <maven.compiler.optimize>true</maven.compiler.optimize>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- eXo Modules -->
+        <!-- **************************************** -->
+        <!-- Dependencies versions                    -->
+        <!-- **************************************** -->
         <org.exoplatform.depmgt.version>13-RC01</org.exoplatform.depmgt.version>
-        <org.exoplatform.platform.version>5.0.0-RC09</org.exoplatform.platform.version>
-        <!-- Juzu Version -->
-        <juzu.version>1.1.0</juzu.version>
+        <org.exoplatform.platform.version>5.0.0-RC13</org.exoplatform.platform.version>
         <!-- for tests -->
         <junit.version>4.12</junit.version>
-    </properties>
+        <!-- Liquibase stack -->
+        <org.liquibase.version>3.5.5</org.liquibase.version>
+        <org.liquibase-hibernate4.version>3.6</org.liquibase-hibernate4.version>
+        <org.javassist.version>3.20.0-GA</org.javassist.version>
+        <validation-api.version>1.1.0.Final</validation-api.version>
+        <xml-apis.version>1.4.01</xml-apis.version>
 
+        <profile.liquibase/>
+        <!-- MySQL driver-->
+        <mysql.version>5.1.23</mysql.version>
+        <mysql.version>5.1.23</mysql.version>
+        <!-- Juzu Version -->
+        <juzu.version>1.1.0</juzu.version>
+    </properties>
     <dependencyManagement>
         <dependencies>
             <!-- Import versions of external dependencies to use -->
@@ -70,6 +84,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
             <!-- Import versions from platform project -->
             <dependency>
                 <groupId>org.exoplatform.platform</groupId>
@@ -102,12 +122,6 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>1.10.19</version>
-                <!--<scope>test</scope>-->
             </dependency>
         </dependencies>
     </dependencyManagement>

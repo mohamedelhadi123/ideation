@@ -4,7 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-
     <groupId>org.exoplatform.addons.ideation</groupId>
     <artifactId>ideation</artifactId>
     <version>1.0.x-SNAPSHOT</version>
@@ -12,7 +11,7 @@
     <artifactId>ideation-services</artifactId>
     <packaging>jar</packaging>
     <name>eXo ideation :: Backend Services</name>
-    <description>eXo ideation services</description>
+    <description>eXo ideation services </description>
 
     <dependencies>
         <!-- Others third party -->
@@ -28,10 +27,26 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.exoplatform.core</groupId>
+            <artifactId>exo.core.component.organization.api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.ws</groupId>
+            <artifactId>exo.ws.rest.core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- Portal & ECMS & Social -->
         <dependency>
             <groupId>org.exoplatform.commons</groupId>
             <artifactId>commons-webui-ext</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.social</groupId>
+            <artifactId>social-component-core</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -41,12 +56,24 @@
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.3.6.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.3.6.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
@@ -61,11 +88,42 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.23</version>
+        </dependency>
+
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.1.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.juzu</groupId>
+            <artifactId>juzu-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.juzu</groupId>
+            <artifactId>juzu-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.8</version>
+            <scope>provided</scope>
+        </dependency>
+
+
     </dependencies>
     <build>
         <resources>
@@ -99,12 +157,6 @@
                 </includes>
             </resource>
         </resources>
-        <plugins>
-            <plugin>
-                <groupId>com.jcabi</groupId>
-                <artifactId>jcabi-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
     </build>
 
 </project>

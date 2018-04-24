@@ -2,28 +2,15 @@ package org.exoplatform.ideation.entities.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import org.exoplatform.commons.api.persistence.ExoEntity;
 
 @Entity(name = "Idea")
 @ExoEntity
-@Table(name = "IDEA")
+@Table(name = "IDEA_IDEAS")
 @NamedQueries({
                 @NamedQuery(
                         name = "Idea.getAllIdeas",
@@ -32,6 +19,11 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
                 @NamedQuery(
                         name = "Idea.findIdeaByTitle",
                         query = "SELECT idea FROM Idea idea where idea.title = :ideaTitle"
+                ),
+
+                @NamedQuery(
+                        name = "Idea.findIdeaById",
+                        query = "SELECT idea FROM Idea idea where idea.id = :ideaId"
                 ),
                 @NamedQuery(
                         name = "Idea.deleteIdeaByTitle",
@@ -43,23 +35,22 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
                 )
 
 })
-public class IdeaEntity implements Serializable {
+public class IdeaEntity {
 
     @Id
     @Column(name = "IDEA_ID")
+    @SequenceGenerator(name = "SEQ_IDEATION_IDEAS_IDEA_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_IDEATION_IDEAS_IDEA_ID")
     private long  id;
-    private long rate;
+    @Column(name = "TITLE")
     private String title;
+    @Column(name = "DESCRIPTION")
     private String description;
+    @Column(name = "STATUS")
     private String status;
-
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "Idea_Idea_COWORKERS",
-            joinColumns = @JoinColumn(name = "Idea_ID"))
-    private Set<String> coworker = new HashSet<String>();
-
     @Column(name = "CREATED_BY")
     private String createdBy;
+
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED_TIME")
@@ -102,6 +93,7 @@ public class IdeaEntity implements Serializable {
 
 
 
+
     public String getCreatedBy() {
         return createdBy;
     }
@@ -118,30 +110,32 @@ public class IdeaEntity implements Serializable {
         this.createdTime = createdTime;
     }
 
-    public Set<String> getCoworker() {
-        return coworker;
-    }
-
-    public void setCoworker(Set<String> coworker) {
-        this.coworker = coworker;
-    }
 
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
-        IdeaEntity IdeaEntity = (org.exoplatform.ideation.entities.domain.IdeaEntity) o;
+        IdeaEntity badgeEntity = (IdeaEntity) o;
+        return !(badgeEntity.getId() == 0 || getId() == 0) && Objects.equals(getId(), badgeEntity.getId());
+    }
 
-        if (id != IdeaEntity.id) return false;
-        if (coworker != null ? !coworker.equals(IdeaEntity.coworker) : IdeaEntity.coworker != null) return false;
-        if (createdBy != null ? !createdBy.equals(IdeaEntity.createdBy) : IdeaEntity.createdBy != null) return false;
-        if (createdTime != null ? !createdTime.equals(IdeaEntity.createdTime) : IdeaEntity.createdTime != null) return false;
-        if (description != null ? !description.equals(IdeaEntity.description) : IdeaEntity.description != null) return false;
-        if (status != null ? !status.equals(IdeaEntity.status) : IdeaEntity.status != null) return false;
-        if (title != null ? !title.equals(IdeaEntity.title) : IdeaEntity.title != null) return false;
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
 
-        return true;
+
+    @Override
+    public String toString() {
+        return "Badge{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                "}";
     }
 }

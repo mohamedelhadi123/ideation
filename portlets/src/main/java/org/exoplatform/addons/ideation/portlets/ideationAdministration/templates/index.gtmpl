@@ -1,0 +1,69 @@
+<div id="ideaAdmin">
+    <div ng-controller="ideaFrontCtrl" id="ideaFrontCtrl">
+        <div class="table-responsive">
+            <table class="table uiGrid table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>title</th>
+                    <th>description</th>
+                    <th>Creator</th>
+                    <th>Creation Date</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="idea in ideas| orderBy:orderByField:reverseSort">
+                    <td>
+                         {{idea.title}}
+                    </td>
+                    <td>
+                        {{idea.description}}
+                    </td>
+                    <td>{{idea.createdBy}}</td>
+                    <td>{{idea.createdTime | date:'dd-MM-yyyy HH:mm'}}</td>
+                    <td>
+                        <a data-placement="bottom" rel="tooltip" class="new-idea actionIcon" data-original-title="Edit">
+                            <i class="uiIconEdit uiIconLightGray" data-ng-click="activeEditForm(idea)"></i>
+                        </a>
+                        <a class="actionIcon" title="" href="" data-ng-click="deleteIdea(idea)">
+                                <i class="uiIconDeleteUser uiIconLightGray"> </i>
+                            </a>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br>
+
+        <div class="new-idea-container col-md-12" style="display: none;">
+                <div class="new-idea-input panel panel-primary">
+                    <div class="panel-body">
+                        <form novalidate>
+                            <div class="form-group">
+                                <input class=" input-xxlarge" type="hidden" placeholder="" ng-model="id">
+                            </div>
+                            <div class="form-group">
+                                <input class="input-xxlarge" type="text" placeholder="" ng-model="title">
+                            </div>
+                            <div class="form-group">
+
+                            <input class=" input-xxlarge" type="text" placeholder="" ng-model="createdBy">
+                            </div>
+
+                            <div class="form-group">
+                                <input class="input-xxlarge" type="text" placeholder="" ng-model="createdTime">
+                            </div>
+                            <div class="form-group">
+                                <textarea  rows="5" ng-model="description" ></textarea>
+                            </div>
+                            <div>
+                                <button class="idea-up btn btn-primary" ng-click="updateIdea()">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        </div>
+</div>
+</div>
