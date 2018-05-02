@@ -238,6 +238,21 @@ public class IdeaFrontController {
     @Resource(method = HttpMethod.POST)
     @MimeType.JSON
     @Jackson
+    public Response deleteFavorite(@Jackson FavoriteDTO obj) throws Exception {
+        try {
+            favoriteService.remove(obj);
+            return Response.ok();
+        } catch (Exception e) {
+            log.error("Error when removing Idea", e);
+            return Response.error("");
+        }
+    }
+
+
+    @Ajax
+    @Resource(method = HttpMethod.POST)
+    @MimeType.JSON
+    @Jackson
     public Response getAttachements(@Jackson IdeaDTO obj) {
         SessionProvider sessionProvider = SessionProvider.createSystemProvider();
         List<JSON> atts = new ArrayList<JSON>();

@@ -1,10 +1,9 @@
 define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function($, jz)  {
-    let ideaFrontCtrl = function($scope, $q, $timeout, $http,Upload) {
-        let ideaFrontContainer = $('#ideaFront');
-        let deferred = $q.defer();
+    var ideaFrontCtrl = function($scope, $q, $timeout, $http,Upload) {
+        var ideaFrontContainer = $('#ideaFront');
+        var deferred = $q.defer();
         $scope.showAlert = false;
         $scope.newIdea={
-            id:0
 
         };
         $scope.ideasToVAlidateFilter = "active";
@@ -18,16 +17,13 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
         $scope.currentUser="";
         $scope.comments = [];
         $scope.newComment = {
-            id:0
         };
         $scope.Favs =[];
         $scope.newFav={
-            id:0
         };
         $scope.showList = true;
         $scope.showForm = false;
         $scope.newideaId= {
-            id:null
         };
 
         $scope.loadBundle = function () {
@@ -52,6 +48,21 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
                     'Content-Type': 'application/json'
                 },
                 url: ideaFrontContainer.jzURL('IdeaFrontController.deleteIdea')
+            }).then(function successCallback(data) {
+                $scope.loadIdeas();
+            }, function errorCallback(data) {
+                $scope.setResultMessage($scope.i18n.defaultError, "error");
+            });
+        };
+
+        $scope.deleteFavorite = function (idea) {
+            $http({
+                data: idea,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                url: ideaFrontContainer.jzURL('IdeaFrontController.deleteFavorite')
             }).then(function successCallback(data) {
                 $scope.loadIdeas();
             }, function errorCallback(data) {
@@ -87,7 +98,6 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
         };
 
-
         $scope.CommentForm =  function(idea) {
             $('.new-comment').on('click', function (e) {
                 e.preventDefault();
@@ -119,6 +129,9 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
             });
 
         };
+
+
+
 
         $scope.loadData = function () {
 
@@ -367,6 +380,12 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
             });
 
         };
+        $scope.fav = function($scope) {
+            $scope.item = {
+                star: false
+            };
+        }
+
 
         //   $scope.loadBundle();
         //  $scope.loadData();

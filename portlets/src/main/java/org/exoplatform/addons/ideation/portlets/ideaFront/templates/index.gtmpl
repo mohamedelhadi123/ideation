@@ -109,6 +109,7 @@
                                         <a ng-if="idea.createdBy == '${currentUser}'" class="actionIcon" title="" href="" data-ng-click="deleteIdea(idea)">
                                             <i style="position:relative; top:-143px; left:618px;" class="uiIconDeleteUser uiIconLightGray"> </i>
                                         </a>
+
                                         <a  class="actionIcon" title="" href="" data-ng-click="saveFavorite(idea)">
                                             <i style="position:relative; top:-143px; left:526px;" class="uiIconColorStarYellow"> </i>
                                         </a>
