@@ -7,8 +7,9 @@
                     <th>title</th>
                     <th>description</th>
                     <th>Creator</th>
+                    <th>Status</th>
                     <th>Creation Date</th>
-                    <th>Action</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -20,6 +21,7 @@
                         {{idea.description}}
                     </td>
                     <td>{{idea.createdBy}}</td>
+                    <td>{{idea.status}}</td>
                     <td>{{idea.createdTime | date:'dd-MM-yyyy HH:mm'}}</td>
                     <td>
                         <a data-placement="bottom" rel="tooltip" class="new-idea actionIcon" data-original-title="Edit">
@@ -48,16 +50,18 @@
                                 <input class="input-xxlarge" type="text" placeholder="" ng-model="title">
                             </div>
                             <div class="form-group">
-
-                            <input class=" input-xxlarge" type="text" placeholder="" ng-model="createdBy | date:'dd-MM-yyyy HH:mm'">
-                            </div>
-
-                            <div class="form-group">
-                                <input class="input-xxlarge" type="text" placeholder="" ng-model="createdTime">
+                                <input class="input-xxlarge" type="text" placeholder="" ng-model="createdBy">
                             </div>
                             <div class="form-group">
                                 <textarea  rows="5" ng-model="description" ></textarea>
                             </div>
+                            <label>
+                                <select ng-selected="status" ng-model="status">
+                                    <option>DRAFTED</option>
+                                    <option>ARCHIVED</option>
+                                    <option>PUBLISHED</option>
+                                </select>
+                            </label>
                             <div>
                                 <button class="idea-up btn btn-primary" ng-click="updateIdea()">Update</button>
                             </div>

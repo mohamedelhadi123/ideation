@@ -1,11 +1,14 @@
 package org.exoplatform.ideation.entities.domain;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.ecs.html.S;
 import org.exoplatform.commons.api.persistence.ExoEntity;
 
 @Entity(name = "Idea")
@@ -16,6 +19,15 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
                         name = "Idea.getAllIdeas",
                         query = "SELECT idea FROM Idea idea"
                 ),
+                @NamedQuery(
+                        name = "Idea.getPublishedIdeas",
+                        query = "SELECT idea FROM Idea idea where idea.status = :PUBLISHED or (idea.status = :DRAFTED and idea.createdBy = :createdBy)"
+                ),
+                @NamedQuery(
+                        name = "Idea.getDraftIdeas",
+                        query = "SELECT idea FROM Idea idea where idea.status = :DRAFTED and idea.createdBy = :createdBy"
+                ),
+
                 @NamedQuery(
                         name = "Idea.findIdeaByTitle",
                         query = "SELECT idea FROM Idea idea where idea.title = :ideaTitle"
@@ -36,6 +48,39 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
 
 })
 public class IdeaEntity {
+    public enum Status {
+        PUBLISHED("PUBLISHED"),
+        ARCHIVED("ARCHIVED"),
+        DRAFTED("DRAFTED");
+
+        private static Map<String, Status> FORMAT_MAP = Stream
+                .of(Status.values())
+                .collect(Collectors.toMap(s -> s.formatted, Function.identity()));
+
+        private final String formatted;
+
+        Status(String formatted) {
+            this.formatted = formatted;
+        }
+
+
+
+
+
+        @JsonCreator // This is the factory method and must be static
+        public static Status fromString(String string) {
+            return Optional
+                    .ofNullable(FORMAT_MAP.get(string))
+                    .orElseThrow(() -> new IllegalArgumentException(string));
+        }
+
+        @JsonCreator // This is the factory method and must be static
+        public  String toString() {
+            return this.name();
+        }
+
+    }
+
 
     @Id
     @Column(name = "IDEA_ID")
@@ -46,8 +91,8 @@ public class IdeaEntity {
     private String title;
     @Column(name = "DESCRIPTION")
     private String description;
-    @Column(name = "STATUS")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     @Column(name = "CREATED_BY")
     private String createdBy;
 
@@ -83,11 +128,11 @@ public class IdeaEntity {
     }
 
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

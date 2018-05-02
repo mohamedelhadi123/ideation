@@ -7,6 +7,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+
 public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
 
     public IdeaDAO() {
@@ -26,10 +27,10 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
 
     }
 
-    public IdeaEntity findIdeaById(Long IdeaId) throws PersistenceException {
+    public IdeaEntity findIdeaById(Long ideaId) throws PersistenceException {
 
         TypedQuery<IdeaEntity> query = getEntityManager().createNamedQuery("Idea.findIdeaById", IdeaEntity.class)
-                .setParameter("ideaId", IdeaId);
+                .setParameter("ideaId", ideaId);
 
         try {
             return query.getSingleResult();
@@ -40,6 +41,15 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
     }
 
 
+
+    public List<IdeaEntity> getPublishedIdeas(IdeaEntity.Status PUBLISHED , IdeaEntity.Status DRAFTED , String createdBy) throws PersistenceException {
+
+       return getEntityManager().createNamedQuery("Idea.getPublishedIdeas", IdeaEntity.class).setParameter("PUBLISHED",PUBLISHED)
+                .setParameter("DRAFTED",DRAFTED).setParameter("createdBy", createdBy).getResultList();
+
+
+
+    }
 
     public List<IdeaEntity> getAllIdeas() throws PersistenceException {
 
@@ -53,6 +63,14 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
 
     }
 
+
+
+
+    public List<IdeaEntity> getDraftIdeas(IdeaEntity.Status DRAFTED , String createdBy) throws PersistenceException {
+        return getEntityManager().createNamedQuery("Idea.getDraftIdeas", IdeaEntity.class).setParameter("DRAFTED",DRAFTED)
+                .setParameter("createdBy", createdBy).getResultList();
+
+    }
 
 
     public int deleteIdeaById(int ideaId) throws PersistenceException {

@@ -2,14 +2,19 @@ package org.exoplatform.ideation.entities.domain;
 import org.exoplatform.commons.api.persistence.ExoEntity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity(name = "IdeaCommentEntity")
 @ExoEntity
 @Table(name = "IDEATION_COMMENTS")
 @NamedQueries({
-        @NamedQuery(name = "commentEntity.findByIdeaId", query = "SELECT a FROM IdeaCommentEntity a where a.id = :ideaId"),
-        @NamedQuery(name = "commentEntity.count", query = "SELECT count(a.id) FROM IdeaCommentEntity a  where a.id = :ideaId ") })
+        @NamedQuery(name = "commentEntity.findByIdeaId", query = "SELECT a FROM IdeaCommentEntity a where a.ideaId.id = :ideaId"),
+        @NamedQuery(name = "commentEntity.count", query = "SELECT count(a.id) FROM IdeaCommentEntity a  where a.ideaId.id = :ideaId "),
+        @NamedQuery(
+                name = "IdeaCommentEntity.getAllComments",
+                query = "SELECT c FROM IdeaCommentEntity c "
+        ),})
 public class CommentEntity {
 
     public CommentEntity(){
@@ -30,7 +35,7 @@ public class CommentEntity {
     private long ideaId;
 
     @Column(name = "CREATED_TIME")
-    private long   createdTime;
+    private Date   createdTime;
 
     @Column(name = "CMT")
     private String   commentText;
@@ -58,11 +63,11 @@ public class CommentEntity {
         this.ideaId = ideaId;
     }
 
-    public long getCreatedTime() {
+    public Date getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(long createdTime) {
+    public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
     }
 

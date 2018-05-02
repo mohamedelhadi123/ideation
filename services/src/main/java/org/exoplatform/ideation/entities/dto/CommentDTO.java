@@ -1,13 +1,14 @@
 package org.exoplatform.ideation.entities.dto;
 import java.io.Serializable;
+import java.util.Date;
 
-    public class CommentDTO implements Serializable{
+public class CommentDTO implements Serializable{
 
 
 
         private long              Id;
 
-        private long              createdTime;
+        private Date createdTime;
 
         private long              ideaId;
 
@@ -25,11 +26,11 @@ import java.io.Serializable;
             Id = id;
         }
 
-        public long getCreatedTime() {
+        public Date getCreatedTime() {
             return createdTime;
         }
 
-        public void setCreatedTime(long createdTime) {
+        public void setCreatedTime(Date createdTime) {
             this.createdTime = createdTime;
         }
 

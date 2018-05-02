@@ -11,7 +11,10 @@ public interface IdeaService {
 
     public IdeaEntity createIdea (IdeaEntity ideaEntity) ;
 
+    public List<IdeaDTO> getPublishedIdeas(String PUBLISHED);
+
     public List<IdeaDTO> getAllIdeas();
+
 
     public IdeaEntity updateIdea (IdeaEntity ideaEntity);
 
@@ -19,9 +22,7 @@ public interface IdeaService {
     public IdeaDTO save(IdeaDTO entity, boolean newIde);
 
     public void delete(IdeaDTO entity);
-
-
-
+    public List<IdeaDTO> getDraftIdeas(String createdBy);
     public IdeaEntity findIdeaByTitle(String IdeaTitle) ;
 
 

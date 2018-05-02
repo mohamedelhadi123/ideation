@@ -17,7 +17,7 @@ public class IdeaDTO implements Serializable {
     protected String description;
 
     @Size(min = 1, max = 256)
-    protected String status;
+    protected IdeaEntity.Status status;
 
     protected int rate;
 
@@ -73,11 +73,11 @@ public class IdeaDTO implements Serializable {
         this.description = description;
     }
 
-    public String getStatus() {
+    public IdeaEntity.Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus( IdeaEntity.Status status) {
         this.status = status;
     }
 

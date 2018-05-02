@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -25,9 +26,8 @@ public class CommentService {
     }
 
     public CommentDTO save(CommentDTO entity) {
-        if (entity == null) {
-            throw new IllegalStateException("Parameter 'entity' is null");
-        }
+        entity.setCreatedTime(new Date());
+
 
         CommentEntity commentEntity = null;
         commentEntity = commentDAO.create(convert(entity));
@@ -41,11 +41,8 @@ public class CommentService {
         commentDAO.delete(convert(entity));
     }
 
-    public List<CommentDTO> getCommentsByIdeaId(long id, int offset, int limit) {
-        if (offset < 0) {
-            throw new IllegalArgumentException("Method getCommentsByRequestID - Parameter 'offset' must be positive");
-        }
-        List<CommentEntity> entities = commentDAO.getCommentsByIdeaId(id, offset, limit);
+    public List<CommentDTO> getCommentsByIdeaId() {
+        List<CommentEntity> entities = commentDAO.getAllComments();
         List<CommentDTO> dtos = new ArrayList<CommentDTO>();
         for (CommentEntity entity : entities) {
             dtos.add(convert(entity));

@@ -41,6 +41,7 @@ define("ideationAdministrationControllers", [ "SHARED/jquery", "SHARED/juzu-ajax
                     "createdBy":$scope.createdBy,
                     "createdTime":$scope.createdTime,
                     "description": $scope.description,
+                    "status":$scope.status,
                 },
                 method : 'POST',
                 headers : {
@@ -66,6 +67,7 @@ define("ideationAdministrationControllers", [ "SHARED/jquery", "SHARED/juzu-ajax
             $scope.description = idea.description;
             $scope.createdBy = idea.createdBy;
             $scope.createdTime = idea.createdTime;
+            $scope.status = idea.status;
         };
 
         $scope.deleteIdea = function (idea) {

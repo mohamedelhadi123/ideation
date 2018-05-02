@@ -31,7 +31,7 @@
         <portlet-application>
             <portlet>
                 <application-ref>ideation</application-ref>
-                <portlet-ref>ideationAdministrationControllerPortlet</portlet-ref>
+                <portlet-ref>IdeaFrontPortlet</portlet-ref>
             </portlet>
             <title>Manage ideas</title>
             <access-permissions>*:/platform/administrators</access-permissions>

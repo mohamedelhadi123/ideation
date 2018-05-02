@@ -1,20 +1,28 @@
 package org.exoplatform.ideation.service.impl;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import juzu.Response;
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
 import org.exoplatform.ideation.entities.dto.IdeaDTO;
 import org.exoplatform.ideation.service.IdeaService;
+import org.exoplatform.ideation.storage.dao.jpa.FavoriteDAO;
 import org.exoplatform.ideation.storage.dao.jpa.IdeaDAO;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class IdeaServiceImpl implements IdeaService {
+
+    private  String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
+
     private static final Log LOG = ExoLogger.getExoLogger(IdeaServiceImpl.class);
 
     private IdeaDAO ideaDao = new IdeaDAO();
@@ -26,6 +34,7 @@ public class IdeaServiceImpl implements IdeaService {
         return IdeaE;
 
     }
+    FavoriteDAO favoriteDAO = new FavoriteDAO();
 
     public IdeaEntity updateIdea(IdeaEntity ideaEntity) {
 
@@ -41,12 +50,17 @@ public class IdeaServiceImpl implements IdeaService {
         return ideaDao.findIdeaByTitle(IdeaTitle);
     }
 
+    FavoriteService favoriteService = new FavoriteService();
+
     public void delete(IdeaDTO entity) {
         if (entity == null) {
             throw new IllegalStateException("Parameter 'entity' = + "+entity+ " or 'entity.id' is null");
         }
+
+
         ideaDao.delete(convert(entity));
     }
+
 
 
     public IdeaDTO save(IdeaDTO entity, boolean newIde) {
@@ -65,6 +79,15 @@ public class IdeaServiceImpl implements IdeaService {
         return convert(ideaEntity);
     }
 
+    public List<IdeaDTO> getPublishedIdeas(String createdBy) {
+        List<IdeaEntity> entities = ideaDao.getPublishedIdeas(IdeaEntity.Status.PUBLISHED , IdeaEntity.Status.DRAFTED ,createdBy);
+        List<IdeaDTO> dtos = new ArrayList<IdeaDTO>();
+        for (IdeaEntity entity : entities) {
+            dtos.add(convert(entity));
+        }
+        return dtos;
+    }
+
     public List<IdeaDTO> getAllIdeas() {
         List<IdeaEntity> entities = ideaDao.getAllIdeas();
         List<IdeaDTO> dtos = new ArrayList<IdeaDTO>();
@@ -73,6 +96,19 @@ public class IdeaServiceImpl implements IdeaService {
         }
         return dtos;
     }
+
+
+    public List<IdeaDTO> getDraftIdeas(String createdBy) {
+            List<IdeaEntity> entities = ideaDao.getDraftIdeas(IdeaEntity.Status.DRAFTED,createdBy);
+            List<IdeaDTO> dtos = new ArrayList<IdeaDTO>();
+            for (IdeaEntity entity : entities) {
+                dtos.add(convert(entity));
+            }
+
+            return dtos;
+        }
+
+
 
 
     public IdeaEntity findIdeaById(Long IdeaId) {
@@ -88,7 +124,7 @@ public class IdeaServiceImpl implements IdeaService {
         entity.setTitle(dto.getTitle());
         entity.setDescription(dto.getDescription());
         entity.setCreatedBy(dto.getCreatedBy());
-
+        entity.setStatus(dto.getStatus());
         return entity;
     }
 
@@ -99,7 +135,7 @@ public class IdeaServiceImpl implements IdeaService {
         dto.setDescription(entity.getDescription());
         dto.setCreatedBy(entity.getCreatedBy());
         dto.setCreatedTime(entity.getCreatedTime());
-
+        dto.setStatus(entity.getStatus());
         return dto;
     }
 

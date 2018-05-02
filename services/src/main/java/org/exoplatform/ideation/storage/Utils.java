@@ -15,6 +15,7 @@ public class Utils {
 
     private static Log log = ExoLogger.getLogger(Utils.class);
     public static final String COMMENT="comment";
+    public static final String ALL="all";
 
 
     public static void saveFile(FileItem item, String typeFolder, String parentNode){

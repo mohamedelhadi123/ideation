@@ -3,37 +3,19 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_objects_1_2 http://www.gatein.org/xml/ns/gatein_objects_1_2"
         xmlns="http://www.gatein.org/xml/ns/gatein_objects_1_2">
-
   <page>
     <name>ideation</name>
     <title>ideation</title>
     <access-permissions>*:/platform/users</access-permissions>
     <edit-permission>*:/platform/administrators</edit-permission>
-    <show-max-window>false</show-max-window>
     <portlet-application>
       <portlet>
         <application-ref>ideation</application-ref>
         <portlet-ref>IdeaFrontPortlet</portlet-ref>
       </portlet>
+      <title>ideation</title>
       <access-permissions>*:/platform/users</access-permissions>
       <show-info-bar>false</show-info-bar>
     </portlet-application>
   </page>
-
-  <page>
-    <name>ideation-administration</name>
-    <title>ideation-administration</title>
-    <access-permissions>manager:/platform/administrators</access-permissions>
-    <edit-permission>manager:/platform/administrators</edit-permission>
-    <show-max-window>false</show-max-window>
-    <portlet-application>
-      <portlet>
-        <application-ref>ideation</application-ref>
-        <portlet-ref>ideationAdministrationControllerPortlet</portlet-ref>
-      </portlet>
-      <access-permissions>*:/platform/administrators</access-permissions>
-      <show-info-bar>false</show-info-bar>
-    </portlet-application>
-  </page>
-
 </page-set>

@@ -23,7 +23,7 @@
             <column name="DESCRIPTION" type="NVARCHAR(2000)">
                 <constraints nullable="true"/>
             </column>
-            <column name="STATUS" type="NVARCHAR(100)" defaultValue="0">
+            <column name="STATUS" type="ENUM('PUBLISHED','ARCHIVED','DRAFTED')">
                 <constraints nullable="true"/>
             </column>
             <column name="CREATED_BY" type="NVARCHAR(50)">
