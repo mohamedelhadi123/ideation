@@ -111,6 +111,11 @@
                 <type>war</type>
             </dependency>
             <dependency>
+                <groupId>org.juzu</groupId>
+                <artifactId>juzu-plugins-jackson</artifactId>
+                <version>${juzu.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.exoplatform.addons.ideation</groupId>
                 <artifactId>ideation-extension</artifactId>
                 <version>${project.version}</version>

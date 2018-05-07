@@ -3,14 +3,10 @@ package org.exoplatform.addons.ideation.portlets.ideaFront;
 import juzu.*;
 import juzu.impl.common.JSON;
 import juzu.plugin.jackson.Jackson;
-
 import juzu.template.Template;
-
 import org.apache.commons.fileupload.FileItem;
-import org.apache.ecs.wml.U;
 import org.exoplatform.commons.juzu.ajax.Ajax;
 import org.exoplatform.commons.utils.PropertyManager;
-import org.exoplatform.ideation.entities.domain.IdeaEntity;
 import org.exoplatform.ideation.entities.dto.CommentDTO;
 import org.exoplatform.ideation.entities.dto.FavoriteDTO;
 import org.exoplatform.ideation.entities.dto.IdeaDTO;
@@ -20,26 +16,19 @@ import org.exoplatform.ideation.service.impl.FavoriteService;
 import org.exoplatform.ideation.storage.Utils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.social.core.identity.model.Identity;
-import org.exoplatform.social.core.identity.model.Profile;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.social.core.identity.model.Profile;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
-import org.gatein.pc.portlet.impl.jsr168.DispatchedHttpServletRequest;
 
 import javax.inject.Inject;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Session;
-import javax.ws.rs.core.SecurityContext;
-
-
 import java.io.IOException;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -96,10 +85,22 @@ public class IdeaFrontController {
     @Jackson
     public void saveIdea(@Jackson IdeaDTO obj) {
 
-        if (currentUser != null) {
-            obj.setCreatedBy(currentUser);
+        ConversationState conversationState = ConversationState.getCurrent();
+
+        if (conversationState != null) {
+
+            obj.setCreatedBy(conversationState.getIdentity().getUserId());
+
+            obj = ideaService.save(obj,true);
+
+        } else {
+
+            //TODO add log message
+            log.warn("");
+
         }
-        obj = ideaService.save(obj,true);
+
+        //todo return your object
     }
 
     @Ajax
