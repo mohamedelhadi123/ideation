@@ -1,19 +1,10 @@
 package org.exoplatform.ideation.service.impl;
-
-
-
-import org.exoplatform.commons.api.persistence.ExoTransactional;
-import org.exoplatform.ideation.entities.domain.IdeaEntity;
-import org.exoplatform.ideation.entities.dto.IdeaDTO;
 import org.exoplatform.ideation.storage.dao.jpa.FavoriteDAO;
 import org.exoplatform.ideation.entities.dto.FavoriteDTO;
 import org.exoplatform.ideation.entities.domain.FavoriteEntity;
-import org.exoplatform.ideation.storage.dao.jpa.IdeaDAO;
 import org.exoplatform.services.security.ConversationState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,22 +18,36 @@ public class FavoriteService {
     private FavoriteDAO favoriteDAO;
 
 
+
+
     public FavoriteService() {
         this.favoriteDAO = new FavoriteDAO();
     }
 
-    public FavoriteDTO save(FavoriteDTO entity) {
+    public Boolean save(FavoriteDTO entity,String author,long ideaId) {
         entity.setCreatedTime(new Date());
         FavoriteEntity favoriteEntity = null;
-        /*if (entity == null) {*/
-        favoriteEntity = favoriteDAO.create(convert(entity));
+        FavoriteEntity entiti = favoriteDAO.getFavoriteByIdeaAndUserId(author,ideaId);
+        if(entiti != null){
+            favoriteDAO.delete(entiti);
+            entity.setFav(false);
 
-        return convert(favoriteEntity);
+        }else {
+            favoriteDAO.create(convert(entity));
+            entity.setFav(true);
+
+        }
+        return entity.getFav();
     }
 
 
 
 
+    public long count(long ideaId){
+        return  favoriteDAO.getfavsByIdeaIdCount(ideaId);
+
+
+    }
 
 
     public void remove(FavoriteDTO entity) {
@@ -52,14 +57,17 @@ public class FavoriteService {
         favoriteDAO.delete(convert(entity));
     }
 
-    public List<FavoriteDTO> getFavoritesByUserId(String user) {
-        List<FavoriteEntity> entities = favoriteDAO.getAllFavoriteofIdeaofuser(user);
+    public List<FavoriteDTO> getFavorites(String author) {
+        List<FavoriteEntity> entities = favoriteDAO.getAllFavorites(author);
         List<FavoriteDTO> dtos = new ArrayList<FavoriteDTO>();
         for (FavoriteEntity entity : entities) {
+
             dtos.add(convert(entity));
         }
         return dtos;
     }
+
+
 
 
     private FavoriteEntity convert(FavoriteDTO dto) {

@@ -11,7 +11,7 @@ public interface IdeaService {
 
     public IdeaEntity createIdea (IdeaEntity ideaEntity) ;
 
-    public List<IdeaDTO> getPublishedIdeas(String PUBLISHED);
+    public List<IdeaDTO> getUserIdeas(String PUBLISHED);
 
     public List<IdeaDTO> getAllIdeas();
 

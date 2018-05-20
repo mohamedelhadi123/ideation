@@ -4,7 +4,6 @@ import java.lang.*;
 import org.exoplatform.ideation.entities.domain.CommentEntity;
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
 import org.exoplatform.ideation.entities.dto.CommentDTO;
-import org.exoplatform.ideation.entities.dto.IdeaDTO;
 import org.exoplatform.ideation.storage.dao.jpa.CommentDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,8 +49,17 @@ public class CommentService {
         return dtos;
     }
 
+    public List<CommentDTO> getCommentsofIdea(long ideaId) {
+        List<CommentEntity> entities = commentDAO.getIdeaComments(ideaId);
+        List<CommentDTO> dtos = new ArrayList<CommentDTO>();
+        for (CommentEntity entity : entities) {
+            dtos.add(convert(entity));
+        }
+        return dtos;
+    }
 
-    public Long getCommentsByIdeaIdCount(Long id) {
+
+    public long countcomment(long id) {
         return commentDAO.getCommentsByIdeaIdCount(id);
     }
 
@@ -61,16 +69,15 @@ public class CommentService {
         entity.setCreatedTime(dto.getCreatedTime());
         entity.setCommentText(dto.getCommentText());
         entity.setIdeaId(dto.getIdeaId());
+
         entity.setAuthor(dto.getAuthor());
         return entity;
     }
 
     private CommentDTO convert(CommentEntity entity) {
         CommentDTO dto = new CommentDTO();
-        IdeaEntity ideaEntity = new IdeaEntity();
         dto.setId(entity.getId());
-        dto.setCreatedTime(entity.getCreatedTime());
-        dto.setIdeaId(ideaEntity.getId());
+        dto.setIdeaId(entity.getIdeaId());
         dto.setCommentText(entity.getCommentText());
         dto.setAuthor(entity.getAuthor());
         return dto;

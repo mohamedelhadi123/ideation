@@ -43,7 +43,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="IDEA_ID" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="FK_LIKE_IDEATION_01" references="IDEA_IDEAS(IDEA_ID)"/>
+                <constraints nullable="false" foreignKeyName="FK_LIKE_IDEATION_01" references="IDEA_IDEAS(IDEA_ID) ON DELETE CASCADE"/>
             </column>
             <column name="CREATED_TIME" type="TIMESTAMP">
                 <constraints nullable="true"/>
@@ -71,8 +71,10 @@
             <column name="AUTHOR" type="NVARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
+            <column name="ISFAV" type="BOOLEAN" defaultValue="false">
+            </column>
             <column name="IDEA_ID" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="FK_FAV_IDEATION_01" references="IDEA_IDEAS(IDEA_ID)"/>
+                <constraints nullable="false" foreignKeyName="FK_FAV_IDEATION_01" references="IDEA_IDEAS(IDEA_ID) ON DELETE CASCADE"/>
             </column>
             <column name="CREATED_TIME" type="TIMESTAMP">
                 <constraints nullable="true"/>
@@ -84,8 +86,9 @@
             <column name="CWK_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
                 <constraints primaryKey="true" primaryKeyName="PK_IDEATION_CWK" nullable="false"/>
             </column>
+
             <column name="IDEA_ID" type="BIGINT">
-                <constraints foreignKeyName="FK_IDE_CWK_IDE_01" references="IDEA_IDEAS(IDEA_ID)" nullable="false"/>
+                <constraints foreignKeyName="FK_IDE_CWK_IDE_01" references="IDEA_IDEAS(IDEA_ID) ON DELETE CASCADE" nullable="false"/>
             </column>
             <column name="COWORKER" type="NVARCHAR(50)">
                 <constraints nullable="false"/>
@@ -106,7 +109,7 @@
                 <constraints nullable="true"/>
             </column>
             <column name="IDEA_ID" type="BIGINT">
-
+                <constraints nullable="false" foreignKeyName="FK_IDE_CMT_IDE_01" references="IDEA_IDEAS(IDEA_ID) ON DELETE CASCADE"/>
             </column>
         </createTable>
         <!-- Definition of IDEATION_LOGS table -->
@@ -115,7 +118,7 @@
                 <constraints primaryKey="true" primaryKeyName="PK_IDEATION_CHANGE_LOG" nullable="false"/>
             </column>
             <column name="IDEA_ID" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="FK_LOG_IDEATION" references="IDEA_IDEAS(IDEA_ID)"/>
+                <constraints nullable="false" foreignKeyName="FK_LOG_IDEATION ON DELETE CASCADE" references="IDEA_IDEAS(IDEA_ID)"/>
             </column>
             <column name="AUTHOR" type="NVARCHAR(100)">
                 <constraints nullable="false"/>

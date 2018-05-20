@@ -3,9 +3,7 @@ package org.exoplatform.ideation.entities.domain;
 
 import org.exoplatform.commons.api.persistence.ExoEntity;
 import java.util.*;
-
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 
 @Entity(name = "Favorite")
 @ExoEntity
@@ -13,25 +11,28 @@ import javax.xml.crypto.Data;
 @NamedQueries({
         @NamedQuery(
                 name = "Favorite.getAllFavoriteofIdea",
-                query = "SELECT favorite FROM Favorite favorite where favorite.ideaId.id = :ideaId"
+                query = "SELECT favorite FROM Favorite favorite where favorite.ideaId = :ideaId"
         ),
         @NamedQuery(
                 name = "Favorite.getFavoriteofUser",
-                query = "SELECT favorite FROM Favorite favorite where favorite.author = :author"
+                query = "SELECT favorite FROM Favorite favorite WHERE  favorite.author = :author"
         ),
 
         @NamedQuery(
-                name = "Favorite.favoriteOnce",
-                query = "SELECT favorite FROM Favorite favorite where favorite.ideaId.id = :ideaId and favorite.author = :author"
+                name = "Favorite.count",
+                query = "SELECT count(favorite) FROM Favorite favorite WHERE  favorite.ideaId = :ideaId"
         ),
+
         @NamedQuery(
-                name = "Favorite.findFavoriteOfIdea",
-                query = "SELECT favorite FROM Favorite favorite WHERE favorite.ideaId.id = :ideaId  ORDER BY favorite.createdTime DESC"
+                name = "Favorite.getFavoriteByIdeaAndUserID",
+                query = "SELECT favorite FROM Favorite favorite WHERE favorite.ideaId = :ideaId and favorite.author = :author"
         ),
+
+
 
         @NamedQuery(
                 name = "Favorite.countFavoriteOfIdea",
-                query = "SELECT count(c) FROM Favorite c WHERE c.ideaId.id = :ideaId "
+                query = "SELECT count(c) FROM Favorite c WHERE c.ideaId = :ideaId "
         ),
 })
 
@@ -41,6 +42,8 @@ public class FavoriteEntity {
     @SequenceGenerator(name = "SEQ_IDEATION_FAV_FAV_ID")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_IDEATION_FAV_FAV_ID")
     private long  id;
+    @Column(name = "ISFAV")
+    private boolean isfav;
     @Column(name = "AUTHOR")
     private String author;
     @Temporal(TemporalType.TIMESTAMP)
@@ -56,6 +59,14 @@ public class FavoriteEntity {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public boolean getFav() {
+        return isfav;
+    }
+
+    public void setFav(boolean isfav) {
+        this.isfav = isfav;
     }
 
     public String getAuthor() {

@@ -3,43 +3,33 @@ package org.exoplatform.ideation.entities.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-public class FavoriteDTO implements Serializable {
-    private long            Id  ;
-    private long ideaId ;
+public class LikeDTO implements Serializable {
+        private long            Id  ;
+        private long ideaId ;
+    private boolean like ;
+        private long numlike;
+        private String   author;
 
-    private String   author;
-    private long numfav;
-    private boolean fav ;
+        private Date createdTime;
 
-    private Date createdTime;
+        public LikeDTO(){
 
-    public FavoriteDTO(){
-
-    }
-
+        }
 
     public long getId() {
         return Id;
     }
 
-    public boolean getFav() {
-        return fav;
-    }
-
-    public void setFav(boolean fav) {
-        this.fav = fav;
-    }
-
-    public long getNumfav() {
-        return numfav;
-    }
-
-    public void setNumfav(long numfav) {
-        this.numfav = numfav;
-    }
-
     public void setId(long id) {
         Id = id;
+    }
+
+    public long getNumlike() {
+        return numlike;
+    }
+
+    public void setNumlike(long numlike) {
+        this.numlike = numlike;
     }
 
     public long getIdeaId() {
@@ -64,5 +54,13 @@ public class FavoriteDTO implements Serializable {
 
     public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
+    }
+
+    public boolean isLike() {
+        return like;
+    }
+
+    public void setLike(boolean like) {
+        this.like = like;
     }
 }

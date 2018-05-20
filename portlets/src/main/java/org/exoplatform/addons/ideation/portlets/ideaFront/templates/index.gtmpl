@@ -1,5 +1,5 @@
 <div id="ideaFront" style="display: none;">
-    <div ng-controller="ideaFrontCtrl" id="ideaFrontCtrl">
+    <div ng-controller="ideaFrontCtrl" id="ideaFrontCtrl" class="uiContentBox uiBox">
             <h2>Ideation</h2>
         <div class="btn-toolbar" >
             <div class="btn-group">
@@ -18,145 +18,236 @@
                 </ul>
             </div><!-- /btn-group -->
         </div>
-            <!-- Button trigger modal -->
-            <button id="modalBtn" class="button" style="position: relative; top : -50px; left: -343px;">Create Idea</button>
-            <div id="simpleModal" class="modall">
-                <div class="modal-contentt">
-                    <div class="modal-headerr">
-                        <span class="closeBtn">&times;</span>
-                        <div style="position: relative; left: 110px; top:20px;">
-                            <h2>What's your idea ?</h2>
-                        </div>
+            <a class="button create-idea">Create Idea</a>
+                  #{include path=create_idea.gtmpl /}
+               <div style="display: none;" class=" RightBodyTDContainer uiBox uiContentBox edit-container">
+                <form>
+                    <div class="form-group">
+                        <input class=" input-xxlarge ng-pristine ng-valid ng-empty ng-touched" type="hidden" placeholder="" ng-model="id">
                     </div>
-                    <div class="modal-bodyy" style="position: relative; left: 85px;">
-                     #{include path=create_idea.gtmpl /}
+                    <div class="form-group">
+                        <input class="input-xxlarge ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder="" ng-model="title">
                     </div>
-                </div>
+                    <div class="form-group">
+                        <input class=" input-xxlarge ng-pristine ng-valid ng-empty ng-touched" type="hidden"  value="${currentUser}"/>
+                    </div>
+                    <div class="form-group">
+                        <textarea  rows="5" ng-model="description" ></textarea>
+                    </div>
+                    <label>
+                        <select ng-model="status" ng-selected="status">
+                            <option>DRAFTED</option>
+                            <option ng-selected="PUBLISHED">PUBLISHED</option>
+                        </select>
+                    </label>
+                    <div>
+                        <button class="idea-up btn btn-primary" data-ng-click="updateIdea()">Update</button>
+                    </div>
+                </form>
+               </div>
+<div ng-repeat="idea in ideas">
+<!--<div class="container content">
+    <div class="comments-container">
+      <ul id="comments-list" class="comments-list" style="position: relative; right: 190px;">
+     <li>
+ <div class="comment-main-level">
+
+   <div class="comment-avatar"><img src="/eXoSkin/skin/images/system/UserAvtDefault.png"/></div>
+  <div class="comment-box">
+       <div class="comment-head">
+       <h6 class="comment-name by-author"><a href="/portal/intranet/profile/{{idea.createdBy}}">{{idea.createdBy}}</a></h6>
+  <span>{{idea.createdTime | date:'dd-MM-yyyy HH:mm'}}</span>
+   <br>
+   <br>
+  <h4><strong>{{idea.title}}</strong></h4>
+   </div>
+  <div class="comment-content">
+   {{idea.description}}
+    </div>
+
+    <a type="submit" data-ng-click="saveFavorite(idea)">
+            <span ng-if="idea.fav == false" class="uiIconStar"></span>
+
+               <span ng-if="idea.fav == true"  class="uiIconColorStarYellow"></span>
+
+               </a>
+
+
+            <a class="actionIcon" title="" href="" data-ng-click="saveLike(idea)">
+                  <span ng-if="idea.like == false" class="uiIconThumbUp"><i ng-if="idea.numlike > 0"> ({{idea.numlike}}) </i></span>
+                <span ng-if="idea.like == true"  class="uiIconThumbUp uiIconBlue"><i ng-if="idea.numlike > 0"> ({{idea.numlike}}) </i></span>
+
+            </a>
+
+<a data-ng-click="comment(idea)">
+   <i>&nbsp;comment</i> ({{idea.numcomments}}) </a>
+            <div id="new-comment-container_{{idea.id}}" style="display: none;">
+                  <div class= "commentRight">
+                         <div class="commentInputBox ">
+                             <div id="comtext" style="width : 70%;" >
+                                 <textarea  id="newcomment_{{idea.id}}" title="Add your comment..." name="comment_{{idea.id}}"  ng-model="idea.commentText"></textarea>
+                               </div>
+                                </div>
+                   </div>
+              <div class="clearfix">
+                <div style="position:relative; top: -50px;">
+                   <button  type="button" class="btn btn-xs pull-right btn-primary"
+                  data-ng-click="saveComment(idea)">Comment
+                   </button>
+               </div>
+
+                   <div ng-repeat="comment in comments" id="commentList_{{idea.id}}">
+                 <div  class="commentRight">
+                    <p  class="contentComment_{{idea.id}}">
+                  {{comment.commentText}}
+                  </p>
+                      </div>
+                 </div>
+            </div>
             </div>
 
-        <div class="new-idea-container col-md-12" style="display: none;">
-            <div class="new-idea-input panel panel-primary">
-                <div class="panel-body">
-                    <form novalidate>
-                        <div class="form-group">
-                            <input class=" input-xxlarge" type="hidden" placeholder="" ng-model="id">
+-->
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-offset-1 col-md-8">
+                    <!-- POST -->
+                    <div class="post">
+                        <div class="wrap-ut pull-left">
+                            <div class="userinfo pull-left">
+                                <div class="avatar">
+                                    <img src="/eXoSkin/skin/images/system/UserAvtDefault.png" alt="">
+                                </div>
+                                <b>
+                                <p style="position: relative; left: 20px;">{{idea.createdBy}}</p>
+                                </b>
+                            </div>
+                            <div class="posttext pull-left">
+                                <h2  ><b>{{idea.title}}</b></h2>
+                                <p>{{idea.description}}</p>
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="form-group">
-                            <input class="input-xxlarge" type="text" placeholder="" ng-model="title">
+                        <a ng-if="idea.createdBy == '${currentUser}'" class="actionIcon" title="" href="" data-ng-click="deleteIdea(idea)">
+                            <i class="uiIconDeleteUser uiIconLightGray"> </i>
+                        </a>
+                        <p style="position:  relative; left: 57px; color: blue; top: 20px;">Favorites</p>
+                        <div class="postinfo pull-left">
+                            <div class="comments">
+                                <div class="commentbg">
+                                    {{idea.numfav}}
+                                    <div class="mark"></div>
+                                </div>
+                            </div>
+                            <p style="position:  relative; left: 46px; color:  blue;">Posted time</p>
+                            <div class="time"><i class="uiIconClock  uiIconLightGray"></i>{{idea.createdTime | date:'dd-MM-yyyy HH:mm'}}</div>
                         </div>
-                        <div class="form-group">
-                            <input class=" input-xxlarge" type="hidden"  value="${currentUser}"/>
-                        </div>
-                        <div class="form-group">
-                            <textarea  rows="5" ng-model="description" ></textarea>
-                        </div>
+                        <div class="clearfix"></div>
+                        <div class="postinfobot">
 
-                        <label>
-                            <select ng-model="status" ng-selected="status">
-                                <option>DRAFTED</option>
-                                <option ng-selected="status">PUBLISHED</option>
-                            </select>
-                        </label>
-                        <div>
-                            <button class="idea-up btn btn-primary" data-ng-click="updateIdea()">Update</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="new-comment-container" style="display: none;">
-            <div class="new-comment-input">
-                <div class=" commentRight">
-                    <div class="commentInputBox ">
-                        <div class="commentInput" style="position: relative; left: 90px;" >
+                            <a title="" href="" data-ng-click="saveLike(idea)" class="actionIcon likeblock pull-left">
+                                <span href="#"  ng-if="idea.like == false" class="uiIconThumbUp down"> <i ng-if="idea.numlike > 0"> {{idea.numlike}} </i> </span>
 
-                            <textarea title="Add your comment..." name="comment" ng-model="newComment.commentText" cols="30" rows="10" class="textarea"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="clearfix">
-                    <div style="position:relative; right: 635px; top: -50px;">
-                        <button type="button" class="btn pull-right btn-primary"
-                                data-ng-click="saveComment(idea)">Comment
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ng-repeat="idea in ideas| orderBy:orderByField">
-                <div class="container content">
-                    <div class="comments-container">
-                        <ul id="comments-list" class="comments-list" style="position: relative; right: 190px;">
-                            <li>
-                                <div class="comment-main-level">
-                                    <!-- Avatar -->
-                                    <div class="comment-avatar"><img src="/eXoSkin/skin/images/system/UserAvtDefault.png"/></div>
-                                    <div class="comment-box">
-                                        <div class="comment-head">
-                                            <h6 class="comment-name by-author"><a href="/portal/intranet/profile/{{idea.createdBy}}">{{idea.createdBy}}</a></h6>
-                                            <span>{{idea.createdTime | date:'dd-MM-yyyy HH:mm'}}</span>
-                                            <i ng-if="active" class="Active uiIconStar uiIconBlue"></i>
-                                            <br>
-                                            <br>
-                                            <h4><strong>{{idea.title}}</strong></h4>
-                                        </div>
-                                        <div class="comment-content">
-                                            {{idea.description}}
-                                        </div>
-                                        <a ng-if="idea.createdBy == '${currentUser}'" rel="tooltip" class="new-idea actionIcon" data-original-title="Edit">
-                                            <i style="position:relative; top:-143px; left:623px;" class="uiIconEdit uiIconLightGray" data-ng-click="activeEditForm(idea)"></i>
-                                        </a>
-                                        <a ng-if="idea.createdBy == '${currentUser}'" class="actionIcon" title="" href="" data-ng-click="deleteIdea(idea)">
-                                            <i style="position:relative; top:-143px; left:618px;" class="uiIconDeleteUser uiIconLightGray"> </i>
-                                        </a>
+                                <span href="#" ng-if="idea.like == true"  class="uiIconThumbUp uiIconBlue "><i ng-if="idea.numlike > 0"> {{idea.numlike}} </i></span>
+                            </a>
+                            <a data-ng-click="comment(idea)">
+                                <i class="uiIconComment uiIconLightGray"> {{idea.numcomments}}</i>
+                            </a>
+                            <a class=" next pull-right" type="submit" data-ng-click="saveFavorite(idea)">
+                                <span ng-if="idea.fav == false" class="uiIconStar"></span>
 
-                                        <a  class="actionIcon" title="" href="" data-ng-click="saveFavorite(idea)">
-                                            <i style="position:relative; top:-143px; left:526px;" class="uiIconColorStarYellow"> </i>
-                                        </a>
-                                        <a  class="new-comment actionIcon" title="" href="" >
-                                            <i class="uiIconComment" data-ng-click="CommentForm(idea)">&nbsp;comment</i>
-                                        </a>
+                                <span ng-if="idea.fav == true"  class="uiIconColorStarYellow"></span>
+
+                            </a>
+                            <a ng-if="idea.createdBy == '${currentUser}'" rel="tooltip" class="new-idea actionIcon" data-original-title="Edit">
+                                <i  class="uiIconEdit uiIconLightGray" data-ng-click="Edit(idea)"></i>
+                            </a>
+                            <div class="new-idea-container col-md-12" style="display: none;">
+                                <div class="new-idea-input">
+                                    <div>
+                                        <form novalidate>
+                                            <div class="form-group">
+                                                <input class=" input-xxlarge" type="hidden" placeholder="" ng-model="id">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="input-xxlarge" type="text" placeholder="" ng-model="title">
+                                            </div>
+                                            <div class="form-group">
+                                                <input class=" input-xxlarge" type="hidden"  value="${currentUser}"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea style="width: 70%;" rows="5" ng-model="description" ></textarea>
+                                            </div>
+
+                                            <label>
+                                                <select ng-model="status" ng-selected="status">
+                                                    <option>DRAFTED</option>
+                                                    <option ng-selected="status">PUBLISHED</option>
+                                                </select>
+                                            </label>
+                                            <div>
+                                                <button class="idea-up btn btn-primary" data-ng-click="updateIdea()">Update</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
+                            </div>
+                            <div id="new-comment-container_{{idea.id}}" style="display: none;">
+                                <div class= "commentRight">
+                                    <div class="commentInputBox ">
+                                        <div id="comtext"  >
+                                            <textarea style="width : 70%;"  id="newcomment_{{idea.id}}" title="Add your comment..." name="comment_{{idea.id}}"  ng-model="idea.commentText"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+                                    <div style="position:relative; top: -50px; left: -220px;">
+                                        <button  type="button" class="btn btn-xs pull-right btn-primary"
+                                                 data-ng-click="saveComment(idea)">Comment
+                                        </button>
+                                    </div>
+                                    <div class="commentList">
 
-                            </li>
-                        </ul>
-                    </div>
-                    </div>
-        </div>
+                                    <div ng-repeat="comment in comments"  class="commentItem" id="commentList_{{idea.id}}">
+                                        <div ng-if="comment.ideaId == idea.id" class="commmentLeft">
+                                            <a class="avatarXSmall" href="/portal/intranet/profile/{{comment.createdBy}}">
+                                                <img src="/eXoSkin/skin/images/system/UserAvtDefault.png" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="commentRight">
+                                            <div ng-if="comment.ideaId == idea.id" class="author">
+                                                <a style="font-size:13px;" href="/portal/intranet/profile/{{comment.author}}">{{comment.author}}</a>
+                                                <span class="date">
+                        {{comment.createdTime | date:'yyyy-MM-dd HH:mm:ss'}}
+                        </span>
+                                            </div>
+                                            <p ng-if="comment.ideaId == idea.id" style="position:  relative;top: -69px;left: 50px;" class="contentComment">
+                                                {{comment.commentText}}
+                                            </p>
+                                        </div>
 
-
-
-
-
-    <div ng-repeat="comment in comments" class="commentItem" data-commentid="comment.Id">
-                    <div class="commentRight">
-                        <p class="contentComment">
-                            {{comment.commentText}}
-                            {{comment.Id}}
-                        </p>
-                    </div>
-            <input type="hidden" ng-model="comment.ideaId" value="idea.id">
-                <div class="inputContainer">
-                    <div class="commentItem commentFormBox">
-                        <div class="clearfix" style="position: relative; left: 52px;">
-                            <div class="commmentLeft pull-left" style="
-    position:  relative;
-    right: 5px;
-">
-                                <a class="avatarXSmall"
-                                   href="/portal/intranet/profile/">
-                                    <img src="/eXoSkin/skin/images/system/UserAvtDefault.png"
-                                         alt="Root Root">
-                                </a>
+                                    </div>
+                                    </div>
+                                </div>
                             </div>
 
-                    </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div><!-- POST -->
+
+
+
                 </div>
-            </div>
+                <div class="col-lg-4 col-md-4">
 
+                    <!-- -->
 
+                </div>
+            </div></div></div>
+
+</div>
+   </div>
         </div>
 
-        </div>
-    </div>
+
+

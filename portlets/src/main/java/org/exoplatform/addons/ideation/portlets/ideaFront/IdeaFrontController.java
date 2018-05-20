@@ -14,9 +14,11 @@ import org.exoplatform.ideation.entities.domain.IdeaEntity;
 import org.exoplatform.ideation.entities.dto.CommentDTO;
 import org.exoplatform.ideation.entities.dto.FavoriteDTO;
 import org.exoplatform.ideation.entities.dto.IdeaDTO;
+import org.exoplatform.ideation.entities.dto.LikeDTO;
 import org.exoplatform.ideation.service.IdeaService;
 import org.exoplatform.ideation.service.impl.CommentService;
 import org.exoplatform.ideation.service.impl.FavoriteService;
+import org.exoplatform.ideation.service.impl.LikeService;
 import org.exoplatform.ideation.storage.Utils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -75,6 +77,9 @@ public class IdeaFrontController {
     @Inject
     FavoriteService favoriteService;
 
+    @Inject
+    LikeService likeService ;
+
     private String bundleString;
 
     private String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
@@ -96,25 +101,40 @@ public class IdeaFrontController {
     @Jackson
     public void saveIdea(@Jackson IdeaDTO obj) {
 
-        if (currentUser != null) {
-            obj.setCreatedBy(currentUser);
+        ConversationState conversationState = ConversationState.getCurrent();
+
+        if (conversationState != null) {
+
+            obj.setCreatedBy(conversationState.getIdentity().getUserId());
+
+            obj = ideaService.save(obj,true);
+
+        } else {
+
+            //TODO add log message
+            log.warn("");
+
         }
-        obj = ideaService.save(obj,true);
+
+        //todo return your object
     }
+
+
 
     @Ajax
     @Resource(method = HttpMethod.POST)
     @MimeType.JSON
     @Jackson
-    public void saveFavorite(@Jackson FavoriteDTO obj) {
+    public void saveLIke(@Jackson LikeDTO obj) {
+        ConversationState conversationState = ConversationState.getCurrent();
         if (currentUser != null) {
             obj.setAuthor(currentUser);
         }
-            obj = favoriteService.save(obj);
 
-        }
+        long id = obj.getIdeaId();
+        likeService.save(obj,currentUser,id);
 
-
+    }
 
 
     @Ajax
@@ -130,14 +150,33 @@ public class IdeaFrontController {
 
 
     @Ajax
+    @Resource(method = HttpMethod.POST)
+    @MimeType.JSON
+    @Jackson
+    public void SaveFavorite(@Jackson FavoriteDTO obj) {
+        if (currentUser != null) {
+            obj.setAuthor(currentUser);
+        }
+
+        long id = obj.getIdeaId();
+
+        favoriteService.save(obj,currentUser,id);
+    }
+
+
+
+
+    @Ajax
     @juzu.Resource
     @MimeType.JSON
     @Jackson
     public Response getContext() {
+        ConversationState conversationState = ConversationState.getCurrent();
+
         try {
             JSON data = new JSON();
-            data.set("currentUser",currentUser);
-            Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, currentUser, false).getProfile();
+            data.set("currentUser",conversationState.getIdentity().getUserId());
+            Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, conversationState.getIdentity().getUserId(), false).getProfile();
             if(profile.getAvatarUrl()!=null){
                 data.set("currentUserAvatar",profile.getAvatarUrl());
             }else{
@@ -155,21 +194,108 @@ public class IdeaFrontController {
     @juzu.Resource
     @MimeType.JSON
     @Jackson
-    public List<IdeaDTO> getIdeas() {
-        try {
-            return ideaService.getPublishedIdeas(currentUser);
-        } catch (Throwable e) {
-            return null;
-        }
+    public List<LikeDTO> getLikes(@Jackson LikeDTO obj) {
+        return likeService.getLikes();
+
+
     }
 
     @Ajax
     @juzu.Resource
     @MimeType.JSON
     @Jackson
-    public List<CommentDTO> getComments(@Jackson IdeaDTO obj) {
+    public List<IdeaDTO> getIdeas() {
+        String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
+        List<FavoriteDTO> favs = favoriteService.getFavorites(currentUser);
+        LikeDTO likeDTO = new LikeDTO();
+        List<LikeDTO> likes = likeService.getLikes();
+        List<CommentDTO> comments = commentService.getCommentsByIdeaId();
+        try {
+             List<IdeaDTO> ideas =ideaService.getUserIdeas(currentUser);
+             for(IdeaDTO idea : ideas){
+                 idea.setFav(false);
+                 idea.setLike(false);
+                 for (FavoriteDTO fav: favs){
+                     if (fav.getAuthor().equals(currentUser)&& fav.getIdeaId()==idea.getId()){
+                         idea.setFav(true);
+                         long countfav = favoriteService.count(idea.getId());
+                         idea.setNumfav(countfav);
+                         break;
+                     }
+                     if(fav.getIdeaId()==idea.getId()){
+                         long count = favoriteService.count(idea.getId());
+                         idea.setNumfav(count);
 
+                     }
+                 }
+                 for (LikeDTO like: likes){
+                     if (like.getAuthor().equals(currentUser)&& like.getIdeaId()==idea.getId()){
+                         idea.setLike(true);
+                         long count = likeService.count(idea.getId());
+                         idea.setNumlike(count);
+                         break;
+                     }
+                     if(like.getIdeaId()==idea.getId()){
+                         long count = likeService.count(idea.getId());
+                         idea.setNumlike(count);
+
+                     }
+                 }
+
+                 for (CommentDTO comment: comments){
+                     if (comment.getAuthor().equals(currentUser)&& comment.getIdeaId()==idea.getId()){
+                         idea.setCommentText(comment.getCommentText());
+                         long countcomment = commentService.countcomment(idea.getId());
+                         idea.setNumcomments(countcomment);
+                         break;
+                     }
+                     if(comment.getIdeaId()==idea.getId()){
+                         long countcomment = commentService.countcomment(idea.getId());
+                         idea.setNumcomments(countcomment);
+
+                     }
+                 }
+
+                 }
+            return ideas;
+        } catch (Throwable e) {
+            return null;
+        }
+    }
+
+
+
+
+
+    @Ajax
+    @juzu.Resource
+    @MimeType.JSON
+    @Jackson
+    public List<CommentDTO> getComments(@Jackson CommentDTO obj) {
           return  commentService.getCommentsByIdeaId();
+
+
+    }
+
+
+    @Ajax
+    @juzu.Resource
+    @MimeType.JSON
+    @Jackson
+    public List<FavoriteDTO> getFavorite(@Jackson FavoriteDTO obj) {
+
+        return favoriteService.getFavorites(currentUser);
+
+
+    }
+
+    @Ajax
+    @juzu.Resource
+    @MimeType.JSON
+    @Jackson
+    public List<IdeaDTO> getDraftIdeas(@Jackson IdeaDTO obj) {
+
+        return  ideaService.getDraftIdeas(currentUser);
 
 
     }
@@ -179,12 +305,14 @@ public class IdeaFrontController {
     @MimeType.JSON
     @Jackson
     public List<IdeaDTO> getDraftedIdeasOfCurrentUser(String status) {
+        ConversationState conversationState = ConversationState.getCurrent();
+
         try {
             if (status != null) {
                 if (status.equals("DRAFTED")) {
-                    return ideaService.getDraftIdeas(currentUser);
+                    return ideaService.getDraftIdeas(conversationState.getIdentity().getUserId());
                 } else {
-                    return ideaService.getPublishedIdeas("PUBLISHED");
+                    return ideaService.getUserIdeas("PUBLISHED");
                 }
                 }else{
             return null;
@@ -197,16 +325,10 @@ public class IdeaFrontController {
 
     }
 
-    @Ajax
-    @juzu.Resource
-    @MimeType.JSON
-    @Jackson
-    public List<FavoriteDTO> getFavoritesByUserId() {
-
-        return favoriteService.getFavoritesByUserId(currentUser);
 
 
-    }
+
+
 
 
     @Ajax
@@ -241,6 +363,20 @@ public class IdeaFrontController {
     public Response deleteFavorite(@Jackson FavoriteDTO obj) throws Exception {
         try {
             favoriteService.remove(obj);
+            return Response.ok();
+        } catch (Exception e) {
+            log.error("Error when removing Idea", e);
+            return Response.error("");
+        }
+    }
+
+    @Ajax
+    @Resource(method = HttpMethod.POST)
+    @MimeType.JSON
+    @Jackson
+    public Response deleteLike(@Jackson LikeDTO obj) throws Exception {
+        try {
+            likeService.remove(obj);
             return Response.ok();
         } catch (Exception e) {
             log.error("Error when removing Idea", e);
@@ -292,8 +428,10 @@ public class IdeaFrontController {
     @MimeType.JSON
     @Jackson
     public void saveComment(@Jackson CommentDTO obj) {
-        if (currentUser != null) {
-            obj.setAuthor(currentUser);
+        ConversationState conversationState = ConversationState.getCurrent();
+
+        if (conversationState != null) {
+            obj.setAuthor(conversationState.getIdentity().getUserId());
         }
         commentService.save(obj);
     }

@@ -15,14 +15,21 @@ public class CommentDAO extends GenericDAOJPAImpl<CommentEntity, String> {
 
     public List<CommentEntity>  getAllComments() throws PersistenceException {
 
-        return getEntityManager().createNamedQuery("Favorite.getAllComments", CommentEntity.class)
-                .getResultList();
+        return getEntityManager().createNamedQuery("Comment.getAllComments", CommentEntity.class).getResultList();
 
 
     }
-    public  Long getCommentsByIdeaIdCount(Long id) {
+
+    public List<CommentEntity>  getIdeaComments(long ideaId) throws PersistenceException {
+
+        return getEntityManager().createNamedQuery("Comment.findByIdeaId", CommentEntity.class).setParameter("ideaId",ideaId).getResultList();
+
+
+    }
+
+   public  long getCommentsByIdeaIdCount(long id) {
         try {
-            return getEntityManager().createNamedQuery("commentEntity.count", Long.class)
+            return getEntityManager().createNamedQuery("Comment.count", Long.class)
                     .setParameter("ideaId", id)
                     .getSingleResult();
         } catch (Exception e) {

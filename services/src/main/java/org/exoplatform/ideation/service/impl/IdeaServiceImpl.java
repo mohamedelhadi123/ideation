@@ -1,22 +1,12 @@
 package org.exoplatform.ideation.service.impl;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import juzu.Response;
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
 import org.exoplatform.ideation.entities.dto.IdeaDTO;
 import org.exoplatform.ideation.service.IdeaService;
-import org.exoplatform.ideation.storage.dao.jpa.FavoriteDAO;
 import org.exoplatform.ideation.storage.dao.jpa.IdeaDAO;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
-
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 public class IdeaServiceImpl implements IdeaService {
@@ -34,7 +24,6 @@ public class IdeaServiceImpl implements IdeaService {
         return IdeaE;
 
     }
-    FavoriteDAO favoriteDAO = new FavoriteDAO();
 
     public IdeaEntity updateIdea(IdeaEntity ideaEntity) {
 
@@ -50,14 +39,11 @@ public class IdeaServiceImpl implements IdeaService {
         return ideaDao.findIdeaByTitle(IdeaTitle);
     }
 
-    FavoriteService favoriteService = new FavoriteService();
 
     public void delete(IdeaDTO entity) {
         if (entity == null) {
             throw new IllegalStateException("Parameter 'entity' = + "+entity+ " or 'entity.id' is null");
         }
-
-
         ideaDao.delete(convert(entity));
     }
 
@@ -79,6 +65,16 @@ public class IdeaServiceImpl implements IdeaService {
         return convert(ideaEntity);
     }
 
+    public List<IdeaDTO> getUserIdeas(String createdBy) {
+        List<IdeaEntity> entities = ideaDao.getPublishedIdeas(IdeaEntity.Status.PUBLISHED , IdeaEntity.Status.DRAFTED ,createdBy);
+        List<IdeaDTO> dtos = new ArrayList<IdeaDTO>();
+        for (IdeaEntity entity : entities) {
+            dtos.add(convert(entity));
+        }
+        return dtos;
+    }
+
+
     public List<IdeaDTO> getPublishedIdeas(String createdBy) {
         List<IdeaEntity> entities = ideaDao.getPublishedIdeas(IdeaEntity.Status.PUBLISHED , IdeaEntity.Status.DRAFTED ,createdBy);
         List<IdeaDTO> dtos = new ArrayList<IdeaDTO>();
@@ -87,6 +83,7 @@ public class IdeaServiceImpl implements IdeaService {
         }
         return dtos;
     }
+
 
     public List<IdeaDTO> getAllIdeas() {
         List<IdeaEntity> entities = ideaDao.getAllIdeas();
