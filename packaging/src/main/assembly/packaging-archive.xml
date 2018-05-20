@@ -33,5 +33,14 @@
             <scope>provided</scope>
             <fileMode>0644</fileMode>
         </dependencySet>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <useTransitiveDependencies>true</useTransitiveDependencies>
+            <includes>
+                <include>org.juzu:juzu-plugins-jackson*:jar</include>
+            </includes>
+            <scope>provided</scope>
+            <fileMode>0644</fileMode>
+        </dependencySet>
     </dependencySets>
 </assembly>
