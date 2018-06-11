@@ -5,7 +5,10 @@ import org.exoplatform.ideation.entities.domain.IdeaEntity;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
+import java.lang.reflect.Type;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
@@ -27,6 +30,9 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
 
     }
 
+
+
+
     public IdeaEntity findIdeaById(Long ideaId) throws PersistenceException {
 
         TypedQuery<IdeaEntity> query = getEntityManager().createNamedQuery("Idea.findIdeaById", IdeaEntity.class)
@@ -40,7 +46,9 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
 
     }
 
-
+    public IdeaEntity getIdea(long ideaId) throws PersistenceException {
+        return getEntityManager().createNamedQuery("Idea.getIdea",IdeaEntity.class).setParameter("Id",ideaId).getSingleResult();
+    }
 
     public List<IdeaEntity> getPublishedIdeas(IdeaEntity.Status PUBLISHED , IdeaEntity.Status DRAFTED , String createdBy) throws PersistenceException {
 
@@ -49,6 +57,13 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
 
 
 
+    }
+
+    public Set<String> getCoworker(long ideaId) {
+        TypedQuery<String> query = getEntityManager().createNamedQuery("Idea.getCoworker", String.class);
+        query.setParameter("ideaId", ideaId);
+        List<String> tags = query.getResultList();
+        return new HashSet<String>(tags);
     }
 
     public List<IdeaEntity> getAllIdeas() throws PersistenceException {

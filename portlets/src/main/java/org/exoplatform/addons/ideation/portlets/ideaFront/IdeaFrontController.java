@@ -7,14 +7,14 @@ import juzu.template.Template;
 import org.apache.commons.fileupload.FileItem;
 import org.exoplatform.commons.juzu.ajax.Ajax;
 import org.exoplatform.commons.utils.PropertyManager;
-import org.exoplatform.ideation.entities.dto.CommentDTO;
-import org.exoplatform.ideation.entities.dto.FavoriteDTO;
-import org.exoplatform.ideation.entities.dto.IdeaDTO;
-import org.exoplatform.ideation.entities.dto.LikeDTO;
+import org.exoplatform.ideation.entities.domain.IdeaEntity;
+import org.exoplatform.ideation.entities.domain.RatingEntity;
+import org.exoplatform.ideation.entities.dto.*;
 import org.exoplatform.ideation.service.IdeaService;
 import org.exoplatform.ideation.service.impl.CommentService;
 import org.exoplatform.ideation.service.impl.FavoriteService;
 import org.exoplatform.ideation.service.impl.LikeService;
+import org.exoplatform.ideation.service.impl.RateService;
 import org.exoplatform.ideation.storage.Utils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -58,6 +58,9 @@ public class IdeaFrontController {
     @Inject
     CommentService commentService;
 
+
+    @Inject
+    RateService rateService;
 
     @Inject
     IdeaService ideaService;
@@ -189,6 +192,17 @@ public class IdeaFrontController {
 
     }
 
+
+
+    @Ajax
+    @juzu.Resource
+    @MimeType.JSON
+    @Jackson
+    public List<RateDTO> getRates(@Jackson RateDTO obj) {
+        return rateService.getRates();
+    }
+
+
     @Ajax
     @juzu.Resource
     @MimeType.JSON
@@ -196,12 +210,15 @@ public class IdeaFrontController {
     public List<IdeaDTO> getIdeas() {
         String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
         List<FavoriteDTO> favs = favoriteService.getFavorites(currentUser);
+        List<RateDTO> rates = rateService.getRates();
+
         LikeDTO likeDTO = new LikeDTO();
         List<LikeDTO> likes = likeService.getLikes();
         List<CommentDTO> comments = commentService.getCommentsByIdeaId();
         try {
              List<IdeaDTO> ideas =ideaService.getUserIdeas(currentUser);
              for(IdeaDTO idea : ideas){
+                 idea.setRated(false);
                  idea.setFav(false);
                  idea.setLike(false);
                  for (FavoriteDTO fav: favs){
@@ -232,10 +249,16 @@ public class IdeaFrontController {
                  }
 
                  for (CommentDTO comment: comments){
+                     Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, comment.getAuthor(), false).getProfile();
                      if (comment.getAuthor().equals(currentUser)&& comment.getIdeaId()==idea.getId()){
                          idea.setCommentText(comment.getCommentText());
                          long countcomment = commentService.countcomment(idea.getId());
                          idea.setNumcomments(countcomment);
+                         if(profile.getAvatarUrl()!=null){
+                             idea.setPosterAvatar(profile.getAvatarUrl());
+                         }else{
+                             idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
+                         }
                          break;
                      }
                      if(comment.getIdeaId()==idea.getId()){
@@ -244,7 +267,14 @@ public class IdeaFrontController {
 
                      }
                  }
-
+                 for (RateDTO rate: rates) {
+                     if (rate.getAuthor().equals(currentUser) && rate.getIdeaId() == idea.getId()) {
+                         idea.setRated(true);
+                         idea.setRate(rate);
+                         rate.setNumRate(rateService.count(idea.getId()));
+                         break;
+                     }
+                     }
                  }
             return ideas;
         } catch (Throwable e) {
@@ -330,6 +360,8 @@ public class IdeaFrontController {
     }
 
 
+
+
     @Ajax
     @Resource(method = HttpMethod.POST)
     @MimeType.JSON
@@ -385,7 +417,7 @@ public class IdeaFrontController {
             Session session = sessionProvider.getSession("collaboration",
                     repositoryService.getCurrentRepository());
             Node rootNode = session.getRootNode();
-            Long requestId=obj.getId();
+            long requestId=obj.getId();
             if (rootNode.hasNode("Application Data/ideation/Ideas/req_"+requestId)) {
                 Node requestsFolders= rootNode.getNode("Application Data/ideation/Ideas/req_"+requestId);
                 NodeIterator iter = requestsFolders.getNodes();
@@ -424,6 +456,36 @@ public class IdeaFrontController {
         }
         commentService.save(obj);
     }
+
+
+
+    @Ajax
+    @Resource(method = HttpMethod.POST)
+    @MimeType.JSON
+    @Jackson
+    public void saveRate(@Jackson RateDTO obj) {
+        ConversationState conversationState = ConversationState.getCurrent();
+
+        if (currentUser != null) {
+            obj.setAuthor(conversationState.getIdentity().getUserId());
+        }
+        long id = obj.getIdeaId();
+        rateService.save(obj,true,currentUser,id);
+    }
+
+
+    @Ajax
+    @Resource(method = HttpMethod.POST)
+    @MimeType.JSON
+    @Jackson
+    public void updateRate(@Jackson RateDTO obj) {
+        long id = obj.getIdeaId();
+
+        rateService.save(obj,false,currentUser,id);
+    }
+
+
+
     @Ajax
     @Resource
     @MimeType.JSON

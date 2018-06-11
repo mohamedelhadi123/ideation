@@ -19,6 +19,9 @@ public class CommentDTO implements Serializable{
 
         private long id;
 
+    private String              posterAvatar;
+
+
         private Date createdTime;
 
         private long ideaId;
@@ -61,6 +64,14 @@ public class CommentDTO implements Serializable{
         this.commentText = commentText;
     }
 
+    public String getPosterAvatar() {
+        return posterAvatar;
+    }
+
+    public void setPosterAvatar(String posterAvatar) {
+        this.posterAvatar = posterAvatar;
+    }
+
     public String getAuthor() {
         return author;
     }
@@ -76,5 +87,7 @@ public class CommentDTO implements Serializable{
     public void setNumcomments(long numcomments) {
         this.numcomments = numcomments;
     }
+
+
 }
 

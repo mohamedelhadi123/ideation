@@ -1,118 +1,37 @@
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <div id="ideaFront" style="display: none;">
-    <div ng-controller="ideaFrontCtrl" id="ideaFrontCtrl" class="uiContentBox uiBox">
-            <h2>Ideation</h2>
-        <div class="btn-toolbar" >
-            <div class="btn-group">
-                <button class="btn dropdown-toggle" data-toggle="dropdown">Action
-                    <i class="uiIconMiniArrowDown uiIconLightGray"></i></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li> <a class="dropdown-item" data-ng-click="loadIdeas()" href="#">All</a></li>
-                    <li><a class="dropdown-item" href="javascript:void(0)" data-ng-click="ideasToVAlidateFilter='DRAFTED';loadDraftedIdeas('DRAFTED')">My Drafts</a>
-                    </li>
-                    <li><a class="dropdown-item" href="javascript:void(0)" data-ng-click="ideasToVAlidateFilter='PUBLISHED';loadDraftedIdeas('PUBLISHED')">Published Ideas</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li> <a class="dropdown-item" data-ng-click="loadFavorites()" href="#">My Favorites</a>
-                    </li>
-                </ul>
-            </div><!-- /btn-group -->
-        </div>
-            <a class="button create-idea">Create Idea</a>
+    <div ng-controller="ideaFrontCtrl" id="ideaFrontCtrl">
+                <div class="wrapper">
+                    <div class="list-filter" style="margin-top: 12px; margin-left: 7px;  width: 135%;">
+                        <a class="filter-active" href="javascript:void(0)" data-ng-click="loadIdeas()">Ideation</a>
+                        <a href="javascript:void(0)" data-ng-click="ideasToVAlidateFilter='DRAFTED';loadDraftedIdeas('DRAFTED')">Draft</a>
+                        <a  href="javascript:void(0)" data-ng-click="ideasToVAlidateFilter='PUBLISHED';loadDraftedIdeas('PUBLISHED')">Published</a>
+                        <a data-ng-click="loadFavorites()" href="javascript:void(0)">Favorites</a>
+                    </div>
+                </div>
+
+            <b><a style="left: 8px; position:  relative; top: 26px; " class="button create-idea">Create Idea</a></b>
                   #{include path=create_idea.gtmpl /}
-               <div style="display: none;" class=" RightBodyTDContainer uiBox uiContentBox edit-container">
-                <form>
-                    <div class="form-group">
-                        <input class=" input-xxlarge ng-pristine ng-valid ng-empty ng-touched" type="hidden" placeholder="" ng-model="id">
-                    </div>
-                    <div class="form-group">
-                        <input class="input-xxlarge ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder="" ng-model="title">
-                    </div>
-                    <div class="form-group">
-                        <input class=" input-xxlarge ng-pristine ng-valid ng-empty ng-touched" type="hidden"  value="${currentUser}"/>
-                    </div>
-                    <div class="form-group">
-                        <textarea  rows="5" ng-model="description" ></textarea>
-                    </div>
-                    <label>
-                        <select ng-model="status" ng-selected="status">
-                            <option>DRAFTED</option>
-                            <option ng-selected="PUBLISHED">PUBLISHED</option>
-                        </select>
-                    </label>
-                    <div>
-                        <button class="idea-up btn btn-primary" data-ng-click="updateIdea()">Update</button>
-                    </div>
-                </form>
-               </div>
+        <div class="pull-right sidebarblock" style=" width: 17em; position:  relative; top: 80px; right: 8px;" >
+            <h3>Top Ideas</h3>
+            <div class="divline"></div>
+            <div class="blocktxt">
+                <ul ng-repeat="fav in ideas | orderBy:'-fav.numfav'" class="cats">
+                    <li><a class="avatarXSmall" href="/portal/intranet/profile/">
+                        <img src="/eXoSkin/skin/images/system/UserAvtDefault.png" alt="">
+                    </a>
+                        <a href="#">{{fav.title}}<span class="badge  pull-right">{{fav.numfav}}</span></a></li>
+                </ul>
+            </div>
+        </div>
 <div ng-repeat="idea in ideas">
-<!--<div class="container content">
-    <div class="comments-container">
-      <ul id="comments-list" class="comments-list" style="position: relative; right: 190px;">
-     <li>
- <div class="comment-main-level">
-
-   <div class="comment-avatar"><img src="/eXoSkin/skin/images/system/UserAvtDefault.png"/></div>
-  <div class="comment-box">
-       <div class="comment-head">
-       <h6 class="comment-name by-author"><a href="/portal/intranet/profile/{{idea.createdBy}}">{{idea.createdBy}}</a></h6>
-  <span>{{idea.createdTime | date:'dd-MM-yyyy HH:mm'}}</span>
-   <br>
-   <br>
-  <h4><strong>{{idea.title}}</strong></h4>
-   </div>
-  <div class="comment-content">
-   {{idea.description}}
-    </div>
-
-    <a type="submit" data-ng-click="saveFavorite(idea)">
-            <span ng-if="idea.fav == false" class="uiIconStar"></span>
-
-               <span ng-if="idea.fav == true"  class="uiIconColorStarYellow"></span>
-
-               </a>
-
-
-            <a class="actionIcon" title="" href="" data-ng-click="saveLike(idea)">
-                  <span ng-if="idea.like == false" class="uiIconThumbUp"><i ng-if="idea.numlike > 0"> ({{idea.numlike}}) </i></span>
-                <span ng-if="idea.like == true"  class="uiIconThumbUp uiIconBlue"><i ng-if="idea.numlike > 0"> ({{idea.numlike}}) </i></span>
-
-            </a>
-
-<a data-ng-click="comment(idea)">
-   <i>&nbsp;comment</i> ({{idea.numcomments}}) </a>
-            <div id="new-comment-container_{{idea.id}}" style="display: none;">
-                  <div class= "commentRight">
-                         <div class="commentInputBox ">
-                             <div id="comtext" style="width : 70%;" >
-                                 <textarea  id="newcomment_{{idea.id}}" title="Add your comment..." name="comment_{{idea.id}}"  ng-model="idea.commentText"></textarea>
-                               </div>
-                                </div>
-                   </div>
-              <div class="clearfix">
-                <div style="position:relative; top: -50px;">
-                   <button  type="button" class="btn btn-xs pull-right btn-primary"
-                  data-ng-click="saveComment(idea)">Comment
-                   </button>
-               </div>
-
-                   <div ng-repeat="comment in comments" id="commentList_{{idea.id}}">
-                 <div  class="commentRight">
-                    <p  class="contentComment_{{idea.id}}">
-                  {{comment.commentText}}
-                  </p>
-                      </div>
-                 </div>
-            </div>
-            </div>
-
--->
     <div class="container-fluid">
         <div class="container">
             <div class="row">
+
                 <div class="col-lg-4 col-sm-offset-1 col-md-8">
                     <!-- POST -->
-                    <div class="post">
+                    <div class="post" style="margin-top: 55px; margin-left: 23px; margin-bottom: -12px;">
                         <div class="wrap-ut pull-left">
                             <div class="userinfo pull-left">
                                 <div class="avatar">
@@ -125,83 +44,111 @@
                             <div class="posttext pull-left">
                                 <h2  ><b>{{idea.title}}</b></h2>
                                 <p>{{idea.description}}</p>
-                            </div>
+                                </div>
                             <div class="clearfix"></div>
                         </div>
-                        <a ng-if="idea.createdBy == '${currentUser}'" class="actionIcon" title="" href="" data-ng-click="deleteIdea(idea)">
+                        <a ng-if="idea.createdBy == '${currentUser}'" class="actionIcon" title="" style="position: relative; left: 88px;" data-ng-click="deleteIdea(idea)">
                             <i class="uiIconDeleteUser uiIconLightGray"> </i>
                         </a>
-                        <p style="position:  relative; left: 57px; color: blue; top: 20px;">Favorites</p>
-                        <div class="postinfo pull-left">
-                            <div class="comments">
-                                <div class="commentbg">
-                                    {{idea.numfav}}
-                                    <div class="mark"></div>
-                                </div>
-                            </div>
-                            <p style="position:  relative; left: 46px; color:  blue;">Posted time</p>
-                            <div class="time"><i class="uiIconClock  uiIconLightGray"></i>{{idea.createdTime | date:'dd-MM-yyyy HH:mm'}}</div>
+                        <div class="star-rating">
+                            <input ng-if="idea.rated == false" type="radio" data-ng-click="saveRate(idea)" id="5-stars" ng-model="newRate.rate" name="rating" value="5" />
+                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="5-stars" ng-model="idea.rate.rate" name="rating" value="5" />
+                            <label style="font-size: 20px;" for="5-stars" class="star">&#9733;</label>
+
+                            <input ng-if="idea.rated == false" data-ng-click="saveRate(idea)" type="radio" ng-model="newRate.rate" id="4-stars" name="rating" value="4" />
+                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="4-stars" ng-model="idea.rate.rate" name="rating" value="4" />
+                            <label style="font-size: 20px;" for="4-stars" class="star">&#9733;</label>
+
+                            <input ng-if="idea.rated == false" data-ng-click="saveRate(idea)" type="radio" ng-model="newRate.rate" id="3-stars" name="rating" value="3" />
+                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="3-stars" ng-model="idea.rate.rate" name="rating" value="3" />
+                            <label style="font-size: 20px;" for="3-stars" class="star">&#9733;</label>
+
+                            <input ng-if="idea.rated == false" data-ng-click="saveRate(idea)" type="radio" ng-model="newRate.rate" id="2-stars" name="rating" value="2" />
+                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="2-stars" ng-model="idea.rate.rate" name="rating" value="2" />
+                            <label style="font-size: 20px;" for="2-stars" class="star">&#9733;</label>
+
+                            <input ng-if="idea.rated == false" data-ng-click="saveRate(idea)" type="radio" ng-model="newRate.rate" id="1-stars" name="rating" value="1" />
+                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="1-stars" ng-model="idea.rate.rate" name="rating" value="1" />
+                            <label style="font-size: 20px;" for="1-stars" class="star">&#9733;</label>
                         </div>
+
+
                         <div class="clearfix"></div>
                         <div class="postinfobot">
+                            <div class="time pull-right"><i class="uiIconClock  uiIconLightGray"></i>{{idea.createdTime | date:'dd-MM-yyyy HH:mm'}}</div>
 
                             <a title="" href="" data-ng-click="saveLike(idea)" class="actionIcon likeblock pull-left">
-                                <span href="#"  ng-if="idea.like == false" class="uiIconThumbUp down"> <i ng-if="idea.numlike > 0"> {{idea.numlike}} </i> </span>
+                                <span href="#"  ng-if="idea.like == false" class="uiIconThumbUp down"> <i ng-if="idea.numlike > 0"> ({{idea.numlike}}) </i> </span>
 
-                                <span href="#" ng-if="idea.like == true"  class="uiIconThumbUp uiIconBlue "><i ng-if="idea.numlike > 0"> {{idea.numlike}} </i></span>
+                                <span href="#" ng-if="idea.like == true"  class="uiIconThumbUp uiIconBlue "><i ng-if="idea.numlike > 0"> ({{idea.numlike}}) </i></span>
                             </a>
-                            <a data-ng-click="comment(idea)">
-                                <i class="uiIconComment uiIconLightGray"> {{idea.numcomments}}</i>
+                            <a data-ng-click="comment(idea)" style="right: 80px; position:  relative;">
+                                <i class="uiIconComment uiIconLightGray"> ({{idea.numcomments}})</i>
                             </a>
-                            <a class=" next pull-right" type="submit" data-ng-click="saveFavorite(idea)">
+                            <a class=" next " style="position: relative;right: 242px;" type="submit" data-ng-click="saveFavorite(idea)">
                                 <span ng-if="idea.fav == false" class="uiIconStar"></span>
 
                                 <span ng-if="idea.fav == true"  class="uiIconColorStarYellow"></span>
 
                             </a>
-                            <a ng-if="idea.createdBy == '${currentUser}'" rel="tooltip" class="new-idea actionIcon" data-original-title="Edit">
+
+                            <a ng-if="idea.createdBy == '${currentUser}'" rel="tooltip" href="#edit-container_{{idea.id}}"  class="new-idea actionIcon" data-original-title="Edit" style="
+    position:  relative;
+    right: 87px;
+">
                                 <i  class="uiIconEdit uiIconLightGray" data-ng-click="Edit(idea)"></i>
                             </a>
-                            <div class="new-idea-container col-md-12" style="display: none;">
-                                <div class="new-idea-input">
-                                    <div>
-                                        <form novalidate>
+                                <div class=" popup modal hide fade UIPopupWindow uiPopup UIDragObject NormalStyle" id="edit-container_{{idea.id}}" aria-hidden="true"  tabindex="-1" style="display: none;">
+                                    <div class="popupHeader ClearFix">
+
+                                        <a class="uiIconClose pull-right" aria-hidden="true" data-ng-click="hide(idea)" data-dismiss="modal" ></a>
+                                        <span class="PopupTitle popupTitle">Edit Idea</span>
+                                    </div>
+                                    <div class="PopupContent popupContent">
+                                        <div class="form-horizontal resizable">
+                                            <form method="POST" action="">
                                             <div class="form-group">
-                                                <input class=" input-xxlarge" type="hidden" placeholder="" ng-model="id">
+                                                <input  class=" input-xxlarge" type="hidden" placeholder="" ng-model="id">
                                             </div>
                                             <div class="form-group">
-                                                <input class="input-xxlarge" type="text" placeholder="" ng-model="title">
+                                                <input style="width: 100%;" class="input-xxlarge" type="text" placeholder="" ng-model="idea.title">
                                             </div>
                                             <div class="form-group">
                                                 <input class=" input-xxlarge" type="hidden"  value="${currentUser}"/>
                                             </div>
+                                            <br>
                                             <div class="form-group">
-                                                <textarea style="width: 70%;" rows="5" ng-model="description" ></textarea>
+                                                <textarea style="width: 38em; height: 28ch;" rows="5" ng-model="idea.description" ></textarea>
                                             </div>
 
                                             <label>
-                                                <select ng-model="status" ng-selected="status">
+                                                <select STYLE="width: 100%;" ng-model="idea.status" ng-selected="status">
                                                     <option>DRAFTED</option>
                                                     <option ng-selected="status">PUBLISHED</option>
                                                 </select>
                                             </label>
-                                            <div>
-                                                <button class="idea-up btn btn-primary" data-ng-click="updateIdea()">Update</button>
+                                            <div class="uiAction uiActionBorder">
+                                                <button class="btn" data-ng-click="updateIdea(idea)" type="button">Update</button>
+                                                <button class="btn" data-ng-click="hide(idea)" type="button">Cancel</button>
                                             </div>
-                                        </form>
+                                            </form>
+
+                                        </div>
+                                        <span class="uiIconResize pull-right uiIconLightGray"></span>
                                     </div>
-                                </div>
+
+                            </div>
                             </div>
                             <div id="new-comment-container_{{idea.id}}" style="display: none;">
                                 <div class= "commentRight">
                                     <div class="commentInputBox ">
-                                        <div id="comtext"  >
+                                        <div id="comtext_{{idea.id}}"  >
                                             <textarea style="width : 70%;"  id="newcomment_{{idea.id}}" title="Add your comment..." name="comment_{{idea.id}}"  ng-model="idea.commentText"></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="clearfix">
-                                    <div style="position:relative; top: -50px; left: -220px;">
+                                    <div style="position:relative; top: -50px; left: -94px;">
                                         <button  type="button" class="btn btn-xs pull-right btn-primary"
                                                  data-ng-click="saveComment(idea)">Comment
                                         </button>
@@ -218,10 +165,10 @@
                                             <div ng-if="comment.ideaId == idea.id" class="author">
                                                 <a style="font-size:13px;" href="/portal/intranet/profile/{{comment.author}}">{{comment.author}}</a>
                                                 <span class="date">
-                        {{comment.createdTime | date:'yyyy-MM-dd HH:mm:ss'}}
-                        </span>
+                                                {{comment.createdTime | date:'yyyy-MM-dd HH:mm:ss'}}
+                                                </span>
                                             </div>
-                                            <p ng-if="comment.ideaId == idea.id" style="position:  relative;top: -69px;left: 50px;" class="contentComment">
+                                            <p ng-if="comment.ideaId == idea.id" style="color: black; position:  relative;top: -44px;left: 50px;" class="contentComment">
                                                 {{comment.commentText}}
                                             </p>
                                         </div>
@@ -238,16 +185,12 @@
 
 
                 </div>
-                <div class="col-lg-4 col-md-4">
 
-                    <!-- -->
-
-                </div>
             </div></div></div>
 
 </div>
+
    </div>
-        </div>
 
 
 

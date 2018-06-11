@@ -1,30 +1,45 @@
 <div class="create-idea-container panel panel-primary"  style="display: none;" >
-        <div  class="panel-body create-idea-input" style="position: relative; left: 443px;">
-            <form id="ideaForm">
-
+        <div  class="panel-body create-idea-input" style="position: relative; left: 400px;">
             <label><input type="hidden" ng-model="newIdea.id"></label>
+            <div style="position:  relative;left: -39.6%;top: 43px;margin-right: 0; margin-top: -50px">
+                <form class="form-horizontal ng-pristine ng-valid ng-valid-min ng-valid-max uiBox" novalidate="">
+                    <div class="control-group ">
 
-<div class="form-group">
-            <input class="input-xxlarge form-control ng-pristine ng-valid ng-empty ng-touched" id="txtTitle" type="Title" ng-model="newIdea.title" placeholder="add title"/>
-</div>
-              <br>
+                        <div class="controls">
 
-                <div class="form-group">
+                        </div>
+                    </div>
+                    <div class="control-group ">
+                        <label class="control-label ng-binding" for="txtTitle">Title:</label>
+                        <div class="controls">
+                            <input type="text" name="title" id="txtTitle" placeholder="" ng-model="newIdea.title" class="ng-pristine ng-untouched ng-valid ng-empty" style="width: 97%;">
+                        </div>
+                    </div>
+                    <div class="control-group ">
+                        <div class="controls">
 
-        <input class=" input-xxlarge form-control ng-pristine ng-valid ng-empty ng-touched" type="hidden" readonly="readonly" value="${currentUser}"/>
-                </div>
-                <br>
-                <div class="form-group">
+                            <input class=" input-xxlarge form-control ng-pristine ng-valid ng-empty ng-touched" type="hidden" readonly="readonly" value="${currentUser}">
+                        </div>
+                    </div>
+                    <div class="control-group ">
+                        <label class="control-label ng-binding" for="txtDescription">Description:</label>
+                        <div class="controls">
+                            <textarea type="text" name="title" id="txtDescription" placeholder="" ng-model="newIdea.description" class="ng-pristine ng-untouched ng-valid ng-empty" style="width: 97%;">                                        </textarea>
+                        </div>
+                    </div>
+                    <div style="
+    position:  relative;
+    left: 72%;
+">
+                        <button type="button" class="btn btn-primary" id="submit" ng-click="saveIdea(newIdea)">Confirm</button>
+                        <button type="button" class="btn btn-success" ng-click="saveDraft(newIdea)">Save</button>
 
-                <textarea class=" form-control input-xxlarge ng-pristine ng-valid ng-empty ng-touched" id="txtDescription" rows="4" cols="50" ng-model="newIdea.description" placeholder="add description"></textarea>
-                </div>
+                        <button type="button" class="btn btn-default cancel">Cancel</button>
 
-    <button type="button" class="btn btn-primary" id="submit" ng-click="saveIdea(newIdea)">Confirm</button>
-     <button type="button" class="btn btn-success"  ng-click="saveDraft(newIdea)">Save</button>
 
-                <button type="button" class="btn btn-default Cancel" ng-click="Cancel()">Cancel</button>
-
-</form>
+                    </div>
+                </form>
+            </div>
         </div>
 
-    </div>
+        </div>

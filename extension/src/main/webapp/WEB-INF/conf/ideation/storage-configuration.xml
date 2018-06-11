@@ -16,6 +16,9 @@
         <type>org.exoplatform.ideation.service.impl.CommentService</type>
     </component>
     <component>
+        <type>org.exoplatform.ideation.service.impl.RateService</type>
+    </component>
+    <component>
         <type>rest.TestRest</type>
     </component>
     <component>

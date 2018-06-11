@@ -6,6 +6,9 @@ import org.exoplatform.ideation.storage.dao.jpa.IdeaDAO;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.social.core.identity.model.Profile;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
+
 import java.util.*;
 
 
@@ -47,6 +50,9 @@ public class IdeaServiceImpl implements IdeaService {
         ideaDao.delete(convert(entity));
     }
 
+    public Set<String> getCoworker(long ideaId) {
+        return ideaDao.getCoworker(ideaId);
+    }
 
 
     public IdeaDTO save(IdeaDTO entity, boolean newIde) {
@@ -84,6 +90,11 @@ public class IdeaServiceImpl implements IdeaService {
         return dtos;
     }
 
+
+    public IdeaDTO getIdea(long ideaId){
+        return convert(ideaDao.getIdea(ideaId));
+
+    }
 
     public List<IdeaDTO> getAllIdeas() {
         List<IdeaEntity> entities = ideaDao.getAllIdeas();

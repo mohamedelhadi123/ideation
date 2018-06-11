@@ -27,6 +27,8 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
                         name = "Idea.getDraftIdeas",
                         query = "SELECT idea FROM Idea idea where idea.status = :DRAFTED and idea.createdBy = :createdBy"
                 ),
+                @NamedQuery(name = "Idea.getCoworker",
+                query = "SELECT c FROM Idea idea inner join idea.coworker c WHERE idea.id = :ideaId"),
 
                 @NamedQuery(
                         name = "Idea.findIdeaByTitle",
@@ -44,7 +46,12 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
                 @NamedQuery(
                         name = "Idea.deleteIdeaById",
                         query = "DELETE FROM Idea idea WHERE idea.id = :ideaId "
-                )
+                ),
+                    @NamedQuery(
+                            name = "Idea.getIdea",
+                            query = "DELETE FROM Idea idea WHERE idea.id = :ideaId "
+                    ),
+
 
 })
 public class IdeaEntity {
@@ -96,6 +103,10 @@ public class IdeaEntity {
     @Column(name = "CREATED_BY")
     private String createdBy;
 
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "IDEATION_COWORKERS",
+            joinColumns = @JoinColumn(name = "IDEA_ID"))
+    private Set<String> coworker = new HashSet<String>();
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED_TIME")
@@ -136,8 +147,13 @@ public class IdeaEntity {
         this.status = status;
     }
 
+    public Set<String> getCoworker() {
+        return coworker;
+    }
 
-
+    public void setCoworker(Set<String> coworker) {
+        this.coworker = coworker;
+    }
 
     public String getCreatedBy() {
         return createdBy;

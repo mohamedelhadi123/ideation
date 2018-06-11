@@ -133,6 +133,26 @@
             </column>
         </createTable>
 
+        <!-- DEfinition of RATING Table -->
+
+        <createTable tableName="IDEATION_RATING">
+            <column name="RATE_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
+                <constraints primaryKey="true" primaryKeyName="PK_IDEATION_RATING" nullable="false"/>
+            </column>
+            <column name="IDEA_ID" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="FK_RATE_IDE_01" references="IDEA_IDEAS(IDEA_ID) ON DELETE CASCADE"/>
+            </column>
+            <column name="AUTHOR" type="NVARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RATE" type="FLOAT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_TIME" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
         <!-- Definition of CATEGORIES table -->
         <createTable tableName="CATEGORY_CAT">
             <column name="CTAEGORY_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">

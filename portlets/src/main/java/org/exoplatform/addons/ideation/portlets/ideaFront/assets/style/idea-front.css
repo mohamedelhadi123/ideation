@@ -112,12 +112,12 @@ body{
 }
 .button{
     background:cornflowerblue;
-    padding:1em 6em;
+    padding:1em 3em;
     color:#fff;
     border:0;
     position: relative;
-    left: 480px;
-    top: -50px;
+    left: 25px;
+    top: 12px;
 }
 
 .button:hover{
@@ -779,7 +779,7 @@ ul.cats li {
     list-style: none;
     display: block;
     margin:0;
-    padding:0;
+    padding:13px;
     line-height: 30px;
 }
 
@@ -887,9 +887,11 @@ td.chbox {
 /*--- Post --*/
 .post {
     background-color: #ffffff;
-
+    width: 65%;
+    margin-right : 182px;
+    margin: 8px;
     border-radius: 2px;
-    box-shadow: 0 9px 25px #c9cccd;
+    box-shadow: 0 0px 4px 2px #c9cccd;
     margin-bottom: 80px;
 }
 
@@ -917,7 +919,8 @@ td.chbox {
 .post .postinfo {
     width: 15%;
     border-left: solid 1px #f1f1f1;
-
+    position: relative;
+    top: 132px;
 
 }
 
@@ -1030,15 +1033,22 @@ td.chbox {
 
 .postinfobot {
     border-top: solid 1px #f1f1f1;
-    line-height: 32px;
+    line-height: 50px;
     padding: 0 30px 0 94px;
 }
 
-
+.popup{
+    opacity:1 !important;
+}
+.popup.modal.fade
+{
+    top:10%;
+}
 .postinfobot .likeblock {
     width: 120px;
     position: relative;
-    top: 2px;
+    top: 9px;
+    right: 69px;
 }
 
 .postinfobot .prev {
@@ -1628,7 +1638,7 @@ td.chbox {
 
 /*-----------------------------------------------------------------*/
 /*--- Medium devices (992-1200px) ---*/
-@media (min-width: 892px) and (max-width: 1100px) {
+@media (min-width: 800px) and (max-width: 825px) {
     .container-fluid {
         padding: 0;
     }
@@ -1656,7 +1666,7 @@ td.chbox {
 
 /*-----------------------------------------------------------------*/
 /*--- Large devices (more 1200px) ---*/
-@media (min-width: 1201px) {
+@media (min-width: 800) {
     .container-fluid {
         padding: 0;
     }
@@ -1666,9 +1676,140 @@ td.chbox {
     }
 }
 
+/* component */
+
+.star-rating {
+    display:flex;
+    flex-direction: row-reverse;
+    font-size:1.5em;
+    justify-content:space-around;
+    padding:0 .2em;
+    text-align:center;
+    width:4em;
+}
+
+.star-rating input {
+    display:none;
+}
+
+.star-rating label {
+    color:#ccc;
+    cursor:pointer;
+}
+
+.star-rating :checked ~ label {
+    color:#f90;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color:#fc0;
+}
+
 
 /*##########################################################################################"*/
 
+.wrapper {
+    width: 800px;
+
+}
+
+.list-filter {
+    background: #fff;
+    display: inline-block;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+}
+.list-filter > span {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.7);
+}
+.list-filter > span, .list-filter a {
+    padding: 8px 16px;
+    display: inline-block;
+}
+.list-filter a {
+    color: #000;
+    line-height: 1.5;
+}
+.list-filter a span {
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 0px 4px;
+    margin-left: 4px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.list-filter a:hover, .list-filter a.filter-active {
+    transition: background-color 0.3s;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.list-filter a:hover span, .list-filter a.filter-active span {
+    background-color: #1db954;
+    color: #fff;
+}
 
 
+/*######################################################################*/
 
+
+.main-content {
+    height: 800px;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.overlay-bg {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height:100%;
+    width: 100%;
+    cursor: pointer;
+    z-index: 1000; /* high z-index */
+    background: #000; /* fallback */
+    background: rgba(0,0,0,0.75);
+}
+.overlay-content {
+    background: #fff;
+    padding: 1%;
+    width: 40%;
+    position: relative;
+    top: 15%;
+    left: 50%;
+    margin: 0 0 0 -20%; /* add negative left margin for half the width to center the div */
+    cursor: default;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.9);
+}
+
+.close-btn {
+    cursor: pointer;
+    border: 1px solid #333;
+    padding: 2% 5%;
+    background: #a9e7f9; /* fallback */
+    background: -moz-linear-gradient(top,  #a9e7f9 0%, #77d3ef 4%, #05abe0 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a9e7f9), color-stop(4%,#77d3ef), color-stop(100%,#05abe0));
+    background: -webkit-linear-gradient(top,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+    background: -o-linear-gradient(top,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+    background: -ms-linear-gradient(top,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+    background: linear-gradient(to bottom,  #a9e7f9 0%,#77d3ef 4%,#05abe0 100%);
+    border-radius: 4px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}
+.close-btn:hover {
+    background: #05abe0;
+}
+
+/* media query for most mobile devices */
+@media only screen and (min-width: 0px) and (max-width: 480px){
+
+    .overlay-content {
+        width: 96%;
+        margin: 0 2%;
+        left: 0;
+    }
+}

@@ -1,6 +1,7 @@
 package org.exoplatform.ideation.entities.dto;
 import org.exoplatform.ideation.entities.domain.FavoriteEntity;
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
+import org.exoplatform.ideation.entities.domain.RatingEntity;
 import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -10,8 +11,7 @@ import java.util.Date;
 public class IdeaDTO implements Serializable {
     protected long id;
     private boolean like;
-    private boolean fav ;
-
+    private boolean fav;
 
 
     @NotBlank
@@ -26,12 +26,17 @@ public class IdeaDTO implements Serializable {
     @Size(min = 1, max = 256)
     protected IdeaEntity.Status status;
     private long numfav;
-    protected int rate;
     private long numlike;
+    private RateDTO rate;
+
     @Size(min = 1, max = 256)
     protected String createdBy;
     private String commentText;
+    private float numRate;
+
     private long numcomments;
+    private String posterAvatar;
+    private boolean rated;
     public Date getCreatedTime() {
         return createdTime;
     }
@@ -40,8 +45,9 @@ public class IdeaDTO implements Serializable {
         this.createdTime = createdTime;
     }
 
-    public  IdeaDTO() {
+    public IdeaDTO() {
     }
+
     public boolean isLike() {
         return like;
     }
@@ -49,9 +55,8 @@ public class IdeaDTO implements Serializable {
     public void setLike(boolean like) {
         this.like = like;
     }
-    public  IdeaDTO(IdeaEntity ideaEntity) {
 
-
+    public IdeaDTO(IdeaEntity ideaEntity) {
 
         this.id = ideaEntity.getId();
 
@@ -68,11 +73,14 @@ public class IdeaDTO implements Serializable {
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
 
-    public boolean getFav() {return fav ;}
+    public boolean getFav() {
+        return fav;
+    }
 
     public String getCommentText() {
         return commentText;
@@ -90,7 +98,9 @@ public class IdeaDTO implements Serializable {
         this.numcomments = numcomments;
     }
 
-    public void setFav(boolean fav){this.fav = fav;}
+    public void setFav(boolean fav) {
+        this.fav = fav;
+    }
 
     public long getNumfav() {
         return numfav;
@@ -128,7 +138,7 @@ public class IdeaDTO implements Serializable {
         return status;
     }
 
-    public void setStatus( IdeaEntity.Status status) {
+    public void setStatus(IdeaEntity.Status status) {
         this.status = status;
     }
 
@@ -136,8 +146,45 @@ public class IdeaDTO implements Serializable {
         return createdBy;
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    public String getPosterAvatar() {
+        return posterAvatar;
     }
 
+    public void setPosterAvatar(String posterAvatar) {
+        this.posterAvatar = posterAvatar;
+    }
+
+
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+
+
+
+
+    }
+
+    public boolean isRated() {
+        return rated;
+    }
+
+    public RateDTO getRate() {
+        return rate;
+    }
+
+    public void setRate(RateDTO rate) {
+        this.rate = rate;
+    }
+
+    public void setRated(boolean rated) {
+        this.rated = rated;
+    }
+
+    public float getNumRate() {
+        return numRate;
+    }
+
+    public void setNumRate(float numRate) {
+        this.numRate = numRate;
+    }
 }
