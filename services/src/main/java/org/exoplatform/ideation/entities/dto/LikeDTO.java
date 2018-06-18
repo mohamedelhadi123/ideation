@@ -6,10 +6,9 @@ import java.util.Date;
 public class LikeDTO implements Serializable {
         private long            Id  ;
         private long ideaId ;
-    private boolean like ;
+        private boolean like ;
         private long numlike;
         private String   author;
-
         private Date createdTime;
 
         public LikeDTO(){

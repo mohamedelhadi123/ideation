@@ -49,7 +49,7 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
                 ),
                     @NamedQuery(
                             name = "Idea.getIdea",
-                            query = "DELETE FROM Idea idea WHERE idea.id = :ideaId "
+                            query = "SELECT idea FROM Idea idea WHERE idea.id = :ideaId "
                     ),
 
 

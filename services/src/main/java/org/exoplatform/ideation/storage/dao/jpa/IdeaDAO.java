@@ -2,6 +2,9 @@ package org.exoplatform.ideation.storage.dao.jpa;
 
 import org.exoplatform.commons.persistence.impl.GenericDAOJPAImpl;
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
@@ -12,6 +15,7 @@ import java.util.Set;
 
 
 public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
+    private static final Logger LOG = LoggerFactory.getLogger(IdeaDAO.class);
 
     public IdeaDAO() {
 
@@ -46,8 +50,15 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
 
     }
 
-    public IdeaEntity getIdea(long ideaId) throws PersistenceException {
-        return getEntityManager().createNamedQuery("Idea.getIdea",IdeaEntity.class).setParameter("Id",ideaId).getSingleResult();
+    public List<IdeaEntity> getIdea(long ideaId) throws PersistenceException {
+        try {
+            return getEntityManager().createNamedQuery("Idea.getIdea", IdeaEntity.class)
+                    .setParameter("ideaId", ideaId)
+                    .getResultList();
+        }  catch (Exception e) {
+            LOG.warn("Exception while attempting to get idea", e);
+            throw e;
+        }
     }
 
     public List<IdeaEntity> getPublishedIdeas(IdeaEntity.Status PUBLISHED , IdeaEntity.Status DRAFTED , String createdBy) throws PersistenceException {

@@ -6,11 +6,18 @@
     <external-component-plugins>
         <target-component>org.exoplatform.services.listener.ListenerService</target-component>
         <component-plugin>
-            <name>exo.task.ideationCommentCreation</name>
+            <name>exo.ideation.ideaComment</name>
             <set-method>addListener</set-method>
-            <type>org.exoplatform.ideation.integration.notification.IdeaCommentNotificationListener</type>
+            <type>org.exoplatform.ideation.service.listener.IdeaCommentNotificationListener</type>
         </component-plugin>
     </external-component-plugins>
-
+    <external-component-plugins>
+        <target-component>org.exoplatform.services.listener.ListenerService</target-component>
+        <component-plugin>
+            <name>exo.ideation.ideaLike</name>
+            <set-method>addListener</set-method>
+            <type>org.exoplatform.ideation.service.listener.IdeaLikeNotificationListener</type>
+        </component-plugin>
+    </external-component-plugins>
     <import>jar:/conf/portal/ideation-notification-plugin.xml</import>
 </configuration>

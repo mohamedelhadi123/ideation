@@ -6,7 +6,7 @@
         @Binding(value = RateService.class),
         @Binding(value = RepositoryService.class),
         @Binding(value = IdentityManager.class),
-
+        @Binding(value = ListenerService.class),
 })
 @Scripts({
         @Script(id = "jQueryUI", value = "js/lib/jquery-ui.js"),
@@ -43,5 +43,6 @@ import org.exoplatform.ideation.service.IdeaService;
 import org.exoplatform.ideation.service.impl.CommentService;
 import org.exoplatform.ideation.service.impl.RateService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.social.core.manager.IdentityManager;
 

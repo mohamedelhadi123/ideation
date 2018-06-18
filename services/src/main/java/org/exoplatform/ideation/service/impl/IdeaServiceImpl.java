@@ -92,9 +92,13 @@ public class IdeaServiceImpl implements IdeaService {
 
 
     public IdeaDTO getIdea(long ideaId){
-        return convert(ideaDao.getIdea(ideaId));
-
+       List<IdeaEntity> entities =  ideaDao.getIdea(ideaId);
+        if (entities.size()!=0){
+            return convert(entities.get(0));
+        }
+        return null;
     }
+
 
     public List<IdeaDTO> getAllIdeas() {
         List<IdeaEntity> entities = ideaDao.getAllIdeas();

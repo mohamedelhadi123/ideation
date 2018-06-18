@@ -49,7 +49,8 @@ import java.util.Locale;
 
 @TemplateConfigs(
    templates = {
-       @TemplateConfig( pluginId=IdeaCommentPlugin.ID, template="war:/notification/templates/web/RequestCommentedPlugin.gtmpl"),
+       @TemplateConfig( pluginId= IdeaCommentedPlugin.ID, template="war:/notification/template/web/IdeaCommentedPlugin.gtmpl"),
+       @TemplateConfig( pluginId= IdeaLikedPlugin.ID, template="war:/notification/template/web/IdeaLikedPlugin.gtmpl"),
    }
 )
 public class WebTemplateProvider extends TemplateProvider {
@@ -61,7 +62,9 @@ public class WebTemplateProvider extends TemplateProvider {
     super(initParams);
 
 
-    this.templateBuilders.put(PluginKey.key(IdeaCommentPlugin.ID), new TemplateBuilder());
+    this.templateBuilders.put(PluginKey.key(IdeaCommentedPlugin.ID), new TemplateBuilder());
+    this.templateBuilders.put(PluginKey.key(IdeaLikedPlugin.ID), new TemplateBuilder());
+
   }
 
   private class TemplateBuilder extends AbstractTemplateBuilder {
@@ -74,17 +77,25 @@ public class WebTemplateProvider extends TemplateProvider {
       TemplateContext templateContext = TemplateContext.newChannelInstance(getChannelKey(), pluginId, language);
       
       String creator = notification.getValueOwnerParameter(NotificationUtils.CREATOR);
-
+      String IdeaUrl = notification.getValueOwnerParameter(NotificationUtils.IDEAURL);
+      String userName = notification.getValueOwnerParameter(NotificationUtils.USER_NAME);
       EntityEncoder encoder = HTMLEntityEncoder.getInstance();
       IdentityManager identityManager = CommonsUtils.getService(IdentityManager.class);
       Identity identity = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, creator, true);
       Profile profile = identity.getProfile();
-      templateContext.put("USER", encoder.encode(profile.getFullName().toString()));
+      templateContext.put("USER", encoder.encode(profile.getFullName()));
       templateContext.put("AVATAR", profile.getAvatarUrl() != null ? profile.getAvatarUrl() : LinkProvider.PROFILE_DEFAULT_AVATAR_URL);
       templateContext.put("PROFILE_URL", LinkProviderUtils.getRedirectUrl("user", identity.getRemoteId()));
       //
 
+      if(IdeaUrl!=null) {
+        templateContext.put("IDEAURL", IdeaUrl);
+      }
 
+      if(userName!=null) {
+        Identity id=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, userName, false);
+        templateContext.put("USER_NAME", id.getProfile().getFullName());
+      }
 
 
 
@@ -107,7 +118,7 @@ public class WebTemplateProvider extends TemplateProvider {
       return false;
     }
 
-  };
+  }
 
 
 }

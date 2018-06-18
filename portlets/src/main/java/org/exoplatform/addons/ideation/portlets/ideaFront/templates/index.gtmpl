@@ -51,25 +51,29 @@
                             <i class="uiIconDeleteUser uiIconLightGray"> </i>
                         </a>
                         <div class="star-rating">
-                            <input ng-if="idea.rated == false" type="radio" data-ng-click="saveRate(idea)" id="5-stars" ng-model="newRate.rate" name="rating" value="5" />
-                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="5-stars" ng-model="idea.rate.rate" name="rating" value="5" />
-                            <label style="font-size: 20px;" for="5-stars" class="star">&#9733;</label>
+                            <input ng-if="idea.rated == false" type="radio" data-ng-click="saveRate(idea)" id="5-stars_{{idea.id}}" ng-model="newRate.rate" name="rating" value="5" />
+                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="5-stars_{{idea.id}}" ng-model="idea.rate.rate" name="rating" value="5" />
+                            <label style="font-size: 20px;" for="5-stars_{{idea.id}}" class="star_{{idea.id}}">&#9733;</label>
 
-                            <input ng-if="idea.rated == false" data-ng-click="saveRate(idea)" type="radio" ng-model="newRate.rate" id="4-stars" name="rating" value="4" />
-                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="4-stars" ng-model="idea.rate.rate" name="rating" value="4" />
-                            <label style="font-size: 20px;" for="4-stars" class="star">&#9733;</label>
 
-                            <input ng-if="idea.rated == false" data-ng-click="saveRate(idea)" type="radio" ng-model="newRate.rate" id="3-stars" name="rating" value="3" />
-                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="3-stars" ng-model="idea.rate.rate" name="rating" value="3" />
-                            <label style="font-size: 20px;" for="3-stars" class="star">&#9733;</label>
+                            <input ng-if="idea.rated == false" data-ng-click="saveRate(idea)" type="radio" id="4-stars_{{idea.id}}" ng-model="newRate.rate"  name="rating" value="4" />
+                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="4-stars_{{idea.id}}" ng-model="idea.rate.rate" name="rating" value="4" />
+                            <label style="font-size: 20px;" for="4-stars_{{idea.id}}" class="star_{{idea.id}}">&#9733;</label>
 
-                            <input ng-if="idea.rated == false" data-ng-click="saveRate(idea)" type="radio" ng-model="newRate.rate" id="2-stars" name="rating" value="2" />
-                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="2-stars" ng-model="idea.rate.rate" name="rating" value="2" />
-                            <label style="font-size: 20px;" for="2-stars" class="star">&#9733;</label>
 
-                            <input ng-if="idea.rated == false" data-ng-click="saveRate(idea)" type="radio" ng-model="newRate.rate" id="1-stars" name="rating" value="1" />
-                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="1-stars" ng-model="idea.rate.rate" name="rating" value="1" />
-                            <label style="font-size: 20px;" for="1-stars" class="star">&#9733;</label>
+                            <input ng-if="idea.rated == false" data-ng-click="saveRate(idea)" type="radio" id="3-stars_{{idea.id}}" ng-model="newRate.rate" name="rating" value="3" />
+                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="3-stars_{{idea.id}}" ng-model="idea.rate.rate" name="rating" value="3" />
+                            <label style="font-size: 20px;" for="3-stars_{{idea.id}}" class="star_{{idea.id}}">&#9733;</label>
+
+
+                            <input ng-if="idea.rated == false" data-ng-click="saveRate(idea)" type="radio" id="2-stars_{{idea.id}}" ng-model="newRate.rate"  name="rating" value="2" />
+                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="2-stars_{{idea.id}}" ng-model="idea.rate.rate" name="rating" value="2" />
+                            <label style="font-size: 20px;" for="2-stars_{{idea.id}}" class="star_{{idea.id}}">&#9733;</label>
+
+
+                            <input ng-if="idea.rated == false" data-ng-click="saveRate(idea)" type="radio" id="1-stars_{{idea.id}}" ng-model="newRate.rate" name="rating" value="1" />
+                            <input ng-if="idea.rated == true" type="radio" data-ng-click="updateRate(idea.rate)" id="1-stars_{{idea.id}}" ng-model="idea.rate.rate" name="rating" value="1" />
+                            <label style="font-size: 20px;" for="1-stars_{{idea.id}}" class="star_{{idea.id}}">&#9733;</label>
                         </div>
 
 

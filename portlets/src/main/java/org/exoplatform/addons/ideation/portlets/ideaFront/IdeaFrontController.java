@@ -19,6 +19,7 @@ import org.exoplatform.ideation.storage.Utils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
@@ -47,7 +48,8 @@ public class IdeaFrontController {
     @Path("index.gtmpl")
     Template indexTmpl;
 
-
+    @Inject
+    ListenerService listenerService;
 
     @Inject
     IdentityManager identityManager;
@@ -125,7 +127,13 @@ public class IdeaFrontController {
 
         long id = obj.getIdeaId();
         likeService.save(obj,currentUser,id);
-
+        if (obj.isLike()) {
+            try {
+                listenerService.broadcast("exo.ideation.ideaLike", "", obj);
+            } catch (Exception e) {
+                log.error("Cannot broadcast like event");
+            }
+        }
     }
 
 
@@ -455,6 +463,11 @@ public class IdeaFrontController {
             obj.setAuthor(conversationState.getIdentity().getUserId());
         }
         commentService.save(obj);
+        try {
+            listenerService.broadcast("exo.ideation.ideaComment",currentUser, obj);
+        } catch (Exception e) {
+            log.error("Cannot broadcast comment event");
+        }
     }
 
 
