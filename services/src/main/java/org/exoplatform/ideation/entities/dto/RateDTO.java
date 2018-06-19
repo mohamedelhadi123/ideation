@@ -9,7 +9,7 @@ public class RateDTO implements Serializable {
 
 
     private long Id  ;
-    private float numRate;
+    private float generalRate;
     private long ideaId ;
     private String author;
     private float rate ;
@@ -60,11 +60,11 @@ public class RateDTO implements Serializable {
         this.ideaId = ideaId;
     }
 
-    public float getNumRate() {
-        return numRate;
+    public float getGeneralRate() {
+        return generalRate;
     }
 
-    public void setNumRate(float numRate) {
-        this.numRate = numRate;
+    public void setGeneralRate(float generalRate) {
+        this.generalRate = generalRate;
     }
 }

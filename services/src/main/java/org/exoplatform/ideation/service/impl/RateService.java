@@ -39,12 +39,16 @@ public class RateService {
     }
 
 
-    public long count(long ideaId){
-        return  rateDAO.getrateByIdeaIdCount(ideaId);
-
-
+    public List<RateDTO> count(){
+        IdeaDTO rate = new IdeaDTO();
+        long ideaId = rate.getId();
+        List<RatingEntity> entities = rateDAO.getrateByIdeaIdCount(ideaId);
+        List<RateDTO> dtos = new ArrayList<RateDTO>();
+        for (RatingEntity entity : entities) {
+            dtos.add(convert(entity));
+        }
+        return dtos;
     }
-
 
     public List<RateDTO> getRates() {
         List<RatingEntity> entities = rateDAO.getRateByIdea();

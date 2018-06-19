@@ -6,6 +6,7 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
         $scope.newIdea={
 
         };
+        $scope.totrate =[];
         $scope.drafts = [];
         $scope.files=[];
         $scope.ideaToDelete=null;
@@ -60,6 +61,8 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
                 $scope.setResultMessage($scope.i18n.defaultError, "error");
             });
         };
+
+
 
 
         $scope.deleteFavorite = function (idea) {
@@ -523,15 +526,12 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
             }).then(function successCallback(data) {
                 $scope.likes = data.data;
             }, function errorCallback(data) {
-
             });
-
         };
 
         $scope.LoadFavorite();
         $scope.loadComments();
         $scope.loadRates();
-
         //   $scope.loadBundle();
         //  $scope.loadData();
         $('#ideaFront').css('display', 'block');

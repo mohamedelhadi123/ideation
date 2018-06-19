@@ -20,16 +20,18 @@ public class RateDAO  extends GenericDAOJPAImpl<RatingEntity, Long> {
 
 
 
-    public  long getrateByIdeaIdCount(long id) {
+    public  List<RatingEntity> getrateByIdeaIdCount(long id) {
         try {
-            return getEntityManager().createNamedQuery("Rate.Count", Long.class)
+            return getEntityManager().createNamedQuery("Rate.CountRate", RatingEntity.class)
                     .setParameter("ideaId", id)
-                    .getSingleResult();
+                    .getResultList();
         } catch (Exception e) {
             LOG.warn("Exception while attempting to get Rate count.", e);
             throw e;
         }
     }
+
+
 
     public RatingEntity getRateByIdeaAndUser(long ideaId , String author) throws PersistenceException {
 
@@ -42,6 +44,8 @@ public class RateDAO  extends GenericDAOJPAImpl<RatingEntity, Long> {
             return null;
         }
     }
+
+
 
 
     public List<RatingEntity> getRateByIdea() throws PersistenceException {

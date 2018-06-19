@@ -200,6 +200,13 @@ public class IdeaFrontController {
 
     }
 
+    @Ajax
+    @juzu.Resource
+    @MimeType.JSON
+    @Jackson
+    public List<RateDTO> getrate(@Jackson RateDTO obj) {
+        return rateService.count();
+    }
 
 
     @Ajax
@@ -279,7 +286,6 @@ public class IdeaFrontController {
                      if (rate.getAuthor().equals(currentUser) && rate.getIdeaId() == idea.getId()) {
                          idea.setRated(true);
                          idea.setRate(rate);
-                         rate.setNumRate(rateService.count(idea.getId()));
                          break;
                      }
                      }
