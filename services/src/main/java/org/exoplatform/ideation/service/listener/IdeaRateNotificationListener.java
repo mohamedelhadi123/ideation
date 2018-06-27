@@ -6,7 +6,7 @@ import org.exoplatform.commons.notification.impl.NotificationContextImpl;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.ideation.entities.dto.IdeaDTO;
 import org.exoplatform.ideation.entities.dto.RateDTO;
-import org.exoplatform.ideation.integration.IdeaRatedPlugin;
+import org.exoplatform.ideation.integration.notification.IdeaRatedPlugin;
 import org.exoplatform.ideation.service.IdeaService;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;

@@ -15,7 +15,7 @@
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  **/
   
-package org.exoplatform.ideation.integration;
+package org.exoplatform.ideation.integration.notification;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

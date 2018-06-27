@@ -1,4 +1,4 @@
-package org.exoplatform.ideation.integration;
+package org.exoplatform.ideation.integration.notification;
 
 import org.exoplatform.commons.api.notification.NotificationContext;
 import org.exoplatform.commons.api.notification.annotation.TemplateConfig;

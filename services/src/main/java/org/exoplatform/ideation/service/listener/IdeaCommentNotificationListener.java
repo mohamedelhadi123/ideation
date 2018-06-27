@@ -10,7 +10,7 @@ import org.exoplatform.ideation.entities.dto.IdeaDTO;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.exoplatform.ideation.integration.IdeaCommentedPlugin;
+import org.exoplatform.ideation.integration.notification.IdeaCommentedPlugin;
 import org.exoplatform.ideation.service.IdeaService;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
