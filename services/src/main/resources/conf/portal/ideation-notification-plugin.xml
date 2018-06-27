@@ -34,7 +34,7 @@
     <component-plugin>
       <name>notification.plugins</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.ideation.integration.notification.IdeaCommentedPlugin</type>
+      <type>org.exoplatform.ideation.integration.IdeaCommentedPlugin</type>
       <description>Initial information for plugin.</description>
       <init-params>
         <object-param>
@@ -74,7 +74,7 @@
     <component-plugin>
       <name>notification.plugins</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.ideation.integration.notification.IdeaLikedPlugin</type>
+      <type>org.exoplatform.ideation.integration.IdeaLikedPlugin</type>
       <description>Initial information for plugin.</description>
       <init-params>
         <object-param>
@@ -116,7 +116,7 @@
     <component-plugin>
       <name>notification.plugins</name>
       <set-method>addPlugin</set-method>
-      <type>org.exoplatform.ideation.integration.notification.IdeaRatedPlugin</type>
+      <type>org.exoplatform.ideation.integration.IdeaRatedPlugin</type>
       <description>Initial information for plugin.</description>
       <init-params>
         <object-param>
@@ -157,7 +157,7 @@
     <component-plugin>
       <name>mail.channel.idea.template</name>
       <set-method>registerTemplateProvider</set-method>
-      <type>org.exoplatform.ideation.integration.notification.MailTemplateProvider</type>
+      <type>org.exoplatform.ideation.integration.MailTemplateProvider</type>
       <init-params>
         <value-param>
           <name>channel-id</name>
@@ -168,7 +168,7 @@
     <component-plugin>
       <name>web.channel.idea.template</name>
       <set-method>registerTemplateProvider</set-method>
-      <type>org.exoplatform.ideation.integration.notification.WebTemplateProvider</type>
+      <type>org.exoplatform.ideation.integration.WebTemplateProvider</type>
       <init-params>
         <value-param>
           <name>channel-id</name>

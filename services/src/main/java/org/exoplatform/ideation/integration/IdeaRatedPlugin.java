@@ -1,4 +1,4 @@
-package org.exoplatform.ideation.integration.notification;
+package org.exoplatform.ideation.integration;
 
 import org.exoplatform.commons.api.notification.NotificationContext;
 import org.exoplatform.commons.api.notification.model.ArgumentLiteral;
