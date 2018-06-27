@@ -19,6 +19,7 @@ public class IdeaDTO implements Serializable {
     @Size(min = 1, max = 50)
     protected String title;
     protected Date createdTime;
+    private long countRate;
 
     @Size(min = 1, max = 256)
     protected String description;
@@ -37,6 +38,7 @@ public class IdeaDTO implements Serializable {
     private long numcomments;
     private String posterAvatar;
     private boolean rated;
+    private String result;
     public Date getCreatedTime() {
         return createdTime;
     }
@@ -73,6 +75,7 @@ public class IdeaDTO implements Serializable {
     public long getId() {
         return id;
     }
+
 
     public void setId(long id) {
         this.id = id;
@@ -158,10 +161,6 @@ public class IdeaDTO implements Serializable {
 
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
-
-
-
-
     }
 
     public boolean isRated() {
@@ -187,4 +186,22 @@ public class IdeaDTO implements Serializable {
     public void setNumRate(float numRate) {
         this.numRate = numRate;
     }
+
+    public long getCountRate() {
+        return countRate;
+    }
+
+    public void setCountRate(long countRate) {
+        this.countRate = countRate;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+
 }

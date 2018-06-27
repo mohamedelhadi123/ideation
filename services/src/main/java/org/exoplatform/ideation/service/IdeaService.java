@@ -12,7 +12,10 @@ public interface IdeaService {
 
     public IdeaEntity createIdea (IdeaEntity ideaEntity) ;
 
-    public List<IdeaDTO> getUserIdeas(String PUBLISHED);
+    public long getMaxId() ;
+
+
+        public List<IdeaDTO> getUserIdeas(String PUBLISHED);
 
     public List<IdeaDTO> getAllIdeas();
     public Set<String> getCoworker(long ideaId);

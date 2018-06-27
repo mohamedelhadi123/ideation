@@ -2,6 +2,7 @@ package org.exoplatform.ideation.service.impl;
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
 import org.exoplatform.ideation.entities.dto.IdeaDTO;
 import org.exoplatform.ideation.service.IdeaService;
+import org.exoplatform.ideation.storage.dao.jpa.CoworkerDAO;
 import org.exoplatform.ideation.storage.dao.jpa.IdeaDAO;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -28,6 +29,7 @@ public class IdeaServiceImpl implements IdeaService {
 
     }
 
+
     public IdeaEntity updateIdea(IdeaEntity ideaEntity) {
 
         IdeaEntity IdeaE = ideaDao.update(ideaEntity);
@@ -35,6 +37,14 @@ public class IdeaServiceImpl implements IdeaService {
         return IdeaE;
 
     }
+
+    public long getMaxId() {
+
+        return ideaDao.getMaxId();
+    }
+
+
+
 
 
     public IdeaEntity findIdeaByTitle(String IdeaTitle) {

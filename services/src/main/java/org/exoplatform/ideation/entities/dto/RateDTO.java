@@ -14,7 +14,9 @@ public class RateDTO implements Serializable {
     private String author;
     private float rate ;
     private Date createdTime;
-
+    float result;
+    private long countRate;
+    private float numRate;
 
 
     public long getId() {
@@ -66,5 +68,29 @@ public class RateDTO implements Serializable {
 
     public void setGeneralRate(float generalRate) {
         this.generalRate = generalRate;
+    }
+
+    public float getNumRate() {
+        return numRate;
+    }
+
+    public void setNumRate(float numRate) {
+        this.numRate = numRate;
+    }
+
+    public long getCountRate() {
+        return countRate;
+    }
+
+    public void setCountRate(long countRate) {
+        this.countRate = countRate;
+    }
+
+    public float getResult() {
+        return result;
+    }
+
+    public void setResult(float result) {
+        this.result = result;
     }
 }

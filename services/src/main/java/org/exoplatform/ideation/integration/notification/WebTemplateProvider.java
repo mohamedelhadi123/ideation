@@ -51,6 +51,8 @@ import java.util.Locale;
    templates = {
        @TemplateConfig( pluginId= IdeaCommentedPlugin.ID, template="war:/notification/template/web/IdeaCommentedPlugin.gtmpl"),
        @TemplateConfig( pluginId= IdeaLikedPlugin.ID, template="war:/notification/template/web/IdeaLikedPlugin.gtmpl"),
+       @TemplateConfig( pluginId= IdeaRatedPlugin.ID, template="war:/notification/template/web/IdeaRatedPlugin.gtmpl"),
+
    }
 )
 public class WebTemplateProvider extends TemplateProvider {
@@ -64,6 +66,8 @@ public class WebTemplateProvider extends TemplateProvider {
 
     this.templateBuilders.put(PluginKey.key(IdeaCommentedPlugin.ID), new TemplateBuilder());
     this.templateBuilders.put(PluginKey.key(IdeaLikedPlugin.ID), new TemplateBuilder());
+    this.templateBuilders.put(PluginKey.key(IdeaRatedPlugin.ID), new TemplateBuilder());
+
 
   }
 

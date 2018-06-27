@@ -33,6 +33,30 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
         $scope.newideaId= {
         };
 
+        $scope.ratings = [{number : $scope.result}];
+
+        $scope.getStars = function(rating) {
+            // Get the value
+            var val = parseFloat(rating);
+            // Turn value into number/100
+            var size = val/5*100;
+            return size + '%';
+        }
+
+
+
+        $scope.loadresults = function () {
+            $http({
+                method: 'GET',
+                url: ideaFrontContainer.jzURL('IdeaFrontController.getResults')
+            }).then(function successCallback(data) {
+                $scope.ratings = data.data;
+            }, function errorCallback(data) {
+                $scope.setResultMessage($scope.i18n.defaultError, "error");
+            });
+        }
+
+
         $scope.loadBundle = function () {
             $http({
                 method: 'GET',
@@ -160,8 +184,7 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
             });
             };
 
-        $scope.updateRate = function(rate,idea) {
-
+        $scope.updateRate = function(rate) {
             $http({
                 data : rate,
                 method : 'POST',
@@ -262,8 +285,7 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
         $scope.loadAttachments = function () {
             $http({
-                data: $scope.newIdea,
-                method: 'POST',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -279,7 +301,7 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
         $scope.deleteAttachement = function(fileName) {
             $http({
-                url : ideaFrontContainer.jzURL('IdeaFrontController.deleteFile')+"&ideaId="+$scope.idea.id+"&fileName="+fileName
+                url : ideaFrontContainer.jzURL('IdeaFrontController.deleteFile')+"&fileName="+fileName
             }).then(function successCallback(data) {
                 $scope.attachements = $scope.loadAttachments($scope.idea);
 
@@ -341,6 +363,8 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
        $scope.saveRate = function (idea) {
            $scope.newRate.ideaId = idea.id;
+           $scope.newRate.numRate = idea.numRate;
+
 
            $http({
                data : $scope.newRate,
@@ -364,6 +388,7 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
         $scope.saveFavorite = function(idea) {
             $scope.newFav.ideaId = idea.id;
+
             if(idea.fav == true){
                 idea.fav = false;
             }else if(idea.fav == false){
@@ -453,6 +478,8 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
         };
 
 
+
+
         $scope.loadComments = function () {
             $http({
                 method: 'GET',
@@ -485,8 +512,26 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
         };
 
-        $scope.LoadFavorite = function (idea) {
-            // $scope.isfav = idea.fav;
+        $scope.loadIdea = function (idea) {
+            var url = "";
+            url=url+ "&idea="+idea.id;
+            $http({
+                data : idea,
+                method: 'GET',
+                url: ideaFrontContainer.jzURL('IdeaFrontController.getIdeas')+url
+            }).then(function successCallback(data) {
+                $scope.ideas = data.data;
+                console.log($scope.ideas);
+            }, function errorCallback(data) {
+
+            });
+
+        };
+
+
+
+
+        $scope.LoadFavorite = function () {
             $http({
                 method: 'GET',
                 url: ideaFrontContainer.jzURL('IdeaFrontController.getFavorite')
@@ -513,12 +558,6 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
         };
 
-
-
-
-
-
-
         $scope.loadLikes = function (idea) {
             $http({
                 method: 'GET',
@@ -532,16 +571,21 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
         $scope.LoadFavorite();
         $scope.loadComments();
         $scope.loadRates();
-        //   $scope.loadBundle();
-        //  $scope.loadData();
         $('#ideaFront').css('display', 'block');
         $scope.loadIdeas();
-        //$scope.loadDraftedIdeas();
-        // Get modal element
 
 
 
 
+        var header = document.getElementById("myDIV");
+        var btns = header.getElementsByClassName("bouton");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].addEventListener("click", function() {
+                var current = document.getElementsByClassName("filter-active");
+                current[0].className = current[0].className.replace(" filter-active", "");
+                this.className += " filter-active";
+            });
+        }
 
         };
     return ideaFrontCtrl;

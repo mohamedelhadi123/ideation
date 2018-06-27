@@ -39,9 +39,15 @@ public class RateService {
     }
 
 
-    public List<RateDTO> count(){
-        IdeaDTO rate = new IdeaDTO();
-        long ideaId = rate.getId();
+    public long countRates(long ideaId){
+        return  rateDAO.Count(ideaId);
+
+    }
+
+
+
+
+    public List<RateDTO> count(long ideaId){
         List<RatingEntity> entities = rateDAO.getrateByIdeaIdCount(ideaId);
         List<RateDTO> dtos = new ArrayList<RateDTO>();
         for (RatingEntity entity : entities) {
@@ -80,4 +86,6 @@ public class RateService {
         dto.setCreatedTime(entity.getCreatedTime());
         return dto;
     }
+
+
 }

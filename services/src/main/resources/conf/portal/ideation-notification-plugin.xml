@@ -110,6 +110,48 @@
     </component-plugin>
   </external-component-plugins>
 
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.commons.api.notification.service.setting.PluginContainer</target-component>
+    <component-plugin>
+      <name>notification.plugins</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.ideation.integration.notification.IdeaRatedPlugin</type>
+      <description>Initial information for plugin.</description>
+      <init-params>
+        <object-param>
+          <name>template.IdeaRatedPlugin</name>
+          <description>The template of IdeaRatedPlugin</description>
+          <object
+                  type="org.exoplatform.commons.api.notification.plugin.config.PluginConfig">
+            <field name="pluginId">
+              <string>IdeaRatedPlugin</string>
+            </field>
+            <field name="resourceBundleKey">
+              <string>UINotification.label.IdeaRatedPlugin</string>
+            </field>
+            <field name="order">
+              <string>4</string>
+            </field>
+            <field name="defaultConfig">
+              <collection type="java.util.ArrayList">
+                <value>
+                  <string>weekly</string>
+                </value>
+              </collection>
+            </field>
+            <field name="groupId">
+              <string>idea</string>
+            </field>
+            <field name="bundlePath">
+              <string>locale.notification.IdeaNotification</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+
   <external-component-plugins>
     <target-component>org.exoplatform.commons.api.notification.channel.ChannelManager</target-component>
     <component-plugin>

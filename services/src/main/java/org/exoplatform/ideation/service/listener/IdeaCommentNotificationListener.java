@@ -1,7 +1,4 @@
-
-
-
-        package org.exoplatform.ideation.service.listener;
+package org.exoplatform.ideation.service.listener;
 
 import org.exoplatform.commons.api.notification.NotificationContext;
 import org.exoplatform.commons.api.notification.model.PluginKey;

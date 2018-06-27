@@ -25,7 +25,6 @@ import javax.persistence.TypedQuery;
 import java.lang.reflect.Array;
 import java.util.List;
 
-
 public class JPAQueryListAccess<E> implements ListAccess<E> {
   private final Class<E> clazz;
   private final TypedQuery<Long> countQuery;
@@ -39,14 +38,40 @@ public class JPAQueryListAccess<E> implements ListAccess<E> {
     this.selectQuery = selectQuery;
   }
 
-
-    @Override
-    public E[] load(int i, int i1) throws Exception, IllegalArgumentException {
-        return null;
+  @Override
+  public E[] load(int index, int length) throws Exception, IllegalArgumentException {
+    if (length > 0) {
+      selectQuery.setFirstResult(index).setMaxResults(length);
+    } else {
+      // Load all
+      selectQuery.setFirstResult(0).setMaxResults(Integer.MAX_VALUE);
     }
+    List<E> list = selectQuery.getResultList();
 
-    @Override
+    E[] e = (E[])Array.newInstance(clazz, list.size());
+    for (int i = 0; i < e.length; i++) {
+      Object obj = list.get(i);
+      E entity = null;
+      if (clazz.isInstance(obj)) {
+        entity = (E)obj;
+      } else if (obj instanceof Object[]){
+        for (Object o : (Object[])obj) {
+          if (clazz.isInstance(o)) {
+            entity = (E)o;
+            break;
+          }
+        }
+      }
+
+    }
+    return e;
+  }
+
+  @Override
   public int getSize() throws Exception {
-    return 0;
+    if (size == -1) {
+      size = countQuery.getSingleResult();
+    }
+    return (int)size;
   }
 }

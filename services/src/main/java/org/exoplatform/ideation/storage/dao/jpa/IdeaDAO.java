@@ -34,6 +34,14 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
 
     }
 
+    public long getMaxId() throws PersistenceException {
+
+        return getEntityManager().createNamedQuery("Idea.findMaxId", Long.class)
+        .getSingleResult();
+
+
+    }
+
 
 
 
