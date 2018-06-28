@@ -230,6 +230,8 @@ public class IdeaFrontController {
     }
 
 
+
+
     @Ajax
     @juzu.Resource
     @MimeType.JSON
@@ -248,6 +250,12 @@ public class IdeaFrontController {
                  idea.setRated(false);
                  idea.setFav(false);
                  idea.setLike(false);
+                 Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, idea.getCreatedBy(), false).getProfile();
+                 if(profile.getAvatarUrl()!=null){
+                     idea.setPosterAvatar(profile.getAvatarUrl());
+                 }else{
+                     idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
+                 }
                  for (FavoriteDTO fav: favs){
                      if (fav.getAuthor().equals(currentUser)&& fav.getIdeaId()==idea.getId()){
                          idea.setFav(true);
@@ -276,16 +284,10 @@ public class IdeaFrontController {
                  }
 
                  for (CommentDTO comment: comments){
-                     Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, comment.getAuthor(), false).getProfile();
                      if (comment.getAuthor().equals(currentUser)&& comment.getIdeaId()==idea.getId()){
                          idea.setCommentText(comment.getCommentText());
                          long countcomment = commentService.countcomment(idea.getId());
                          idea.setNumcomments(countcomment);
-                         if(profile.getAvatarUrl()!=null){
-                             idea.setPosterAvatar(profile.getAvatarUrl());
-                         }else{
-                             idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
-                         }
                          break;
                      }
                      if(comment.getIdeaId()==idea.getId()){
@@ -340,6 +342,12 @@ public class IdeaFrontController {
                 idea.setRated(false);
                 idea.setFav(false);
                 idea.setLike(false);
+            Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, idea.getCreatedBy(), false).getProfile();
+            if(profile.getAvatarUrl()!=null){
+                idea.setPosterAvatar(profile.getAvatarUrl());
+            }else{
+                idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
+            }
                 for (FavoriteDTO fav: favs){
                     if (fav.getAuthor().equals(currentUser)&& fav.getIdeaId()==idea.getId()){
                         idea.setFav(true);
@@ -368,16 +376,11 @@ public class IdeaFrontController {
                 }
 
                 for (CommentDTO comment: comments){
-                    Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, comment.getAuthor(), false).getProfile();
                     if (comment.getAuthor().equals(currentUser)&& comment.getIdeaId()==idea.getId()){
                         idea.setCommentText(comment.getCommentText());
                         long countcomment = commentService.countcomment(idea.getId());
                         idea.setNumcomments(countcomment);
-                        if(profile.getAvatarUrl()!=null){
-                            idea.setPosterAvatar(profile.getAvatarUrl());
-                        }else{
-                            idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
-                        }
+
                         break;
                     }
                     if(comment.getIdeaId()==idea.getId()){
@@ -420,7 +423,21 @@ public class IdeaFrontController {
     @MimeType.JSON
     @Jackson
     public List<CommentDTO> getComments(@Jackson CommentDTO obj) {
-          return  commentService.getCommentsByIdeaId();
+        try {
+            List<CommentDTO> comments= commentService.getCommentsByIdeaId();
+            for (CommentDTO comment : comments){
+                Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, comment.getAuthor(), false).getProfile();
+                if(profile.getAvatarUrl()!=null){
+                    comment.setPosterAvatar(profile.getAvatarUrl());
+                }else{
+                    comment.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
+                }
+            }
+            return comments;
+        } catch (Throwable e) {
+            log.error(e);
+            return null;
+        }
     }
 
     @Ajax
@@ -428,8 +445,6 @@ public class IdeaFrontController {
     @MimeType.JSON
     @Jackson
     public List<FavoriteDTO> getFavorite(@Jackson FavoriteDTO obj) {
-
-
         return favoriteService.getFavorites(currentUser);
     }
 
@@ -451,6 +466,12 @@ public class IdeaFrontController {
                 idea.setRated(false);
                 idea.setFav(false);
                 idea.setLike(false);
+                Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, idea.getCreatedBy(), false).getProfile();
+                if(profile.getAvatarUrl()!=null){
+                    idea.setPosterAvatar(profile.getAvatarUrl());
+                }else{
+                    idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
+                }
                 for (FavoriteDTO fav: favs){
                     if (fav.getAuthor().equals(currentUser)&& fav.getIdeaId()==idea.getId()){
                         idea.setFav(true);
@@ -479,16 +500,11 @@ public class IdeaFrontController {
                 }
 
                 for (CommentDTO comment: comments){
-                    Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, comment.getAuthor(), false).getProfile();
                     if (comment.getAuthor().equals(currentUser)&& comment.getIdeaId()==idea.getId()){
                         idea.setCommentText(comment.getCommentText());
                         long countcomment = commentService.countcomment(idea.getId());
                         idea.setNumcomments(countcomment);
-                        if(profile.getAvatarUrl()!=null){
-                            idea.setPosterAvatar(profile.getAvatarUrl());
-                        }else{
-                            idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
-                        }
+
                         break;
                     }
                     if(comment.getIdeaId()==idea.getId()){
@@ -545,6 +561,12 @@ public class IdeaFrontController {
                 idea.setRated(false);
                 idea.setFav(false);
                 idea.setLike(false);
+                Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, idea.getCreatedBy(), false).getProfile();
+                if(profile.getAvatarUrl()!=null){
+                    idea.setPosterAvatar(profile.getAvatarUrl());
+                }else{
+                    idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
+                }
                 for (FavoriteDTO fav: favs){
                     if (fav.getAuthor().equals(currentUser)&& fav.getIdeaId()==idea.getId()){
                         idea.setFav(true);
@@ -573,16 +595,11 @@ public class IdeaFrontController {
                 }
 
                 for (CommentDTO comment: comments){
-                    Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, comment.getAuthor(), false).getProfile();
                     if (comment.getAuthor().equals(currentUser)&& comment.getIdeaId()==idea.getId()){
                         idea.setCommentText(comment.getCommentText());
                         long countcomment = commentService.countcomment(idea.getId());
                         idea.setNumcomments(countcomment);
-                        if(profile.getAvatarUrl()!=null){
-                            idea.setPosterAvatar(profile.getAvatarUrl());
-                        }else{
-                            idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
-                        }
+
                         break;
                     }
                     if(comment.getIdeaId()==idea.getId()){

@@ -1,7 +1,6 @@
 package org.exoplatform.ideation.entities.dto;
 
 import org.exoplatform.ideation.entities.domain.CommentEntity;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,7 +18,7 @@ public class CommentDTO implements Serializable{
 
         private long id;
 
-    private String              posterAvatar;
+    private String posterAvatar;
 
 
         private Date createdTime;

@@ -901,7 +901,7 @@ td.chbox {
 
 .post .userinfo {
     width: 15%;
-    padding: 20px 0 15px 15px;
+    padding: 35px 0 15px 15px;
 }
 
 .post .posttext {
@@ -1698,12 +1698,13 @@ td.chbox {
 }
 
 .star-rating :checked ~ label {
-    color:#f90;
+    color: #1c94c4;
+;
 }
 
 .star-rating label:hover,
 .star-rating label:hover ~ label {
-    color:#fc0;
+    color:#05abe0;
 }
 
 

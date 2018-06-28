@@ -274,8 +274,8 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
                 },
                 url : ideaFrontContainer.jzURL('IdeaFrontController.saveComment')
             }).then(function successCallback(data) {
+                data.append();
                 $scope.loadComments();
-                $scope.showAlert = false;
             }, function errorCallback(data) {
                 $scope.setResultMessage($scope.i18n.defaultError, "error");
             });
@@ -479,12 +479,10 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
 
 
-        $scope.loadComments = function () {
+        $scope.loadComments = function (idea) {
             $http({
+                data:idea,
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
                 url: ideaFrontContainer.jzURL('IdeaFrontController.getComments')
             }).then(function successCallback(data) {
                 $scope.comments = data.data;

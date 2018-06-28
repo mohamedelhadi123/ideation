@@ -14,9 +14,9 @@
             <h3>Top Rated Ideas</h3>
             <div class="divline"></div>
             <div class="blocktxt">
-                <ul ng-repeat="fav in ideas | orderBy:'fav.result' : reverse" class="cats">
-                    <li><a class="avatarXSmall" href="/portal/intranet/profile/">
-                        <img src="/eXoSkin/skin/images/system/UserAvtDefault.png" alt="">
+                <ul ng-repeat="fav in ideas | orderBy:'fav.result':reverseSort"  class="cats">
+                    <li><a class="avatarXSmall" href="/portal/intranet/profile/{{idea.createdBy}}">
+                        <img src="{{fav.posterAvatar}}" alt="{{fav.createdBy}}" >
                     </a>
                         <a href="#">{{fav.title}}
                             <ion-content>
@@ -32,7 +32,7 @@
  </div>
         <div ng-init="total = 0"></div>
 
-        <div ng-repeat="idea in ideas">
+        <div ng-repeat="idea in ideas | orderBy:'-idea'">
             <div class="container-fluid">
 <div class="container">
 <div class="row">
@@ -42,7 +42,7 @@
     <div class="wrap-ut pull-left">
         <div class="userinfo pull-left">
             <div class="avatar">
-                <img src="/eXoSkin/skin/images/system/UserAvtDefault.png" alt="">
+                <img src="{{idea.posterAvatar}}" alt="{{idea.createdBy}}" >
             </div>
             <b>
             <p style="position: relative; left: 20px;">{{idea.createdBy}}</p>
@@ -54,6 +54,9 @@
             </div>
         <div class="clearfix"></div>
     </div>
+
+
+
     <a ng-if="idea.createdBy == '${currentUser}'" class="actionIcon" title="" style="position: relative; left: 88px;" data-ng-click="deleteIdea(idea)">
         <i class="uiIconDeleteUser uiIconLightGray"> </i>
     </a>
@@ -180,8 +183,8 @@ right: 87px;
 
                 <div ng-repeat="comment in comments"  class="commentItem" id="commentList_{{idea.id}}">
                     <div ng-if="comment.ideaId == idea.id" class="commmentLeft">
-                        <a class="avatarXSmall" href="/portal/intranet/profile/{{comment.createdBy}}">
-                            <img src="{{comment.posterAvatar}}" alt="">
+                        <a class="avatarXSmall" href="/portal/intranet/profile/{{comment.author}}">
+                            <img src="{{comment.posterAvatar}}" alt="{{comment.author}}">
                         </a>
                     </div>
                     <div class="commentRight">
