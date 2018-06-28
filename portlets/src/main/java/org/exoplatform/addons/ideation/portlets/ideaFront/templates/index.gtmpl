@@ -14,15 +14,16 @@
             <h3>Top Rated Ideas</h3>
             <div class="divline"></div>
             <div class="blocktxt">
-                <ul ng-repeat="fav in ideas | orderBy:'-(fav.result)'" class="cats">
+                <ul ng-repeat="fav in ideas | orderBy:'fav.result' : reverse" class="cats">
                     <li><a class="avatarXSmall" href="/portal/intranet/profile/">
                         <img src="/eXoSkin/skin/images/system/UserAvtDefault.png" alt="">
                     </a>
-                        <a href="#">{{fav.title}}<ion-content>
+                        <a href="#">{{fav.title}}
+                            <ion-content>
                             <ion-list>
                                 <ion-item>
-      <span class="stars alignright" style="position:  relative; left: 18px; margin-top: 8%;">
-            <span ng-style="{ 'width': getStars(idea.result) }"></span></span>
+      <span class="stars alignright" style="position:  relative; left: 18px; margin-top: 4%;">
+            <span ng-style="{ 'width': getStars(fav.result) }"></span></span>
                                 </ion-item>
                             </ion-list>
                         </ion-content></a></li>

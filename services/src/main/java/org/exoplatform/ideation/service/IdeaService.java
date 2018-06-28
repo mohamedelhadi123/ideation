@@ -31,7 +31,6 @@ public interface IdeaService {
 
 
 
-    public IdeaEntity findIdeaById(Long IdeaId) ;
 
 
 

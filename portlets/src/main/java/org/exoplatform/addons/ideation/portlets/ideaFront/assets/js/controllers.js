@@ -44,7 +44,6 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
         }
 
 
-
         $scope.loadresults = function () {
             $http({
                 method: 'GET',
@@ -512,21 +511,24 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
         };
 
+
+
         $scope.loadIdea = function (idea) {
             var url = "";
             url=url+ "&idea="+idea.id;
             $http({
-                data : idea,
                 method: 'GET',
-                url: ideaFrontContainer.jzURL('IdeaFrontController.getIdeas')+url
+                url: ideaFrontContainer.jzURL('IdeaFrontController.getIdea')+url
             }).then(function successCallback(data) {
                 $scope.ideas = data.data;
-                console.log($scope.ideas);
+
             }, function errorCallback(data) {
 
             });
 
         };
+
+
 
 
 

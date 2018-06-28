@@ -58,17 +58,6 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
 
     }
 
-    public List<IdeaEntity> getIdea(long ideaId) throws PersistenceException {
-        try {
-            return getEntityManager().createNamedQuery("Idea.getIdea", IdeaEntity.class)
-                    .setParameter("ideaId", ideaId)
-                    .getResultList();
-        }  catch (Exception e) {
-            LOG.warn("Exception while attempting to get idea", e);
-            throw e;
-        }
-    }
-
     public List<IdeaEntity> getPublishedIdeas(IdeaEntity.Status PUBLISHED , IdeaEntity.Status DRAFTED , String createdBy) throws PersistenceException {
 
        return getEntityManager().createNamedQuery("Idea.getPublishedIdeas", IdeaEntity.class).setParameter("PUBLISHED",PUBLISHED)

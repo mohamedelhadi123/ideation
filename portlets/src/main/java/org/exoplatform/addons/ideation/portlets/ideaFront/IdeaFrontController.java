@@ -294,24 +294,23 @@ public class IdeaFrontController {
 
                      }
                  }
+                 List<RateDTO> ratin=rateService.count(idea.getId());
                  for (RateDTO rate: rates) {
                      if (rate.getAuthor().equals(currentUser) && rate.getIdeaId() == idea.getId()) {
                          idea.setRated(true);
                          idea.setRate(rate);
-                         break;
                      }
-                     if(rate.getIdeaId() == idea.getId()){
-                         long countRate = rateService.countRates(idea.getId());
-                         long rat = 0;
-                         List<RateDTO> ratin=rateService.count(idea.getId());
-                         for (RateDTO ratecount : ratin ) {
-                             rat+=ratecount.getRate();
-                             idea.setNumRate(rat);
-                             idea.setCountRate(countRate);
-                             float result = (float)rat/(float)countRate;
-                             idea.setResult(new DecimalFormat("##.##").format(result));
-                         }
+                     long countRate = rateService.countRates(idea.getId());
+                     long rat = 0;
+                     for (RateDTO ratecount : ratin ) {
+                         rat+=ratecount.getRate();
+                         idea.setNumRate(rat);
+                         idea.setCountRate(countRate);
+                         float result = (float)rat/(float)countRate;
+                         idea.setResult(new DecimalFormat("##.##").format(result));
                      }
+
+
                      }
                  rateService.count(idea.getId());
 
@@ -321,6 +320,100 @@ public class IdeaFrontController {
             return null;
         }
     }
+
+
+
+    @Ajax
+    @juzu.Resource
+    @MimeType.JSON
+    @Jackson
+    public IdeaDTO getIdea(@Jackson IdeaDTO obj) {
+        String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
+        List<FavoriteDTO> favs = favoriteService.getFavorites(currentUser);
+        List<RateDTO> rates = rateService.getRates();
+        long ideaId = obj.getId();
+        List<LikeDTO> likes = likeService.getLikes();
+        List<CommentDTO> comments = commentService.getCommentsByIdeaId();
+        try {
+            IdeaDTO idea =ideaService.getIdea(ideaId);
+
+                idea.setRated(false);
+                idea.setFav(false);
+                idea.setLike(false);
+                for (FavoriteDTO fav: favs){
+                    if (fav.getAuthor().equals(currentUser)&& fav.getIdeaId()==idea.getId()){
+                        idea.setFav(true);
+                        long countfav = favoriteService.count(idea.getId());
+                        idea.setNumfav(countfav);
+                        break;
+                    }
+                    if(fav.getIdeaId()==idea.getId()){
+                        long count = favoriteService.count(idea.getId());
+                        idea.setNumfav(count);
+
+                    }
+                }
+                for (LikeDTO like: likes){
+                    if (like.getAuthor().equals(currentUser)&& like.getIdeaId()==idea.getId()){
+                        idea.setLike(true);
+                        long count = likeService.count(idea.getId());
+                        idea.setNumlike(count);
+                        break;
+                    }
+                    if(like.getIdeaId()==idea.getId()){
+                        long count = likeService.count(idea.getId());
+                        idea.setNumlike(count);
+
+                    }
+                }
+
+                for (CommentDTO comment: comments){
+                    Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, comment.getAuthor(), false).getProfile();
+                    if (comment.getAuthor().equals(currentUser)&& comment.getIdeaId()==idea.getId()){
+                        idea.setCommentText(comment.getCommentText());
+                        long countcomment = commentService.countcomment(idea.getId());
+                        idea.setNumcomments(countcomment);
+                        if(profile.getAvatarUrl()!=null){
+                            idea.setPosterAvatar(profile.getAvatarUrl());
+                        }else{
+                            idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
+                        }
+                        break;
+                    }
+                    if(comment.getIdeaId()==idea.getId()){
+                        long countcomment = commentService.countcomment(idea.getId());
+                        idea.setNumcomments(countcomment);
+
+                    }
+                }
+                for (RateDTO rate: rates) {
+                    if (rate.getAuthor().equals(currentUser) && rate.getIdeaId() == idea.getId()) {
+                        idea.setRated(true);
+                        idea.setRate(rate);
+                        break;
+                    }
+                        long countRate = rateService.countRates(idea.getId());
+                        long rat = 0;
+                        List<RateDTO> ratin=rateService.count(idea.getId());
+                        for (RateDTO ratecount : ratin ) {
+                            rat+=ratecount.getRate();
+                            idea.setNumRate(rat);
+                            idea.setCountRate(countRate);
+                            float result = (float)rat/(float)countRate;
+                            idea.setResult(new DecimalFormat("##.##").format(result));
+                        }
+
+                }
+                rateService.count(idea.getId());
+
+
+            return idea;
+        } catch (Throwable e) {
+            return null;
+        }
+    }
+
+
 
     @Ajax
     @juzu.Resource
@@ -404,24 +497,23 @@ public class IdeaFrontController {
 
                     }
                 }
+                List<RateDTO> ratin=rateService.count(idea.getId());
                 for (RateDTO rate: rates) {
                     if (rate.getAuthor().equals(currentUser) && rate.getIdeaId() == idea.getId()) {
                         idea.setRated(true);
                         idea.setRate(rate);
-                        break;
                     }
-                    if(rate.getIdeaId() == idea.getId()){
-                        long countRate = rateService.countRates(idea.getId());
-                        long rat = 0;
-                        List<RateDTO> ratin=rateService.count(idea.getId());
-                        for (RateDTO ratecount : ratin ) {
-                            rat+=ratecount.getRate();
-                            idea.setNumRate(rat);
-                            idea.setCountRate(countRate);
-                            float result = (float)rat/(float)countRate;
-                            idea.setResult(new DecimalFormat("##.##").format(result));
-                        }
+                    long countRate = rateService.countRates(idea.getId());
+                    long rat = 0;
+                    for (RateDTO ratecount : ratin ) {
+                        rat+=ratecount.getRate();
+                        idea.setNumRate(rat);
+                        idea.setCountRate(countRate);
+                        float result = (float)rat/(float)countRate;
+                        idea.setResult(new DecimalFormat("##.##").format(result));
                     }
+
+
                 }
                 rateService.count(idea.getId());
 
@@ -499,26 +591,26 @@ public class IdeaFrontController {
 
                     }
                 }
+                List<RateDTO> ratin=rateService.count(idea.getId());
                 for (RateDTO rate: rates) {
                     if (rate.getAuthor().equals(currentUser) && rate.getIdeaId() == idea.getId()) {
                         idea.setRated(true);
                         idea.setRate(rate);
-                        break;
                     }
-                    if(rate.getIdeaId() == idea.getId()){
-                        long countRate = rateService.countRates(idea.getId());
-                        long rat = 0;
-                        List<RateDTO> ratin=rateService.count(idea.getId());
-                        for (RateDTO ratecount : ratin ) {
-                            rat+=ratecount.getRate();
-                            idea.setNumRate(rat);
-                            idea.setCountRate(countRate);
-                            float result = (float)rat/(float)countRate;
-                            idea.setResult(new DecimalFormat("##.##").format(result));
-                        }
+                    long countRate = rateService.countRates(idea.getId());
+                    long rat = 0;
+                    for (RateDTO ratecount : ratin ) {
+                        rat+=ratecount.getRate();
+                        idea.setNumRate(rat);
+                        idea.setCountRate(countRate);
+                        float result = (float)rat/(float)countRate;
+                        idea.setResult(new DecimalFormat("##.##").format(result));
                     }
+
+
                 }
                 rateService.count(idea.getId());
+
 
             }
             return ideas;

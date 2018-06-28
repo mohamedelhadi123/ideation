@@ -102,9 +102,9 @@ public class IdeaServiceImpl implements IdeaService {
 
 
     public IdeaDTO getIdea(long ideaId){
-       List<IdeaEntity> entities =  ideaDao.getIdea(ideaId);
-        if (entities.size()!=0){
-            return convert(entities.get(0));
+       IdeaEntity entities =  ideaDao.findIdeaById(ideaId);
+        if (entities !=null){
+            return convert(entities);
         }
         return null;
     }
@@ -133,10 +133,6 @@ public class IdeaServiceImpl implements IdeaService {
 
 
 
-    public IdeaEntity findIdeaById(Long IdeaId) {
-
-        return ideaDao.findIdeaById(IdeaId);
-    }
 
 
     private IdeaEntity convert(IdeaDTO dto) {
