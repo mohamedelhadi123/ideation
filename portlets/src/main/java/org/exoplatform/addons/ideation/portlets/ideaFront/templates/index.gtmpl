@@ -10,7 +10,8 @@
                 </div>
             <b><a style="left: 8px; position:  relative; top: 26px; " class="button create-idea">Create Idea</a></b>
                   #{include path=create_idea.gtmpl /}
- <div class="pull-right sidebarblock" style="position:  relative; top: 80px; right: 8px;" >
+      <!-- Top Rated Ideas -->            
+ <div class="pull-right uiBox OfficeRightTDContainer TDContainer" style="position:  relative; top: 80px; right: 8px;" >
             <h3>Top Rated Ideas</h3>
             <div class="divline"></div>
             <div class="blocktxt">
@@ -22,7 +23,7 @@
                             <ion-content>
                             <ion-list>
                                 <ion-item>
-      <span class="stars alignright" style="position:  relative; left: 18px; margin-top: 4%;">
+      <span class="stars alignright" style="position: relative; left: 18px; margin-top: 4%;">
             <span ng-style="{ 'width': getStars(fav.result) }"></span></span>
                                 </ion-item>
                             </ion-list>
@@ -32,20 +33,21 @@
  </div>
         <div ng-init="total = 0"></div>
 
-        <div ng-repeat="idea in ideas">
+        <div ng-repeat="idea in ideas" class="uiSocApplication uiUserActivityStreamPortlet uiUserActivityDetail">
             <div class="container-fluid">
-<div class="container">
+<div class="">
 <div class="row">
 <div class="col-lg-4 col-sm-offset-1 col-md-8">
 <!-- POST -->
-<div class="post" style="margin-top: 55px; margin-left: 23px; margin-bottom: -12px;">
+<div class="post" style="margin-top: 39px;  margin-bottom: -12px;">
     <div class="wrap-ut pull-left">
         <div class="userinfo pull-left">
             <div class="avatar">
                 <img src="/eXoSkin/skin/images/system/UserAvtDefault.png" alt="">
             </div>
+            
             <b>
-            <p style="position: relative; left: 20px;">{{idea.createdBy}}</p>
+            <p  class="ownerName">{{idea.createdBy}}</p>
             </b>
         </div>
         <div class="posttext pull-left">
@@ -54,7 +56,7 @@
             </div>
         <div class="clearfix"></div>
     </div>
-    <a ng-if="idea.createdBy == '${currentUser}'" class="actionIcon" title="" style="position: relative; left: 88px;" data-ng-click="deleteIdea(idea)">
+    <a ng-if="idea.createdBy == '${currentUser}'" class="actionIcon" title="" style="position: relative; left: 85px; top: 10px;" data-ng-click="deleteIdea(idea)">
         <i class="uiIconDeleteUser uiIconLightGray"> </i>
     </a>
     <div></div>
@@ -87,7 +89,7 @@
     <ion-content>
         <ion-list>
             <ion-item>
-      <span class="stars alignright" style="position:  relative; right: 6px; margin-top: 35%;">
+      <span class="stars alignright" style="position:  relative; right: 6px; ">
             <span ng-style="{ 'width': getStars(idea.result) }"></span>
 
       </span>
@@ -96,28 +98,27 @@
     </ion-content>
 
 
-    <div class="clearfix"></div>
     <div class="postinfobot">
         <div class="time pull-right"><i class="uiIconClock  uiIconLightGray"></i>{{idea.createdTime | date:'dd-MM-yyyy HH:mm'}}</div>
-
-        <a title="" href="" data-ng-click="saveLike(idea)" class="actionIcon likeblock pull-left">
+        <div class="time pull-left">
+            <a class=" next " style="position: relative; float:left; padding: 0px 10px;" type="submit" data-ng-click="saveFavorite(idea)">
+                    <span ng-if="idea.fav == false" class="uiIconStar"></span>
+        
+                    <span ng-if="idea.fav == true"  class="uiIconColorStarYellow"></span>
+        
+            </a>
+        <a title="" href="" data-ng-click="saveLike(idea)" class="actionIcon likeblock pull-left" style="float:left;">
             <span href="#"  ng-if="idea.like == false" class="uiIconThumbUp down"> <i ng-if="idea.numlike > 0"> ({{idea.numlike}}) </i> </span>
 
             <span href="#" ng-if="idea.like == true"  class="uiIconThumbUp uiIconBlue "><i ng-if="idea.numlike > 0"> ({{idea.numlike}}) </i></span>
         </a>
-        <a data-ng-click="comment(idea)" style="right: 80px; position:  relative;">
+        <a data-ng-click="comment(idea)" style="float:left; position:  relative; padding: 0px 10px;">
             <i class="uiIconComment uiIconLightGray"> ({{idea.numcomments}})</i>
         </a>
-        <a class=" next " style="position: relative;right: 242px;" type="submit" data-ng-click="saveFavorite(idea)">
-            <span ng-if="idea.fav == false" class="uiIconStar"></span>
-
-            <span ng-if="idea.fav == true"  class="uiIconColorStarYellow"></span>
-
-        </a>
-
+       
         <a ng-if="idea.createdBy == '${currentUser}'" rel="tooltip" href="#edit-container_{{idea.id}}"  class="new-idea actionIcon" data-original-title="Edit" style="
 position:  relative;
-right: 87px;
+float:left;
 ">
             <i  class="uiIconEdit uiIconLightGray" data-ng-click="Edit(idea)"></i>
         </a>
@@ -161,21 +162,22 @@ right: 87px;
                 </div>
 
         </div>
-        </div>
+        </div></div>
         <div id="new-comment-container_{{idea.id}}" style="display: none;">
             <div class= "commentRight">
                 <div class="commentInputBox ">
                     <div id="comtext_{{idea.id}}"  >
-                        <textarea style="width : 70%;"  id="newcomment_{{idea.id}}" title="Add your comment..." name="comment_{{idea.id}}"  ng-model="idea.commentText"></textarea>
+                        <textarea style="width : 81%"  id="newcomment_{{idea.id}}" title="Add your comment..." name="comment_{{idea.id}}"  ng-model="idea.commentText"></textarea>
+                    </div>
+                    <div style="position:relative; left: -12px; top: -61px;">
+                            <button  type="button" class="btn btn-xs pull-right btn-primary"
+                                     data-ng-click="saveComment(idea)">Comment
+                            </button>
                     </div>
                 </div>
             </div>
             <div class="clearfix">
-                <div style="position:relative; top: -50px; left: -94px;">
-                    <button  type="button" class="btn btn-xs pull-right btn-primary"
-                             data-ng-click="saveComment(idea)">Comment
-                    </button>
-                </div>
+                
                 <div class="commentList">
 
                 <div ng-repeat="comment in comments"  class="commentItem" id="commentList_{{idea.id}}">
