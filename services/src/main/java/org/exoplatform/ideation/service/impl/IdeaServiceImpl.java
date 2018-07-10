@@ -101,11 +101,13 @@ public class IdeaServiceImpl implements IdeaService {
     }
 
 
-    public IdeaDTO getIdea(long ideaId){
+    public IdeaDTO getIdea(){
+        IdeaDTO ideaDTO = new IdeaDTO();
+        long ideaId = ideaDTO.getId();
        IdeaEntity entities =  ideaDao.findIdeaById(ideaId);
-        if (entities !=null){
+       if (entities !=null){
             return convert(entities);
-        }
+       }
         return null;
     }
 

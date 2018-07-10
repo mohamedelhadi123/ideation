@@ -9,16 +9,16 @@
         @Binding(value = ListenerService.class),
 })
 @Scripts({
+        @Script(id = "angularjs", value = "js/lib/angular.min.js"),
         @Script(id = "jQueryUI", value = "js/lib/jquery-ui.js"),
     // AngularJS is still global, should be AMDified
-    @Script(id = "angularjs", value = "js/lib/angular.min.js"),
         @Script(id = "ngSanitize", value = "js/lib/angular-sanitize.js", depends = "angularjs"),
     // services and controllers js are AMD modules, required by controllers.js
-    @Script(id = "ideaFront", value = "js/idea-front.js", depends = { "controllers" ,"jQueryUI" }),
         @Script(id = "ng-file-upload", value = "js/lib/ng-file-upload.js", depends = "angularjs"),
         @Script(id = "ng-file-upload-shim", value = "js/lib/ng-file-upload-shim.js", depends = "angularjs"),
         @Script(id = "fileSaver", value = "js/lib/FileSaver.js", depends = {"angularjs"}),
-        @Script(id = "controllers", value = "js/controllers.js", depends = "angularjs")
+        @Script(id = "controllers", value = "js/controllers.js", depends = "angularjs"),
+        @Script(id = "ideaFront", value = "js/idea-front.js", depends = { "controllers" ,"jQueryUI" })
 
 })
 

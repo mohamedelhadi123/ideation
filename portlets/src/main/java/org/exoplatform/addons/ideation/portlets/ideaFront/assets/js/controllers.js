@@ -340,6 +340,23 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
         };
 
+
+        $('#recherche').autocomplete({
+            source : function(){
+                $.ajax({
+                    url : ideaFrontContainer.jzURL('IdeaFrontController.getIdeas'),
+                    data : {
+                        name_startsWith : $('#recherche').val()
+                    },
+
+                    success : function(data){
+                        $scope.loadIdeas(idea);
+
+                    }
+                });
+            }
+        });
+
         $scope.saveDraft = function(idea) {
             $scope.newIdea.status = "DRAFTED" ;
             document.getElementById("txtTitle").value = "";

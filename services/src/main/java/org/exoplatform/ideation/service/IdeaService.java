@@ -15,14 +15,14 @@ public interface IdeaService {
     public long getMaxId() ;
 
 
-        public List<IdeaDTO> getUserIdeas(String PUBLISHED);
+    public List<IdeaDTO> getUserIdeas(String PUBLISHED);
 
     public List<IdeaDTO> getAllIdeas();
     public Set<String> getCoworker(long ideaId);
 
     public IdeaEntity updateIdea (IdeaEntity ideaEntity);
 
-    public IdeaDTO getIdea(long ideaId);
+    public IdeaDTO getIdea();
     public IdeaDTO save(IdeaDTO entity, boolean newIde);
 
     public void delete(IdeaDTO entity);

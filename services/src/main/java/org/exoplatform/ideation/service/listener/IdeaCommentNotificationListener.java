@@ -28,7 +28,7 @@ public class IdeaCommentNotificationListener extends Listener<Set<String>,IdeaDT
 
 
         Set<String> receivers = new HashSet<String>();
-        IdeaDTO vr = CommonsUtils.getService(IdeaService.class).getIdea(comment.getIdeaId());
+        IdeaDTO vr = CommonsUtils.getService(IdeaService.class).getIdea();
 
         receivers.add(vr.getCreatedBy());
 

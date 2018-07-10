@@ -23,7 +23,7 @@ import java.util.Set;
         public void onEvent(Event event) throws Exception {
             RateDTO rate=(RateDTO)event.getData();
             Set<String> receivers = new HashSet<String>();
-            IdeaDTO vr = CommonsUtils.getService(IdeaService.class).getIdea(rate.getIdeaId());
+            IdeaDTO vr = CommonsUtils.getService(IdeaService.class).getIdea();
             receivers.add(vr.getCreatedBy());
             NotificationContext ctx = NotificationContextImpl.cloneInstance().append(IdeaRatedPlugin.RATE, rate).append(IdeaRatedPlugin.RECEIVERS, receivers).append(IdeaRatedPlugin.IDEA, vr);
             ctx.getNotificationExecutor().with(ctx.makeCommand(PluginKey.key(IdeaRatedPlugin.ID))).execute(ctx);

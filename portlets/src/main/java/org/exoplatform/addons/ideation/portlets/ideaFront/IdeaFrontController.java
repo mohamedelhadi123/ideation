@@ -128,7 +128,9 @@ public class IdeaFrontController {
         likeService.save(obj,currentUser,id);
         if (obj.isLike()) {
             try {
-                listenerService.broadcast("exo.ideation.ideaLike", "", obj);
+                if(!obj.getAuthor().equals(currentUser)) {
+                    listenerService.broadcast("exo.ideation.ideaLike", "", obj);
+                }
             } catch (Exception e) {
                 log.error("Cannot broadcast like event");
             }
@@ -329,99 +331,6 @@ public class IdeaFrontController {
     @juzu.Resource
     @MimeType.JSON
     @Jackson
-    public IdeaDTO getIdea(@Jackson IdeaDTO obj) {
-        String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
-        List<FavoriteDTO> favs = favoriteService.getFavorites(currentUser);
-        List<RateDTO> rates = rateService.getRates();
-        long ideaId = obj.getId();
-        List<LikeDTO> likes = likeService.getLikes();
-        List<CommentDTO> comments = commentService.getCommentsByIdeaId();
-        try {
-            IdeaDTO idea =ideaService.getIdea(ideaId);
-
-                idea.setRated(false);
-                idea.setFav(false);
-                idea.setLike(false);
-            Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, idea.getCreatedBy(), false).getProfile();
-            if(profile.getAvatarUrl()!=null){
-                idea.setPosterAvatar(profile.getAvatarUrl());
-            }else{
-                idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
-            }
-                for (FavoriteDTO fav: favs){
-                    if (fav.getAuthor().equals(currentUser)&& fav.getIdeaId()==idea.getId()){
-                        idea.setFav(true);
-                        long countfav = favoriteService.count(idea.getId());
-                        idea.setNumfav(countfav);
-                        break;
-                    }
-                    if(fav.getIdeaId()==idea.getId()){
-                        long count = favoriteService.count(idea.getId());
-                        idea.setNumfav(count);
-
-                    }
-                }
-                for (LikeDTO like: likes){
-                    if (like.getAuthor().equals(currentUser)&& like.getIdeaId()==idea.getId()){
-                        idea.setLike(true);
-                        long count = likeService.count(idea.getId());
-                        idea.setNumlike(count);
-                        break;
-                    }
-                    if(like.getIdeaId()==idea.getId()){
-                        long count = likeService.count(idea.getId());
-                        idea.setNumlike(count);
-
-                    }
-                }
-
-                for (CommentDTO comment: comments){
-                    if (comment.getAuthor().equals(currentUser)&& comment.getIdeaId()==idea.getId()){
-                        idea.setCommentText(comment.getCommentText());
-                        long countcomment = commentService.countcomment(idea.getId());
-                        idea.setNumcomments(countcomment);
-
-                        break;
-                    }
-                    if(comment.getIdeaId()==idea.getId()){
-                        long countcomment = commentService.countcomment(idea.getId());
-                        idea.setNumcomments(countcomment);
-
-                    }
-                }
-                for (RateDTO rate: rates) {
-                    if (rate.getAuthor().equals(currentUser) && rate.getIdeaId() == idea.getId()) {
-                        idea.setRated(true);
-                        idea.setRate(rate);
-                        break;
-                    }
-                        long countRate = rateService.countRates(idea.getId());
-                        long rat = 0;
-                        List<RateDTO> ratin=rateService.count(idea.getId());
-                        for (RateDTO ratecount : ratin ) {
-                            rat+=ratecount.getRate();
-                            idea.setNumRate(rat);
-                            idea.setCountRate(countRate);
-                            float result = (float)rat/(float)countRate;
-                            idea.setResult(new DecimalFormat("##.##").format(result));
-                        }
-
-                }
-                rateService.count(idea.getId());
-
-
-            return idea;
-        } catch (Throwable e) {
-            return null;
-        }
-    }
-
-
-
-    @Ajax
-    @juzu.Resource
-    @MimeType.JSON
-    @Jackson
     public List<CommentDTO> getComments(@Jackson CommentDTO obj) {
         try {
             List<CommentDTO> comments= commentService.getCommentsByIdeaId();
@@ -447,6 +356,15 @@ public class IdeaFrontController {
     public List<FavoriteDTO> getFavorite(@Jackson FavoriteDTO obj) {
         return favoriteService.getFavorites(currentUser);
     }
+
+    @Ajax
+    @juzu.Resource
+    @MimeType.JSON
+    @Jackson
+    public IdeaDTO getIdea(@Jackson IdeaDTO obj) {
+        return ideaService.getIdea();
+    }
+
 
     @Ajax
     @juzu.Resource
@@ -751,7 +669,9 @@ public class IdeaFrontController {
         }
         commentService.save(obj);
         try {
-            listenerService.broadcast("exo.ideation.ideaComment",currentUser, obj);
+            if(!obj.getAuthor().equals(currentUser)) {
+                listenerService.broadcast("exo.ideation.ideaComment", currentUser, obj);
+            }
         } catch (Exception e) {
             log.error("Cannot broadcast comment event");
         }
@@ -772,7 +692,9 @@ public class IdeaFrontController {
         long id = obj.getIdeaId();
         rateService.save(obj,true,currentUser,id);
             try {
+                if(!obj.getAuthor().equals(currentUser)){
                 listenerService.broadcast("exo.ideation.ideaRate", "", obj);
+                }
             } catch (Exception e) {
                 log.error("Cannot broadcast like event");
 
