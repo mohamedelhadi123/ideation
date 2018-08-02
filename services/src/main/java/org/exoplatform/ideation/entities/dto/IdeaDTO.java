@@ -9,13 +9,14 @@ import java.util.Date;
 
 
 public class IdeaDTO implements Serializable {
-    protected long id;
+    private long id;
     private boolean like;
     private boolean fav;
 
+    private FavoriteDTO favoriteDTO;
+
 
     @NotBlank
-
     @Size(min = 1, max = 50)
     protected String title;
     protected Date createdTime;
@@ -29,6 +30,7 @@ public class IdeaDTO implements Serializable {
     private long numfav;
     private long numlike;
     private RateDTO rate;
+    private FavoriteDTO favorite;
 
     @Size(min = 1, max = 256)
     protected String createdBy;
@@ -203,5 +205,23 @@ public class IdeaDTO implements Serializable {
         this.result = result;
     }
 
+    public FavoriteDTO getFavorite() {
+        return favorite;
+    }
 
+    public void setFavorite(FavoriteDTO favorite) {
+        this.favorite = favorite;
+    }
+
+    public boolean isFav() {
+        return fav;
+    }
+
+    public FavoriteDTO getFavoriteDTO() {
+        return favoriteDTO;
+    }
+
+    public void setFavoriteDTO(FavoriteDTO favoriteDTO) {
+        this.favoriteDTO = favoriteDTO;
+    }
 }

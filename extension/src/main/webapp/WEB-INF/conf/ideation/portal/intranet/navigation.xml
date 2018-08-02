@@ -6,9 +6,9 @@
   <page-nodes>
     <node>
       <uri>ideation</uri>
-      <name>ideation</name>
-      <label xml:lang="en">ideation</label>
-      <label xml:lang="fr">ideation</label>
+      <name>Ideation</name>
+      <label xml:lang="en">Ideation</label>
+      <label xml:lang="fr">Ideation</label>
       <page-reference>portal::intranet::ideation</page-reference>
     </node>
   </page-nodes>

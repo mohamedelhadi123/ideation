@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.*;
 
+import org.exoplatform.social.core.identity.model.Identity;
 
 public class IdeaFrontController {
     private static Log log = ExoLogger.getLogger(IdeaFrontController.class);
@@ -120,19 +121,18 @@ public class IdeaFrontController {
     @Jackson
     public void saveLIke(@Jackson LikeDTO obj) {
         ConversationState conversationState = ConversationState.getCurrent();
-        if (currentUser != null) {
-            obj.setAuthor(currentUser);
-        }
 
+        if (conversationState != null) {
+            obj.setAuthor(conversationState.getIdentity().getUserId());
+        }
         long id = obj.getIdeaId();
         likeService.save(obj,currentUser,id);
         if (obj.isLike()) {
             try {
-                if(!obj.getAuthor().equals(currentUser)) {
-                    listenerService.broadcast("exo.ideation.ideaLike", "", obj);
-                }
+                listenerService.broadcast("exo.ideation.ideaLike", "", obj);
             } catch (Exception e) {
                 log.error("Cannot broadcast like event");
+
             }
         }
     }
@@ -220,7 +220,7 @@ public class IdeaFrontController {
                 }
             }
         }
-            return obj.getResult();
+        return obj.getResult();
     }
 
     @Ajax
@@ -246,83 +246,178 @@ public class IdeaFrontController {
         LikeDTO likeDTO = new LikeDTO();
         List<LikeDTO> likes = likeService.getLikes();
         List<CommentDTO> comments = commentService.getCommentsByIdeaId();
+            try {
+                List<IdeaDTO> ideas = ideaService.getUserIdeas(currentUser);
+                for (IdeaDTO idea : ideas) {
+                    idea.setRated(false);
+                    idea.setFav(false);
+                    idea.setLike(false);
+                    Profile profile = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, idea.getCreatedBy(), false).getProfile();
+                    if (profile.getAvatarUrl() != null) {
+                        idea.setPosterAvatar(profile.getAvatarUrl());
+                    } else {
+                        idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
+                    }
+                    for (FavoriteDTO fav : favs) {
+                        if (fav.getAuthor().equals(currentUser) && fav.getIdeaId() == idea.getId()) {
+                            idea.setFav(true);
+                            long countfav = favoriteService.count(idea.getId());
+                            idea.setNumfav(countfav);
+                            break;
+                        }
+                        if (fav.getIdeaId() == idea.getId()) {
+                            long count = favoriteService.count(idea.getId());
+                            idea.setNumfav(count);
+
+                        }
+
+                    }
+                    for (LikeDTO like : likes) {
+                        if (like.getAuthor().equals(currentUser) && like.getIdeaId() == idea.getId()) {
+                            idea.setLike(true);
+                            long count = likeService.count(idea.getId());
+                            idea.setNumlike(count);
+                            break;
+                        }
+                        if (like.getIdeaId() == idea.getId()) {
+                            long count = likeService.count(idea.getId());
+                            idea.setNumlike(count);
+
+                        }
+                    }
+
+                    for (CommentDTO comment : comments) {
+                        if (comment.getAuthor().equals(currentUser) && comment.getIdeaId() == idea.getId()) {
+                            idea.setCommentText(comment.getCommentText());
+                            long countcomment = commentService.countcomment(idea.getId());
+                            idea.setNumcomments(countcomment);
+                            break;
+                        }
+                        if (comment.getIdeaId() == idea.getId()) {
+                            long countcomment = commentService.countcomment(idea.getId());
+                            idea.setNumcomments(countcomment);
+
+                        }
+                    }
+                    List<RateDTO> ratin = rateService.count(idea.getId());
+                    for (RateDTO rate : rates) {
+                        if (rate.getAuthor().equals(currentUser) && rate.getIdeaId() == idea.getId()) {
+                            idea.setRated(true);
+                            idea.setRate(rate);
+                        }
+                        long countRate = rateService.countRates(idea.getId());
+                        long rat = 0;
+                        for (RateDTO ratecount : ratin) {
+                            rat += ratecount.getRate();
+                            idea.setNumRate(rat);
+                            idea.setCountRate(countRate);
+                            float result = (float) rat / (float) countRate;
+                            idea.setResult(new DecimalFormat("##.##").format(result));
+                        }
+
+
+                    }
+                    rateService.count(idea.getId());
+
+                }
+                return ideas;
+
+            } catch (Throwable e) {
+                return null;
+            }
+
+    }
+
+
+    @Ajax
+    @juzu.Resource
+    @MimeType.JSON
+    @Jackson
+    public IdeaDTO getIdea(Long id) {
+       String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
+        List<FavoriteDTO> favs = favoriteService.getFavorites(currentUser);
+        List<RateDTO> rates = rateService.getRates();
+        List<LikeDTO> likes = likeService.getLikes();
+        List<CommentDTO> comments = commentService.getCommentsByIdeaId();
+
         try {
-             List<IdeaDTO> ideas =ideaService.getUserIdeas(currentUser);
-             for(IdeaDTO idea : ideas){
-                 idea.setRated(false);
-                 idea.setFav(false);
-                 idea.setLike(false);
-                 Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, idea.getCreatedBy(), false).getProfile();
-                 if(profile.getAvatarUrl()!=null){
-                     idea.setPosterAvatar(profile.getAvatarUrl());
-                 }else{
-                     idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
-                 }
-                 for (FavoriteDTO fav: favs){
-                     if (fav.getAuthor().equals(currentUser)&& fav.getIdeaId()==idea.getId()){
-                         idea.setFav(true);
-                         long countfav = favoriteService.count(idea.getId());
-                         idea.setNumfav(countfav);
-                         break;
-                     }
-                     if(fav.getIdeaId()==idea.getId()){
-                         long count = favoriteService.count(idea.getId());
-                         idea.setNumfav(count);
+            IdeaDTO idea =ideaService.getIdea(id);
+            idea.setRated(false);
+            idea.setFav(false);
+            idea.setLike(false);
+            Profile profile=identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, idea.getCreatedBy(), false).getProfile();
+            if(profile.getAvatarUrl()!=null){
+                idea.setPosterAvatar(profile.getAvatarUrl());
+            }else{
+                idea.setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
+            }
+            for (FavoriteDTO fav: favs){
+                if (fav.getAuthor().equals(currentUser) && fav.getIdeaId()==idea.getId()){
+                    idea.setFav(true);
+                    long countfav = favoriteService.count(idea.getId());
+                    idea.setNumfav(countfav);
+                    break;
+                }
+                if(fav.getIdeaId()==idea.getId()){
+                    long count = favoriteService.count(idea.getId());
+                    idea.setNumfav(count);
 
-                     }
-                 }
-                 for (LikeDTO like: likes){
-                     if (like.getAuthor().equals(currentUser)&& like.getIdeaId()==idea.getId()){
-                         idea.setLike(true);
-                         long count = likeService.count(idea.getId());
-                         idea.setNumlike(count);
-                         break;
-                     }
-                     if(like.getIdeaId()==idea.getId()){
-                         long count = likeService.count(idea.getId());
-                         idea.setNumlike(count);
+                }
+            }
+            for (LikeDTO like: likes){
+                if (like.getAuthor().equals(currentUser)&& like.getIdeaId()==idea.getId()){
+                    idea.setLike(true);
+                    long count = likeService.count(idea.getId());
+                    idea.setNumlike(count);
+                    break;
+                }
+                if(like.getIdeaId()==idea.getId()){
+                    long count = likeService.count(idea.getId());
+                    idea.setNumlike(count);
 
-                     }
-                 }
+                }
+            }
 
-                 for (CommentDTO comment: comments){
-                     if (comment.getAuthor().equals(currentUser)&& comment.getIdeaId()==idea.getId()){
-                         idea.setCommentText(comment.getCommentText());
-                         long countcomment = commentService.countcomment(idea.getId());
-                         idea.setNumcomments(countcomment);
-                         break;
-                     }
-                     if(comment.getIdeaId()==idea.getId()){
-                         long countcomment = commentService.countcomment(idea.getId());
-                         idea.setNumcomments(countcomment);
+            for (CommentDTO comment: comments){
+                if (comment.getAuthor().equals(currentUser)&& comment.getIdeaId()==idea.getId()){
+                    idea.setCommentText(comment.getCommentText());
+                    long countcomment = commentService.countcomment(idea.getId());
+                    idea.setNumcomments(countcomment);
 
-                     }
-                 }
-                 List<RateDTO> ratin=rateService.count(idea.getId());
-                 for (RateDTO rate: rates) {
-                     if (rate.getAuthor().equals(currentUser) && rate.getIdeaId() == idea.getId()) {
-                         idea.setRated(true);
-                         idea.setRate(rate);
-                     }
-                     long countRate = rateService.countRates(idea.getId());
-                     long rat = 0;
-                     for (RateDTO ratecount : ratin ) {
-                         rat+=ratecount.getRate();
-                         idea.setNumRate(rat);
-                         idea.setCountRate(countRate);
-                         float result = (float)rat/(float)countRate;
-                         idea.setResult(new DecimalFormat("##.##").format(result));
-                     }
+                    break;
+                }
+                if(comment.getIdeaId()==idea.getId()){
+                    long countcomment = commentService.countcomment(idea.getId());
+                    idea.setNumcomments(countcomment);
+
+                }
+            }
+            for (RateDTO rate: rates) {
+                if (rate.getAuthor().equals(currentUser) && rate.getIdeaId() == idea.getId()) {
+                    idea.setRated(true);
+                    idea.setRate(rate);
+                    break;
+                }
+                long countRate = rateService.countRates(idea.getId());
+                long rat = 0;
+                List<RateDTO> ratin=rateService.count(idea.getId());
+                for (RateDTO ratecount : ratin ) {
+                    rat+=ratecount.getRate();
+                    idea.setNumRate(rat);
+                    idea.setCountRate(countRate);
+                    float result = (float)rat/(float)countRate;
+                    idea.setResult(new DecimalFormat("##.##").format(result));
+                }
+
+            }
+            rateService.count(idea.getId());
 
 
-                     }
-                 rateService.count(idea.getId());
-
-             }
-            return ideas;
+            return idea;
         } catch (Throwable e) {
             return null;
         }
+
     }
 
 
@@ -331,7 +426,7 @@ public class IdeaFrontController {
     @juzu.Resource
     @MimeType.JSON
     @Jackson
-    public List<CommentDTO> getComments(@Jackson CommentDTO obj) {
+    public List<CommentDTO> getComments() {
         try {
             List<CommentDTO> comments= commentService.getCommentsByIdeaId();
             for (CommentDTO comment : comments){
@@ -353,18 +448,82 @@ public class IdeaFrontController {
     @juzu.Resource
     @MimeType.JSON
     @Jackson
-    public List<FavoriteDTO> getFavorite(@Jackson FavoriteDTO obj) {
-        return favoriteService.getFavorites(currentUser);
-    }
+    public List<FavoriteDTO> getFavorite(@Jackson FavoriteDTO favoriteDTO) {
+        String currentUser = ConversationState.getCurrent().getIdentity().getUserId();
+        List<FavoriteDTO> favs = favoriteService.getFavorites(currentUser);
+        List<RateDTO> rates = rateService.getRates();
 
-    @Ajax
-    @juzu.Resource
-    @MimeType.JSON
-    @Jackson
-    public IdeaDTO getIdea(@Jackson IdeaDTO obj) {
-        return ideaService.getIdea();
-    }
+        LikeDTO likeDTO = new LikeDTO();
+        List<LikeDTO> likes = likeService.getLikes();
+        List<CommentDTO> comments = commentService.getCommentsByIdeaId();
+        try {
+            List<FavoriteDTO> ideas = favoriteService.getFavorites(currentUser);
+            for (FavoriteDTO idea : ideas) {
+                idea.getIdea().setRated(false);
+                idea.getIdea().setLike(false);
+                Profile profile = identityManager.getOrCreateIdentity(OrganizationIdentityProvider.NAME, idea.getIdea().getCreatedBy(), false).getProfile();
+                if (profile.getAvatarUrl() != null) {
+                    idea.getIdea().setPosterAvatar(profile.getAvatarUrl());
+                } else {
+                    idea.getIdea().setPosterAvatar("/eXoSkin/skin/images/system/UserAvtDefault.png");
+                }
 
+                for (LikeDTO like : likes) {
+                    if (like.getAuthor().equals(currentUser) && like.getIdeaId() == idea.getIdea().getId()) {
+                        idea.getIdea().setLike(true);
+                        long count = likeService.count(idea.getId());
+                        idea.getIdea().setNumlike(count);
+                        break;
+                    }
+                    if (like.getIdeaId() == idea.getIdea().getId()) {
+                        long count = likeService.count(idea.getIdea().getId());
+                        idea.getIdea().setNumlike(count);
+
+                    }
+                }
+
+                for (CommentDTO comment : comments) {
+                    if (comment.getAuthor().equals(currentUser) && comment.getIdeaId() == idea.getIdea().getId()) {
+                        idea.getIdea().setCommentText(comment.getCommentText());
+                        long countcomment = commentService.countcomment(idea.getIdea().getId());
+                        idea.getIdea().setNumcomments(countcomment);
+                        break;
+                    }
+                    if (comment.getIdeaId() == idea.getIdea().getId()) {
+                        long countcomment = commentService.countcomment(idea.getIdea().getId());
+                        idea.getIdea().setNumcomments(countcomment);
+
+                    }
+                }
+                List<RateDTO> ratin = rateService.count(idea.getIdea().getId());
+                for (RateDTO rate : rates) {
+                    if (rate.getAuthor().equals(currentUser) && rate.getIdeaId() == idea.getIdea().getId()) {
+                        idea.getIdea().setRated(true);
+                        idea.getIdea().setRate(rate);
+                    }
+                    long countRate = rateService.countRates(idea.getIdea().getId());
+                    long rat = 0;
+                    for (RateDTO ratecount : ratin) {
+                        rat += ratecount.getRate();
+                        idea.getIdea().setNumRate(rat);
+                        idea.getIdea().setCountRate(countRate);
+                        float result = (float) rat / (float) countRate;
+                        idea.getIdea().setResult(new DecimalFormat("##.##").format(result));
+                    }
+
+
+                }
+                rateService.count(idea.getIdea().getId());
+
+            }
+            return ideas;
+
+        } catch (Throwable e) {
+            return null;
+        }
+
+
+    }
 
     @Ajax
     @juzu.Resource
@@ -422,7 +581,6 @@ public class IdeaFrontController {
                         idea.setCommentText(comment.getCommentText());
                         long countcomment = commentService.countcomment(idea.getId());
                         idea.setNumcomments(countcomment);
-
                         break;
                     }
                     if(comment.getIdeaId()==idea.getId()){
@@ -446,19 +604,13 @@ public class IdeaFrontController {
                         float result = (float)rat/(float)countRate;
                         idea.setResult(new DecimalFormat("##.##").format(result));
                     }
-
-
                 }
                 rateService.count(idea.getId());
-
             }
             return ideas;
         } catch (Throwable e) {
             return null;
         }
-
-
-
     }
 
     @Ajax
@@ -508,7 +660,6 @@ public class IdeaFrontController {
                     if(like.getIdeaId()==idea.getId()){
                         long count = likeService.count(idea.getId());
                         idea.setNumlike(count);
-
                     }
                 }
 
@@ -517,7 +668,6 @@ public class IdeaFrontController {
                         idea.setCommentText(comment.getCommentText());
                         long countcomment = commentService.countcomment(idea.getId());
                         idea.setNumcomments(countcomment);
-
                         break;
                     }
                     if(comment.getIdeaId()==idea.getId()){
@@ -561,7 +711,7 @@ public class IdeaFrontController {
     @MimeType.JSON
     @Jackson
     public void updateIdea(@Jackson IdeaDTO obj) {
-    obj = ideaService.save(obj, false);
+        obj = ideaService.save(obj, false);
 
     }
 
@@ -619,6 +769,8 @@ public class IdeaFrontController {
 
 
 
+
+
     @Ajax
     @Resource(method = HttpMethod.POST)
     @MimeType.JSON
@@ -664,18 +816,17 @@ public class IdeaFrontController {
     public void saveComment(@Jackson CommentDTO obj) {
         ConversationState conversationState = ConversationState.getCurrent();
 
-        if (conversationState != null) {
+        if (currentUser != null) {
             obj.setAuthor(conversationState.getIdentity().getUserId());
         }
         commentService.save(obj);
-        try {
-            if(!obj.getAuthor().equals(currentUser)) {
+            try {
                 listenerService.broadcast("exo.ideation.ideaComment", currentUser, obj);
+            } catch (Exception e) {
+                log.error("Cannot broadcast comment event");
             }
-        } catch (Exception e) {
-            log.error("Cannot broadcast comment event");
         }
-    }
+
 
 
 
@@ -691,14 +842,14 @@ public class IdeaFrontController {
         }
         long id = obj.getIdeaId();
         rateService.save(obj,true,currentUser,id);
+
             try {
-                if(!obj.getAuthor().equals(currentUser)){
                 listenerService.broadcast("exo.ideation.ideaRate", "", obj);
-                }
             } catch (Exception e) {
                 log.error("Cannot broadcast like event");
 
-        }
+            }
+
     }
 
 

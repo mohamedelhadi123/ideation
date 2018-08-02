@@ -61,7 +61,6 @@ public class FavoriteService {
         List<FavoriteEntity> entities = favoriteDAO.getAllFavorites(author);
         List<FavoriteDTO> dtos = new ArrayList<FavoriteDTO>();
         for (FavoriteEntity entity : entities) {
-
             dtos.add(convert(entity));
         }
         return dtos;

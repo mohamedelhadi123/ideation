@@ -24,6 +24,10 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
                         query = "SELECT idea FROM Idea idea where idea.status = :PUBLISHED or (idea.status = :DRAFTED and idea.createdBy = :createdBy)"
                 ),
                 @NamedQuery(
+                        name = "Idea.getIdea",
+                        query = "SELECT idea FROM Idea idea WHERE idea.id = :ideaId"
+                ),
+                @NamedQuery(
                         name = "Idea.getDraftIdeas",
                         query = "SELECT idea FROM Idea idea where idea.status = :DRAFTED and idea.createdBy = :createdBy"
                 ),
@@ -34,11 +38,6 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
                         name = "Idea.findIdeaByTitle",
                         query = "SELECT idea FROM Idea idea where idea.title = :ideaTitle"
                 ),
-
-                @NamedQuery(
-                        name = "Idea.findIdeaById",
-                        query = "SELECT idea FROM Idea idea where idea.id = :ideaId"
-                ),
                 @NamedQuery(
                         name = "Idea.deleteIdeaByTitle",
                         query = "DELETE FROM Idea Idea WHERE Idea.title = :ideaTitle "
@@ -47,14 +46,14 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
                         name = "Idea.deleteIdeaById",
                         query = "DELETE FROM Idea idea WHERE idea.id = :ideaId "
                 ),
-                    @NamedQuery(
-                            name = "Idea.getIdea",
-                            query = "SELECT idea FROM Idea idea WHERE idea.id = :ideaId "
-                    ),
+
                 @NamedQuery(
                         name = "Idea.findMaxId",
                         query = "SELECT MAX(idea.id) FROM Idea idea "
                 ),
+
+
+
 
 
 

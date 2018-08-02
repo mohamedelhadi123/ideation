@@ -21,6 +21,8 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
         $scope.rates=[];
         $scope.newRate = {
         };
+        $scope.Fav =[];
+
         $scope.Favs =[];
         $scope.likes =[];
         $scope.newFav={
@@ -177,11 +179,11 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
             }).then(function successCallback(data) {
                 $('#edit-container'+ idea.id).hide();
                 $scope.loadIdeas();
-                 $scope.setResultMessage($scope.i18n.thanks, "success");
+                $scope.setResultMessage($scope.i18n.thanks, "success");
             }, function errorCallback(data) {
                 //  $scope.setResultMessage($scope.i18n.defaultError, "error");
             });
-            };
+        };
 
         $scope.updateRate = function(rate) {
             $http({
@@ -264,7 +266,6 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
             $scope.showAlert = false;
             document.getElementById("newcomment_"+ idea.id).value = "";
 
-            $('#new-comment-container_' + idea.id).slideToggle();
 
             $http({
                 data : $scope.newComment,
@@ -274,8 +275,8 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
                 },
                 url : ideaFrontContainer.jzURL('IdeaFrontController.saveComment')
             }).then(function successCallback(data) {
-                data.append();
                 $scope.loadComments();
+                $scope.showAlert = false;
             }, function errorCallback(data) {
                 $scope.setResultMessage($scope.i18n.defaultError, "error");
             });
@@ -340,23 +341,6 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
         };
 
-
-        $('#recherche').autocomplete({
-            source : function(){
-                $.ajax({
-                    url : ideaFrontContainer.jzURL('IdeaFrontController.getIdeas'),
-                    data : {
-                        name_startsWith : $('#recherche').val()
-                    },
-
-                    success : function(data){
-                        $scope.loadIdeas(idea);
-
-                    }
-                });
-            }
-        });
-
         $scope.saveDraft = function(idea) {
             $scope.newIdea.status = "DRAFTED" ;
             document.getElementById("txtTitle").value = "";
@@ -377,25 +361,23 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
         };
 
-       $scope.saveRate = function (idea) {
-           $scope.newRate.ideaId = idea.id;
-           $scope.newRate.numRate = idea.numRate;
+        $scope.saveRate = function (idea) {
+            $scope.newRate.ideaId = idea.id;
+            $scope.newRate.numRate = idea.numRate;
+            $http({
+                data : $scope.newRate,
+                method : 'POST',
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                url : ideaFrontContainer.jzURL('IdeaFrontController.saveRate')
+            }).then(function successCallback(data) {
+                $scope.loadRates();
+            }, function errorCallback(data) {
+                //  $scope.setResultMessage($scope.i18n.defaultError, "error");
+            });
 
-
-           $http({
-               data : $scope.newRate,
-               method : 'POST',
-               headers : {
-                   'Content-Type' : 'application/json'
-               },
-               url : ideaFrontContainer.jzURL('IdeaFrontController.saveRate')
-           }).then(function successCallback(data) {
-               $scope.loadRates();
-           }, function errorCallback(data) {
-               //  $scope.setResultMessage($scope.i18n.defaultError, "error");
-           });
-
-       };
+        };
 
 
 
@@ -496,10 +478,12 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
 
 
-        $scope.loadComments = function (idea) {
+        $scope.loadComments = function () {
             $http({
-                data:idea,
                 method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 url: ideaFrontContainer.jzURL('IdeaFrontController.getComments')
             }).then(function successCallback(data) {
                 $scope.comments = data.data;
@@ -529,11 +513,10 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
 
 
         $scope.loadIdea = function (idea) {
-            var url = "";
-            url=url+ "&idea="+idea.id;
+
             $http({
                 method: 'GET',
-                url: ideaFrontContainer.jzURL('IdeaFrontController.getIdea')+url
+                url: ideaFrontContainer.jzURL('IdeaFrontController.getIdea')
             }).then(function successCallback(data) {
                 $scope.ideas = data.data;
 
@@ -544,16 +527,28 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
         };
 
 
-
-
-
-
         $scope.LoadFavorite = function () {
+
             $http({
                 method: 'GET',
                 url: ideaFrontContainer.jzURL('IdeaFrontController.getFavorite')
             }).then(function successCallback(data) {
-                $scope.favs = data.data;
+                $scope.ideas = data.data;
+
+            }, function errorCallback(data) {
+
+            });
+
+        };
+
+
+        $scope.getfavIdea = function () {
+
+            $http({
+                method: 'GET',
+                url: ideaFrontContainer.jzURL('IdeaFrontController.getfavIdea')
+            }).then(function successCallback(data) {
+                $scope.ideas = data.data;
 
             }, function errorCallback(data) {
 
@@ -604,7 +599,7 @@ define("ideaFrontControllers", [ "SHARED/jquery", "SHARED/juzu-ajax"], function(
             });
         }
 
-        };
+    };
     return ideaFrontCtrl;
 
 

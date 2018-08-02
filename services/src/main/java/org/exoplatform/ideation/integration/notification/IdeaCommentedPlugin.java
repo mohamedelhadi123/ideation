@@ -34,6 +34,7 @@ public class IdeaCommentedPlugin extends BaseNotificationPlugin {
         this.identityManager = identityManager;
 
     }
+
     @Override
     public String getId() {
         return ID;
@@ -44,7 +45,6 @@ public class IdeaCommentedPlugin extends BaseNotificationPlugin {
     }
     @Override
     protected NotificationInfo makeNotification(NotificationContext ctx) {
-
         CommentDTO obj = ctx.value(COMMENT);
         Set<String> receivers = ctx.value(RECEIVERS);
         IdeaDTO idea  = ctx.value(IDEA);

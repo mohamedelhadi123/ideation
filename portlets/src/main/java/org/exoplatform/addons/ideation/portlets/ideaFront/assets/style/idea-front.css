@@ -24,6 +24,8 @@ span {
 }
 }
 
+
+
 input {
     display: block;
 
@@ -130,7 +132,7 @@ body{
 }
 
 .OfficeRightTDContainer h3{
-    text-align: center;
+text-align: center;
 }
 .post h2 {
     color: #578dc9;
@@ -1026,7 +1028,7 @@ td.chbox {
 .commentInputBox textarea{
     width: 97%;
     display: block;
-    margin: 0 10px;
+    margin: 0 10px; 
 }
 
 
@@ -1077,7 +1079,7 @@ ion-content{
     top:10%;
 }
 .postinfobot .likeblock {
-
+    
     position: relative;
     padding: 0px 10px;
 }
@@ -1106,7 +1108,7 @@ ion-content{
 }
 
 .postinfobot .next {
-
+    
     text-align: right;
 }
 
@@ -1126,7 +1128,7 @@ ion-content{
 
 .ownerName{
     position: relative;
-    left: 18px;
+   left: 18px;
     max-width: 50%;
     text-overflow: ellipsis;
     white-space: nowrap;

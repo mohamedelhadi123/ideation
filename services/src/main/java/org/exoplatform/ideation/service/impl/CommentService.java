@@ -1,14 +1,10 @@
 package org.exoplatform.ideation.service.impl;
 
 import java.lang.*;
-
-import org.apache.ecs.xhtml.comment;
 import org.exoplatform.ideation.entities.domain.CommentEntity;
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
 import org.exoplatform.ideation.entities.dto.CommentDTO;
 import org.exoplatform.ideation.storage.dao.jpa.CommentDAO;
-import org.exoplatform.social.core.identity.model.Profile;
-import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +26,8 @@ public class CommentService {
 
     public CommentDTO save(CommentDTO entity) {
         entity.setCreatedTime(new Date());
+
+
         CommentEntity commentEntity = null;
         commentEntity = commentDAO.create(convert(entity));
         return convert(commentEntity);

@@ -42,21 +42,28 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
 
     }
 
+    public long getId() throws PersistenceException {
+
+        return getEntityManager().createNamedQuery("Idea.findId", Long.class)
+                .getSingleResult();
+
+    }
 
 
 
-    public IdeaEntity findIdeaById(Long ideaId) throws PersistenceException {
 
-        TypedQuery<IdeaEntity> query = getEntityManager().createNamedQuery("Idea.findIdeaById", IdeaEntity.class)
-                .setParameter("ideaId", ideaId);
+    public List<IdeaEntity> findIdeaById(long id) throws PersistenceException {
+        TypedQuery<IdeaEntity> query = getEntityManager().createNamedQuery("Idea.getIdea", IdeaEntity.class).setParameter("ideaId",id);
 
         try {
-            return query.getSingleResult();
+            return query.getResultList();
         } catch (NoResultException e) {
             return null;
         }
 
     }
+
+
 
     public List<IdeaEntity> getPublishedIdeas(IdeaEntity.Status PUBLISHED , IdeaEntity.Status DRAFTED , String createdBy) throws PersistenceException {
 
@@ -94,6 +101,8 @@ public class IdeaDAO extends GenericDAOJPAImpl<IdeaEntity, Long> {
                 .setParameter("createdBy", createdBy).getResultList();
 
     }
+
+
 
 
     public int deleteIdeaById(int ideaId) throws PersistenceException {

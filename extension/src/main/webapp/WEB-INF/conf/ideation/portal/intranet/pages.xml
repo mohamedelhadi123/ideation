@@ -5,7 +5,7 @@
         xmlns="http://www.gatein.org/xml/ns/gatein_objects_1_2">
   <page>
     <name>ideation</name>
-    <title>ideation</title>
+    <title>Ideation</title>
     <access-permissions>*:/platform/users</access-permissions>
     <edit-permission>*:/platform/administrators</edit-permission>
     <portlet-application>
@@ -13,7 +13,7 @@
         <application-ref>ideation</application-ref>
         <portlet-ref>IdeaFrontPortlet</portlet-ref>
       </portlet>
-      <title>ideation</title>
+      <title>Ideation</title>
       <access-permissions>*:/platform/users</access-permissions>
       <show-info-bar>false</show-info-bar>
     </portlet-application>

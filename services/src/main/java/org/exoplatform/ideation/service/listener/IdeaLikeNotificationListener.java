@@ -21,9 +21,11 @@ public class IdeaLikeNotificationListener extends Listener<Set<String>,IdeaDTO> 
     public void onEvent(Event event) throws Exception {
         LikeDTO like=(LikeDTO)event.getData();
         Set<String> receivers = new HashSet<String>();
-        IdeaDTO vr = CommonsUtils.getService(IdeaService.class).getIdea();
+        IdeaDTO vr = CommonsUtils.getService(IdeaService.class).getIdea(like.getIdeaId());
         receivers.add(vr.getCreatedBy());
         NotificationContext ctx = NotificationContextImpl.cloneInstance().append(IdeaLikedPlugin.LIKE, like).append(IdeaLikedPlugin.RECEIVERS, receivers).append(IdeaLikedPlugin.IDEA, vr);
+
         ctx.getNotificationExecutor().with(ctx.makeCommand(PluginKey.key(IdeaLikedPlugin.ID))).execute(ctx);
+
     }
 }

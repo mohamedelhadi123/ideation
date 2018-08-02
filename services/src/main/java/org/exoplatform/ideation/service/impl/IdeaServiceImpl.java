@@ -1,8 +1,11 @@
 package org.exoplatform.ideation.service.impl;
+import org.exoplatform.ideation.entities.domain.FavoriteEntity;
 import org.exoplatform.ideation.entities.domain.IdeaEntity;
+import org.exoplatform.ideation.entities.dto.FavoriteDTO;
 import org.exoplatform.ideation.entities.dto.IdeaDTO;
 import org.exoplatform.ideation.service.IdeaService;
 import org.exoplatform.ideation.storage.dao.jpa.CoworkerDAO;
+import org.exoplatform.ideation.storage.dao.jpa.FavoriteDAO;
 import org.exoplatform.ideation.storage.dao.jpa.IdeaDAO;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -19,6 +22,7 @@ public class IdeaServiceImpl implements IdeaService {
 
     private static final Log LOG = ExoLogger.getExoLogger(IdeaServiceImpl.class);
 
+    private FavoriteDAO favoriteDAO = new FavoriteDAO();
     private IdeaDAO ideaDao = new IdeaDAO();
 
     public IdeaEntity createIdea(IdeaEntity ideaEntity) {
@@ -28,6 +32,7 @@ public class IdeaServiceImpl implements IdeaService {
         return IdeaE;
 
     }
+
 
 
     public IdeaEntity updateIdea(IdeaEntity ideaEntity) {
@@ -81,6 +86,7 @@ public class IdeaServiceImpl implements IdeaService {
         return convert(ideaEntity);
     }
 
+
     public List<IdeaDTO> getUserIdeas(String createdBy) {
         List<IdeaEntity> entities = ideaDao.getPublishedIdeas(IdeaEntity.Status.PUBLISHED , IdeaEntity.Status.DRAFTED ,createdBy);
         List<IdeaDTO> dtos = new ArrayList<IdeaDTO>();
@@ -101,15 +107,16 @@ public class IdeaServiceImpl implements IdeaService {
     }
 
 
-    public IdeaDTO getIdea(){
-        IdeaDTO ideaDTO = new IdeaDTO();
-        long ideaId = ideaDTO.getId();
-       IdeaEntity entities =  ideaDao.findIdeaById(ideaId);
-       if (entities !=null){
-            return convert(entities);
-       }
+    public IdeaDTO getIdea(long id){
+      List<IdeaEntity> entities =  ideaDao.findIdeaById(id);
+        if (entities.size()!=0){
+            return convert(entities.get(0));
+        }
         return null;
+
     }
+
+
 
 
     public List<IdeaDTO> getAllIdeas() {

@@ -28,15 +28,12 @@ public class IdeaCommentNotificationListener extends Listener<Set<String>,IdeaDT
 
 
         Set<String> receivers = new HashSet<String>();
-        IdeaDTO vr = CommonsUtils.getService(IdeaService.class).getIdea();
 
+        IdeaDTO vr = CommonsUtils.getService(IdeaService.class).getIdea(comment.getIdeaId());
         receivers.add(vr.getCreatedBy());
-
-
-
-
 
         NotificationContext ctx = NotificationContextImpl.cloneInstance().append(IdeaCommentedPlugin.COMMENT, comment).append(IdeaCommentedPlugin.RECEIVERS, receivers).append(IdeaCommentedPlugin.IDEA, vr);
         ctx.getNotificationExecutor().with(ctx.makeCommand(PluginKey.key(IdeaCommentedPlugin.ID))).execute(ctx);
+
     }
 }
