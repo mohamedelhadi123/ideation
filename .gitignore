@@ -138,3 +138,6 @@ nbdist/
 nbactions.xml
 .nb-gradle/
 
+### VS Code
+.vscode/
+
