@@ -26,6 +26,13 @@
         </dependency>
         <dependency>
             <groupId>org.exoplatform.addons.ideation</groupId>
+            <artifactId>ideation-vue-portlets</artifactId>
+            <type>war</type>
+            <scope>provided</scope>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.exoplatform.addons.ideation</groupId>
             <artifactId>ideation-services</artifactId>
             <type>jar</type>
             <scope>provided</scope>

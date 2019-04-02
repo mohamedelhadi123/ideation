@@ -24,6 +24,15 @@
             <scope>provided</scope>
             <fileMode>0644</fileMode>
         </dependencySet>
+            <dependencySet>
+            <outputDirectory>webapps</outputDirectory>
+            <includes>
+                <include>org.exoplatform.addons.ideation:ideation-vue-portlets:war</include>
+            </includes>
+            <outputFileNameMapping>ideation-vue-portlets.war</outputFileNameMapping>
+            <scope>provided</scope>
+            <fileMode>0644</fileMode>
+        </dependencySet>
         <dependencySet>
             <outputDirectory>lib</outputDirectory>
             <useTransitiveDependencies>true</useTransitiveDependencies>

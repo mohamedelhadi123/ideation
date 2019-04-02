@@ -37,6 +37,7 @@
     <modules>
         <module>services</module>
         <module>portlets</module>
+        <module>vue-portlets</module>
         <module>extension</module>
         <module>packaging</module>
     </modules>

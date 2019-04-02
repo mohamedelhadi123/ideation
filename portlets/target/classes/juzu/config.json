@@ -1,0 +1,7 @@
+{
+  "application":{
+    "org.exoplatform.addons.ideation.portlets.ideaFront":{},
+    "org.exoplatform.addons.ideation.portlets.ideationAdministration":{}
+  },
+  "sourcepath":"C:\Users\Med Hadi\Desktop\Back\pfe\ideation\portlets\src\main\java"
+}
