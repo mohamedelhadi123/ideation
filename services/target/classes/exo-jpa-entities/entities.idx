@@ -1,6 +1,0 @@
-org.exoplatform.ideation.entities.domain.LikeEntity
-org.exoplatform.ideation.entities.domain.CoworkerEntity
-org.exoplatform.ideation.entities.domain.IdeaEntity
-org.exoplatform.ideation.entities.domain.RatingEntity
-org.exoplatform.ideation.entities.domain.CommentEntity
-org.exoplatform.ideation.entities.domain.FavoriteEntity
