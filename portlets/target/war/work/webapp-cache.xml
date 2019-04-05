@@ -10,52 +10,10 @@
           <string>WEB-INF/gatein-resources.xml</string>
           <string>WEB-INF/portlet.xml</string>
           <string>WEB-INF/web.xml</string>
-          <string>WEB-INF/classes/juzu/config.json</string>
           <string>WEB-INF/classes/locale/portlet/ideation.properties</string>
           <string>WEB-INF/classes/locale/portlet/ideation_en.properties</string>
           <string>WEB-INF/classes/locale/portlet/ideation_fr.properties</string>
           <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/commons/BaseController.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/Application.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/assets/js/controllers.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/assets/js/idea-front.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/assets/js/lib/angular-sanitize.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/assets/js/lib/angular.min.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/assets/js/lib/FileSaver.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/assets/js/lib/jquery-ui.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/assets/js/lib/ng-file-upload-shim.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/assets/js/lib/ng-file-upload.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/assets/style/idea-front.css</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/assets/style/jquery-ui.css</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/config.json</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/IdeaFrontController.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/IdeaFrontControllerPortlet.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/IdeaFrontController_.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/package-info.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/templates/create_idea$Builder.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/templates/create_idea.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/templates/create_idea_.groovy</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/templates/index$Builder.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/templates/index.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideaFront/templates/index_.groovy</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/Application.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/assets/js/controllers.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/assets/js/idea-front.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/assets/js/lib/angular-sanitize.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/assets/js/lib/angular.min.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/assets/js/lib/FileSaver.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/assets/js/lib/jquery-ui.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/assets/js/lib/ng-file-upload-shim.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/assets/js/lib/ng-file-upload.js</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/assets/style/idea-front.css</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/assets/style/jquery-ui.css</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/config.json</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/IdeationAdministrationController.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/IdeationAdministrationControllerPortlet.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/IdeationAdministrationController_.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/package-info.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/templates/index$Builder.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/templates/index.class</string>
-          <string>WEB-INF/classes/org/exoplatform/addons/ideation/portlets/ideationAdministration/templates/index_.groovy</string>
           <string>WEB-INF/classes/rebel-remote.xml</string>
           <string>WEB-INF/classes/rebel.xml</string>
           <string>WEB-INF/lib/common-common-2.2.2.Final.jar</string>
@@ -83,7 +41,7 @@
               <columnNumber>21</columnNumber>
               <source>
                 <modelId>org.exoplatform.addons.ideation:ideation-portlets:[unknown-version]</modelId>
-                <location>C:\Users\Med Hadi\Desktop\Back\pfe\ideation\portlets\pom.xml</location>
+                <location>C:\Users\Med Hadi\Desktop\copie\ideation\portlets\pom.xml</location>
               </source>
             </org.apache.maven.model.InputLocation>
           </entry>
@@ -934,7 +892,7 @@
               <columnNumber>26</columnNumber>
               <source>
                 <modelId>org.exoplatform.addons.ideation:ideation:1.1.x-SNAPSHOT</modelId>
-                <location>C:\Users\Med Hadi\Desktop\Back\pfe\ideation\pom.xml</location>
+                <location>C:\Users\Med Hadi\Desktop\copie\ideation\pom.xml</location>
               </source>
             </org.apache.maven.model.InputLocation>
           </entry>
