@@ -1,5 +1,4 @@
 package org.exoplatform.ideation.service.rest;
-import org.exoplatform.ideation.dao.IdeaImp;
 import org.exoplatform.ideation.entities.IdeaEntity;
 import org.exoplatform.ideation.service.utils.IdeaService;
 import org.exoplatform.services.log.ExoLogger;
@@ -23,17 +22,14 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 
 public class IdeaRestService implements ResourceContainer {
-    IdeaImp ide;
 
-    public void setId(IdeaImp ide) {
-        this.ide = ide;
-    }
+
 
     private static Log log = ExoLogger.getLogger(IdeaRestService.class);
 
     @Inject
     IdeaService ideaService;
-
+/*
     @GET
     @Path("/list")
     public Response getIdeas(){
@@ -46,6 +42,7 @@ public class IdeaRestService implements ResourceContainer {
                 jsonObject.put("id_ideas", idea.getId());
                 jsonObject.put("titre", idea.getTitle());
                 jsonObject.put("description", idea.getDescription());
+                jsonObject.put("status",idea.getStatus());
                 jsonObject.put("user", idea.getUSER());
                 jsonObject.put("time", idea.getCreatedTime());
                 jsonArray.add(jsonObject);
@@ -54,11 +51,19 @@ public class IdeaRestService implements ResourceContainer {
         }catch (Exception e){
             log.error(e.getMessage(),e);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("An internal error has occurred When trying to import categories list")
+                    .entity("An internal error has occurred When trying to import Ideas list")
                     .build();
         }
         return Response.ok(jsonArray.toString(), MediaType.APPLICATION_JSON).build();
     }
+*/
+@GET
+@Path("/json")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public List<IdeaEntity> getjson(){
+        return ideaService.getAllIdea();
+}
 
 @POST
 @Path("/addidea")
@@ -66,7 +71,13 @@ public class IdeaRestService implements ResourceContainer {
 @Consumes(MediaType.APPLICATION_JSON)
 
     public IdeaEntity creatIdee(IdeaEntity idee){
-        return ideaService.AddIdea(idee);
+    IdeaEntity idea=new IdeaEntity();
+    idea.setTitle(idee.getTitle());
+    idea.setDescription(idee.getDescription());
+    idea.setCreatedTime(idee.getCreatedTime());
+    idea.setUSER(idee.getUSER());
+    idea.setStatus(idee.getStatus());
+    return ideaService.AddIdea(idea);
 }
 
 @DELETE
@@ -74,8 +85,10 @@ public class IdeaRestService implements ResourceContainer {
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
      public String deltetidea(@PathParam("id") Long id){
+
         return ideaService.deleteIdea(id);
 }
+
 
 
 }

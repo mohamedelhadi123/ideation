@@ -7,6 +7,9 @@ for more details. You should have received a copy of the GNU Lesser General Publ
         <type>org.exoplatform.ideation.entities.IdeaEntity</type>
     </component>
     <component>
+    <type>org.exoplatform.ideation.service.rest.CoworkerRestService</type>
+    </component>
+    <component>
         <type>org.exoplatform.ideation.entities.CoworkerEntity</type>
     </component>
     <component>
@@ -39,6 +42,9 @@ for more details. You should have received a copy of the GNU Lesser General Publ
     </component>
     <component>
         <type>org.exoplatform.ideation.service.utils.IdeaService</type>
+    </component>
+       <component>
+        <type>org.exoplatform.ideation.service.utils.CoworkerService</type>
     </component>
     
     <external-component-plugins>

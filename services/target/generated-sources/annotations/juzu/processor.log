@@ -1,42 +1,42 @@
-17:13,03:586 INFO    [ProcessingContext]: Using processing tool JAVAC
-17:13,03:587 INFO    [ProcessingContext]: Using processing javac ProcessingEnvironment
-17:13,03:587 INFO    [ProcessingContext]: Using source path null
-17:13,03:587 INFO    [MainProcessor]: Using processing env juzu.impl.compiler.ProcessingContext
-17:13,03:640 FINER   [ProcessingContext]: Resolved resolved resource location=SOURCE_OUTPUT pkg=juzu relativeName=metamodel.ser from filer
-17:13,03:640 INFO    [MainProcessor]: Created new meta model
-17:13,03:649 INFO    [ProcessingContext]: Loading services implementation of juzu.impl.plugin.module.metamodel.ModuleMetaModelPlugin
-17:13,03:677 INFO    [ProcessingContext]: Using plugins: application
-17:13,03:678 INFO    [ProcessingContext]: Loading services implementation of juzu.impl.plugin.application.metamodel.ApplicationMetaModelPlugin
-17:13,03:816 INFO    [ProcessingContext]: Using plugins: controller template ajax asset binding router amd
-17:13,03:816 INFO    [ProcessingContext]: Plugin controller supports [juzu.Consumes, juzu.Action, juzu.View, juzu.Resource]
-17:13,03:817 INFO    [ProcessingContext]: Plugin template supports [juzu.Path, juzu.template.Tags]
-17:13,03:818 INFO    [ProcessingContext]: Plugin ajax supports [juzu.plugin.ajax.Ajax]
-17:13,03:819 INFO    [ProcessingContext]: Plugin asset supports [juzu.plugin.asset.Stylesheets, juzu.plugin.asset.Scripts]
-17:13,03:819 INFO    [ProcessingContext]: Plugin binding supports [juzu.plugin.binding.Bindings]
-17:13,03:820 INFO    [ProcessingContext]: Plugin router supports [juzu.Route]
-17:13,03:821 INFO    [ProcessingContext]: Plugin amd supports [juzu.plugin.amd.Modules]
-17:13,03:822 INFO    [ProcessingContext]: Plugin application supports [juzu.Path, juzu.View, juzu.Action, juzu.plugin.binding.Bindings, juzu.plugin.asset.Stylesheets, juzu.Resource, juzu.plugin.ajax.Ajax, juzu.Route, juzu.Consumes, juzu.Application, juzu.template.Tags, juzu.plugin.asset.Scripts, juzu.plugin.amd.Modules]
-17:13,03:823 INFO    [MainProcessor]: Starting APT round #0
-17:13,03:823 INFO    [MainProcessor]: Activating model
-17:13,03:838 INFO    [ProcessingContext]: Loading services implementation of juzu.template.TagHandler
-17:13,03:858 INFO    [ProcessingContext]: Loaded tag handler juzu.impl.tags.DecorateTag as decorate
-17:13,03:863 INFO    [ProcessingContext]: Loaded tag handler juzu.impl.tags.IncludeTag as include
-17:13,03:863 INFO    [ProcessingContext]: Loaded tag handler juzu.impl.tags.InsertTag as insert
-17:13,03:864 INFO    [ProcessingContext]: Loaded tag handler juzu.impl.tags.ParamTag as param
-17:13,03:864 INFO    [ProcessingContext]: Loaded tag handler juzu.impl.tags.TitleTag as title
-17:13,03:866 INFO    [ProcessingContext]: Loading services implementation of juzu.impl.template.spi.TemplateProvider
-17:13,03:881 INFO    [MainProcessor]: Process annotations
-17:13,03:881 INFO    [MainProcessor]: Post processing model
-17:13,03:882 INFO    [MainProcessor]: Process events
-17:13,03:882 INFO    [MainProcessor]: Post process events
-17:13,03:882 INFO    [MainProcessor]: Ending APT round #0
-17:13,05:225 INFO    [MainProcessor]: Starting APT round #1
-17:13,05:226 INFO    [MainProcessor]: Process annotations
-17:13,05:227 INFO    [MainProcessor]: Post processing model
-17:13,05:227 INFO    [MainProcessor]: Process events
-17:13,05:227 INFO    [MainProcessor]: Post process events
-17:13,05:228 INFO    [MainProcessor]: Ending APT round #1
-17:13,05:372 INFO    [MainProcessor]: APT processing over
-17:13,05:372 INFO    [MainProcessor]: Passivating model
-17:13,05:372 INFO    [ProcessingContext]: Emitting module config
-17:13,05:373 INFO    [ProcessingContext]: Passivating templates
+14:42,02:140 INFO    [ProcessingContext]: Using processing tool JAVAC
+14:42,02:141 INFO    [ProcessingContext]: Using processing javac ProcessingEnvironment
+14:42,02:141 INFO    [ProcessingContext]: Using source path null
+14:42,02:141 INFO    [MainProcessor]: Using processing env juzu.impl.compiler.ProcessingContext
+14:42,02:162 FINER   [ProcessingContext]: Resolved resolved resource location=SOURCE_OUTPUT pkg=juzu relativeName=metamodel.ser from filer
+14:42,02:162 INFO    [MainProcessor]: Created new meta model
+14:42,02:169 INFO    [ProcessingContext]: Loading services implementation of juzu.impl.plugin.module.metamodel.ModuleMetaModelPlugin
+14:42,02:187 INFO    [ProcessingContext]: Using plugins: application
+14:42,02:188 INFO    [ProcessingContext]: Loading services implementation of juzu.impl.plugin.application.metamodel.ApplicationMetaModelPlugin
+14:42,02:262 INFO    [ProcessingContext]: Using plugins: controller template ajax asset binding router amd
+14:42,02:263 INFO    [ProcessingContext]: Plugin controller supports [juzu.Consumes, juzu.Action, juzu.View, juzu.Resource]
+14:42,02:263 INFO    [ProcessingContext]: Plugin template supports [juzu.Path, juzu.template.Tags]
+14:42,02:264 INFO    [ProcessingContext]: Plugin ajax supports [juzu.plugin.ajax.Ajax]
+14:42,02:265 INFO    [ProcessingContext]: Plugin asset supports [juzu.plugin.asset.Stylesheets, juzu.plugin.asset.Scripts]
+14:42,02:265 INFO    [ProcessingContext]: Plugin binding supports [juzu.plugin.binding.Bindings]
+14:42,02:267 INFO    [ProcessingContext]: Plugin router supports [juzu.Route]
+14:42,02:269 INFO    [ProcessingContext]: Plugin amd supports [juzu.plugin.amd.Modules]
+14:42,02:269 INFO    [ProcessingContext]: Plugin application supports [juzu.Path, juzu.Action, juzu.View, juzu.plugin.binding.Bindings, juzu.plugin.asset.Stylesheets, juzu.Resource, juzu.plugin.ajax.Ajax, juzu.Route, juzu.Consumes, juzu.Application, juzu.template.Tags, juzu.plugin.asset.Scripts, juzu.plugin.amd.Modules]
+14:42,02:270 INFO    [MainProcessor]: Starting APT round #0
+14:42,02:270 INFO    [MainProcessor]: Activating model
+14:42,02:284 INFO    [ProcessingContext]: Loading services implementation of juzu.template.TagHandler
+14:42,02:295 INFO    [ProcessingContext]: Loaded tag handler juzu.impl.tags.DecorateTag as decorate
+14:42,02:295 INFO    [ProcessingContext]: Loaded tag handler juzu.impl.tags.IncludeTag as include
+14:42,02:295 INFO    [ProcessingContext]: Loaded tag handler juzu.impl.tags.InsertTag as insert
+14:42,02:295 INFO    [ProcessingContext]: Loaded tag handler juzu.impl.tags.ParamTag as param
+14:42,02:296 INFO    [ProcessingContext]: Loaded tag handler juzu.impl.tags.TitleTag as title
+14:42,02:297 INFO    [ProcessingContext]: Loading services implementation of juzu.impl.template.spi.TemplateProvider
+14:42,02:307 INFO    [MainProcessor]: Process annotations
+14:42,02:307 INFO    [MainProcessor]: Post processing model
+14:42,02:307 INFO    [MainProcessor]: Process events
+14:42,02:308 INFO    [MainProcessor]: Post process events
+14:42,02:308 INFO    [MainProcessor]: Ending APT round #0
+14:42,02:752 INFO    [MainProcessor]: Starting APT round #1
+14:42,02:753 INFO    [MainProcessor]: Process annotations
+14:42,02:753 INFO    [MainProcessor]: Post processing model
+14:42,02:753 INFO    [MainProcessor]: Process events
+14:42,02:754 INFO    [MainProcessor]: Post process events
+14:42,02:754 INFO    [MainProcessor]: Ending APT round #1
+14:42,02:837 INFO    [MainProcessor]: APT processing over
+14:42,02:837 INFO    [MainProcessor]: Passivating model
+14:42,02:837 INFO    [ProcessingContext]: Emitting module config
+14:42,02:837 INFO    [ProcessingContext]: Passivating templates

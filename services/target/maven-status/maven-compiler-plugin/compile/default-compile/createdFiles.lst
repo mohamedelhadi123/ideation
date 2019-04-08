@@ -7,9 +7,11 @@ org\exoplatform\ideation\dao\IdeaImp.class
 exo-jpa-entities\entities.idx
 org\exoplatform\ideation\entities\RatingEntity$Status.class
 org\exoplatform\ideation\service\utils\IdeaService.class
+org\exoplatform\ideation\service\rest\CoworkerRestService.class
 org\exoplatform\ideation\dao\CoworkerImp.class
 org\exoplatform\ideation\entities\CommentEntity.class
 org\exoplatform\ideation\entities\RatingEntity.class
 org\exoplatform\ideation\service\rest\IdeaRestService.class
 org\exoplatform\ideation\dao\FavoriteImp.class
 org\exoplatform\ideation\entities\CoworkerEntity.class
+org\exoplatform\ideation\service\utils\CoworkerService.class

@@ -23,6 +23,7 @@ public class IdeaService {
 
     public IdeaEntity AddIdea(IdeaEntity idea){
        
+
          ideaDao.create(idea);
            
         return idea;
@@ -44,4 +45,6 @@ public class IdeaService {
             return ideaDao.getPublishedIdeas(publshed);
 
     }
+
+ 
 }

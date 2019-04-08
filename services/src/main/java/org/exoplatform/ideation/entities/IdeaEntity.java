@@ -37,7 +37,6 @@ public class IdeaEntity implements Serializable {
     private Status status;
     @Column(name = "USER")
     private String USER;
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CREATED_TIME")
     private Date createdTime;
 
