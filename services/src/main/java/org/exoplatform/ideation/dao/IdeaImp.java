@@ -10,7 +10,7 @@ public class IdeaImp extends GenericDAOJPAImpl<IdeaEntity ,Long> {
 
     public List<IdeaEntity> getPublishedIdeas(IdeaEntity.Status PUBLISHED ) {
 
-        return getEntityManager().createNamedQuery("Idea.getPublishedIdeas", IdeaEntity.class).setParameter("PUBLISHED",PUBLISHED).getResultList();
+        return getEntityManager().createNamedQuery("IdeaDTO.getPublishedIdeas", IdeaEntity.class).setParameter("PUBLISHED",PUBLISHED).getResultList();
 
     }
 

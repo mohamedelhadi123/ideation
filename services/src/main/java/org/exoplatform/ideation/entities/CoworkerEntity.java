@@ -11,7 +11,7 @@ public class CoworkerEntity implements Serializable {
 
     @Id
     @Column(name = "CWK_ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long  id;
     @Column(name = "COWORKER")
     private String coworker;
@@ -20,11 +20,11 @@ public class CoworkerEntity implements Serializable {
     @JoinColumn (name="ID_IDEACE")
     private IdeaEntity idea;
 
-    public CoworkerEntity(Long id,String coworker, IdeaEntity idea) {
-        this.id=id;
+    public CoworkerEntity( String coworker, IdeaEntity idea) {
         this.coworker = coworker;
         this.idea = idea;
     }
+
 
     public CoworkerEntity() {
     }

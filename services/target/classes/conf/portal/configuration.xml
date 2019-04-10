@@ -46,6 +46,15 @@ for more details. You should have received a copy of the GNU Lesser General Publ
        <component>
         <type>org.exoplatform.ideation.service.utils.CoworkerService</type>
     </component>
+    <component>
+        <type>org.exoplatform.ideation.dto.CowokerDTO</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.dto.IdeaDTO</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.dto.CommentDTO</type>
+    </component>
     
     <external-component-plugins>
         <target-component>org.exoplatform.commons.api.persistence.DataInitializer</target-component>

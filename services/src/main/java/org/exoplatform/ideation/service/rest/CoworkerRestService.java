@@ -1,5 +1,6 @@
 package org.exoplatform.ideation.service.rest;
 
+import org.exoplatform.ideation.dto.CowokerDTO;
 import org.exoplatform.ideation.entities.CoworkerEntity;
 import org.exoplatform.ideation.service.utils.CoworkerService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -27,8 +28,16 @@ public class CoworkerRestService implements ResourceContainer {
     @Path("/addcowoker")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public CoworkerEntity addcowoker(CoworkerEntity ce){
-        return cs.addCoworker(ce);
+    public CoworkerEntity addcowoker(CowokerDTO cr){
+        return cs.addCoworker(cr);
+    }
+
+    @GET
+    @Path("/getdto/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public CowokerDTO select(@PathParam("id") Long id){
+    return cs.getCoworker(id);
     }
 
 }

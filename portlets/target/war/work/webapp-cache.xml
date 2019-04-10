@@ -1000,6 +1000,7 @@
         </locations>
         <managementKey>org.exoplatform.gatein.pc:pc-api:jar</managementKey>
       </dependency>
+      <targetFileName>pc-api-5.1.x-SNAPSHOT.jar</targetFileName>
     </org.apache.maven.plugin.war.util.DependencyInfo>
     <org.apache.maven.plugin.war.util.DependencyInfo>
       <dependency>
