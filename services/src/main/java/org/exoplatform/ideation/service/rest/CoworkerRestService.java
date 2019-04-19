@@ -20,8 +20,8 @@ public class CoworkerRestService implements ResourceContainer {
     @Path("/getcowoker")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<CoworkerEntity> getallcowoker(){
-        return cs.getAllCoworker();
+    public  List<CowokerDTO>   getallcowoker(){
+        return cs.getallCowokerDto();
     }
 
     @POST

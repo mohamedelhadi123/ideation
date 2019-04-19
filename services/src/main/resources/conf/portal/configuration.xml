@@ -13,19 +13,19 @@ for more details. You should have received a copy of the GNU Lesser General Publ
         <type>org.exoplatform.ideation.entities.CoworkerEntity</type>
     </component>
     <component>
-        <type>org.exoplatform.ideation.dao.CoworkerImp</type>
+        <type>org.exoplatform.ideation.dao.CoworkerImpDAO</type>
     </component>
     <component>
-        <type>org.exoplatform.ideation.dao.IdeaImp</type>
+        <type>org.exoplatform.ideation.dao.IdeaImpDAO</type>
     </component>
     <component>
-        <type>org.exoplatform.ideation.dao.CommentImp</type>
+        <type>org.exoplatform.ideation.dao.CommentImpDAO</type>
     </component>
     <component>
-        <type>org.exoplatform.ideation.dao.FavoriteImp</type>
+        <type>org.exoplatform.ideation.dao.FavoriteImpDAO</type>
     </component>
     <component>
-        <type>org.exoplatform.ideation.dao.RatingImp</type>
+        <type>org.exoplatform.ideation.dao.RatingImpDAO</type>
     </component>
     
     <component>

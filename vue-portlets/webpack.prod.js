@@ -11,7 +11,7 @@ const config = merge(webpackCommonConfig, {
         use: {
           loader: "file-loader",
           options: {
-            name: "/vue-portlets/fonts/[name].[ext]",
+            name: "/ideation-vue-portlets/fonts/[name].[ext]",
             emitFile: false
           }
         }

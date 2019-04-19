@@ -15,7 +15,7 @@ public class IdeaDTO implements Serializable {
         this.createdTime = ideaent.getCreatedTime();
         this.description = ideaent.getDescription();
         this.status = ideaent.getStatus();
-        this.USER = ideaent.getUSER();
+        this.user = ideaent.getUser();
     }
 
     private Long id;
@@ -23,7 +23,7 @@ public class IdeaDTO implements Serializable {
     private Date createdTime;
     private String description;
     private IdeaEntity.Status status;
-    private String USER;
+    private String user;
 
     public Long getId() {
         return id;
@@ -65,11 +65,11 @@ public class IdeaDTO implements Serializable {
         this.status = status;
     }
 
-    public String getUSER() {
-        return USER;
+    public String getUser() {
+        return user;
     }
 
-    public void setUSER(String USER) {
-        this.USER = USER;
+    public void setUser(String user) {
+        this.user = user;
     }
 }

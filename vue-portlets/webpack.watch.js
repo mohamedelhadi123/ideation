@@ -2,7 +2,7 @@ const path = require('path');
 const merge = require('webpack-merge');
 
 const webpackProductionConfig = require('./webpack.prod.js');
-const exoServerPath = "C:/Users/Med Hadi/Desktop/platform-5.2.0-RC06";
+const exoServerPath = "C:/Users/Med Hadi/Desktop/v5.2 Platform/platform-5.3.x-SNAPSHOT";
 const app = 'ideation-vue-portlets';
 
 module.exports = merge(webpackProductionConfig, {

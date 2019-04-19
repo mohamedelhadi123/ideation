@@ -1,0 +1,7 @@
+Wed Apr 17 23:08:43 WAT 2019
+C:\Users\Med Hadi\.m2\repository\com\googlecode\mp4parser\isoparser\1.0-RC-1\isoparser-1.0-RC-1.jar!com\googlecode\mp4parser\RequiresParseDetailAspect.class [warning] can not build thisJoinPoint lazily for this advice since it has no suitable guard [Xlint:noGuardForLazyTjp]
+	
+C:\Users\Med Hadi\.m2\repository\com\googlecode\mp4parser\isoparser\1.0-RC-1\isoparser-1.0-RC-1.jar!com\googlecode\mp4parser\RequiresParseDetailAspect.class [warning] advice defined in com.googlecode.mp4parser.RequiresParseDetailAspect has not been applied [Xlint:adviceDidNotMatch]
+	
+C:\Users\Med Hadi\.m2\repository\org\exoplatform\commons\commons-component-common\5.2.0-RC09\commons-component-common-5.2.0-RC09.jar!org\exoplatform\commons\persistence\impl\ExoTransactionalAspect.class [warning] advice defined in org.exoplatform.commons.persistence.impl.ExoTransactionalAspect has not been applied [Xlint:adviceDidNotMatch]
+	

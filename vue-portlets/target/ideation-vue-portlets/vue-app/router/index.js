@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../components/Home.vue'
-import Blog from '../components/Blog.vue'
+import CreateIdea from '../components/CreateIdea.vue'
+import IdeaD from '../components/IdeaD.vue'
+import tabs from '../components/tabs.vue'
 
 
 
@@ -10,14 +11,18 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Home',
-      component: Home
+      path: '/createidea',
+      name: 'CreateIdee',
+      component: CreateIdea
     },
     {
-      path: '/createCours',
-      name: 'Blog',
-      component: Blog
+      path : '/ideapubsh',
+      name :'IdeaD',
+      component :IdeaD
+    },{
+      path:'/tabs',
+      name:'tabs',
+      component:tabs
     }
   ]
 })

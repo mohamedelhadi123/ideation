@@ -1,12 +1,12 @@
 package org.exoplatform.ideation.service.utils;
 
-import org.exoplatform.ideation.dao.IdeaImp;
+import org.exoplatform.ideation.dao.IdeaImpDAO;
 import org.exoplatform.ideation.entities.IdeaEntity;
 
 import java.util.List;
 
 public class IdeaService {
-    private IdeaImp ideaDao;
+    private IdeaImpDAO ideaDao;
 
 
     /**
@@ -14,7 +14,7 @@ public class IdeaService {
      * @param ideaDao;
      */
 
-    public IdeaService(IdeaImp ideaDao) {
+    public IdeaService(IdeaImpDAO ideaDao) {
         this.ideaDao = ideaDao;
     }
     public List<IdeaEntity> getAllIdea(){
@@ -41,9 +41,9 @@ public class IdeaService {
         return msg;
     }
 
-    public List<IdeaEntity> getIdeaPush(IdeaEntity.Status publshed){
-            return ideaDao.getPublishedIdeas(publshed);
 
+    public List<IdeaEntity> getIdeaByUser(String user){
+        return ideaDao.getIdeaByUser(user);
     }
 
  

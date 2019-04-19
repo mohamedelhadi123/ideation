@@ -75,7 +75,7 @@ public List<IdeaEntity> getjson(){
     idea.setTitle(idee.getTitle());
     idea.setDescription(idee.getDescription());
     idea.setCreatedTime(idee.getCreatedTime());
-    idea.setUSER(idee.getUSER());
+    idea.setUser(idee.getUser());
     idea.setStatus(idee.getStatus());
     return ideaService.AddIdea(idea);
 }
@@ -87,6 +87,14 @@ public List<IdeaEntity> getjson(){
      public String deltetidea(@PathParam("id") Long id){
 
         return ideaService.deleteIdea(id);
+}
+
+@GET
+@Path("/getuser/{user}")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+    public List<IdeaEntity> getideabyuser(@PathParam("user") String user){
+    return ideaService.getIdeaByUser(user);
 }
 
 

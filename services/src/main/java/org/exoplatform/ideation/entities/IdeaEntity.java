@@ -1,21 +1,15 @@
 package org.exoplatform.ideation.entities;
 import java.io.Serializable;
 import java.util.*;
-
 import javax.persistence.*;
-
 import org.exoplatform.commons.api.persistence.ExoEntity;
 
-@Entity(name = "Idea")
+@Entity(name = "idea")
 @ExoEntity
 @Table(name = "IDEA_IDEAS")
 @NamedQueries({
-
-        @NamedQuery(
-                name = "Idea.getPublishedIdeas",
-                query = "SELECT idea FROM Idea idea where idea.status = :PUBLISHED"
-        )
-              })
+        @NamedQuery(name = "Idea.getIdeasByUser", query = "select i from idea i where i.user= :user")
+})
 
 public class IdeaEntity implements Serializable {
     public enum Status {
@@ -36,20 +30,20 @@ public class IdeaEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private Status status;
     @Column(name = "USER")
-    private String USER;
+    private String user;
     @Column(name = "CREATED_TIME")
     private Date createdTime;
 
-   
+
  public IdeaEntity(){
-     
+
  }
-    public IdeaEntity(long id, String title, String description, Status status, String USER, Date createdTime) {
+    public IdeaEntity(long id, String title, String description, Status status, String user, Date createdTime) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.status = status;
-        this.USER = USER;
+        this.user = user;
         this.createdTime = createdTime;
 
     }
@@ -86,12 +80,12 @@ public class IdeaEntity implements Serializable {
         this.status = status;
     }
 
-    public String getUSER() {
-        return USER;
+    public String getUser() {
+        return user;
     }
 
-    public void setUSER(String USER) {
-        this.USER = USER;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public Date getCreatedTime() {
@@ -102,5 +96,5 @@ public class IdeaEntity implements Serializable {
         this.createdTime = createdTime;
     }
 
-  
+
 }
