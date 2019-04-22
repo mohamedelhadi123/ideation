@@ -1,50 +1,40 @@
-<template>
-  <div>
-    <v-toolbar
-      color="purple"
-      dark
-      tabs
-    >
-  
+   
+            <template v-slot:extension>
+               <v-tabs
+                centered
+               color="cyan"
+                  dark
+                 icons-and-text
+                 >
+                    <v-tabs-slider color="yellow"></v-tabs-slider>
 
-      <template v-slot:extension>
-        <v-tabs
-          v-model="tabs"
-          centered
-          color="transparent"
-          slider-color="white"
-        >
-          <v-tab
-            v-for="n in 3"
-            :key="n"
-          >
-            Item {{ n }}
-          </v-tab>
-        </v-tabs>
-      </template>
-    </v-toolbar>
+                    <v-tab v-for="item in links" :key="item"  router
+                           :to="item.route">
+                        {{ item.text }}
+                    <v-icon >{{ item.icon }}</v-icon>
 
-    <v-tabs-items v-model="tabs">
-      <v-tab-item
-        v-for="n in 3"
-        :key="n"
-      >
-        <v-card>
-          <v-card-text>
-            {{ text }} <i class="fas fa-angry"></i>
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
-    </v-tabs-items>
-  </div>
-</template>
+                    </v-tab>
+               <v-tab>
+                   <v-btn fab dark small color="indigo">
+                  <v-icon dark>add</v-icon>
+                   </v-btn>
+               </v-tab>
+                </v-tabs>
+            </template>
+       
+
 <script>
-  export default {
-    data () {
-      return {
-        tabs: null,
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-      }
+    export default {
+        data () {
+            return {
+                tab: null,
+                links: [
+                    { icon: 'check_circle', text: 'Idées Publiées', route: '/' },
+                    { icon: 'favorite', text: 'Idées Favoris', route: '/ideafav' },
+                    { icon: 'fas fa-edit', text: 'Idées redigées', route: '/ideadrafted' },
+                    { icon: 'present_to_all', text: 'Idées Archivées', route: '/ideaarchived' },
+                ]
+            }
+        }
     }
-  }
 </script>

@@ -1,9 +1,13 @@
+    
 <template>
-<v-layout class="bt">
-    <v-dialog v-model="dialog" persistent max-width="500px">
-      <v-btn  slot="activator"  color="#0000FF" dark><i class="fas fa-plus-circle"></i> créer une idée </v-btn>
-      <v-card>
-          <v-container class="backgroundTop" >
+
+  <v-dialog max-width="600px" >
+    
+    <template >
+    <v-btn flat slot="activator" class="red">Add New Project</v-btn>
+    </template>
+     <v-card >
+       <v-container >
         <v-card-title>
           <span class="headline">Créer une Idée</span>
         </v-card-title>
@@ -18,16 +22,13 @@
       v-model="titre"
       :counter="10"
       :rules="nameRules"
-      placeholder="Titre" 
+      label="Name"
       required
-      prepend-icon="edit"
     ></v-text-field>
-   
-      <v-textarea   prepend-icon="edit" v-model="description" placeholder="Description ..."  /> 
-  
+      <v-textarea class="dem"  v-model="description" placeholder="Entrer votre commentaire ..."  /> 
                     <v-flex md10>
+                   
                       <select
-                      
                         class="select_style"
                         :options="option"
                         placeholder="Categories" >
@@ -41,22 +42,23 @@
         
         </v-card-text>
         </v-container>
-        
-        <v-card-actions >
+        <v-card-actions>
           <v-spacer></v-spacer>
-           <v-btn color="red" flat @click="reset">reset</v-btn>
-
-          <v-btn color="blue darken-1" flat @click="annuler">Close</v-btn>
-          <v-btn color="blue darken-1" flat @click="annuler">Save</v-btn>
+          <v-btn color="red" flat @click="reset">reset</v-btn>
+          <v-btn color="blue darken-1" flat slot="activator">Annule</v-btn>
+          <v-btn color="blue darken-1" flat @click="this.dialog = false">Enregistrer</v-btn>
         </v-card-actions>
-       
+           
+
       </v-card>
-    </v-dialog>
-</v-layout>
- 
+     
+  </v-dialog>
+
+
 </template>
+
 <script>
- export default {
+export default {
   data() {
     return { titre:null,
              description:null,
@@ -86,27 +88,12 @@
 </script>
 <style>
 
-
 .textet{
   width: 72%;
  
 
 }
-.bt{
-justify-content: flex-end;
-width: 95%;
-}
-
- .backgroundTop{
-        background:linear-gradient(to bottom, #1867c0, #5CBBF6);
-      font-family: 'Avenir', Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-align: center;
-      color: #2c3e50;
-    }
-    .select_style{
-      margin-left: 12%;
-      width: 108%;
-    }
 </style>
+
+
+

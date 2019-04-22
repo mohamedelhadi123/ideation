@@ -1,28 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import CreateIdea from '../components/CreateIdea.vue'
-import IdeaD from '../components/IdeaD.vue'
-import tabs from '../components/tabs.vue'
-
-
+import IdeaPublished from '../components/IdeaPublished.vue';
+import test from '../components/test.vue';
+import IdeaInfo from '../components/IdeaInfo.vue';
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/createidea',
-      name: 'CreateIdee',
-      component: CreateIdea
+      path: '/',
+      name: 'IdeaPublished',
+      component: IdeaPublished
     },
     {
-      path : '/ideapubsh',
-      name :'IdeaD',
-      component :IdeaD
-    },{
-      path:'/tabs',
-      name:'tabs',
-      component:tabs
+      path: '/test',
+      name: 'test',
+      component: test
+    },
+    {
+      path: '/ideainfo',
+      name :'IdeaInfo',
+      component: IdeaInfo
+
     }
+    
   ]
 })
