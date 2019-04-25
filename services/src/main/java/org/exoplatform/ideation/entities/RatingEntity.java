@@ -4,14 +4,17 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-@Entity
+@Entity(name="rating")
 @ExoEntity
 @Table(name = "IDEATION_RATING")
+@NamedQueries({
+        @NamedQuery(name = "Rating.getStatusByIdIdea", query = "select r from rating r where r.idea.id= :id AND r.status= :DISLIKE")
+})
 public class RatingEntity implements Serializable {
     public enum Status {
         LIKE,
         DISLIKE,
-        NONE
+        NONE;
     }
 
     @Id
@@ -20,12 +23,12 @@ public class RatingEntity implements Serializable {
     @Column(name = "USER")
     private String user;
     @Enumerated(EnumType.STRING)
-    private IdeaEntity.Status status;
+    private RatingEntity.Status status;
     @ManyToOne
     @JoinColumn (name="ID_IDEAR")
     private IdeaEntity idea;
 
-    public RatingEntity(Long id, String user, IdeaEntity.Status status, IdeaEntity idea) {
+    public RatingEntity(Long id, String user, RatingEntity.Status status, IdeaEntity idea) {
 
         this.id = id;
         this.user = user;
@@ -52,11 +55,11 @@ public class RatingEntity implements Serializable {
         this.user = user;
     }
 
-    public IdeaEntity.Status getStatus() {
+    public RatingEntity.Status getStatus() {
         return status;
     }
 
-    public void setStatus(IdeaEntity.Status status) {
+    public void setStatus(RatingEntity.Status status) {
         this.status = status;
     }
 

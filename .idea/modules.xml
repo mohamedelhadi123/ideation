@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ideation.iml" filepath="$PROJECT_DIR$/ideation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/extension/ideation-extension.iml" filepath="$PROJECT_DIR$/extension/ideation-extension.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packaging/ideation-packaging.iml" filepath="$PROJECT_DIR$/packaging/ideation-packaging.iml" />
+      <module fileurl="file://$PROJECT_DIR$/portlets/ideation-portlets.iml" filepath="$PROJECT_DIR$/portlets/ideation-portlets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/ideation-services.iml" filepath="$PROJECT_DIR$/services/ideation-services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vue-portlets/ideation-vue-portlets.iml" filepath="$PROJECT_DIR$/vue-portlets/ideation-vue-portlets.iml" />
+    </modules>
+  </component>
+</project>

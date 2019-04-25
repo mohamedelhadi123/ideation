@@ -60,7 +60,7 @@
           <string>vue-app/components/IdeaPublished.vue</string>
           <string>vue-app/components/tabs.vue</string>
           <string>vue-app/components/test.vue</string>
-          <string>vue-app/components/zz.vue</string>
+          <string>vue-app/http-common.js</string>
           <string>vue-app/idea.js</string>
           <string>vue-app/router/index.js</string>
           <string>WEB-INF/conf/configuration.xml.bak</string>

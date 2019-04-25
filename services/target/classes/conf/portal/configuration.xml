@@ -55,6 +55,39 @@ for more details. You should have received a copy of the GNU Lesser General Publ
     <component>
         <type>org.exoplatform.ideation.dto.CommentDTO</type>
     </component>
+    <component>
+        <type>org.exoplatform.ideation.service.utils.CommentService</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.utils.RatingService</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.rest.CommentRestService</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.rest.RatingRestService</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.Mapper.CommentMapper</type>
+    </component>
+    <component>
+    <type>org.exoplatform.ideation.service.Mapper.IdeaMapper</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.Mapper.RatingMapper</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.Mapper.FavoritMapper</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.dto.FavoritDTO</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.utils.FavService</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.rest.FavRestService</type>
+    </component>
     
     <external-component-plugins>
         <target-component>org.exoplatform.commons.api.persistence.DataInitializer</target-component>

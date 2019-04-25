@@ -1,20 +1,16 @@
 package org.exoplatform.ideation.service.rest;
+import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.ideation.dto.IdeaDTO;
 import org.exoplatform.ideation.entities.IdeaEntity;
 import org.exoplatform.ideation.service.utils.IdeaService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-
 import org.exoplatform.services.rest.resource.ResourceContainer;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-
 import java.util.List;
 
 
@@ -25,77 +21,65 @@ public class IdeaRestService implements ResourceContainer {
 
 
 
-    private static Log log = ExoLogger.getLogger(IdeaRestService.class);
+    private static Log LOG = ExoLogger.getLogger(IdeaRestService.class);
 
     @Inject
     IdeaService ideaService;
-/*
+
+    public IdeaRestService() {
+        ideaService= CommonsUtils.getService(IdeaService.class);
+    }
+
     @GET
-    @Path("/list")
-    public Response getIdeas(){
+    @Path("/all/{PUBLISHED}")
+    public Response getAllIdeaPublished(@PathParam("PUBLISHED") IdeaEntity.Status PUBLISHED) {
 
-        List<IdeaEntity> ideas =ideaService.getAllIdea();
-        JSONArray jsonArray=new JSONArray();
+
         try {
-            for(IdeaEntity idea :  ideas){
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("id_ideas", idea.getId());
-                jsonObject.put("titre", idea.getTitle());
-                jsonObject.put("description", idea.getDescription());
-                jsonObject.put("status",idea.getStatus());
-                jsonObject.put("user", idea.getUSER());
-                jsonObject.put("time", idea.getCreatedTime());
-                jsonArray.add(jsonObject);
+            List<IdeaDTO> allIdeaPublished = ideaService.getIdeaPublished(PUBLISHED);
 
-            }
-        }catch (Exception e){
-            log.error(e.getMessage(),e);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("An internal error has occurred When trying to import Ideas list")
+            return Response.ok(allIdeaPublished, MediaType.APPLICATION_JSON).build();
+
+        } catch (Exception e) {
+
+            LOG.error("Error listing all Idea Published ", e);
+
+            return Response.serverError()
+                    .entity("Error listing all Idea Published")
                     .build();
         }
-        return Response.ok(jsonArray.toString(), MediaType.APPLICATION_JSON).build();
     }
-*/
-@GET
-@Path("/json")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-public List<IdeaEntity> getjson(){
-        return ideaService.getAllIdea();
-}
 
-@POST
-@Path("/addidea")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+    @GET
+    @Path("allpublishedbyuser/{PUBLISHED}/{user}")
+    public Response getAllPublishedByUser(@PathParam("PUBLISHED") IdeaEntity.Status PUBLISHED,@PathParam("user") String user) {
+        try {
+            List<IdeaDTO> allIdeaPublishedByUser = ideaService.getIdeaPublishedByUser(PUBLISHED, user);
+            return Response.ok(allIdeaPublishedByUser, MediaType.APPLICATION_JSON).build();
 
-    public IdeaEntity creatIdee(IdeaEntity idee){
-    IdeaEntity idea=new IdeaEntity();
-    idea.setTitle(idee.getTitle());
-    idea.setDescription(idee.getDescription());
-    idea.setCreatedTime(idee.getCreatedTime());
-    idea.setUser(idee.getUser());
-    idea.setStatus(idee.getStatus());
-    return ideaService.AddIdea(idea);
-}
+        } catch (Exception e) {
 
-@DELETE
-@Path("/delete/{id}")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-     public String deltetidea(@PathParam("id") Long id){
+            LOG.error("Error listing all Idea Published by user ", e);
 
-        return ideaService.deleteIdea(id);
-}
+            return Response.serverError()
+                    .entity("Error listing all Idea Published user")
+                    .build();
+        }
+    }
+    @POST
+    @Path("addIdea")
+    public  Response addIdea(IdeaDTO ideaDTO){
+        try{
+            ideaDTO=ideaService.addIdea(ideaDTO);
+            return Response.ok().entity(ideaDTO).build();
+        }catch (Exception e) {
+            return Response.serverError()
+                    .entity("Error adding new idea")
+                    .build();
+        }
+    }
 
-@GET
-@Path("/getuser/{user}")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-    public List<IdeaEntity> getideabyuser(@PathParam("user") String user){
-    return ideaService.getIdeaByUser(user);
-}
+
 
 
 

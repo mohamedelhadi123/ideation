@@ -4,9 +4,12 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-@Entity
+@Entity(name="fav")
 @ExoEntity
 @Table(name = "IDEATION_FAV")
+@NamedQueries({
+        @NamedQuery(name = "Fav.getAllFavByUser", query = "select f from fav f where f.user=:user")
+})
 public class FavoriteEntity implements Serializable {
 
 

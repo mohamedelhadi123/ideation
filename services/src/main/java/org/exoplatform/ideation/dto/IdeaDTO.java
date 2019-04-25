@@ -3,24 +3,27 @@ package org.exoplatform.ideation.dto;
 import org.exoplatform.ideation.entities.IdeaEntity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class IdeaDTO implements Serializable {
+    private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
     public IdeaDTO() {
     }
 
     public IdeaDTO(IdeaEntity ideaent) {
-        this.id = ideaent.getId();
+        this.id=ideaent.getId();
         this.title = ideaent.getTitle();
-        this.createdTime = ideaent.getCreatedTime();
+        if (ideaent.getCreatedTime()!= null) {
+            this.createdTime= formatter.format(ideaent.getCreatedTime());
+        }
         this.description = ideaent.getDescription();
         this.status = ideaent.getStatus();
         this.user = ideaent.getUser();
     }
-
     private Long id;
     protected String title;
-    private Date createdTime;
+    private String createdTime;
     private String description;
     private IdeaEntity.Status status;
     private String user;
@@ -41,11 +44,11 @@ public class IdeaDTO implements Serializable {
         this.title = title;
     }
 
-    public Date getCreatedTime() {
+    public String getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Date createdTime) {
+    public void setCreatedTime(String createdTime) {
         this.createdTime = createdTime;
     }
 

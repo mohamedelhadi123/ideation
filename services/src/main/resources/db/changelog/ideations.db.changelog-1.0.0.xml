@@ -31,7 +31,7 @@
             </column>
             <column name="TITLE" type="VARCHAR(250)"/>
             <column name="DESCRIPTION" type="VARCHAR(250)"/>
-            <column name="STATUS" type="ENUM('PUBLISHED','ARCHIVED','DRAFTED')"></column>
+            <column name="STATUS" type="ENUM('PUBLISHED','ARCHIVED','DRAFET')"></column>
             <column name="USER" type="NVARCHAR(50)"></column>
             <column name="CREATED_TIME" type="TIMESTAMP"></column>
         </createTable>

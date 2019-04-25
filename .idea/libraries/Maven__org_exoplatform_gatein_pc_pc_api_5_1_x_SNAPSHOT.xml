@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.exoplatform.gatein.pc:pc-api:5.1.x-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/exoplatform/gatein/pc/pc-api/5.1.x-SNAPSHOT/pc-api-5.1.x-20190421.131634-4.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/exoplatform/gatein/pc/pc-api/5.1.x-SNAPSHOT/pc-api-5.1.x-20190421.131634-4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/exoplatform/gatein/pc/pc-api/5.1.x-SNAPSHOT/pc-api-5.1.x-20190421.131634-4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

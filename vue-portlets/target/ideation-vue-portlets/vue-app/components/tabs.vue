@@ -1,5 +1,6 @@
    
             <template v-slot:extension>
+            <div>
                <v-tabs
                 centered
                color="cyan"
@@ -14,17 +15,19 @@
                     <v-icon >{{ item.icon }}</v-icon>
 
                     </v-tab>
-               <v-tab>
-                   <v-btn fab dark small color="indigo">
-                  <v-icon dark>add</v-icon>
-                   </v-btn>
-               </v-tab>
+               
+                
+              
                 </v-tabs>
+                  <test/>
+                  </div>
             </template>
        
 
 <script>
+import test from './test.vue';
     export default {
+         components: {test},
         data () {
             return {
                 tab: null,

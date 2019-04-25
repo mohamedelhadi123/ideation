@@ -1,14 +1,22 @@
 package org.exoplatform.ideation.entities;
-import java.io.Serializable;
-import java.util.*;
-import javax.persistence.*;
 import org.exoplatform.commons.api.persistence.ExoEntity;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 @Entity(name = "idea")
 @ExoEntity
 @Table(name = "IDEA_IDEAS")
 @NamedQueries({
-        @NamedQuery(name = "Idea.getIdeasByUser", query = "select i from idea i where i.user= :user")
+        @NamedQuery(name = "Idea.getIdeasByUser", query = "select i from idea i where i.user= :user"),
+        @NamedQuery(name = "Idea.getIdeasPublished", query = "select i from idea i where i.status= :PUBLISHED"),
+        @NamedQuery(name = "Idea.getIdeasDRAFET", query = "select i from idea i where i.status= :DRAFET"),
+        @NamedQuery(name = "Idea.getIdeasARCHIVED", query = "select i from idea i where i.status= :ARCHIVED"),
+        @NamedQuery(name="Idea.getIdeaPublishedByuser",query = "select i from idea i where i.status= :PUBLISHED AND i.user= :user")
+
+
+
 })
 
 public class IdeaEntity implements Serializable {
@@ -16,6 +24,8 @@ public class IdeaEntity implements Serializable {
         PUBLISHED,
         ARCHIVED,
         DRAFET;
+        
+
 
 
     }

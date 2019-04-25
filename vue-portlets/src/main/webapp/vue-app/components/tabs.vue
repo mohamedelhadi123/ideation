@@ -1,27 +1,25 @@
    
-            <template v-slot:extension>
-            <div>
-               <v-tabs
-                centered
-               color="cyan"
-                  dark
-                 icons-and-text
-                 >
-                    <v-tabs-slider color="yellow"></v-tabs-slider>
+<template v-slot:extension>
+  <div>
+    <v-tabs
+      centered
+      color="cyan"
+      dark
+      icons-and-text>
+      <v-tabs-slider color="yellow" />
 
-                    <v-tab v-for="item in links" :key="item"  router
-                           :to="item.route">
-                        {{ item.text }}
-                    <v-icon >{{ item.icon }}</v-icon>
-
-                    </v-tab>
-               
-                
-              
-                </v-tabs>
-                  <test/>
-                  </div>
-            </template>
+      <v-tab
+        v-for="item in links"
+        :key="item"
+        router
+        :to="item.route">
+        {{ item.text }}
+        <v-icon>{{ item.icon }}</v-icon>
+      </v-tab>
+    </v-tabs>
+    <test />
+  </div>
+</template>
        
 
 <script>

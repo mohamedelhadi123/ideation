@@ -6,9 +6,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity
+@Entity(name="comment")
 @ExoEntity
 @Table(name = "IDEATION_COMMENTS")
+@NamedQueries({
+        @NamedQuery(name = "Comment.getComment", query = "select c from comment c where c.idea.id=:id"),
+})
 public class CommentEntity implements Serializable {
     @Id
     @GeneratedValue
