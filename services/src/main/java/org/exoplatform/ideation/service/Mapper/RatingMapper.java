@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class RatingMapper {
+
     public RatingMapper() {
     }
 
@@ -16,12 +17,20 @@ public class RatingMapper {
         return new RatingDTO(ratingEntity);
     }
 
+
+
+
     public List<RatingDTO> RatingsToRatingsDTOS(List<RatingEntity> ratings){
         return ratings.stream()
                 .filter(Objects::nonNull)
                 .map(this::RatingToRatingDTO)
                 .collect(Collectors.toList());
     }
+
+
+
+
+
 public RatingEntity RatingdtoToRating(RatingDTO ratingDTO){
         try {
             if(ratingDTO==null){
@@ -31,8 +40,8 @@ public RatingEntity RatingdtoToRating(RatingDTO ratingDTO){
                 RatingEntity ratingEntity=new RatingEntity();
                 ratingEntity.setStatus(ratingDTO.getStatus());
                 ratingEntity.setUser(ratingDTO.getUser());
-                IdeaEntity idea=this.IdeaFromId(ratingDTO.getId_idea());
-                ratingEntity.setIdea(idea);
+                IdeaEntity idear=this.IdeaFormLongId(ratingDTO.getId_idear());
+                ratingEntity.setIdea(idear);
                 return ratingEntity;
             }
         } catch (Exception pe) {
@@ -43,12 +52,11 @@ public RatingEntity RatingdtoToRating(RatingDTO ratingDTO){
 
 
 
-
-public IdeaEntity IdeaFromId(Long id){
+    public IdeaEntity IdeaFormLongId(Long id){
         IdeaEntity ideaEntity=new IdeaEntity();
         ideaEntity.setId(id);
         return ideaEntity;
-}
+    }
 
 
 }

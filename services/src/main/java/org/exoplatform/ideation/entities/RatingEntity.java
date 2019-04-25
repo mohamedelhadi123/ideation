@@ -8,7 +8,9 @@ import java.io.Serializable;
 @ExoEntity
 @Table(name = "IDEATION_RATING")
 @NamedQueries({
-        @NamedQuery(name = "Rating.getStatusByIdIdea", query = "select r from rating r where r.idea.id= :id AND r.status= :DISLIKE")
+        @NamedQuery(name = "Rating.getStatusByIdIdea", query = "select r from rating r where r.idea.id= :id AND r.status= :DISLIKE"),
+        @NamedQuery(name = "Rating.getStatusByIdIdeaAndUser", query = "select r from rating r where r.idea.id= :id AND r.user= :user")
+
 })
 public class RatingEntity implements Serializable {
     public enum Status {

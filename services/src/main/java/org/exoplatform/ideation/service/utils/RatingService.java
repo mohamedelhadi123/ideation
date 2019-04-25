@@ -2,8 +2,10 @@ package org.exoplatform.ideation.service.utils;
 
 import org.exoplatform.commons.api.persistence.ExoTransactional;
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.ideation.dao.IdeaImpDAO;
 import org.exoplatform.ideation.dao.RatingImpDAO;
 import org.exoplatform.ideation.dto.RatingDTO;
+import org.exoplatform.ideation.entities.IdeaEntity;
 import org.exoplatform.ideation.entities.RatingEntity;
 import org.exoplatform.ideation.service.Mapper.RatingMapper;
 import org.exoplatform.services.log.ExoLogger;
@@ -16,10 +18,13 @@ public class RatingService {
 
     private RatingImpDAO ratingdao;
     private RatingMapper ratingMapper;
+    private IdeaImpDAO ideaImpDAO;
 
-    public RatingService(RatingImpDAO ratingdao, RatingMapper ratingMapper) {
+    public RatingService(RatingImpDAO ratingdao, RatingMapper ratingMapper,IdeaImpDAO ideaImpDAO) {
         this.ratingdao =  CommonsUtils.getService(RatingImpDAO.class);
         this.ratingMapper =  CommonsUtils.getService(RatingMapper.class);
+        this.ideaImpDAO=CommonsUtils.getService(IdeaImpDAO.class);
+
     }
 
     public List<RatingDTO> getStatusByIdeaAndStatus(Long id,RatingEntity.Status DISLIKE){
@@ -34,6 +39,18 @@ public class RatingService {
         return null;
 
     }
+
+    public List<RatingDTO> getStatusByIdeaAndUser(Long id,String user){
+        try{
+            List<RatingEntity> ratings=ratingdao.getStatusByIdAndUser(id,user);
+            if (ratings!=null){
+                return  ratingMapper.RatingsToRatingsDTOS(ratings);
+            }
+        }catch (Exception e) {
+            LOG.error("Error to find Status by id idea and user", e.getMessage());
+        }
+        return null;
+    }
     @ExoTransactional
     public RatingDTO addRating(RatingDTO ratingDTO){
         RatingEntity ratingEntity=null;
@@ -43,6 +60,24 @@ public class RatingService {
             LOG.error("Error to create", ratingDTO.getUser() , e);
         }
         return  ratingMapper.RatingToRatingDTO(ratingEntity);
+    }
+
+
+    public RatingDTO addRatingdto(RatingDTO ratingDTO){
+        if(ratingDTO!=null){
+            try {
+                 RatingEntity ratingEntity=new RatingEntity();
+                IdeaEntity ideae=ideaImpDAO.find(ratingDTO.getId_idear());
+               ratingEntity.setIdea(ideae);
+              ratingEntity.setUser(ratingDTO.getUser());
+              ratingEntity.setStatus(ratingDTO.getStatus());
+              return ratingDTO;
+            }catch (Exception e){
+                LOG.error("errer to add");
+            }
+
+        }
+        return null;
     }
 
 

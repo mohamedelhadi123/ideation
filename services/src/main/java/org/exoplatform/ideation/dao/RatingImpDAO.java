@@ -13,8 +13,13 @@ public class RatingImpDAO extends GenericDAOJPAImpl<RatingEntity,Long> {
         query.setParameter("id",id);
         query.setParameter("DISLIKE",DISLIKE);
         return query.getResultList();
+            }
 
 
-
+    public List<RatingEntity> getStatusByIdAndUser( Long id,String user){
+        TypedQuery<RatingEntity> query = getEntityManager().createNamedQuery("Rating.getStatusByIdIdeaAndUser",RatingEntity.class);
+        query.setParameter("id",id);
+        query.setParameter("user",user);
+        return query.getResultList();
     }
 }

@@ -40,10 +40,44 @@ public class RatingRestService implements ResourceContainer {
                     .build();
         }
     }
+
+    @GET
+    @Path("/verif/{id}/{user}")
+    public Response getRatinguser(@PathParam("id") Long id,@PathParam("user") String user){
+        try{
+            List<RatingDTO> verifRating=ratingservice.getStatusByIdeaAndUser(id,user);
+            return Response.ok(verifRating, MediaType.APPLICATION_JSON).build();
+
+        }catch (Exception e) {
+
+            LOG.error("Error listing Rating verif ", e);
+
+            return Response.serverError()
+                    .entity("Error listing all Rating verif ")
+                    .build();
+        }
+
+    }
+
+
     @POST
+    @Path("/addrating")
+    public Response AddSimplRating(RatingDTO ratingdto){
+  try{
+      ratingdto=ratingservice.addRatingdto(ratingdto);
+      return Response.ok().entity(ratingdto).build();
+
+  }catch (Exception e) {
+      return Response.serverError()
+              .entity("Error adding new rating")
+              .build();
+  }
+    }
+
+
+  /*  @POST
     @Path("/addRating")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+
     public Response addRating(RatingDTO ratingDTO){
         try {
             ratingDTO=ratingservice.addRating(ratingDTO);
@@ -54,11 +88,14 @@ public class RatingRestService implements ResourceContainer {
                     .entity("Error adding new rating")
                     .build();
         }
+
+    }*/
+
+
+
     }
 
 
 
 
 
-
-}

@@ -3,80 +3,29 @@
   <component name="ChangeListManager">
     <list default="true" id="97abe59e-303d-4d5f-b377-03b324f70b6d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extension/ideation-extension.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/extension/target/ideation-extension-sources.jar" beforeDir="false" afterPath="$PROJECT_DIR$/extension/target/ideation-extension-sources.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extension/target/ideation-extension.war" beforeDir="false" afterPath="$PROJECT_DIR$/extension/target/ideation-extension.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extension/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/extension/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ideation.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packaging/ideation-packaging.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/packaging/target/ideation.zip" beforeDir="false" afterPath="$PROJECT_DIR$/packaging/target/ideation.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packaging/target/lib/ideation-services-1.1.x-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/packaging/target/lib/ideation-services-1.1.x-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packaging/target/webapps/ideation-extension.war" beforeDir="false" afterPath="$PROJECT_DIR$/packaging/target/webapps/ideation-extension.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packaging/target/webapps/ideation-portlets.war" beforeDir="false" afterPath="$PROJECT_DIR$/packaging/target/webapps/ideation-portlets.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packaging/target/webapps/ideation-vue-portlets.war" beforeDir="false" afterPath="$PROJECT_DIR$/packaging/target/webapps/ideation-vue-portlets.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portlets/ideation-portlets.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/portlets/target/generated-sources/annotations/juzu/metamodel.ser" beforeDir="false" afterPath="$PROJECT_DIR$/portlets/target/generated-sources/annotations/juzu/metamodel.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portlets/target/generated-sources/annotations/juzu/processor.log" beforeDir="false" afterPath="$PROJECT_DIR$/portlets/target/generated-sources/annotations/juzu/processor.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portlets/target/ideation-portlets-sources.jar" beforeDir="false" afterPath="$PROJECT_DIR$/portlets/target/ideation-portlets-sources.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portlets/target/ideation-portlets.war" beforeDir="false" afterPath="$PROJECT_DIR$/portlets/target/ideation-portlets.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portlets/target/ideation-portlets/WEB-INF/lib/pc-api-5.1.x-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/portlets/target/ideation-portlets/WEB-INF/lib/pc-api-5.1.x-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/portlets/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/portlets/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/ideation-services.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/CommentImpDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/CommentImpDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/FavoriteImpDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/FavoriteImpDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/IdeaImpDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/IdeaImpDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/RatingImpDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/RatingImpDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/CommentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/CommentDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/IdeaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/IdeaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/CommentEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/CommentEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/FavoriteEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/FavoriteEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/IdeaEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/IdeaEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/FavoritDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/FavoritDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/RatingDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/RatingDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/RatingEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/RatingEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/IdeaRestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/IdeaRestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/IdeaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/IdeaService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/Mapper/RatingMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/Mapper/RatingMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/RatingRestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/RatingRestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/RatingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/RatingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/src/main/resources/conf/portal/configuration.xml" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/resources/conf/portal/configuration.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/src/main/resources/db/changelog/ideations.db.changelog-1.0.0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/services/src/main/resources/db/changelog/ideations.db.changelog-1.0.0.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/target/classes/conf/portal/configuration.xml" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/conf/portal/configuration.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/classes/db/changelog/ideations.db.changelog-1.0.0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/db/changelog/ideations.db.changelog-1.0.0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/classes/exo-jpa-entities/entities.idx" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/exo-jpa-entities/entities.idx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dao/CommentImpDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dao/CommentImpDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dao/FavoriteImpDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dao/FavoriteImpDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dao/IdeaImpDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dao/IdeaImpDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dao/RatingImpDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dao/RatingImpDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dto/CommentDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dto/CommentDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dto/IdeaDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dto/IdeaDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/entities/CommentEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/entities/CommentEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/entities/FavoriteEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/entities/FavoriteEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/entities/IdeaEntity$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/entities/IdeaEntity$Status.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/entities/IdeaEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/entities/IdeaEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dto/FavoritDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dto/FavoritDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dto/RatingDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/dto/RatingDTO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/entities/RatingEntity$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/entities/RatingEntity$Status.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/entities/RatingEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/entities/RatingEntity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/service/rest/IdeaRestService.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/service/rest/IdeaRestService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/service/utils/IdeaService.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/service/utils/IdeaService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/service/Mapper/RatingMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/service/Mapper/RatingMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/service/rest/RatingRestService.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/service/rest/RatingRestService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/service/utils/RatingService.class" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/classes/org/exoplatform/ideation/service/utils/RatingService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/target/generated-sources/annotations/juzu/metamodel.ser" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/generated-sources/annotations/juzu/metamodel.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/target/generated-sources/annotations/juzu/processor.log" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/generated-sources/annotations/juzu/processor.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/target/ideation-services-1.1.x-SNAPSHOT-sources.jar" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/ideation-services-1.1.x-SNAPSHOT-sources.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/target/ideation-services-1.1.x-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/ideation-services-1.1.x-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/target/jcabi-ajc.log" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/jcabi-ajc.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/services/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/ideation-vue-portlets.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/src/main/webapp/vue-app/components/IdeaApp.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/src/main/webapp/vue-app/components/IdeaApp.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/src/main/webapp/vue-app/components/IdeaInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/src/main/webapp/vue-app/components/IdeaInfo.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/src/main/webapp/vue-app/components/IdeaPublished.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/src/main/webapp/vue-app/components/IdeaPublished.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/src/main/webapp/vue-app/components/tabs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/src/main/webapp/vue-app/components/tabs.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/src/main/webapp/vue-app/components/test.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/src/main/webapp/vue-app/components/test.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/target/ideation-vue-portlets.war" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/target/ideation-vue-portlets.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/target/ideation-vue-portlets/js/ideation.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/target/ideation-vue-portlets/js/ideation.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/target/ideation-vue-portlets/vue-app/components/IdeaPublished.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/target/ideation-vue-portlets/vue-app/components/IdeaPublished.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/target/ideation-vue-portlets/vue-app/components/tabs.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/target/ideation-vue-portlets/vue-app/components/tabs.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/target/ideation-vue-portlets/vue-app/components/test.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/target/ideation-vue-portlets/vue-app/components/test.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/target/ideation-vue-portlets/vue-app/components/zz.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-portlets/target/war/work/webapp-cache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vue-portlets/target/war/work/webapp-cache.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/vue-portlets/node_modules/" />
     <ignored path="$PROJECT_DIR$/vue-portlets/target/" />
@@ -95,70 +44,42 @@
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/Mapper/RatingMapper.java">
+        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/CommentEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="552">
-              <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+            <state relative-caret-position="221">
+              <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/CommentDTO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#983#984#0" expanded="true" />
+                <element signature="e#1008#1009#0" expanded="true" />
+                <element signature="e#1042#1043#0" expanded="true" />
+                <element signature="e#1070#1071#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/RatingRestService.java">
+        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/IdeaDTO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="674">
-              <caret line="61" selection-start-line="61" selection-end-line="61" />
+            <state relative-caret-position="459">
+              <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/src/main/resources/conf/portal/configuration.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="88" column="66" selection-start-line="88" selection-start-column="66" selection-end-line="88" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/FavRestService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="45" column="7" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="14" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#737#738#0" expanded="true" />
-                <element signature="e#806#807#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/RatingEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="22" column="26" lean-forward="true" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/CommentRestService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="767">
-              <caret line="48" column="11" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#933#934#0" expanded="true" />
+                <element signature="e#967#968#0" expanded="true" />
+                <element signature="e#995#996#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -167,26 +88,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/RatingDTO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/CommentEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/Mapper/CommentMapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="35" column="32" lean-forward="true" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+            <state relative-caret-position="340">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -195,16 +98,73 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/CommentDTO.java">
+        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/RatingService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+            <state relative-caret-position="495">
+              <caret line="49" column="63" selection-start-line="49" selection-start-column="63" selection-end-line="49" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#983#984#0" expanded="true" />
-                <element signature="e#1008#1009#0" expanded="true" />
-                <element signature="e#1042#1043#0" expanded="true" />
-                <element signature="e#1070#1071#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/RatingRestService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="44" column="11" selection-start-line="44" selection-start-column="11" selection-end-line="44" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/RatingImpDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/Mapper/RatingMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="697">
+              <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/RatingEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/FavoritDTO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="6" column="48" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#740#741#0" expanded="true" />
+                <element signature="e#765#766#0" expanded="true" />
+                <element signature="e#799#800#0" expanded="true" />
+                <element signature="e#827#828#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -222,6 +182,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>name</find>
+      <find>rating</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -252,19 +213,19 @@
         <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/IdeaRestService.java" />
         <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/IdeaEntity.java" />
         <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/IdeaService.java" />
-        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/RatingEntity.java" />
-        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/RatingImpDAO.java" />
-        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/Mapper/RatingMapper.java" />
-        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/RatingRestService.java" />
-        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/RatingService.java" />
-        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/RatingDTO.java" />
-        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/FavoritDTO.java" />
         <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/Mapper/FavoritMapper.java" />
         <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/FavoriteEntity.java" />
         <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/FavoriteImpDAO.java" />
         <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/FavService.java" />
-        <option value="$PROJECT_DIR$/services/src/main/resources/conf/portal/configuration.xml" />
         <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/FavRestService.java" />
+        <option value="$PROJECT_DIR$/services/src/main/resources/conf/portal/configuration.xml" />
+        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/FavoritDTO.java" />
+        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/Mapper/RatingMapper.java" />
+        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/RatingDTO.java" />
+        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/RatingEntity.java" />
+        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/RatingImpDAO.java" />
+        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/RatingService.java" />
+        <option value="$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/RatingRestService.java" />
       </list>
     </option>
   </component>
@@ -420,30 +381,6 @@
               <item name="service" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="utils" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
-            <path>
-              <item name="ideation" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="ideation-services" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ideation" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="ideation-services" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="conf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ideation" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="ideation-services" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="resources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="conf" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="portal" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -454,7 +391,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556207985986" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556228431630" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -504,16 +441,19 @@
       <workItem from="1556190322542" duration="1856000" />
       <workItem from="1556194251927" duration="4508000" />
       <workItem from="1556199743467" duration="7793000" />
+      <workItem from="1556215413102" duration="462000" />
+      <workItem from="1556216923908" duration="1317000" />
+      <workItem from="1556224865316" duration="3722000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65311000" />
+    <option name="totallyTimeSpent" value="70812000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3161876" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33131617" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Web" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -678,28 +618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/CowokerDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#472#473#0" expanded="true" />
-            <element signature="e#497#498#0" expanded="true" />
-            <element signature="e#531#532#0" expanded="true" />
-            <element signature="e#559#560#0" expanded="true" />
-            <element signature="e#594#595#0" expanded="true" />
-            <element signature="e#625#626#0" expanded="true" />
-            <element signature="e#673#674#0" expanded="true" />
-            <element signature="e#713#714#0" expanded="true" />
-            <element signature="e#745#746#0" expanded="true" />
-            <element signature="e#775#776#0" expanded="true" />
-            <element signature="e#819#820#0" expanded="true" />
-            <element signature="e#857#858#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/IdeaService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -764,33 +682,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/IdeaDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#933#934#0" expanded="true" />
-            <element signature="e#967#968#0" expanded="true" />
-            <element signature="e#995#996#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/Mapper/FavoritMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
           <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/RatingImpDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="44" selection-start-line="13" selection-start-column="44" selection-end-line="13" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -804,29 +699,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/FavoritDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-          <folding>
-            <element signature="e#397#398#0" expanded="true" />
-            <element signature="e#437#438#0" expanded="true" />
-            <element signature="e#469#470#0" expanded="true" />
-            <element signature="e#502#503#0" expanded="true" />
-            <element signature="e#533#534#0" expanded="true" />
-            <element signature="e#579#580#0" expanded="true" />
-            <element signature="e#619#620#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/FavoriteEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -847,26 +719,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/CommentService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/RatingService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="37" column="21" selection-start-line="37" selection-start-column="21" selection-end-line="37" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/FavService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="376">
@@ -877,38 +729,107 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/FavRestService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="45" column="7" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/FavoriteEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/CowokerDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="12" column="34" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#472#473#0" expanded="true" />
+            <element signature="e#497#498#0" expanded="true" />
+            <element signature="e#531#532#0" expanded="true" />
+            <element signature="e#559#560#0" expanded="true" />
+            <element signature="e#594#595#0" expanded="true" />
+            <element signature="e#625#626#0" expanded="true" />
+            <element signature="e#673#674#0" expanded="true" />
+            <element signature="e#713#714#0" expanded="true" />
+            <element signature="e#745#746#0" expanded="true" />
+            <element signature="e#775#776#0" expanded="true" />
+            <element signature="e#819#820#0" expanded="true" />
+            <element signature="e#857#858#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/CommentRestService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/Mapper/CommentMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="25" column="18" lean-forward="true" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/CommentService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="38" lean-forward="true" selection-start-line="24" selection-start-column="2" selection-end-line="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/services/src/main/resources/conf/portal/configuration.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="88" column="66" selection-start-line="88" selection-start-column="66" selection-end-line="88" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/RatingEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="22" column="26" lean-forward="true" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/RatingDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="39" column="32" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="32" />
+        <state relative-caret-position="1062">
+          <caret line="94" column="32" selection-start-line="94" selection-start-column="32" selection-end-line="94" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/CommentEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="46" />
+        <state relative-caret-position="221">
+          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/FavoritDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="48" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#740#741#0" expanded="true" />
+            <element signature="e#765#766#0" expanded="true" />
+            <element signature="e#799#800#0" expanded="true" />
+            <element signature="e#827#828#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/CommentDTO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        <state relative-caret-position="51">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#983#984#0" expanded="true" />
@@ -919,20 +840,60 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/Mapper/CommentMapper.java">
+    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/IdeaDTO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="35" column="32" lean-forward="true" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+        <state relative-caret-position="459">
+          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#933#934#0" expanded="true" />
+            <element signature="e#967#968#0" expanded="true" />
+            <element signature="e#995#996#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/Mapper/RatingMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
+        <state relative-caret-position="697">
+          <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dto/RatingDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/entities/RatingEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/dao/RatingImpDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/utils/RatingService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="49" column="63" selection-start-line="49" selection-start-column="63" selection-end-line="49" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -941,30 +902,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/RatingRestService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="674">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/FavRestService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="45" column="7" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#737#738#0" expanded="true" />
-            <element signature="e#806#807#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/src/main/java/org/exoplatform/ideation/service/rest/CommentRestService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="767">
-          <caret line="48" column="11" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="31" />
+        <state relative-caret-position="294">
+          <caret line="44" column="11" selection-start-line="44" selection-start-column="11" selection-end-line="44" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

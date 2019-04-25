@@ -88,6 +88,9 @@ for more details. You should have received a copy of the GNU Lesser General Publ
     <component>
         <type>org.exoplatform.ideation.service.rest.FavRestService</type>
     </component>
+    <component>
+        <type>org.exoplatform.ideation.dto.RatingDTO</type>
+    </component>
     
     <external-component-plugins>
         <target-component>org.exoplatform.commons.api.persistence.DataInitializer</target-component>
