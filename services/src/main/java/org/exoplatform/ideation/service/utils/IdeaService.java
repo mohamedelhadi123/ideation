@@ -48,6 +48,17 @@ public class IdeaService {
         }
         return null;
     }
+   public IdeaDTO getIdea(Long id){
+        try {
+            IdeaEntity idea=ideaDao.find(id);
+            if (idea!=null){
+                return ideaMapper.ideaTOideaDTO(idea);
+            }
+        }catch (Exception e) {
+            LOG.error("Error to find Idea published by user", e.getMessage());
+        }
+       return null;
+   }
 
 @ExoTransactional
 public  IdeaDTO addIdea(IdeaDTO ideaDTO){

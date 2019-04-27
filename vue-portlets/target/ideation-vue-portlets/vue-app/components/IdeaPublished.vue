@@ -1,46 +1,46 @@
 <template>
-<v-container>
+  <v-container>
+    <div>
+      <v-stepper labels>
+        <v-stepper-header>
+          <v-stepper-step step="3" complete>
+               <v-flex xs12 sm3>
+            <v-btn flat icon color="green">
+              <v-icon>cached</v-icon>
+                Voir mes idées
 
-  <div>
-
-   <v-stepper labels>
-    <v-stepper-header>
-      <v-stepper-step step="3" complete>
-         
-     <v-checkbox v-model="checkbox1" :label="'Mes Idées'" color="indigo"></v-checkbox>
-      </v-stepper-step>
-    </v-stepper-header>
-   </v-stepper>
-      <v-expansion-panel >
-        <v-expansion-panel-content v-for="project in projects" :key="project.title">
-          <div slot="header" class="py-1">{{ project.title }}</div>
+            </v-btn>
+          </v-flex>
+          </v-stepper-step>
+        </v-stepper-header>
+      </v-stepper>
+      <v-expansion-panel>
+        <v-expansion-panel-content v-for="d in donnes" :key="d.id">
+          <div slot="header" class="py-1">{{ d.title }}</div>
           <v-card>
             <v-card-text class="px-4 grey--text">
-              <div class="font-weight-bold">Due by {{ project.due }}</div>
-              <div>{{ project.content }}  </div>
-              <router-link to="/ideainfo">Lire la suite ...</router-link>
+             <div>{{ d.description }}  </div>
 
-            </v-card-text>
-            
+              <div class="font-weight-bold">créer par {{d.user}} le {{ d.createdTime.year }}</div>
+              <a v-bind:href="'http://127.0.0.1:8080/portal/intranet/ideation/#/ideainfo?id='+ d.id">Lire la suite ...</a>
+                           </v-card-text>
           </v-card>
-         
         </v-expansion-panel-content>
       </v-expansion-panel>
-    
-  </div>
-</v-container>
-
+    </div>
+  </v-container>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     
   data() {
     return {
-      donnes:null,
+      donnes:[],
      dialog: false,
 
-       checkbox1: false,
         
       projects: [
         { title: 'Design a new website', person: 'The Net Ninja', due: '1st Jan 2019', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
@@ -49,7 +49,20 @@ export default {
         { title: 'Create a community forum', person: 'Gouken', due: '20th Oct 2018', status: 'overdue', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
       ]
     }
+  },  mounted () { 
+    
+    axios
+      .get('http://127.0.0.1:8080/portal/rest/idea/json')
+      .then(response => { this.donnes=response.data;
+        
+      })
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
   }
+     
+
 }
 </script>
 <style>

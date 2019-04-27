@@ -49,7 +49,22 @@ public class IdeaRestService implements ResourceContainer {
                     .build();
         }
     }
+   @GET
+   @Path("/getone/{id}")
+   public Response getone(@PathParam("id") Long id){
+        try {
+            IdeaDTO findoneidea=ideaService.getIdea(id);
+            return Response.ok(findoneidea, MediaType.APPLICATION_JSON).build();
 
+        } catch (Exception e) {
+
+            LOG.error("Error listing all Idea Published ", e);
+
+            return Response.serverError()
+                    .entity("Error listing all Idea Published")
+                    .build();
+        }
+   }
     @GET
     @Path("allpublishedbyuser/{PUBLISHED}/{user}")
     public Response getAllPublishedByUser(@PathParam("PUBLISHED") IdeaEntity.Status PUBLISHED,@PathParam("user") String user) {

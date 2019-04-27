@@ -1,10 +1,8 @@
 <template>
- 
   <div id="IdeaApp">
-
-     <tabs/>
-     <router-view />
-    </div>
+    <tabs />
+    <router-view />
+  </div>
 </template>
 
 

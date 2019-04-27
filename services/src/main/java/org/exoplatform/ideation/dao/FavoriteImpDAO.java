@@ -15,4 +15,17 @@ public class FavoriteImpDAO extends GenericDAOJPAImpl<FavoriteEntity,Long> {
         return query.getResultList();
 
     }
+    public List<FavoriteEntity> getFavByUserAndId(String  user ,Long id){
+        TypedQuery<FavoriteEntity> query = getEntityManager().createNamedQuery("Fav.getAllFavByUserAndId", FavoriteEntity.class);
+       query.setParameter("user",user);
+        query.setParameter("id",id);
+        return query.getResultList();
+
+    }
+    public List<FavoriteEntity> getFavById(Long id){
+        TypedQuery<FavoriteEntity> query = getEntityManager().createNamedQuery("Fav.getAllFavById", FavoriteEntity.class);
+        query.setParameter("id",id);
+        return query.getResultList();
+
+    }
 }

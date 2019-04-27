@@ -41,7 +41,34 @@ public class FavRestService implements ResourceContainer {
 
     }
     }
+    @GET@Path("/verif/{user}/{id}")
+    public Response getVerif(@PathParam("user") String user, @PathParam("id") Long id) {
+        try {
+            List<FavoritDTO> allFavByUser = favService.getallbyidANDuser(user, id);
+            return Response.ok(allFavByUser, MediaType.APPLICATION_JSON).build();
 
+
+        } catch (Exception e) {
+            LOG.error("Error listing all fav ", e);
+            return Response.serverError()
+                    .entity("Error listing all fav")
+                    .build();
+        }
+    }
+
+    @GET@Path("/getbyidea/{id}")
+    public Response getByIdea(@PathParam("id") Long id){
+        try { List<FavoritDTO> allFavByUser = favService.getallbyid(id);
+            return Response.ok(allFavByUser, MediaType.APPLICATION_JSON).build();
+
+
+        } catch (Exception e) {
+            LOG.error("Error listing all fav ", e);
+            return Response.serverError()
+                    .entity("Error listing all fav")
+                    .build();
+        }
+    }
 @POST
 @Path("/addfav")
 public Response addFav(FavoritDTO favoritDTO){

@@ -28,11 +28,35 @@ public class FavService {
                 return  favoritMapper.FavsToFavDTOs(favoriteEntities);
             }
         }catch (Exception e){
-            LOG.error("Error to find Comment by idea", e.getMessage());
+            LOG.error("Error to find fav by idea", e.getMessage());
 
         }
         return null;
 
+    }
+    public List<FavoritDTO> getallbyid(Long id){
+        try {
+            List<FavoriteEntity> favs=favoriteImpDAO.getFavById(id);
+            if (favs!=null){
+                return  favoritMapper.FavsToFavDTOs(favs);
+            }
+        }catch (Exception e){
+            LOG.error("Error to find fav by idea", e.getMessage());
+
+        }
+        return null;
+    }
+    public List<FavoritDTO> getallbyidANDuser(String user,Long id){
+        try {
+            List<FavoriteEntity> favs=favoriteImpDAO.getFavByUserAndId(user,id);
+            if (favs!=null){
+                return  favoritMapper.FavsToFavDTOs(favs);
+            }
+        }catch (Exception e){
+            LOG.error("Error to find fav by idea", e.getMessage());
+
+        }
+        return null;
     }
     @ExoTransactional
     public FavoritDTO addFav(FavoritDTO favoritDTO){

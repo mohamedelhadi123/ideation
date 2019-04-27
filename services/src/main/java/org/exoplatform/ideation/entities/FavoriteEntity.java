@@ -8,7 +8,11 @@ import java.io.Serializable;
 @ExoEntity
 @Table(name = "IDEATION_FAV")
 @NamedQueries({
-        @NamedQuery(name = "Fav.getAllFavByUser", query = "select f from fav f where f.user=:user")
+        @NamedQuery(name = "Fav.getAllFavByUser", query = "select f from fav f where f.user=:user"),
+        @NamedQuery(name = "Fav.getAllFavByUserAndId", query = "select f from fav f where f.user=:user AND f.idea.id=:id"),
+        @NamedQuery(name = "Fav.getAllFavById", query = "select f from fav f where f.idea.id=:id")
+
+
 })
 public class FavoriteEntity implements Serializable {
 
