@@ -10,6 +10,8 @@
           <string>WEB-INF/gatein-resources.xml</string>
           <string>WEB-INF/portlet.xml</string>
           <string>WEB-INF/web.xml</string>
+          <string>WEB-INF/classes/juzu/metamodel.ser</string>
+          <string>WEB-INF/classes/juzu/processor.log</string>
           <string>WEB-INF/classes/locale/portlet/ideation.properties</string>
           <string>WEB-INF/classes/locale/portlet/ideation_en.properties</string>
           <string>WEB-INF/classes/locale/portlet/ideation_fr.properties</string>

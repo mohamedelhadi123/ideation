@@ -1,15 +1,22 @@
 package org.exoplatform.ideation.service.Mapper;
 
+import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.ideation.dto.FavoritDTO;
 import org.exoplatform.ideation.entities.FavoriteEntity;
 import org.exoplatform.ideation.entities.IdeaEntity;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.social.core.manager.IdentityManager;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class FavoritMapper {
+    protected IdentityManager identityManager = null;
+
     public FavoritMapper() {
+        identityManager = CommonsUtils.getService(IdentityManager.class);
+
     }
 
     public FavoritDTO FavToFavDTO(FavoriteEntity favoriteEntity){return new FavoritDTO(favoriteEntity);}
@@ -25,8 +32,10 @@ public class FavoritMapper {
             if(favoritDTO== null){
                 return null;
             }else {
+                String user = ConversationState.getCurrent().getIdentity().getUserId();
+
                 FavoriteEntity favoriteEntity=new FavoriteEntity();
-                favoriteEntity.setUser(favoritDTO.getUser());
+                favoriteEntity.setUser(user);
                 IdeaEntity idea=this.IdeaFormLongId(favoritDTO.getId_Ideaf());
                 favoriteEntity.setIdea(idea);
                 return favoriteEntity;

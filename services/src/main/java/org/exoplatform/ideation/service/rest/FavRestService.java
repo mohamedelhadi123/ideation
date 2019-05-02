@@ -7,6 +7,8 @@ import org.exoplatform.ideation.service.utils.FavService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.social.core.manager.IdentityManager;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -17,18 +19,24 @@ import java.util.List;
 @Path("/fav")
 @Produces(MediaType.APPLICATION_JSON)
 public class FavRestService implements ResourceContainer {
+    protected IdentityManager identityManager = null;
+
     private static Log LOG = ExoLogger.getLogger(FavoriteEntity.class);
     @Inject
     FavService favService;
 
     public FavRestService() {
         favService= CommonsUtils.getService(FavService.class);
+        identityManager = CommonsUtils.getService(IdentityManager.class);
+
     }
 
     @GET
-    @Path("/getfavuser/{user}")
-    public Response getallfavByUser(@PathParam("user") String user){
+    @Path("/getfavuser")
+    public Response getallfavByUser(){
     try {
+        String user = ConversationState.getCurrent().getIdentity().getUserId();
+
         List<FavoritDTO> allFavByUser=favService.getAllFavByUser(user);
         return Response.ok(allFavByUser, MediaType.APPLICATION_JSON).build();
 
@@ -41,9 +49,11 @@ public class FavRestService implements ResourceContainer {
 
     }
     }
-    @GET@Path("/verif/{user}/{id}")
-    public Response getVerif(@PathParam("user") String user, @PathParam("id") Long id) {
+    @GET@Path("/verif/{id}")
+    public Response getVerif( @PathParam("id") Long id) {
         try {
+            String user = ConversationState.getCurrent().getIdentity().getUserId();
+
             List<FavoritDTO> allFavByUser = favService.getallbyidANDuser(user, id);
             return Response.ok(allFavByUser, MediaType.APPLICATION_JSON).build();
 

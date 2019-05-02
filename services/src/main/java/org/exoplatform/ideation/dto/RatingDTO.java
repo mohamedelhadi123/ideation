@@ -10,14 +10,22 @@ public class RatingDTO implements Serializable {
     private RatingEntity.Status status;
     private String user;
     private Long id_idear;
+    private Long id;
 
     public RatingDTO(RatingEntity ratingEntity) {
+        this.id=ratingEntity.getId();
        this.status=ratingEntity.getStatus();
        this.user=ratingEntity.getUser();
        this.id_idear=ratingEntity.getIdea().getId();
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public RatingEntity.Status getStatus() {
         return status;

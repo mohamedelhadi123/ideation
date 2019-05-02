@@ -70,7 +70,7 @@ export default {
     showMyIdeaPublished(){
       this.donnes=null;
        axios
-      .get('http://127.0.0.1:8080/portal/rest/idea/allpublishedbyuser/PUBLISHED/Ahmed')
+      .get('http://127.0.0.1:8080/portal/rest/idea/allpublishedbyuser/PUBLISHED')
       .then(response => { this.donnes=response.data;
         
       })

@@ -63,23 +63,6 @@ public class RatingService {
     }
 
 
-    public RatingDTO addRatingdto(RatingDTO ratingDTO){
-        if(ratingDTO!=null){
-            try {
-                 RatingEntity ratingEntity=new RatingEntity();
-                IdeaEntity ideae=ideaImpDAO.find(ratingDTO.getId_idear());
-               ratingEntity.setIdea(ideae);
-              ratingEntity.setUser(ratingDTO.getUser());
-              ratingEntity.setStatus(ratingDTO.getStatus());
-              return ratingDTO;
-            }catch (Exception e){
-                LOG.error("errer to add");
-            }
-
-        }
-        return null;
-    }
-
 
 
 

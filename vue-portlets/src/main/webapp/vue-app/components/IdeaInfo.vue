@@ -3,19 +3,19 @@
     <v-stepper labels>
       <v-stepper-header>
         <v-stepper-step step="3" complete>
-          {{ idea.titre }}     
+          {{ this.donnesidea.title }}     
         </v-stepper-step>
         <v-stepper-step step="3" complete>
-          <router-link to="/ideaclass">voir classement</router-link>
+          <router-link to="/ideaclass">voir classement </router-link>
         </v-stepper-step>
       </v-stepper-header>
     </v-stepper>
     <v-card>
       <v-card-text class="tet">
-        <div>{{ idea.description }}  </div>
+        <div>{{ this.donnesidea.description }}  </div>
       </v-card-text>
       <v-card-text>
-        <div class="font-weight-bold">créer le  {{ idea.waket }} par {{ idea.createur }}</div>
+        <div class="font-weight-bold">créer le  {{ this.donnesidea.createdTime }} par {{ this.donnesidea.user }}</div>
       </v-card-text>
       <v-stepper labels>
         <v-stepper-header>
@@ -27,7 +27,7 @@
                   icon
                   color="pink"
                   :disabled=this.ok>
-                  {{ idea.fav }}
+                  {{ this.favlength}}
                   <v-icon>favorite</v-icon>
                 </v-btn>
               </v-flex>
@@ -41,11 +41,13 @@
                   {{ this.like }}
                   <v-icon>thumb_up</v-icon>
                 </v-btn>
+                
               </v-flex>
               <v-flex xs12 sm3>
                 <v-btn
                   flat
                   icon
+                  @click="addDisLike"
                   color="deep-orange"
                   :disabled=this.okDislike>
                   {{ this.dislike }}
@@ -88,22 +90,24 @@ export default {
     data(){
         return{
            datal:{
-            status:'',
-            user:'',
-            id_idea:null
+            status:"",
+            user:"",
+            id_idear:window.location.href.substring(61,window.location.href.length)
           },
           okFav:false,
           okLike:false,
           okDislike:false,
           like:null,
           dislike:null,
+          favlength:null,
          
           donnes:[],
           commentDonne:[],
+          donnesidea:[],
           commentTextt:'',
           
         datajson:{
-             user:'exoPlatform26',
+             user:'',
              commentText:'',
              id_ideac:window.location.href.substring(61,window.location.href.length),
              createdTime:'' 
@@ -127,11 +131,29 @@ export default {
 
 this.verifyRating();
      
+     axios
+      .get('http://127.0.0.1:8080/portal/rest/idea/getone/'+this.no)
+      .then(response => { this.donnesidea=response.data;
+      console.log(this.donnesidea);
+        
+      })
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
 
-     
-axios
+     axios
       .get('http://127.0.0.1:8080/portal/rest/rating/getratingbyidea/'+this.no+'/DISLIKE')
       .then(response => { this.dislike=response.data.length;
+        
+      })
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
+axios
+      .get('http://127.0.0.1:8080/portal/rest/fav/getbyidea/'+this.no)
+      .then(response => { this.favlength=response.data.length;
         
       })
       .catch(error => {
@@ -162,7 +184,7 @@ axios
     addComment(){
     this.datajson.commentText=this.commentTextt;
     this.datajson.createdTime=new Date();
-
+console.log(this.datajson);
        axios.post('http://127.0.0.1:8080/portal/rest/comment/add', this.datajson, {
     headers: {
       'Content-type': 'application/json',
@@ -177,14 +199,14 @@ axios
     },verifyRating(){
         const sat=null;
       axios
-      .get('http://127.0.0.1:8080/portal/rest/rating/verif/'+this.no+'/Alioua')
+      .get('http://127.0.0.1:8080/portal/rest/rating/verif/'+this.no )
       .then(response => { if(response.data.length===0){
         this.okLike=false;
         this.okDislike=false;
       }else if(response.data[0].status==="LIKE"){
         this.okLike=true;
         console.log("ok ******"+this.okLike);
-      }else if(response.data.status==="DISLIKE"){
+      }else if(response.data[0].status==="DISLIKE"){
         this.okDislike=true;
         console.log("ok dis *********"+this.okDislike);
       }
@@ -198,9 +220,9 @@ axios
 
 
     },addLike(){
-      this.datal.status="LIKE";
-      this.datal.id_idear=window.location.href.substring(61,window.location.href.length);
+     this.datal.status="LIKE";
       this.datal.user="exoLikes";
+      console.log("*******"+this.$route.query.id);
       console.log(this.datal);
         axios.post('http://127.0.0.1:8080/portal/rest/rating/addrating', this.datal, {
     headers: {
@@ -208,6 +230,19 @@ axios
     }
    }) .then(response => {this.like++;
    this.okLike=true})
+    .catch(e => {
+      this.errors.push(e)
+    })
+
+    },addDisLike(){
+     this.datal.status="DISLIKE";
+      console.log(this.datal);
+        axios.post('http://127.0.0.1:8080/portal/rest/rating/addrating', this.datal, {
+    headers: {
+      'Content-type': 'application/json',
+    }
+   }) .then(response => {this.dislike++;
+   this.okDislike=true})
     .catch(e => {
       this.errors.push(e)
     })

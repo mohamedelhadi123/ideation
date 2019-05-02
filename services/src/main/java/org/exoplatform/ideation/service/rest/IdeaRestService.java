@@ -6,6 +6,11 @@ import org.exoplatform.ideation.service.utils.IdeaService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
+import org.exoplatform.social.core.manager.IdentityManager;
+import org.exoplatform.social.core.identity.model.Identity;
+
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -20,6 +25,7 @@ import java.util.List;
 public class IdeaRestService implements ResourceContainer {
 
 
+    protected IdentityManager identityManager = null;
 
     private static Log LOG = ExoLogger.getLogger(IdeaRestService.class);
 
@@ -28,6 +34,7 @@ public class IdeaRestService implements ResourceContainer {
 
     public IdeaRestService() {
         ideaService= CommonsUtils.getService(IdeaService.class);
+        identityManager = CommonsUtils.getService(IdentityManager.class);
     }
 
     @GET
@@ -37,8 +44,12 @@ public class IdeaRestService implements ResourceContainer {
 
         try {
             List<IdeaDTO> allIdeaPublished = ideaService.getIdeaPublished(PUBLISHED);
+            String authenticatedUser = ConversationState.getCurrent().getIdentity().getUserId();
 
+            Identity currentUser = CommonsUtils.getService(IdentityManager.class).getOrCreateIdentity(OrganizationIdentityProvider.NAME, authenticatedUser, true);
             return Response.ok(allIdeaPublished, MediaType.APPLICATION_JSON).build();
+
+
 
         } catch (Exception e) {
 
@@ -66,9 +77,12 @@ public class IdeaRestService implements ResourceContainer {
         }
    }
     @GET
-    @Path("allpublishedbyuser/{PUBLISHED}/{user}")
-    public Response getAllPublishedByUser(@PathParam("PUBLISHED") IdeaEntity.Status PUBLISHED,@PathParam("user") String user) {
+    @Path("allpublishedbyuser/{PUBLISHED}")
+    public Response getAllPublishedByUser(@PathParam("PUBLISHED") IdeaEntity.Status PUBLISHED) {
         try {
+            String user = ConversationState.getCurrent().getIdentity().getUserId();
+
+
             List<IdeaDTO> allIdeaPublishedByUser = ideaService.getIdeaPublishedByUser(PUBLISHED, user);
             return Response.ok(allIdeaPublishedByUser, MediaType.APPLICATION_JSON).build();
 

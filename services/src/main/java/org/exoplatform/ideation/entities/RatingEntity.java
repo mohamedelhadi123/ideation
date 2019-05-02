@@ -21,6 +21,7 @@ public class RatingEntity implements Serializable {
 
     @Id
     @Column(name = "RATE_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long  id;
     @Column(name = "USER")
     private String user;

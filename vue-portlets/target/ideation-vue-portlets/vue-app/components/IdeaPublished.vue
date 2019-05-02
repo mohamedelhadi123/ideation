@@ -5,15 +5,20 @@
         <v-stepper-header>
           <v-stepper-step step="3" complete>
                <v-flex xs12 sm3>
-            <v-btn flat icon color="green">
+            <v-btn flat icon color="green" @click="showMyIdeaPublished" >
               <v-icon>cached</v-icon>
                 Voir mes idées
-
+            </v-btn>
+            <v-btn flat icon color="green" @click="showMyIdeaPublished" >
+              <v-icon>cached</v-icon>
+                Voir mes idées
             </v-btn>
           </v-flex>
+       
           </v-stepper-step>
         </v-stepper-header>
       </v-stepper>
+     
       <v-expansion-panel>
         <v-expansion-panel-content v-for="d in donnes" :key="d.id">
           <div slot="header" class="py-1">{{ d.title }}</div>
@@ -21,7 +26,7 @@
             <v-card-text class="px-4 grey--text">
              <div>{{ d.description }}  </div>
 
-              <div class="font-weight-bold">créer par {{d.user}} le {{ d.createdTime.year }}</div>
+              <div class="font-weight-bold">créer par {{d.user}} le {{ d.createdTime }}</div>
               <a v-bind:href="'http://127.0.0.1:8080/portal/intranet/ideation/#/ideainfo?id='+ d.id">Lire la suite ...</a>
                            </v-card-text>
           </v-card>
@@ -52,7 +57,7 @@ export default {
   },  mounted () { 
     
     axios
-      .get('http://127.0.0.1:8080/portal/rest/idea/json')
+      .get('http://127.0.0.1:8080/portal/rest/idea/all/PUBLISHED')
       .then(response => { this.donnes=response.data;
         
       })
@@ -60,6 +65,20 @@ export default {
         console.log(error)
         this.errored = true
       })
+      
+  }, methods:{
+    showMyIdeaPublished(){
+      this.donnes=null;
+       axios
+      .get('http://127.0.0.1:8080/portal/rest/idea/allpublishedbyuser/PUBLISHED')
+      .then(response => { this.donnes=response.data;
+        
+      })
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
+    }
   }
      
 

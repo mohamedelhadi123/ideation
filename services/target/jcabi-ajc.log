@@ -1,4 +1,4 @@
-Sat Apr 27 01:31:42 WAT 2019
+Tue Apr 30 17:14:05 WAT 2019
 C:\Users\Med Hadi\.m2\repository\com\googlecode\mp4parser\isoparser\1.0-RC-1\isoparser-1.0-RC-1.jar!com\googlecode\mp4parser\RequiresParseDetailAspect.class [warning] can not build thisJoinPoint lazily for this advice since it has no suitable guard [Xlint:noGuardForLazyTjp]
 	
 org\exoplatform\ideation\service\utils\CommentService.java:27 [warning] can not implement lazyTjp on this joinpoint method-execution(org.exoplatform.ideation.dto.CommentDTO org.exoplatform.ideation.service.utils.CommentService.addComment(org.exoplatform.ideation.dto.CommentDTO)) because around advice is used [Xlint:canNotImplementLazyTjp]
