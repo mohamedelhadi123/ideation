@@ -26,7 +26,8 @@
                   flat
                   icon
                   color="pink"
-                  :disabled=this.ok>
+                  @click="addFavori"
+                  :disabled=this.okFav>
                   {{ this.favlength}}
                   <v-icon>favorite</v-icon>
                 </v-btn>
@@ -92,7 +93,7 @@ export default {
            datal:{
             status:"",
             user:"",
-            id_idear:window.location.href.substring(61,window.location.href.length)
+            id_idear:this.$route.query.id
           },
           okFav:false,
           okLike:false,
@@ -109,14 +110,17 @@ export default {
         datajson:{
              user:'',
              commentText:'',
-             id_ideac:window.location.href.substring(61,window.location.href.length),
+             id_ideac:this.$route.query.id,
              createdTime:'' 
 
 
 
           },
+          datajsonfav:{
+            id_Ideaf:this.$route.query.id,
+          },
          
-          no:window.location.href.substring(61,window.location.href.length),
+          no:this.$route.query.id,
      items: [
       { message: 'bravoo !!' ,id:"1",name:"Ahmed"},
       { message: 'good frd .. ;) ',id:"2",name:'Mohamed' }
@@ -180,11 +184,12 @@ axios
         this.errored = true
       })
       
+      
   } ,methods:{
     addComment(){
     this.datajson.commentText=this.commentTextt;
     this.datajson.createdTime=new Date();
-console.log(this.datajson);
+    console.log(this.datajson);
        axios.post('http://127.0.0.1:8080/portal/rest/comment/add', this.datajson, {
     headers: {
       'Content-type': 'application/json',
@@ -217,11 +222,23 @@ console.log(this.datajson);
         this.errored = true
       })
     
+        axios
+      .get('http://127.0.0.1:8080/portal/rest/fav/verif/'+this.no)
+      .then(response => { if(response.data.length===0){
+        this.okFav=false;
+      }else {
+        this.okFav=true;
+      }
+        
+      })
+      .catch(error => {
+        console.log(error)
+        this.errored = true
+      })
 
 
     },addLike(){
      this.datal.status="LIKE";
-      this.datal.user="exoLikes";
       console.log("*******"+this.$route.query.id);
       console.log(this.datal);
         axios.post('http://127.0.0.1:8080/portal/rest/rating/addrating', this.datal, {
@@ -243,6 +260,18 @@ console.log(this.datajson);
     }
    }) .then(response => {this.dislike++;
    this.okDislike=true})
+    .catch(e => {
+      this.errors.push(e)
+    })
+
+    },addFavori(){
+      console.log(this.datajsonfav);
+ axios.post('http://127.0.0.1:8080/portal/rest/fav/addfav', this.datajsonfav, {
+    headers: {
+      'Content-type': 'application/json',
+    }
+   }) .then(response => {this.favlength++;
+   this.okFav=true})
     .catch(e => {
       this.errors.push(e)
     })
