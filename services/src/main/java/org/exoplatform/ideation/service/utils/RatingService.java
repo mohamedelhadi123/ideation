@@ -27,9 +27,9 @@ public class RatingService {
 
     }
 
-    public List<RatingDTO> getStatusByIdeaAndStatus(Long id,RatingEntity.Status DISLIKE){
+    public List<RatingDTO> getStatusByIdeaAndStatus(Long id,RatingEntity.Status status){
         try {
-            List<RatingEntity> ratings=ratingdao.getStatusById(id,DISLIKE);
+            List<RatingEntity> ratings=ratingdao.getStatusByIdea(id,status);
             if(ratings!=null){
                 return ratingMapper.RatingsToRatingsDTOS(ratings);
             }
@@ -42,7 +42,7 @@ public class RatingService {
 
     public List<RatingDTO> getStatusByIdeaAndUser(Long id,String user){
         try{
-            List<RatingEntity> ratings=ratingdao.getStatusByIdAndUser(id,user);
+            List<RatingEntity> ratings=ratingdao.getStatusByIdeaAndUser(id,user);
             if (ratings!=null){
                 return  ratingMapper.RatingsToRatingsDTOS(ratings);
             }
@@ -66,7 +66,7 @@ public class RatingService {
 
 
 
-    }
+}
 
 
 

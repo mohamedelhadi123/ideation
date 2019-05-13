@@ -23,11 +23,11 @@ public class FavoritMapper {
 
     public List<FavoritDTO> FavsToFavDTOs(List<FavoriteEntity> favs){
         return favs.stream()
-                 .filter(Objects::nonNull)
+                .filter(Objects::nonNull)
                 .map(this::FavToFavDTO)
                 .collect(Collectors.toList());
     }
-   public FavoriteEntity FavdtoTofav(FavoritDTO favoritDTO){
+    public FavoriteEntity FavdtoTofav(FavoritDTO favoritDTO){
         try{
             if(favoritDTO== null){
                 return null;
@@ -44,8 +44,8 @@ public class FavoritMapper {
         }catch (Exception pe) {
             pe.printStackTrace();
         }
-       return null;
-   }
+        return null;
+    }
 
 
 

@@ -10,13 +10,12 @@ public class FavoritDTO implements Serializable {
     private Long id;
 
     public FavoritDTO(FavoriteEntity favoriteEntity) {
-        this.id=favoriteEntity.getId();
+        this.id = favoriteEntity.getId();
         this.user = favoriteEntity.getUser();
         this.id_Ideaf = favoriteEntity.getIdea().getId();
     }
 
-    public FavoritDTO() {
-    }
+    public FavoritDTO() {}
 
     public String getUser() {
         return user;

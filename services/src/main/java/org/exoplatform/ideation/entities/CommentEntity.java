@@ -10,7 +10,7 @@ import java.util.Date;
 @ExoEntity
 @Table(name = "IDEATION_COMMENTS")
 @NamedQueries({
-        @NamedQuery(name = "Comment.getComment", query = "select c from comment c where c.idea.id=:id"),
+        @NamedQuery(name = "Comment.getCommentByIdea", query = "select c from comment c where c.idea.id= :id"),
 })
 public class CommentEntity implements Serializable {
     @Id

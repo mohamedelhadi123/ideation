@@ -3,7 +3,16 @@ package org.exoplatform.ideation.dto;
 import org.exoplatform.ideation.entities.RatingEntity;
 
 import java.io.Serializable;
-
+/*
+ *
+ *
+ *
+ * Class DTO For RatingEntity
+ *
+ *
+ *
+ *
+ */
 public class RatingDTO implements Serializable {
     public RatingDTO() {
     }
@@ -14,9 +23,9 @@ public class RatingDTO implements Serializable {
 
     public RatingDTO(RatingEntity ratingEntity) {
         this.id=ratingEntity.getId();
-       this.status=ratingEntity.getStatus();
-       this.user=ratingEntity.getUser();
-       this.id_idear=ratingEntity.getIdea().getId();
+        this.status=ratingEntity.getStatus();
+        this.user=ratingEntity.getUser();
+        this.id_idear=ratingEntity.getIdea().getId();
     }
 
     public Long getId() {

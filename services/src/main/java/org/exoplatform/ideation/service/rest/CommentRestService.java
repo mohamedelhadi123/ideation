@@ -46,8 +46,8 @@ public class CommentRestService implements ResourceContainer {
 
 
     @GET
-    @Path("/allcommentbyid/{id}")
-    public  Response getallcommentById(@PathParam("id")  Long id){
+    @Path("/allcommentbyidea/{id}")
+    public  Response getallcommentByIdea(@PathParam("id")  Long id){
         try{
             List<CommentDTO> allCommentByIdea=commentservice.getAllCommentByIdea(id);
             return Response.ok(allCommentByIdea, MediaType.APPLICATION_JSON).build();

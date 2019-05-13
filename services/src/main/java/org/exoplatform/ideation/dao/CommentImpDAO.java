@@ -9,8 +9,8 @@ import java.util.List;
 
 public class CommentImpDAO extends GenericDAOJPAImpl<CommentEntity,Long> {
 
-    public List<CommentEntity> getComment(Long id){
-        TypedQuery<CommentEntity> query = getEntityManager().createNamedQuery("Comment.getComment", CommentEntity.class);
+    public List<CommentEntity> getCommentByIdIdea(Long id){
+        TypedQuery<CommentEntity> query = getEntityManager().createNamedQuery("Comment.getCommentByIdea", CommentEntity.class);
         query.setParameter("id",id);
         return query.getResultList();
 

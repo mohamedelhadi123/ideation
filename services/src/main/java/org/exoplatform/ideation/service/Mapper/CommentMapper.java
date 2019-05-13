@@ -7,24 +7,24 @@ import org.exoplatform.ideation.entities.IdeaEntity;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.social.core.manager.IdentityManager;
 
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class CommentMapper {
-    private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     protected IdentityManager identityManager = null;
 
 
     public CommentMapper() {
-        identityManager = CommonsUtils.getService(IdentityManager.class);
+        this.identityManager = CommonsUtils.getService(IdentityManager.class);
 
     }
 
     public CommentDTO CommentTOcommentDTO(CommentEntity commentEntity){
         return new CommentDTO(commentEntity);
     }
+
     public List<CommentDTO> CommentsToCommentDTOs(List<CommentEntity> comments){
         return comments.stream()
                 .filter(Objects::nonNull)
@@ -41,9 +41,8 @@ public class CommentMapper {
                 CommentEntity commentEntity = new CommentEntity();
                 commentEntity.setCommentText(commentDTO.getCommentText());
                 commentEntity.setUSER(user);
-                if (commentDTO.getCreatedTime() != null) {
-                    commentEntity.setCreatedTime(formatter.parse(commentDTO.getCreatedTime()));
-                }
+                commentEntity.setCreatedTime(new Date());
+
                 IdeaEntity idea=this.IdeaFormLongId(commentDTO.getId_ideac());
                 commentEntity.setIdea(idea);
                 return commentEntity;

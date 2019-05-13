@@ -7,12 +7,14 @@
 
 
  <script>
-//import NavApp from './NavApp.vue'
-import tabs from './tabs.vue';
-export default {
-       components:{tabs},
-  
- 
-  }
+
+     import tabs from './tabs.vue';
+     export default {
+         components: {
+             tabs
+         },
+
+
+     }
   </script>
    

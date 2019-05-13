@@ -1,12 +1,15 @@
 import IdeaApp from './components/IdeaApp.vue';
 import router from './router/index';
+import UploadButton from 'vuetify-upload-button';
 
 import '../css/main.less';
 
 Vue.use(Vuetify);
+Vue.use(UploadButton);
+export const bus = new Vue();
 
 new Vue({
-  el: '#IdeaApp',
-  router,
-  render: (h) => h(IdeaApp),
+    el: '#IdeaApp',
+    router,
+    render: (h) => h(IdeaApp),
 });

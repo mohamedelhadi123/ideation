@@ -31,6 +31,8 @@
             </column>
             <column name="TITLE" type="VARCHAR(250)"/>
             <column name="DESCRIPTION" type="VARCHAR(250)"/>
+            <column name="RESUME" type="VARCHAR(250)"/>
+            <column name="EXPLANATION" type="VARCHAR(250)"/>
             <column name="STATUS" type="ENUM('PUBLISHED','ARCHIVED','DRAFET')"></column>
             <column name="USER" type="NVARCHAR(50)"></column>
             <column name="CREATED_TIME" type="TIMESTAMP"></column>
@@ -118,7 +120,29 @@
         </addColumn>
     </changeSet>
 
+    <!-- ADD TABLE THEME -->
+    <changeSet author="stock" id="1.0.0-10">
+        <createTable tableName="IDEATION_THEMES">
+            <column name="THEME_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IDEA_ID"/>
+            </column>
+            <column name="USER" type="VARCHAR(250)"/>
+            <column name="SUBJECT" type="VARCHAR(250)"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
+    </changeSet>
 
+    <changeSet author="stock" id="1.0.0-11">
+
+    <addColumn tableName="IDEA_IDEAS">
+        <column name="ID_THEMET" type="BIGINT">
+            <constraints nullable="false" foreignKeyName="FK_IDEA_THEME_ATTACHMENTS"
+                         references="IDEATION_THEMES(THEME_ID)"/>
+        </column>
+    </addColumn>
+    </changeSet>
 
 
 </databaseChangeLog>

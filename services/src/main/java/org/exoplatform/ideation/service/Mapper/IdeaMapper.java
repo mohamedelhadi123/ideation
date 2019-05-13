@@ -3,22 +3,26 @@ package org.exoplatform.ideation.service.Mapper;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.ideation.dto.IdeaDTO;
 import org.exoplatform.ideation.entities.IdeaEntity;
+import org.exoplatform.ideation.entities.ThemeEntity;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.social.core.manager.IdentityManager;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class IdeaMapper {
-    private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     protected IdentityManager identityManager = null;
+
+    private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public IdeaMapper() {
         identityManager = CommonsUtils.getService(IdentityManager.class);
 
     }
+
     public IdeaDTO ideaTOideaDTO(IdeaEntity ideaEntity){
         return new IdeaDTO(ideaEntity);
     }
@@ -30,6 +34,9 @@ public class IdeaMapper {
     }
 
     public IdeaEntity IdeadtoToIdea(IdeaDTO ideaDTO){
+
+
+
         try {
             if(ideaDTO==null){
                 return null;
@@ -41,21 +48,34 @@ public class IdeaMapper {
                 ideaEntity.setStatus(ideaDTO.getStatus());
                 ideaEntity.setDescription(ideaDTO.getDescription());
                 ideaEntity.setTitle(ideaDTO.getTitle());
-                if (ideaDTO.getCreatedTime() != null) {
-                    ideaEntity.setCreatedTime(formatter.parse(ideaDTO.getCreatedTime()));
-                    return ideaEntity;
-                }
+                ideaEntity.setExplanation(ideaDTO.getExplanation());
+                ideaEntity.setResume(ideaDTO.getResume());
+
+                ideaEntity.setCreatedTime(new Date());
+
+
+
+
+                ThemeEntity theme=this.ThemeFromId(ideaDTO.getId_themet());
+                ideaEntity.setTheme(theme);
+                return ideaEntity;
             }
 
 
         }catch (Exception pe){
-        pe.printStackTrace();
-    }
+            pe.printStackTrace();
+        }
         return null;
 
 
     }
 
+
+    public ThemeEntity ThemeFromId(Long id){
+        ThemeEntity themeEntity=new ThemeEntity();
+        themeEntity.setId(id);
+        return themeEntity;
+    }
 
 
 }

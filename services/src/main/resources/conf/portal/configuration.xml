@@ -91,6 +91,27 @@ for more details. You should have received a copy of the GNU Lesser General Publ
     <component>
         <type>org.exoplatform.ideation.dto.RatingDTO</type>
     </component>
+    <component>
+        <type>org.exoplatform.ideation.entities.ThemeEntity</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.dao.ThemeImpDAO</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.dto.ThemeDTO</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.Mapper.ThemeMapper</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.utils.ThemeService</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.rest.ThemeRestService</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.dto.OrderIdeaDTO</type>
+    </component>
     
     <external-component-plugins>
         <target-component>org.exoplatform.commons.api.persistence.DataInitializer</target-component>

@@ -37,7 +37,7 @@ public class RatingMapper {
 
 
 
-public RatingEntity RatingdtoToRating(RatingDTO ratingDTO){
+    public RatingEntity RatingdtoToRating(RatingDTO ratingDTO){
         try {
             if(ratingDTO == null){
                 return null;
@@ -55,8 +55,8 @@ public RatingEntity RatingdtoToRating(RatingDTO ratingDTO){
         } catch (Exception pe) {
             pe.printStackTrace();
         }
-    return null;
-}
+        return null;
+    }
 
 
 

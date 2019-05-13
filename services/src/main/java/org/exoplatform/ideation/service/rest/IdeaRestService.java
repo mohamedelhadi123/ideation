@@ -16,7 +16,10 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 @Path("/idea")
@@ -38,12 +41,16 @@ public class IdeaRestService implements ResourceContainer {
     }
 
     @GET
-    @Path("/all/{PUBLISHED}")
-    public Response getAllIdeaPublished(@PathParam("PUBLISHED") IdeaEntity.Status PUBLISHED) {
+    @Path("/all/{status}")
+    public Response getAllIdeaPublished(@PathParam("status") IdeaEntity.Status status) {
 
 
         try {
-            List<IdeaDTO> allIdeaPublished = ideaService.getIdeaPublished(PUBLISHED);
+            String pattern = "yyyy-mm-dd hh:mm:ss";
+            SimpleDateFormat simpleDateFormat =new SimpleDateFormat(pattern, new Locale("fr", "FR"));
+            String date = simpleDateFormat.format(new Date());
+            System.out.println(date);
+            List<IdeaDTO> allIdeaPublished = ideaService.getIdeaByStatus(status);
             String authenticatedUser = ConversationState.getCurrent().getIdentity().getUserId();
 
             Identity currentUser = CommonsUtils.getService(IdentityManager.class).getOrCreateIdentity(OrganizationIdentityProvider.NAME, authenticatedUser, true);
@@ -60,9 +67,9 @@ public class IdeaRestService implements ResourceContainer {
                     .build();
         }
     }
-   @GET
-   @Path("/getone/{id}")
-   public Response getone(@PathParam("id") Long id){
+    @GET
+    @Path("/getideabyid/{id}")
+    public Response getone(@PathParam("id") Long id){
         try {
             IdeaDTO findoneidea=ideaService.getIdea(id);
             return Response.ok(findoneidea, MediaType.APPLICATION_JSON).build();
@@ -75,15 +82,15 @@ public class IdeaRestService implements ResourceContainer {
                     .entity("Error listing all Idea Published")
                     .build();
         }
-   }
+    }
     @GET
-    @Path("allpublishedbyuser/{PUBLISHED}")
-    public Response getAllPublishedByUser(@PathParam("PUBLISHED") IdeaEntity.Status PUBLISHED) {
+    @Path("AllIdeaByUserAndStatus/{status}")
+    public Response getAllPublishedByUser(@PathParam("status") IdeaEntity.Status status) {
         try {
             String user = ConversationState.getCurrent().getIdentity().getUserId();
 
 
-            List<IdeaDTO> allIdeaPublishedByUser = ideaService.getIdeaPublishedByUser(PUBLISHED, user);
+            List<IdeaDTO> allIdeaPublishedByUser = ideaService.getIdeaByUserAndStatus(status,user);
             return Response.ok(allIdeaPublishedByUser, MediaType.APPLICATION_JSON).build();
 
         } catch (Exception e) {
@@ -109,7 +116,41 @@ public class IdeaRestService implements ResourceContainer {
     }
 
 
+    @DELETE
+    @Path("/delete/{id}")
+    public  Response deltetidea(@PathParam("id") Long id ) {
+        try {
 
+            ideaService.deleteIdea(id);
+
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.serverError()
+                    .entity("Error delete idea")
+                    .build();
+
+        }
+
+
+    }
+    @PUT
+    @Path("/update")
+    public Response updateIdea(IdeaDTO ideaDTO) {
+        try {
+
+            ideaService.updateIdea(ideaDTO);
+
+            return Response.ok().entity(ideaDTO).build();
+
+        } catch (Exception e) {
+
+            LOG.error("Error updating idea {} by {} ", e);
+
+            return Response.serverError().build();
+
+        }
+
+    }
 
 
 }

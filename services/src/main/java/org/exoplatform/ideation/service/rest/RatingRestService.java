@@ -32,10 +32,10 @@ public class RatingRestService implements ResourceContainer {
 
     }
     @GET
-    @Path("getratingbyidea/{id}/{DISLIKE}")
-    public Response getAllRatingByIdeaIdAndStatus(@PathParam("id") Long id,@PathParam("DISLIKE")RatingEntity.Status DISLIKE){
+    @Path("getratingbyidea/{id}/{status}")
+    public Response getAllRatingByIdeaIdAndStatus(@PathParam("id") Long id,@PathParam("status")RatingEntity.Status status){
         try{
-            List<RatingDTO> allRatingByIdea=ratingservice.getStatusByIdeaAndStatus(id,DISLIKE);
+            List<RatingDTO> allRatingByIdea=ratingservice.getStatusByIdeaAndStatus(id,status);
             return Response.ok(allRatingByIdea, MediaType.APPLICATION_JSON).build();
 
         } catch (Exception e) {
@@ -78,7 +78,6 @@ public class RatingRestService implements ResourceContainer {
     public Response addRatingdto(RatingDTO ratingDTO){
         try {
             ratingDTO=ratingservice.addRating(ratingDTO);
-            System.out.println("***********************"+new Date());
             return Response.ok().entity(ratingDTO).build();
 
         }catch (Exception e) {
@@ -91,7 +90,7 @@ public class RatingRestService implements ResourceContainer {
 
 
 
-    }
+}
 
 
 

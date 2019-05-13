@@ -21,6 +21,10 @@ public class CommentService {
         this.commentImpDAO =  CommonsUtils.getService(CommentImpDAO.class);
         this.commentMapper =  CommonsUtils.getService(CommentMapper.class);
     }
+    public CommentService() {
+
+    }
+
 
     @ExoTransactional
     public CommentDTO addComment (CommentDTO commentDTO) {
@@ -37,9 +41,9 @@ public class CommentService {
         return commentMapper.CommentTOcommentDTO(commentEntity);
     }
 
-public List<CommentDTO> getAllCommentByIdea(Long id){
+    public List<CommentDTO> getAllCommentByIdea(Long id){
         try {
-            List<CommentEntity> comments=commentImpDAO.getComment(id);
+            List<CommentEntity> comments=commentImpDAO.getCommentByIdIdea(id);
             if(comments!=null){
                 return  commentMapper.CommentsToCommentDTOs(comments);
             }
@@ -47,7 +51,7 @@ public List<CommentDTO> getAllCommentByIdea(Long id){
             LOG.error("Error to find Comment by idea", e.getMessage());
 
         }
-    return null;
+        return null;
 
     }
 

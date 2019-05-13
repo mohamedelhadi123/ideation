@@ -9,13 +9,8 @@ import java.util.Date;
 @ExoEntity
 @Table(name = "IDEA_IDEAS")
 @NamedQueries({
-        @NamedQuery(name = "Idea.getIdeasByUser", query = "select i from idea i where i.user= :user"),
-        @NamedQuery(name = "Idea.getIdeasPublished", query = "select i from idea i where i.status= :PUBLISHED"),
-        @NamedQuery(name = "Idea.getIdeasDRAFET", query = "select i from idea i where i.status= :DRAFET"),
-        @NamedQuery(name = "Idea.getIdeasARCHIVED", query = "select i from idea i where i.status= :ARCHIVED"),
-        @NamedQuery(name="Idea.getIdeaPublishedByuser",query = "select i from idea i where i.status= :PUBLISHED AND i.user= :user")
-
-
+        @NamedQuery(name = "Idea.getIdeasByStatus", query = "select i from idea i where i.status= :status"),
+        @NamedQuery(name="Idea.getIdeaByuserAndStatus",query = "select i from idea i where i.status= :status AND i.user= :user")
 
 })
 
@@ -24,7 +19,7 @@ public class IdeaEntity implements Serializable {
         PUBLISHED,
         ARCHIVED,
         DRAFET;
-        
+
 
 
 
@@ -43,19 +38,29 @@ public class IdeaEntity implements Serializable {
     private String user;
     @Column(name = "CREATED_TIME")
     private Date createdTime;
+    @ManyToOne
+    @JoinColumn (name="ID_THEMET")
+    private ThemeEntity theme;
 
+    @Column(name="RESUME")
+    private String resume;
 
- public IdeaEntity(){
+    @Column(name = "EXPLANATION")
+    private String explanation;
 
- }
-    public IdeaEntity(long id, String title, String description, Status status, String user, Date createdTime) {
-        this.id = id;
+    public IdeaEntity(){
+
+    }
+
+    public IdeaEntity(String title, String description, Status status, String user, Date createdTime, ThemeEntity theme, String resume, String explanation) {
         this.title = title;
         this.description = description;
         this.status = status;
         this.user = user;
         this.createdTime = createdTime;
-
+        this.theme = theme;
+        this.resume = resume;
+        this.explanation = explanation;
     }
 
     public Long getId() {
@@ -106,5 +111,27 @@ public class IdeaEntity implements Serializable {
         this.createdTime = createdTime;
     }
 
+    public ThemeEntity getTheme() {
+        return theme;
+    }
 
+    public void setTheme(ThemeEntity theme) {
+        this.theme = theme;
+    }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
+
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
 }

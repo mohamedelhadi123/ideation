@@ -4,31 +4,32 @@ import org.exoplatform.commons.api.persistence.ExoEntity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
+  
 @Entity(name="fav")
 @ExoEntity
-@Table(name = "IDEATION_FAV")
-@NamedQueries({
+@Table(name = " eries({
         @NamedQuery(name = "Fav.getAllFavByUser", query = "select f from fav f where f.user=:user"),
         @NamedQuery(name = "Fav.getAllFavByUserAndId", query = "select f from fav f where f.user=:user AND f.idea.id=:id"),
-        @NamedQuery(name = "Fav.getAllFavByIdeaID", query = "select f from fav f where f.idea.id=:id")
+        @NamedQuery(name = "Fav.getAllFavByIdeaID", query = "select f from fav f where f.idea.id=:id"),
+        @NamedQuery(name = "Fav.getAllOrderByFav", query = "SELECT f FROM fav f  GROUP BY f.idea.id order 
 
 
 })
-public class FavoriteEntity implements Serializable {
 
-
+    
     @Id
     @Column(name = "FAV_ID")
-    @GeneratedValue
+    @GeneratedVa e
     private Long  id;
     @Column(name = "USER")
     private String user;
 
-    @ManyToOne
+    @ManyToOne  
     @JoinColumn (name="ID_IDEAF")
     private IdeaEntity idea;
-
-    public FavoriteEntity(Long id ,String user, IdeaEntity idea) {
+ 
+    public Favo r iteEntity(Long id ,String user, IdeaEntity idea) {
         this.id=id;
         this.user = user;
         this.idea = idea;
@@ -59,5 +60,4 @@ public class FavoriteEntity implements Serializable {
 
     public void setIdea(IdeaEntity idea) {
         this.idea = idea;
-    }
-}
+ }

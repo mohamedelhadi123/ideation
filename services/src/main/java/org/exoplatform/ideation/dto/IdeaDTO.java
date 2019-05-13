@@ -4,29 +4,43 @@ import org.exoplatform.ideation.entities.IdeaEntity;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-
+import java.util.Locale;
+/*
+ *
+ *
+ * Class  DTO FOR IdeaEntity
+ *
+ *
+ *
+ */
 public class IdeaDTO implements Serializable {
-    private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-    public IdeaDTO() {
-    }
-
-    public IdeaDTO(IdeaEntity ideaent) {
-        this.id=ideaent.getId();
-        this.title = ideaent.getTitle();
-        if (ideaent.getCreatedTime()!= null) {
-            this.createdTime= formatter.format(ideaent.getCreatedTime());
-        }
-        this.description = ideaent.getDescription();
-        this.status = ideaent.getStatus();
-        this.user = ideaent.getUser();
-    }
+    String pattern = "yyyy-mm-dd hh:mm:ss";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, new Locale("fr", "FR"));
     private Long id;
     protected String title;
     private String createdTime;
     private String description;
     private IdeaEntity.Status status;
     private String user;
+    private String explanation;
+    private String resume;
+    private Long id_themet;
+    public IdeaDTO() {}
+
+    public IdeaDTO(IdeaEntity ideaent) {
+        this.id = ideaent.getId();
+        this.title = ideaent.getTitle();
+        if (ideaent.getCreatedTime() != null) {
+            this.createdTime = simpleDateFormat.format(ideaent.getCreatedTime());
+        }
+        this.description = ideaent.getDescription();
+        this.status = ideaent.getStatus();
+        this.user = ideaent.getUser();
+        this.resume = ideaent.getResume();
+        this.explanation = ideaent.getExplanation();
+        this.id_themet = ideaent.getTheme().getId();
+    }
+
 
     public Long getId() {
         return id;
@@ -74,5 +88,29 @@ public class IdeaDTO implements Serializable {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public String getExplanation() {
+        return explanation;
+    }
+
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
+    }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
+    }
+
+    public Long getId_themet() {
+        return id_themet;
+    }
+
+    public void setId_themet(Long id_themet) {
+        this.id_themet = id_themet;
     }
 }

@@ -4,18 +4,18 @@ import org.exoplatform.ideation.entities.CommentEntity;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class CommentDTO implements Serializable {
-    private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-    public CommentDTO() {
-    }
+    String pattern = "yyyy-mm-dd hh:mm:ss";
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, new Locale("fr", "FR"));
+    public CommentDTO() {}
 
     public CommentDTO(CommentEntity comment) {
-        this.id=comment.getId();
+        this.id = comment.getId();
         this.user = comment.getUSER();
-        if (comment.getCreatedTime()!= null) {
-            this.createdTime= formatter.format(comment.getCreatedTime());
+        if (comment.getCreatedTime() != null) {
+            this.createdTime = simpleDateFormat.format(comment.getCreatedTime());
         }
         this.commentText = comment.getCommentText();
         this.id_ideac = comment.getIdea().getId();
@@ -23,7 +23,7 @@ public class CommentDTO implements Serializable {
     private Long id;
     private String user;
     private String createdTime;
-    private String  commentText;
+    private String commentText;
     private Long id_ideac;
 
 

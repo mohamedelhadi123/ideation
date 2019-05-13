@@ -1,91 +1,90 @@
 <template>
-  <v-container>
-    <div>
-      <v-stepper labels>
-        <v-stepper-header>
-          <v-stepper-step step="3" complete>
-               <v-flex xs12 sm3>
-            <v-btn flat icon color="green" @click="showMyIdeaPublished" >
-              <v-icon>cached</v-icon>
-                Voir mes idées
-            </v-btn>
-            <v-btn flat icon color="green" @click="showMyIdeaPublished" >
-              <v-icon>cached</v-icon>
-                Voir mes idées
-            </v-btn>
-          </v-flex>
-       
-          </v-stepper-step>
-        </v-stepper-header>
-      </v-stepper>
-     
-      <v-expansion-panel>
-        <v-expansion-panel-content v-for="d in donnes" :key="d.id">
-          <div slot="header" class="py-1">{{ d.title }}</div>
-          <v-card>
-            <v-card-text class="px-4 grey--text">
-             <div>{{ d.description }}  </div>
+    <v-container>
+        <div>
+            <v-stepper labels>
+                <v-stepper-header>
+                    <v-stepper-step step="3" complete>
+                        <v-flex xs12 sm3>
+                            <v-btn flat icon color="green" @click="showMyIdeaPublished" >
+                                <v-icon>cached</v-icon>
+                                Voir mes idées
+                            </v-btn>
+                            <v-btn flat icon color="green" @click="showMyIdeaPublished" >
+                                <v-icon>cached</v-icon>
+                                Voir mes idées
+                            </v-btn>
+                        </v-flex>
 
-              <div class="font-weight-bold">créer par {{d.user}} le {{ d.createdTime }}</div>
-              <a v-bind:href="'http://127.0.0.1:8080/portal/intranet/ideation/#/ideainfo?id='+ d.id">Lire la suite ...</a>
-                           </v-card-text>
-          </v-card>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </div>
-  </v-container>
+                    </v-stepper-step>
+                </v-stepper-header>
+            </v-stepper>
+
+            <v-expansion-panel>
+                <div class="alert alert-info" v-if="alt">
+                    <i class="uiIconInfo"></i>Aucun Idee puiblier . </div>
+                <v-expansion-panel-content v-for="d in donnes" :key="d.id">
+                    <div slot="header" class="py-1">{{ d.title }}</div>
+                    <v-card>
+                        <v-card-text class="px-4 grey--text">
+                            <div>{{ d.description }}  </div>
+
+                            <div class="font-weight-bold">créer par {{d.user}} le {{ d.createdTime }}</div>
+                            <router-link :to="`/ideainfo/${d.id}`">Lire la suite ...</router-link>
+                        </v-card-text>
+                    </v-card>
+                </v-expansion-panel-content>
+            </v-expansion-panel>
+        </div>
+    </v-container>
 </template>
 
 <script>
-import axios from 'axios';
+    import axios from 'axios';
 
-export default {
-    
-  data() {
-    return {
-      donnes:[],
-     dialog: false,
+    export default {
 
-        
-      projects: [
-        { title: 'Design a new website', person: 'The Net Ninja', due: '1st Jan 2019', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        { title: 'Code up the homepage', person: 'Chun Li', due: '10th Jan 2019', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        { title: 'Design video thumbnails', person: 'Ryu', due: '20th Dec 2018', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        { title: 'Create a community forum', person: 'Gouken', due: '20th Oct 2018', status: 'overdue', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-      ]
+        data() {
+            return {
+                donnes:[],
+                alt:false,
+                dialog: false,
+
+
+
+            }
+        },  mounted () {
+
+            axios
+                .get('/portal/rest/idea/all/PUBLISHED')
+                .then(response => { this.donnes=response.data;
+
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.errored = true
+                })
+
+        }, methods:{
+            showMyIdeaPublished(){
+                this.donnes=null;
+                axios
+                    .get('/portal/rest/idea/AllIdeaByUserAndStatus/PUBLISHED')
+                    .then(response => { this.donnes=response.data;
+                        if(this.donnes.length===0){
+                            this.alt=true;
+                        }
+
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        this.errored = true
+                    })
+            }
+        }
+
+
     }
-  },  mounted () { 
-    
-    axios
-      .get('http://127.0.0.1:8080/portal/rest/idea/all/PUBLISHED')
-      .then(response => { this.donnes=response.data;
-        
-      })
-      .catch(error => {
-        console.log(error)
-        this.errored = true
-      })
-      
-  }, methods:{
-    showMyIdeaPublished(){
-      this.donnes=null;
-       axios
-      .get('http://127.0.0.1:8080/portal/rest/idea/allpublishedbyuser/PUBLISHED')
-      .then(response => { this.donnes=response.data;
-        
-      })
-      .catch(error => {
-        console.log(error)
-        this.errored = true
-      })
-    }
-  }
-     
-
-}
 </script>
-<style>
 
-</style>
 
 

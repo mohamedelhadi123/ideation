@@ -2,6 +2,7 @@ package org.exoplatform.ideation.service.rest;
 
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.ideation.dto.FavoritDTO;
+import org.exoplatform.ideation.dto.OrderIdeaDTO;
 import org.exoplatform.ideation.entities.FavoriteEntity;
 import org.exoplatform.ideation.service.utils.FavService;
 import org.exoplatform.services.log.ExoLogger;
@@ -32,29 +33,29 @@ public class FavRestService implements ResourceContainer {
     }
 
     @GET
-    @Path("/getfavuser")
+    @Path("/getfavbyuser")
     public Response getallfavByUser(){
-    try {
-        String user = ConversationState.getCurrent().getIdentity().getUserId();
+        try {
+            String user = ConversationState.getCurrent().getIdentity().getUserId();
 
-        List<FavoritDTO> allFavByUser=favService.getAllFavByUser(user);
-        return Response.ok(allFavByUser, MediaType.APPLICATION_JSON).build();
+            List<FavoritDTO> allFavByUser=favService.getAllFavByUser(user);
+            return Response.ok(allFavByUser, MediaType.APPLICATION_JSON).build();
 
 
-    }catch (Exception e){
-        LOG.error("Error listing all fav ", e);
-        return Response.serverError()
-                .entity("Error listing all fav")
-                .build();
+        }catch (Exception e){
+            LOG.error("Error listing all fav ", e);
+            return Response.serverError()
+                    .entity("Error listing all fav")
+                    .build();
 
-    }
+        }
     }
     @GET@Path("/verif/{id}")
     public Response getVerif( @PathParam("id") Long id) {
         try {
             String user = ConversationState.getCurrent().getIdentity().getUserId();
 
-            List<FavoritDTO> allFavByUser = favService.getallbyidANDuser(user, id);
+            List<FavoritDTO> allFavByUser = favService.getallbyIdeaANDuser(user, id);
             return Response.ok(allFavByUser, MediaType.APPLICATION_JSON).build();
 
 
@@ -68,7 +69,7 @@ public class FavRestService implements ResourceContainer {
 
     @GET@Path("/getbyidea/{id}")
     public Response getByIdea(@PathParam("id") Long id){
-        try { List<FavoritDTO> allFavByUser = favService.getallbyid(id);
+        try { List<FavoritDTO> allFavByUser = favService.getallbyidea(id);
             return Response.ok(allFavByUser, MediaType.APPLICATION_JSON).build();
 
 
@@ -79,9 +80,9 @@ public class FavRestService implements ResourceContainer {
                     .build();
         }
     }
-@POST
-@Path("/addfav")
-public Response addFav(FavoritDTO favoritDTO){
+    @POST
+    @Path("/addfav")
+    public Response addFav(FavoritDTO favoritDTO){
         try{
             favoritDTO=favService.addFav(favoritDTO);
             return Response.ok().entity(favoritDTO).build();
@@ -90,9 +91,24 @@ public Response addFav(FavoritDTO favoritDTO){
                     .entity("Error adding new comment")
                     .build();
         }
-}
+    }
+
+    @GET
+    @Path("/getallordered")
+    public Response getallordered(){
+        try {
+            List<OrderIdeaDTO>allordered=favService.getAllOrderByFav();
+            return Response.ok(allordered, MediaType.APPLICATION_JSON).build();
 
 
+        }catch (Exception e){
+            LOG.error("Error listing all fav ", e);
+            return Response.serverError()
+                    .entity("Error listing all fav")
+                    .build();
+
+        }
+    }
 }
 
 

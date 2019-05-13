@@ -11,8 +11,8 @@ import java.util.List;
 
 public class CoworkerService {
 
-  private CoworkerImpDAO coworkerDao;
-  private IdeaImpDAO ideadoa;
+    private CoworkerImpDAO coworkerDao;
+    private IdeaImpDAO ideadoa;
 
     public CoworkerService(CoworkerImpDAO coworkerDao, IdeaImpDAO ideadoa) {
         this.coworkerDao = coworkerDao;
@@ -31,7 +31,7 @@ public class CoworkerService {
         return coworkerDao.findAll();
     }*/
 
-   public CowokerDTO getCoworker(Long id){
+    public CowokerDTO getCoworker(Long id){
         CoworkerEntity ce=coworkerDao.find(id);
 
         CowokerDTO cd=new CowokerDTO();
@@ -39,11 +39,11 @@ public class CoworkerService {
         cd.setId(ce.getId());
         cd.setId_idea(ce.getIdea().getId());
         return cd;
-   }
+    }
 
     public CoworkerEntity addCoworker(CowokerDTO DTOCowoker){
         IdeaEntity ideaentity=ideadoa.find(DTOCowoker.getId_idea());
-       
+
         CoworkerEntity cowkerentity=new CoworkerEntity( DTOCowoker.getCoworker(), ideaentity);
         coworkerDao.create(cowkerentity);
         return  cowkerentity;

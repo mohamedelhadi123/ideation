@@ -37,7 +37,7 @@ public class CoworkerRestService implements ResourceContainer {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public CowokerDTO select(@PathParam("id") Long id){
-    return cs.getCoworker(id);
+        return cs.getCoworker(id);
     }
 
 }
