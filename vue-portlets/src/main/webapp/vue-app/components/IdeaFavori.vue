@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <div class="team">
         <v-container >
             <div class="malt">
@@ -56,7 +56,7 @@
                         axios
                             .get('/portal/rest/idea/getideabyid/'+response.data[i].id_Ideaf)
                             .then(response => { this.donneedatafav.push(response.data);
-                                console.log(this.donneedatafav);
+                                
 
 
                             })
