@@ -119,6 +119,18 @@ public class FavService {
 
         return null;
     }
+    @ExoTransactional
+    public void deleteFav(Long id){
+        FavoriteEntity favoriteEntity=null;
+       favoriteEntity= favoriteImpDAO.find(id);
+        if (favoriteEntity!=null){
+            try {
+                favoriteImpDAO.delete(favoriteEntity);
+            }catch (Exception e) {
+                LOG.error("Error to delete rating with id {}", id, e);
+            }
+        }
+    }
 
 
 

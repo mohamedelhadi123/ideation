@@ -1,191 +1,248 @@
 <template>
-    <div class="max">
-        <v-container class=" my-5 back"  elevation-20>
-            <div class="altm">
-                <div class="alert alert-error" v-if="alt">
-                   <i class="uiIconError" @click="cancelAlt"></i>
-                   SVP remplire tous les champs  !!
-                </div>
+  <div>
+      <div v-if="alt" class="alert alert-info" style="    margin-left: 11%;
+    width: 74%;">
+        <i class="uiIconClose" @click="DontShow"></i><i class="uiIconInfo"></i>Remplire tout les champs
+      </div>
+       <div
+            v-if="dialogs"
+            class="UIPopupWindow uiPopup UIDragObject NormalStyle"
+            style="width: 785px; position: relative; top: auto; left: auto; margin: 0 auto 20px; z-index: 1; max-width: 100%;">
+            <div class="popupHeader ClearFix">
+              <a
+                class="uiIconClose pull-right"
+                aria-hidden="true"
+                @click="CancelDialogs"></a>
+              <span class="PopupTitle popupTitle">Ajouter un Theme</span>
             </div>
-            <v-card
-                    class="mb-5"
-                    height="700px">
-                <v-card-text>
-                    <v-form ref="form" class="px-3">
-                        <v-container>
-                            <v-flex md10>
-                                <v-text-field
-                                        v-model="name"
-                                        label="Entrer le nom de votre idée"
-                                        prepend-icon="edit"
-                                        :rules="inputRules" />
-                            </v-flex>
-                            <v-layout>
-                                <v-flex md6>
-                                    <p class="styleP">Theme de votre idée</p>
-                                    <select
-                                            class="styleSelect"
-                                            v-model="selectedTheme">
-                                        <option v-for="s in subject" :value="s.id" :key="s.id">
-                                            {{s.subject}}
-                                        </option>
-                                    </select>
-                                </v-flex>
-                                <v-flex md4>
-                                    <br>
-                                    <template>
-                                        <v-dialog max-width="600px" v-if="dialogs">
-                                            <button slot="activator" class="classbutton "><i class="fas fa-plus-square"></i></button>
-                                            <v-card>
-                                                <v-card-title>
-                                                    <div class="text_diag">
-                                                        <h8>Ajouter Nouveau theme</h8>
-                                                    </div>
-                                                </v-card-title>
-                                                <v-card-title>
-                                                    <v-text-field
-                                                            v-model="nameTheme"
-                                                            label="Entrer le Theme"
-                                                            prepend-icon="edit"
-                                                             :rules="inputRules"/>
-                                                    <button  class="btn_diag" @click="AddTheme"><i class="fas fa-plus-square"></i></button>
-                                                </v-card-title>
-                                            </v-card>
-                                        </v-dialog>
-                                    </template>
-                                </v-flex>
-                            </v-layout>
-                            <v-layout>
-                                <v-flex md10>
-                                </v-flex>
-                                <v-flex>
-                                    <app-category-cours />
-                                </v-flex>
-                            </v-layout>
-                            <v-flex md10>
-                                <v-textarea
-                                        v-model="description"
-                                        prepend-icon="edit"
-                                        label="Entrer la Description de votre idée " :rules="inputRules"/>
-                            </v-flex>
-                            <v-flex md10>
-                                <v-textarea
-                                        v-model="resume"
-                                        prepend-icon="edit"
-                                        label="Entrer le résumé de votre idée " :rules="inputRules"/>
-                            </v-flex>
-                            <v-flex md10>
-                                <v-text-field
-                                        v-model="cles"
-                                        label="Entrer l'objectif"
-                                        prepend-icon="edit"
-                                         :rules="inputRules"/>
-                            </v-flex>
-                            <div class="para_border">
-                                <v-layout>
-                                    <v-flex>
-                                        <p class=" styleP">Ajouter un fichier</p>
-                                        <upload-btn icon >
-                                            <template slot="icon">
-                                                <v-icon size="60px">attachment</v-icon>
-                                            </template>
-                                        </upload-btn>
-                                    </v-flex>
-                                    <v-flex>
-                                    </v-flex>
-                                </v-layout>
-                            </div>
-                            <div class="but">
-                                <v-flex md10>
-                                    <button class="btn-primary" type="button"  @click="addIdea">Enregistrer</button>
-                                </v-flex>
-                            </div>
-                            <div class="btn-sec">
-                                <v-flex md10>
-                                    <button class="btn"  @click="reset">Réinitialiser</button>
-                                </v-flex>
-                            </div>
-                        </v-container>
-                    </v-form>
-                </v-card-text>
-            </v-card>
-        </v-container>
+            <div class="PopupContent popupContent">
+              <div class="form-horizontal resizable">
+                <div class="popupContent">
+                  <div class="control-group">
+                    <label for="label" class="control-label">Theme:</label>
+                    <div class="controls">
+                      <input
+                        id="label"
+                        v-model="themeInput"
+                        type="text"
+                        name="label">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="uiAction uiActionBorder">
+                <button class="btn" @click="AddTheme">Enregistrer</button>
+                <button
+                  class="btn"
+                  type="button"
+                  @click="CancelDialogs">
+                  Annuler
+                </button>
+              </div>
+            </div>
+            <span class="uiIconResize pull-right uiIconLightGray"></span>
+          </div>
+    <div class="aff">
+    
+
+      <div>
+        <strong>Créer une Idée :</strong>
+        <br>
+
+  
+        <div class="activityCont">
+       
+          <div id="AccountInputSet-tab" class="tab-pane fade in active">
+            <div class="uiTabContent resizable">
+              <div id="AccountInputSet" class="UIFormInputSet AccountInputSet">
+                <div class="form-horizontal">
+                  <div class="control-group">
+                    <label class="control-label">Titre:</label>
+                    <div class="controls">
+                      <input v-model="titre" type="text"> *
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Objectif:</label>
+                    <div class="controls">
+                      <input v-model="objectiv" type="text"> *
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Description:</label>
+                    <div class="controls">
+                      <textarea v-model="description" type="text"></textarea> *
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Resumé:</label>
+                    <div class="controls">
+                      <textarea v-model="resume" type="text"></textarea> *
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="username">Theme:</label>
+                    <div class="controls">
+                      <select
+                        v-model="selectedTheme"
+                        @change="AddToThemes">
+                         <option disabled value="">Choisissez</option>
+
+                        <option
+                        
+                          v-for="s in subject"
+                          :key="s.subject"
+                          :value="s.subject"
+                          selected>
+                          {{ s.subject }}
+                        </option>
+                      </select> <button class="btn" @click="ShowDialogs">Ajouter un theme</button>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="controls">
+                      <div
+                        v-for="t in themes"
+                        :key="t"
+                        class="uiMention">
+                        {{ t }}<i class="uiIconClose" @click.prevent="DeleteTheme(t)"></i>
+                      </div>
+                    </div>
+                  </div>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="btn-button">
+            <button class="btn" @click="reset">Réinitialiser</button>
+            <button class="btn-primary" @click="addIdea">Enregistrer</button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 <script>
     import axios from 'axios';
 
-    import UploadButton from 'vuetify-upload-button';
-    export default {
-       
-        data(){
-            
-            return{
-                name:'',
-                selectedTheme:"",
-                alt:false,
-                resume:'',
-                cles:'',
-                dialogs:true,
-                nameTheme:'',
-                description:'',
-                datajson:{
-                    title:'',
+export default {
+    data(){
+        return{
+            alt:false,
+            themeInput:'',
+            dialogs:false,
+            titre:'',
+            selectedTheme:'',
+            description:'',
+            resume:'',
+            objectiv:'',
+            th:{
+                id:null,
+                subject:'',
+                user:''
+
+            },
+         
+            datajson:{
+                 title:'',
                     description:'',
                     status:"DRAFET",
                     resume:'',
                     explanation:'',
-                    id_themet:'',
-                },
+            },
+            detTheme:[],
+            themes:[],
+            subject:[{id:null,subject:''}],
                 dataTheme:{
                     subject:''
                 },
-                subject:[ ],
-                 inputRules: [
-                v => !!v || 'This field is required',
-            v => v.length >= 3 || 'Minimum length is 3 characters'
-        ]
-            }
-        },
-        components:{
-            'upload-btn': UploadButton
-
-        },mounted(){
+                
+        }
+    },mounted(){
             axios
                 .get('/portal/rest/theme/getalltheme/')
                 .then(response => { this.subject=response.data;
-                    console.log(this.subject);
 
                 })
                 .catch(error => {
-                    console.log(error)
                     this.errored = true
                 })
 
 
-        } , methods: {
-            addIdea(){
-                this.datajson.title=this.name;
+        } ,methods:{
+        DeleteTheme(t){
+        this.themes=this.themes.filter(d=>d !==t);
+        for(let i=0;i<this.detTheme.length;i++){
+            if(this.detTheme[i].subject===t){
+                this.subject.push(this.detTheme[i]);
+                this.detTheme=this.detTheme.filter(d=>d.subject !==t);
+            }
+        }
+    
+        
+        
+        },AddToThemes(){
+          if(this.selectedTheme===''){
+            console.log("error ");
+
+          }else {
+              this.themes.push(this.selectedTheme);
+              
+             
+              for(let i=0;i<this.subject.length;i++){
+                  
+                  if(this.subject[i].subject===this.selectedTheme){
+                      
+                        this.detTheme.push(this.subject[i]);
+                  }
+              }
+              this.subject=this.subject.filter(d=>d.subject !==this.selectedTheme);
+            
+          }
+
+        }, addIdea(){
+            
+                this.datajson.title=this.titre;
                 this.datajson.description=this.description;
                 this.datajson.resume=this.resume;
-                this.datajson.explanation=this.cles;
-                this.datajson.id_themet=this.selectedTheme;
+                this.datajson.explanation=this.objectiv;
 
-                if((this.name==='') || (this.description==='') || (this.resume==='') || (this.cles==='') || (this.selectedTheme==='')){
+                if((this.titre==='') || (this.description==='') || (this.resume==='') || (this.objectiv==='') || (this.themes.length===0)){
                     this.alt=true;
                 }
 
                 if(this.alt===false){
-                    console.log(this.datajson)
+                    
                     axios.post('/portal/rest/idea/addIdea', this.datajson, {
                         headers: {
                             'Content-type': 'application/json',
                         }
-                    }).then( response=>{this.$router.push('/IdeaDrafted') ;
-                        this.name='';
+                    }).then( response=>{ 
+                      
+                
+                    
+                      for(let i=0;i<this.detTheme.length;i++){
+                          const datates = {
+                    id_ideat: response.data.id,
+                   id_themei:this.detTheme[i].id
+                                     }
+                          
+                         axios.post('/portal/rest/themeidea/addthemeidea', datates, {
+                        headers: {
+                            'Content-type': 'application/json',
+                        }
+                    })
+                      }
+              
+
+                       this.titre='';
                         this.description='';
-                        this.cles='';
+                        this.objectiv='';
                         this.resume='';
+                       this.$router.push('/IdeaDrafted')
 
                     })
 
@@ -195,79 +252,52 @@
 
 
             },reset() {
-                this.name= null;
+                this.titre= null;
                 this.description=null;
-                this.cles="";
+                this.objectiv="";
                 this.resume="";
 
+            },DontShow(){
+                this.alt=false;
+            },ShowDialogs(){
+                this.dialogs=true;
+
+            },CancelDialogs(){
+                this.dialogs=false;
+
             },AddTheme(){
-                this.dataTheme.subject=this.nameTheme;
-                console.log(this.dataTheme);
+                this.dataTheme.subject=this.themeInput;
                 axios.post('/portal/rest/theme/addtheme', this.dataTheme, {
                     headers: {
                         'Content-type': 'application/json',
                     }
                 }) .then(response => {this.subject.push(response.data);
                     this.dialogs=false;
+                    this.themeInput="";
                 })
                     .catch(e => {
                         this.errors.push(e)
                     })
-            },cancelAlt(){
-                this.alt=false;
             }
-
-        }
+            
     }
+    
+}
+
 </script>
 
 <style>
-    .styleSelect{
-        margin-left: 6%;
-        width: 96%;
-    }
-    .styleP{
-        margin-left: 5%;
+.aff{
+    width: 98%;
+     margin-left: 21%;
+}
+.lab-add{
+        margin-left: 12%;
 
-    }
-    .back{
-        background-color: #00bcd4;
-
-
-
-    }
-    .max{
-        width: 92%;
-        margin-left: 2%
-
-    }
-    .classbutton{
-        margin-top: 35%;
-        color: rebeccapurple;
-
-
-    }
-    .but{
-        margin-left: 84%;
-
-
-    }
-    .btn-sec{
-        margin-left: 70%;
-        margin-top: -4%;
-    }
-    .btn_diag{
-        margin-left: 3%;
-        margin-top: -2%;
-        color: blue;
-    }
-    .text_diag{
-        margin-top: -1%;
-        margin-bottom: -6%;
-    }
-    .altm{
-        width: 101%;
-
-    }
-
+}
+.btn-button{
+            margin-left: 16%;
+}
 </style>
+
+

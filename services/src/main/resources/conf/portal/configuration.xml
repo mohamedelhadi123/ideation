@@ -112,6 +112,24 @@ for more details. You should have received a copy of the GNU Lesser General Publ
     <component>
         <type>org.exoplatform.ideation.dto.OrderIdeaDTO</type>
     </component>
+    <component>
+        <type>org.exoplatform.ideation.entities.ThemeIdeaEntity</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.dto.ThemeIdeaDTO</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.dao.ThemeIdeaImpDAO</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.Mapper.ThemeIdeaMapper</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.rest.ThemeIdeaRestService</type>
+    </component>
+    <component>
+        <type>org.exoplatform.ideation.service.utils.ThemeIdeaService</type>
+    </component>
     
     <external-component-plugins>
         <target-component>org.exoplatform.commons.api.persistence.DataInitializer</target-component>

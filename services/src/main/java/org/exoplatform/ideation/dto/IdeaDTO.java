@@ -14,7 +14,7 @@ import java.util.Locale;
  *
  */
 public class IdeaDTO implements Serializable {
-    String pattern = "yyyy-mm-dd hh:mm:ss";
+    String pattern = "yyyy-mm-dd hh:mm";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, new Locale("fr", "FR"));
     private Long id;
     protected String title;
@@ -24,7 +24,7 @@ public class IdeaDTO implements Serializable {
     private String user;
     private String explanation;
     private String resume;
-    private Long id_themet;
+    private Boolean etat;
     public IdeaDTO() {}
 
     public IdeaDTO(IdeaEntity ideaent) {
@@ -38,9 +38,16 @@ public class IdeaDTO implements Serializable {
         this.user = ideaent.getUser();
         this.resume = ideaent.getResume();
         this.explanation = ideaent.getExplanation();
-        this.id_themet = ideaent.getTheme().getId();
+        this.etat=ideaent.getEtat();
     }
 
+    public Boolean getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Boolean etat) {
+        this.etat = etat;
+    }
 
     public Long getId() {
         return id;
@@ -106,11 +113,4 @@ public class IdeaDTO implements Serializable {
         this.resume = resume;
     }
 
-    public Long getId_themet() {
-        return id_themet;
-    }
-
-    public void setId_themet(Long id_themet) {
-        this.id_themet = id_themet;
-    }
 }

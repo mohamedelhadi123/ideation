@@ -1,109 +1,94 @@
 <template>
-  <v-layout row class="my-5 styletocard">
-    <v-flex xs12 sm8 offset-sm1>
-      <v-card>
-        <div class="altm">
-        <div class="alert alert-error" v-if="alt" >
-    <i class="uiIconError"></i>Aucun classement Disponible pour le moment !!
-</div>
+  <div class="crd">
+    <div v-if="alt" class="alert alert-info">
+      <i class="uiIconInfo"></i>Aucun Classement Disponible 
+    </div>
+    <div
+      v-for="d in DonneRating"
+      id="UIActivitiesContainer_welcomeActivity"
+      :key="d.id"
+      class="UIActivitiesContainer_welcomeActivity">
+      <div
+        v-if="show"
+        id="welcomeActivity"
+        class="activityStream uiDefaultActivity">
+        <div class="activityTimeLine pull-left">
+          <div class="activityAvatar avatarCircle">
+            <a>
+              <img alt="Bienvenue sur votre nouvelle plateforme collaborative" src="/eXoSkin/skin/images/themes/default/social/skin/Activity/starterAvt.png">
+            </a>
+          </div>
         </div>
-       <v-list two-line>
-          <template v-for="(idea, index) in DonneRating">
-            <v-list-tile
-              :key="idea.id"
-              avatar
-              ripple
-              @click="toggle(index)"
-            >
-              <v-list-tile-content>
-                <v-list-tile-title>{{ idea.title }}</v-list-tile-title>
-                <v-list-tile-sub-title class="text--primary"> Créer par {{ idea.user }}</v-list-tile-sub-title>
-            
-              </v-list-tile-content>
-            <div class="rat">
-           {{idea.nb}}
-           </div>
-                <v-icon
-                
-                  color="yellow darken-2"
-                >
-                 star
-                </v-icon>
+        <!--end activityTimeLine-->
 
-            </v-list-tile>
-            <v-divider
-              v-if="index + 1 < ideas.length"
-              :key="index"
-            ></v-divider>
-          </template>
-        </v-list>
-      </v-card>
-    </v-flex>
-  </v-layout>
+        <div id="boxContainer" class="boxContainer">
+          <div id="ContextBoxWelcomeActivity" class="uiBox contentBox">
+            <div id="ActivityContextBoxWelcomeActivity">
+              <div class="heading">
+                
+                <span class="arrowLeft"></span>
+                <div class="author">
+                  <a title="welcome to Ideation"><strong>Titre :</strong>{{ d.title }}</a>
+                 
+                  <p style="        margin-left: 92%;">
+                    <a ><strong>{{ d.nb }}</strong></a> <v-icon color="yellow darken-2"> star </v-icon>
+                  </p>
+                </div>
+              </div>
+              <!--end heading-->
+
+              <!-- Welcome content -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import axios from 'axios';
 
-  export default {
-    data () {
-      return {
+export default {
+    data(){
+        return{
         DonneRating:[],
         alt:false,
-        selected: [2],
-         ideas: [
-        { titre: 'The Net Ninja', user: 'Web developer',date :"01-03-2019" },
-        { titre: 'Ryu', user: 'Graphic designer' ,date :"01-03-2019"},
-        { titre: 'Chun Li', user: 'Web developer' ,date :"01-03-2019" },
-        { titre: 'Gouken', user: 'Social media maverick' ,date :"01-03-2019"  },
-        { titre: 'Yoshi', user: 'Sales guru' ,date :"01-03-2019"}
-      ]
-        
-      }
+        show:true,
+        }
     },mounted(){
-   axios
+         axios
       .get('/portal/rest/fav/getallordered')
       .then(response => { this.DonneRating=response.data;
+      
       if(this.DonneRating.length===0){
         this.alt=true;
+        this.show=false;
       }  
       })
       .catch(error => {
-        console.log(error)
         this.errored = true
       })
-    },
-
-    methods: {
-      toggle (index) {
-        const i = this.selected.indexOf(index)
-
-        if (i > -1) {
-          this.selected.splice(i, 1)
-        } else {
-          this.selected.push(index)
-        }
-      }
+    },updated(){
+           axios
+      .get('/portal/rest/fav/getallordered')
+      .then(response => { this.DonneRating=response.data;
       
+      if(this.DonneRating.length===0){
+        this.alt=true;
+        this.show=false;
+      }  
+      })
+      .catch(error => {
+        this.errored = true
+      }) 
     }
-  }
+}
 </script>
+
 <style>
-.styletocard{
-  width: 143%;
-  margin-left: -9%;
-}
-.rat{
-      margin-top: 1%;
-
-}
-.altm{
-      width: 102%;
-
+.crd{
+         width: 73%;
+    margin-left: 12%;
 }
 </style>
-
-
-
-
-
 

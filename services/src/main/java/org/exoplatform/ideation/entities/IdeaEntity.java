@@ -38,9 +38,9 @@ public class IdeaEntity implements Serializable {
     private String user;
     @Column(name = "CREATED_TIME")
     private Date createdTime;
-    @ManyToOne
-    @JoinColumn (name="ID_THEMET")
-    private ThemeEntity theme;
+    @Column(name = "ETAT")
+    private Boolean etat;
+
 
     @Column(name="RESUME")
     private String resume;
@@ -52,15 +52,23 @@ public class IdeaEntity implements Serializable {
 
     }
 
-    public IdeaEntity(String title, String description, Status status, String user, Date createdTime, ThemeEntity theme, String resume, String explanation) {
+    public IdeaEntity(String title, String description, Status status, String user, Date createdTime,  String resume, String explanation,Boolean etat) {
         this.title = title;
         this.description = description;
         this.status = status;
         this.user = user;
         this.createdTime = createdTime;
-        this.theme = theme;
         this.resume = resume;
         this.explanation = explanation;
+        this.etat=etat;
+    }
+
+    public Boolean getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Boolean etat) {
+        this.etat = etat;
     }
 
     public Long getId() {
@@ -111,13 +119,7 @@ public class IdeaEntity implements Serializable {
         this.createdTime = createdTime;
     }
 
-    public ThemeEntity getTheme() {
-        return theme;
-    }
 
-    public void setTheme(ThemeEntity theme) {
-        this.theme = theme;
-    }
 
     public String getResume() {
         return resume;

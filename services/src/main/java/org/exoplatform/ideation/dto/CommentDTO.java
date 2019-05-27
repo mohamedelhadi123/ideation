@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class CommentDTO implements Serializable {
-    String pattern = "yyyy-mm-dd hh:mm:ss";
+    String pattern = "yyyy-mm-dd hh:mm";
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, new Locale("fr", "FR"));
     public CommentDTO() {}
 

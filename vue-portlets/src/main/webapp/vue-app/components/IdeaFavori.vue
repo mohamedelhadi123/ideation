@@ -1,36 +1,50 @@
-﻿<template>
-    <div class="team">
-        <v-container >
-            <div class="malt">
-                <div class="alert alert-info" v-if="alt">
+<template>
+  <div class="crd">
+      <div v-if="alt" class="alert alert-info">
                     <i class="uiIconInfo"></i>Aucun Idée Favori
-                </div>
-            </div>
-            <v-layout row wrap>
-                <v-flex xs12 sm6 md4 lg3 v-for="idee in donneedatafav" :key="idee.id" >
-                    <v-card flat class="text-xs-left ma-3 " >
-                        <v-card-text>
-                            <div >
-                                <i class="far fa-address-card" color="blue"></i>
-                                Titre :{{ idee.title }}
-                            </div>
-                            <div class="grey--text">
-                                <i class="fas fa-user-graduate"></i>
-                                Crée par :{{ idee.user }}</div>
-                            <div class="grey--text">
-                                <i class="fas fa-calendar"></i>
-                                le :{{ idee.createdTime}}</div>
-                        </v-card-text>
-                        <v-card-actions>
-                            <router-link :to="`/ideainfo/${idee.id}`"><i class="fas fa-angle-double-right"></i> </router-link>
-                        </v-card-actions>
+                  </div>
+    <div
+      v-if="compont"
+      id="UIActivitiesContainer_welcomeActivity"
+      class="UIActivitiesContainer_welcomeActivity">
+      <div id="welcomeActivity" class="activityStream uiDefaultActivity">
+        <div class="activityTimeLine pull-left">
+        </div>
+        <!--end activityTimeLine-->
+
+        <div id="boxContainer" class="boxContainer">
+          <div id="ContextBoxWelcomeActivity" class="uiBox contentBox">
+            <div id="ActivityContextBoxWelcomeActivity">
+              <!--end heading-->
+              <div class="heading">
+                <v-expansion-panel>
+                  
+                  <v-expansion-panel-content v-for="d in donneedatafav" :key="d.id">
+                    <div slot="header" class="py-1">
+                      <strong>Titre :</strong>{{ d.title }}
+                      <div class="dataInfor">
+                        <span class="dateTime"><i class="uiIconClock  uiIconLightGray"></i>&nbsp;le {{ d.createdTime }}</span>
+                      </div>
+                    </div>
+                    
+                    <v-card>
+                      <v-card-text class="px-4 grey--text" style="    width: 95%">
+                        <div><strong>Resumé :</strong>{{ d.resume }} </div>
+                        <br>
+                        <p><router-link :to="`/ideainfo/${d.id}`">Lire la suite ...</router-link></p>
+                      </v-card-text>
                     </v-card>
-                </v-flex>
-            </v-layout>
-
-        </v-container>
-
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </div>
+              <!-- Welcome content -->
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+ 
 </template>
 
 <script>
@@ -42,6 +56,7 @@
             return {
                 alt:false,
                 donneedatafav:[],
+                compont:true,
 
             }
         },mounted(){
@@ -49,19 +64,22 @@
                 .get('/portal/rest/fav/getfavbyuser')
                 .then(response => { if(response.data.length===0){
                     this.alt=true;
+                    this.compont=false;
                 }else{
                     for(let i=0;i<response.data.length;i++){
 
 
                         axios
-                            .get('/portal/rest/idea/getideabyid/'+response.data[i].id_Ideaf)
+                            .get(`/portal/rest/idea/getideabyid/${response.data[i].id_Ideaf}`)
                             .then(response => { this.donneedatafav.push(response.data);
+
                                 
+
+
 
 
                             })
                             .catch(error => {
-                                console.log(error)
                                 this.errored = true
                             })
 
@@ -71,7 +89,6 @@
 
                 })
                 .catch(error => {
-                    console.log(error)
                     this.errored = true
                 })
 
@@ -79,11 +96,8 @@
     }
 </script>
 <style>
-    .cardstyle{
-        margin-left: 20%;
-    }
-    .malt{
-        width: 92%;
-        margin-left: 3%;
-    }
+.crd{
+         width: 80%;
+    margin-left: 9%;
+}
 </style>

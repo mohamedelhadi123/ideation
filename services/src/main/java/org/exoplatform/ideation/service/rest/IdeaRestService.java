@@ -10,6 +10,7 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.social.core.identity.provider.OrganizationIdentityProvider;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.identity.model.Identity;
+import org.json.simple.JSONObject;
 
 
 import javax.inject.Inject;
@@ -151,6 +152,34 @@ public class IdeaRestService implements ResourceContainer {
         }
 
     }
+
+
+@POST
+
+@Path("/addSapace/{name}") public Response AddSapce(@PathParam("name") String name ) throws Exception {
+
+    ideaService.testCreateSpaceWithManagersAndMembers(name);
+    return Response.status(Response.Status.ACCEPTED).entity("Create space").build();
+   }
+
+    @GET
+    @Path("/geturl/{name}")
+
+    public Response GetUrlSpace (@PathParam("name") String name  ){
+        try {
+            String url=ideaService.GetUrlSpace(name);
+            JSONObject jo = new JSONObject();
+            jo.put("url",url);
+            return Response.ok(jo).build();
+        }catch (Exception e) {
+            LOG.error("Erreur to URL SPACE" + e.getMessage());
+            return Response.serverError().entity("Error URL SPACE").build();
+        }
+
+
+
+   }
+
 
 
 }

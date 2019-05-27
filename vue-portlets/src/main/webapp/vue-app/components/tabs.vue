@@ -1,41 +1,46 @@
-<template v-slot:extension>
-  <div>
-    <v-tabs
-            centered
-            color="cyan"
-            dark
-            icons-and-text>
-      <v-tabs-slider color="yellow" />
-
-      <v-tab
-              v-for="item in links"
-              :key="item"
-              router
-              :to="item.route">
-        {{ item.text }}
-        <v-icon>{{ item.icon }}</v-icon>
-      </v-tab>
-    </v-tabs>
+<template>
+  <div class="dd">
+    <ul class="nav nav-tabs userNavigation" style="visibility: visible;">
+      <li class="item" style="margin-left: 13%;">
+        <router-link to="/">
+          <i class="fas fa-check-circle"></i><strong>Idées Publiées</strong>
+        </router-link>
+      </li>
+      <li class="item">
+        <router-link to="/ideafav">
+          <i class="fas fa-heart"></i><strong>Idées Favoris</strong>
+        </router-link>
+      </li>
+      <li class="item">
+        <router-link to="/ideadrafted">
+          <i class="fas fa-pencil-alt"></i><strong>Idées Redigées</strong>
+        </router-link>
+      </li>
+      <li class="item">
+        <router-link to="/ideaarchived">
+          <i class="far fa-file-archive"></i><strong>Idées Archivées</strong>
+        </router-link>
+      </li>
+      <li class="item">
+        <router-link to="/rating">
+          <i class="fas fa-star"></i><strong>Classement des Idées</strong>
+        </router-link>
+      </li>
+      <li class="item">
+        <router-link to="/addidea">
+          <i class="fas fa-plus-circle"></i><strong>Créer une Idée</strong>
+        </router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
 
-<script>
-    export default {
-        data () {
-            return {
-                tab: null,
-                links: [
-                    { icon: 'check_circle', text: 'Idées Publiées', route: '/' },
-                    { icon: 'favorite', text: 'Idées Favoris', route: '/ideafav' },
-                    { icon: 'fas fa-edit', text: 'Idées redigées', route: '/ideadrafted' },
-                    { icon: 'present_to_all', text: 'Idées Archivées', route: '/ideaarchived' },
-                    { icon: 'fas fa-award', text: 'Classement des Idées ', route: '/rating' },
-                    { icon: 'fas fa-plus-circle', text: 'Crée une  Idées ', route: '/addidea' },
-
-
-                ]
-            }
-        }
-    }
-</script>
+<style>
+.dd{
+  background-color: white;
+}
+.clLi{
+  margin-left: 10%;
+}
+</style>

@@ -1,86 +1,117 @@
 <template>
+  <div class="crd">
+    <div v-if="alt" class="alert alert-info">
+      <i class="uiIconInfo"></i>Aucune idée trouvée
+    </div>
+    <div
+      v-if="compont"
+      id="UIActivitiesContainer_welcomeActivity"
+      class="UIActivitiesContainer_welcomeActivity">
+      <div id="welcomeActivity" class="activityStream uiDefaultActivity">
+        <div class="activityTimeLine pull-left">
+        </div>
+        <!--end activityTimeLine-->
 
-    <v-container >
-
-        <div class="ideas">
-
-
-
-            <v-expansion-panel>
-                <div class="alert alert-warning" v-if="alt">
+        <div id="boxContainer" class="boxContainer">
+          <div id="ContextBoxWelcomeActivity" class="uiBox contentBox">
+            <div id="ActivityContextBoxWelcomeActivity">
+              <!--end heading-->
+              <div class="heading">
+                <v-expansion-panel>
+                  <div v-if="alt" class="alert alert-warning">
                     <i class="uiIconWarning"></i>Aucun Idée redigée  .
-
-
-                </div>
-                <v-expansion-panel-content v-for="d in donnes" :key="d.id">
+                  </div>
+                  <v-expansion-panel-content v-for="d in donnes" :key="d.id">
                     <!-------------------------------- Dialog for Update ------------------------------------->
 
-                    <div v-if="altDiag" class="UIPopupWindow uiPopup UIDragObject NormalStyle" style="width: 560px; position: relative; top: auto; left: auto; margin: 0 auto 20px; z-index: 1; max-width: 100%;">
-                        <div class="popupHeader ClearFix">
-                            <a class="uiIconClose pull-right" aria-hidden="true" ></a>
-                            <span class="PopupTitle popupTitle">Modifier Votre Idée</span>
-                        </div>
-                        <div class="PopupContent popupContent">
-                            <div class="form-horizontal resizable">
-                                <div class="popupContent">
-                                    <div class="control-group">
-                                        <label for="label" class="control-label">Titre:</label>
-                                        <div class="controls"><input type="text" id="label" name="label" v-model="d.title"></div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label for="label" class="control-label">L'objectif:</label>
-                                        <div class="controls"><input type="text"   v-model="d.explanation"></div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label for="label" class="control-label">Resumé:</label>
-                                        <div class="controls"><textarea type="text"  v-model="d.resume"/></div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label for="label" class="control-label">Discription:</label>
-                                        <div class="controls"><textarea type="text" id="label" name="label" v-model="d.description"/></div>
-                                    </div>
-                                    <p class=" styleP">Ajouter un fichier</p>
-                                    <upload-btn icon >
-                                        <template slot="icon">
-                                            <v-icon size="60px">attachment</v-icon>
-                                        </template>
-                                    </upload-btn>
-                                </div>
+                    <div
+                      v-if="altDiag"
+                      class="UIPopupWindow uiPopup UIDragObject NormalStyle"
+                      style="width: 875px; position: relative; top: auto; left: auto; margin: 0 auto 20px; z-index: 1; max-width: 100%;">
+                      <div class="popupHeader ClearFix">
+                        <a
+                          class="uiIconClose pull-right"
+                          aria-hidden="true"
+                          @click="DontShow"></a>
+                        <span class="PopupTitle popupTitle">Modifier Votre Idée</span>
+                      </div>
+                      <div class="PopupContent popupContent">
+                        <div class="form-horizontal resizable">
+                          <div class="popupContent">
+                            <div class="control-group">
+                              <label for="label" class="control-label">Titre:</label>
+                              <div class="controls">
+                                <input
+                                style="width: 76%;"
+                                  id="label"
+                                  v-model="d.title"
+                                  type="text"
+                                  name="label">
+                              </div>
                             </div>
-                            <div class="uiAction uiActionBorder">
-                                <button class="btn"  @click.prevent="UpdateIdea(d.id,d.title,d.description,d.resume,d.explanation)" >Save</button>
-                                <button class="btn" @click="DontShow" type="button">Cancel</button>
+                            <div class="control-group">
+                              <label for="label" class="control-label">L'objectif:</label>
+                              <div class="controls"><input  style="width: 76%;" v-model="d.explanation" type="text"></div>
                             </div>
+                            <div class="control-group">
+                              <label for="label" class="control-label">Resumé:</label>
+                              <div class="controls"><textarea style="width: 76%;" v-model="d.resume" type="text"></textarea></div>
+                            </div>
+                            <div class="control-group">
+                              <label for="label" class="control-label">Discription:</label>
+                              <div class="controls">
+                                <textarea
+                                  id="label"
+                                  v-model="d.description"
+                                  type="text"
+                                  name="label" style="width: 76%;"></textarea>
+                              </div>
+                            </div>
+                           
+                          </div>
                         </div>
-                        <span class="uiIconResize pull-right uiIconLightGray"></span>
+                        <div class="uiAction uiActionBorder">
+                          <button class="btn" @click.prevent="UpdateIdea(d.id,d.title,d.description,d.resume,d.explanation)">Enregistrer</button>
+                          <button
+                            class="btn"
+                            type="button"
+                            @click="DontShow">
+                            Annuler
+                          </button>
+                        </div>
+                      </div>
+                      <span class="uiIconResize pull-right uiIconLightGray"></span>
                     </div>
                     <!--------------------------------------- END -------------------------------------------->
-                    <div slot="header" class="py-1">{{ d.title }}</div>
+                    <div slot="header" class="py-1">
+                      <strong>Titre :</strong>{{ d.title }}
+                      <div class="dataInfor">
+                        <span class="dateTime"><i class="uiIconClock  uiIconLightGray"></i>&nbsp;le {{ d.createdTime }}</span>
+                      </div>
+                    </div>
+                    
                     <v-card>
-                        <v-card-text class="px-4 grey--text">
-                            <div>{{ d.description }}  </div>
+                      <v-card-text class="px-4 grey--text" style="    width: 95%">
+                        <div><strong>Resumé :</strong>{{ d.resume }} </div>
 
-                            <div class="font-weight-bold">créer par {{d.user}} le {{ d.createdTime }}</div>
-                            <button class="btn" @click="AffichDialog">Modifier</button>
-                            <button  class="btn" @click.prevent="DeleteIdea(d.id)">Supprimer </button>
-                            <button  class="btn-primary" @click.prevent="AddToPublished(d.id,d.title,d.description,index)">Publier</button>
-
-
-
-
-
-                        </v-card-text>
+                            
+                        <button class="btn btn-small" @click="AffichDialog">Modifier</button>
+                        <button class="btn btn-small" @click.prevent="DeleteIdea(d.id)">Supprimer </button>
+                        <button class="btn btn-small btn-primary " @click.prevent="AddToPublished(d.id,d.title,d.description,d.resume,d.explanation)">Publier</button>
+                      </v-card-text>
                     </v-card>
-                </v-expansion-panel-content>
-            </v-expansion-panel>
-
-
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </div>
+              <!-- Welcome content -->
+            </div>
+          </div>
         </div>
-    </v-container>
+      </div>
+    </div>
+  </div>
 </template>
-
 <script>
-    import UploadButton from 'vuetify-upload-button';
 
     import axios from 'axios';
     export default {
@@ -89,6 +120,7 @@
                 donnes:[],
                 altDiag:false,
                 alt:false,
+                compont:true,
                 dialog: false,
                 datajson:{
                     id:null,
@@ -100,10 +132,7 @@
 
                 },
 
-            }}, components:{
-            'upload-btn': UploadButton
-
-        },
+            }}, 
 
 
 
@@ -115,38 +144,39 @@
                 .then(response => { this.donnes=response.data;
                     if(this.donnes.length===0){
                         this.alt=true;
+                        this.compont=false;
                     }
                 })
                 .catch(error => {
-                    console.log(error)
                     this.errored = true
                 })
         },
 
         methods: {
             DeleteIdea: function(event){
-                axios.delete('/portal/rest/idea/delete/'+event, {
+                axios.delete(`/portal/rest/idea/delete/${event}`, {
                     headers : {
                         'Content-Type' : 'application/json'
                     }
                 }).then( response=>{this.donnes=this.donnes.filter(d=>d.id !==event)
                         if(this.donnes.length===0){
                             this.alt=true;
+                            this.compont=false;
                         }
 
                     }
 
                 )
                     .catch(error => {
-                        console.log(error)
                         this.errored = true
                     })
 
             },
-            AddToPublished:function(id,title,description){
-                const idx = this.donnes.indexOf();
+            AddToPublished:function(id,title,description,resume,explanation){
 
                 this.datajson.status="PUBLISHED";
+                this.datajson.explanation=explanation;
+                this.datajson.resume=resume;
                 this.datajson.createdTime=new Date();
                 this.datajson.description=description;
                 this.datajson.title=title;
@@ -166,7 +196,6 @@
                 this.datajson.id=id;
                 this.datajson.explanation=explanation;
                 this.datajson.resume=resume;
-                console.log(this.datajson);
                 axios.put('/portal/rest/idea/update', this.datajson, {
                     headers: {
                         'Content-type': 'application/json',
@@ -179,7 +208,6 @@
 
                         })
                         .catch(error => {
-                            console.log(error)
                             this.errored = true
                         })})
             }
@@ -188,7 +216,6 @@
             reset() {
                 this.titre= null;
                 this.description=null;
-                console.log("ok");
 
             },DontShow(){
                 this.altDiag=false;
@@ -196,7 +223,6 @@
             annuler(){
                 this.dialog=false;
 
-                console.log(this.dialog);
             },AffichDialog(){
                 this.altDiag=true;
             },
@@ -207,28 +233,15 @@
 
 
 
-
 </script>
+
 <style>
-    .textet{
-        width: 72%;
-
-    }
-    .bt{
-        justify-content: flex-end;
-        width: 95%;
-    }
-
-    .select_style{
-        margin-left: 12%;
-        width: 108%;
-    }
+.crd{
+        width: 80%;
+    margin-left: 9%;
+}
+.cmt{
+    width: 101%;
+}
 </style>
-
-
-
-
-
-
-
 

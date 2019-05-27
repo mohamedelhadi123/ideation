@@ -87,6 +87,36 @@ public class RatingRestService implements ResourceContainer {
         }
 
     }
+  @DELETE
+  @Path("/delete/{id}")
+  public Response deleteRating(@PathParam("id") Long id){
+        try {
+            ratingservice.deleteRating(id);
+            return Response.ok().build();
+
+        }catch (Exception e) {
+            return Response.serverError()
+                    .entity("Error delete idea")
+                    .build();
+
+        }
+  }
+
+@PUT
+@Path("/updaterating")
+public Response updateRating(RatingDTO ratingDTO){
+        try {
+            ratingservice.updateRating(ratingDTO);
+            return Response.ok().entity(ratingDTO).build();
+        }catch (Exception e) {
+
+            LOG.error("Error updating idea {} by {} ", e);
+
+            return Response.serverError().build();
+
+        }
+}
+
 
 
 

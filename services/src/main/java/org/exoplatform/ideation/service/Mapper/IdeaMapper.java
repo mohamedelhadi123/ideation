@@ -53,11 +53,6 @@ public class IdeaMapper {
 
                 ideaEntity.setCreatedTime(new Date());
 
-
-
-
-                ThemeEntity theme=this.ThemeFromId(ideaDTO.getId_themet());
-                ideaEntity.setTheme(theme);
                 return ideaEntity;
             }
 
@@ -71,11 +66,6 @@ public class IdeaMapper {
     }
 
 
-    public ThemeEntity ThemeFromId(Long id){
-        ThemeEntity themeEntity=new ThemeEntity();
-        themeEntity.setId(id);
-        return themeEntity;
-    }
 
 
 }

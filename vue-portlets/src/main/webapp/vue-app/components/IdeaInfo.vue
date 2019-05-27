@@ -1,375 +1,431 @@
 <template>
-    <div class="cdtop">
-        <v-card class="my-5">
-            <v-card-title>
-                <div class="lab"> Titre :</div>
-                <div class="tl">
-                    {{ this.donnesidea.title }}
-                </div>
-                <div class="lin">
-                    <router-link to="/rating">voir classement </router-link>
-                </div>
-            </v-card-title>
-             <v-card-title>
-                <div class="lab"> Théme :</div>
-                <div class="des">{{ this.nameOfTheme }}</div>
-            </v-card-title>
-               <v-card-title>
-                <div class="lab"> Objectif :</div>
-                <div class="des">{{ this.donnesidea.explanation }}</div>
-            </v-card-title>
-            <v-card-title>
-                <div class="lab"> Description :</div>
-                <div class="des">{{ this.donnesidea.description }}</div>
-            </v-card-title>
+  <div class="crd">
+    <div id="UIActivitiesContainer_welcomeActivity" class="UIActivitiesContainer_welcomeActivity">
+      <div id="welcomeActivity" class="activityStream uiDefaultActivity">
+        <div class="activityTimeLine pull-left">
+          <div class="activityAvatar avatarCircle">
+            <a>
+              <img alt="Bienvenue sur votre nouvelle plateforme collaborative" src="/eXoSkin/skin/images/themes/default/social/skin/Activity/starterAvt.png">
+            </a>
+          </div>
+        </div>
+        <!--end activityTimeLine-->
 
-            <v-card-title>
-                <div class="lab"> Resume :</div>
-                <div class="des">{{ this.donnesidea.resume }}</div>
-            </v-card-title>
-            <v-card-title>
-                <v-btn flat icon color="pink" @click="addFavori" :disabled=this.okFav>
-                    {{ this.favlength}}
-                    <v-icon>favorite</v-icon>
-                </v-btn>
-                <v-btn flat icon @click="addLike" color="deep-orange" :disabled=this.okLike>
-                    {{ this.like }}
-                    <v-icon>thumb_up</v-icon>
-                </v-btn>
-                <v-btn flat icon @click="addDisLike" color="deep-orange" :disabled=this.okDislike>
-                    {{ this.dislike }}
-                    <v-icon>thumb_down</v-icon>
-                </v-btn>
-                <v-btn flat icon @click="openComment" >
-                    <v-icon large color="blue darken-2">chat</v-icon>
-                </v-btn>
-            </v-card-title>
-            <div v-if="yesCom">
-                <v-card-title >
-                    <div class="cmtHeader">Commentaire ...</div>
-                </v-card-title>
-            </div>
-            <div>
-                <v-card-text>
-                    <ul >
-                        <li v-for="d in commentDonne" :key="d.id" >
-                            <v-card-text class="tet">
-                                <div class="namec">{{ d.user }}:</div>
-                                <div class="cmt">{{ d.commentText }}</div>
-                                <div class="dt">{{d.createdTime}}</div>
-                            </v-card-text>
+        <div id="boxContainer" class="boxContainer">
+          <div id="ContextBoxWelcomeActivity" class="uiBox contentBox">
+            <div id="ActivityContextBoxWelcomeActivity">
+              <div class="heading">
+                <span class="arrowLeft"></span>
+                <div class="author">
+                  <a title="welcome to Ideation">Cette Idée est Céer par {{ this.donnesidea.user }}</a>
+                </div>
+                <div class="dataInfor">
+                  <span class="dateTime"><i class="uiIconClock  uiIconLightGray"></i>&nbsp;le {{ this.donnesidea.createdTime }}</span>
+                </div>
+              </div>
+              <!--end heading-->
+
+              <!-- Welcome content -->
+              <div class="description clearfix">
+                <p><strong>Titre :</strong>{{ this.donnesidea.title }}</p>
+                <p><strong>Objectife :</strong> {{ this.donnesidea.explanation }} </p>
+                <p><strong>Description :</strong> {{ this.donnesidea.description }}</p>
+                                
+                <p><strong>Resume :</strong> {{ this.donnesidea.resume }}</p>
+                <p>
+                  <strong>Theme :</strong> <ul>
+                    <li v-for="th in themeForIdea" :key="th.id">
+                      {{ th.subject }}
+                    </li>
+                  </ul>
+                </p>
+                <div>
+                  <div class="actionBar clearfix linkActivityIcon">
+                    <div>
+                      <ul class="pull-right statusAction kudoContainer">
+                        <li>
+                          <a
+                            rel="tooltip"
+                            data-placement="bottom"
+                            data-original-title="Commentaire">
+                            <i
+                              class="far fa-comment"
+                              :style="Scomment"
+                              @click="ShowComment"></i>&nbsp;{{ this.NbComment }}
+                          </a>
                         </li>
-                    </ul>
-                </v-card-text>
-            </div>
-            <div v-if="clik">
-                <div  class="textar">
-                    <v-textarea
+                        <li>
+                          <a
+                            rel="tooltip"
+                            data-placement="bottom"
+                            data-original-title="j'aime pas">
+                            <i
+                              class="far fa-thumbs-down"
+                              :style="Disl"
+                              @click="addDisLike"></i>&nbsp;{{ this.dislike }}
+                          </a>
+                        </li>
+
+                        <li>
+                          <a
+                            rel="tooltip"
+                            data-placement="bottom"
+                            data-original-title="J'aime">
+                            <i
+                              class="far fa-thumbs-up"
+                              :style="Li"
+                              @click="addLike"></i>&nbsp;{{ this.like }}
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            rel="tooltip"
+                            data-placement="bottom"
+                            data-original-title="Favori">
+                            <i
+                              class="far fa-heart"
+                              :style="favColor"
+                              @click="addFavori"></i>&nbsp;{{ this.fav }}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                                
+
+                <div
+                  v-for="d in commentDonne"
+                  id="CommentBlockBound246557"
+                  :key="d.id"
+                  class="commentBox ">
+                  <div class="commentList">
+                    <div class="CommentBlock">
+                      <div class="commentItem commentItemLast">
+                        <div class="commentRight">
+                          <div class="author">
+                            <a href="#">{{ d.user }}</a>
+                          </div>
+                          <div class="contentComment">
+                            <p>{{ d.commentText }}</p>
+                            <div class="dataInfor">
+                              <span class="dateTime"><i class="uiIconClock  uiIconLightGray"></i>&nbsp;{{ d.createdTime }}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  v-if="alt"
+                  id="CommentBlockBound246557"
+                  class="commentBox ">
+                  <div class="commentList">
+                    <div class="CommentBlock">
+                      <div class="commentItem commentItemLast">
+                        <div class="commentRight">
+                          <textarea
                             v-model="commentTextt"
-                            box
-                            name="input-7-4"
-                            label="Ajouter Votre commentaire"
-                    ></v-textarea>
+                            class="cmt"
+                            name="input-7-1"
+                            auto-grow></textarea>
+                                                    
+                                                   
+                                                   
+                          <button class="btn-primary" @click="addComment">Enregistrer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
                 </div>
-                <div class="btn-ma">
-                    <button class="btn-primary" @click="addComment">Enregistrer</button>
-                </div>
+              </div>
             </div>
-        </v-card>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 <script>
     import axios from 'axios';
 
-    export default {
-  
-        data(){
-            return{
-                datal:{
+export default {
+    data(){
+        return{
+            datal:{ id:null,
                     status:"",
-                    user:"",
-                    yesCom:false,
                     id_idear:this.$route.params.id
+            },
+             datajsonfav:{
+                    id_Ideaf:this.$route.params.id,
                 },
-                okFav:false,
-                okLike:false,
-                okDislike:false,
-                like:null,
-                dislike:null,
-                favlength:null,
-                clik:false,
-                donnes:[],
-                nameOfTheme:'',
-                commentDonne:[],
-                donnesidea:[],
-                commentTextt:'',
-
-                datajson:{
+             datajson:{
                     user:'',
                     commentText:'',
                     id_ideac:this.$route.params.id,
-
-
-
                 },
-                datajsonfav:{
-                    id_Ideaf:this.$route.params.id,
-                },
+            alt:false,
+            Li:{
+             color:""
+            },
+            Disl:{
+             color:""
+            },
+            favColor:{
+                color:''
+            },
+            Scomment:{
+                color:''
+            },
+             commentDonne:[],
+             idFavS:null,
+                donnesidea:[],
+                dislike:null,
+                idDislike:null,
+                idLike:null,
+                like:null,
+                fav:null,
+                
+                NbComment:null,
+                commentTextt:'',
+             donnes:[],
+             themebyId:[],
+             themeForIdea:[],
+           
 
-                no:this.$route.params.id,
 
-            }
-        },
-
-        mounted () {
+        }
+    } ,mounted () {
 
 
-            this.verifyRating();
-            axios
-                .get('/portal/rest/idea/getideabyid/'+this.no)
-                .then(response => { this.donnesidea=response.data;
-                    
-                  axios
-                .get('/portal/rest/theme/getthemebyid/'+response.data.id_themet)
-                .then(response => { this.nameOfTheme=response.data.subject;
-                    
-
-                })
             
-                })
-                .catch(error => {
-                    console.log(error)
-                    this.errored = true
+            axios
+                .get(`/portal/rest/idea/getideabyid/${this.$route.params.id}`)
+                .then(response => { this.donnesidea=response.data;})
+                    
+            axios
+                .get(`/portal/rest/themeidea/getallthemebyidea/${this.$route.params.id}`)
+                .then(response => { this.themebyId=response.data;
+                for(let i=0;i<this.themebyId.length;i++){
+                         axios
+                .get(`/portal/rest/theme/getthemebyid/${this.themebyId[i].id_themei}`)
+                .then(response => {this.themeForIdea.push(response.data)})        
+          
+                }
+                   
+
                 })
 
-            axios
-                .get('/portal/rest/rating/getratingbyidea/'+this.no+'/DISLIKE')
+           
+
+
+        } ,updated(){
+            this.verifyRating();
+ axios
+                .get(`/portal/rest/rating/getratingbyidea/${this.$route.params.id}/DISLIKE`)
                 .then(response => { this.dislike=response.data.length;
+               if(this.dislike.length!==0){
+                   this.idDislike=response.data[0].id;
+               }
 
                 })
                 .catch(error => {
-                    console.log(error)
                     this.errored = true
                 })
             axios
-                .get('/portal/rest/fav/getbyidea/'+this.no)
-                .then(response => { this.favlength=response.data.length;
+                .get(`/portal/rest/fav/getbyidea/${this.$route.params.id}`)
+                .then(response => { this.fav=response.data.length;
+                if(this.fav.length!==0){
+                    this.idFavS=response.data[0].id;
+                }
 
                 })
                 .catch(error => {
-                    console.log(error)
                     this.errored = true
                 })
             axios
-                .get('/portal/rest/rating/getratingbyidea/'+this.no+'/LIKE')
+                .get(`/portal/rest/rating/getratingbyidea/${this.$route.params.id}/LIKE`)
                 .then(response => { this.like=response.data.length;
-
+                if(this.like.length!==0){
+                   this.idLike=response.data[0].id;
+               }
                 })
                 .catch(error => {
-                    console.log(error)
                     this.errored = true
                 })
 
             axios
-                .get('/portal/rest/comment/allcommentbyidea/'+this.no)
+                .get(`/portal/rest/comment/allcommentbyidea/${this.$route.params.id}`)
                 .then(response => { this.commentDonne=response.data;
-                    if(this.commentDonne.length!==0){
-                        this.yesCom=true;
-                    }
+                   this.NbComment=this.commentDonne.length;
+                   if(this.NbComment!==0){
+                       this.Scomment.color="blue";
+                   }
                 })
                 .catch(error => {
-                    console.log(error)
                     this.errored = true
                 })
-
-
-        } ,methods:{
-            addComment(){
+        },
+        methods:{
+        ShowComment(){
+            this.alt=true;
+        },
+       addComment(){
                 this.datajson.commentText=this.commentTextt;
-                console.log(this.datajson);
                 axios.post('/portal/rest/comment/add', this.datajson, {
                     headers: {
                         'Content-type': 'application/json',
                     }
                 }) .then(response => {this.commentDonne.push(response.data);
-                    this.yesCom=true;})
+                    })
                     .catch(e => {
                         this.errors.push(e)
                     })
                 this.commentTextt='';
+                this.alt=false;
 
 
-            },verifyRating(){
-                const sat=null;
+       },verifyRating(){
+                
                 axios
-                    .get('/portal/rest/rating/verif/'+this.no )
-                    .then(response => { if(response.data.length===0){
-                        this.okLike=false;
-                        this.okDislike=false;
-                    }else if(response.data[0].status==="LIKE"){
-                        this.okLike=true;
-                        this.okDislike=true;
-                        console.log("ok ******"+this.okLike);
+                    .get(`/portal/rest/rating/verif/${this.$route.params.id}` )
+                    .then(response => {if(response.data[0].status==="LIKE"){
+                        this.Li.color="blue";
+                        
+                       
                     }else if(response.data[0].status==="DISLIKE"){
-                        this.okDislike=true;
-                        this.okLike=true;
-                        console.log("ok dis *********"+this.okDislike);
+                        this.Disl.color="blue";
+                        
                     }
 
                     })
                     .catch(error => {
-                        console.log(error)
                         this.errored = true
                     })
 
                 axios
-                    .get('/portal/rest/fav/verif/'+this.no)
+                    .get(`/portal/rest/fav/verif/${this.$route.params.id}`)
                     .then(response => { if(response.data.length===0){
-                        this.okFav=false;
+                        this.favColor.color="";
                     }else {
-                        this.okFav=true;
+                        this.favColor.color="red";
                     }
 
                     })
                     .catch(error => {
-                        console.log(error)
                         this.errored = true
                     })
 
 
             },addLike(){
                 this.datal.status="LIKE";
-                console.log("*******"+this.$route.query.id);
-                console.log(this.datal);
-                axios.post('/portal/rest/rating/addrating', this.datal, {
+                
+                if(this.Li.color==="blue"){
+                     axios.delete(`/portal/rest/rating/delete/${this.idLike}`, {
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    }
+                }).then( response=>{this.Li.color='';
+
+                    })
+                }else if(this.Disl.color==="blue"){
+                   
+                    this.datal.status="LIKE"
+                    this.datal.id=this.idDislike;
+                     axios.put('/portal/rest/rating/updaterating', this.datal, {
                     headers: {
                         'Content-type': 'application/json',
                     }
-                }) .then(response => {this.like++;
-                    this.okLike=true;
-                    this.okDislike=true;})
+                }).then(response=>{ this.Disl.color='';
+                this.Li.color="blue"})
+                }
+                else{
+                       axios.post('/portal/rest/rating/addrating', this.datal, {
+                    headers: {
+                        'Content-type': 'application/json',
+                    }
+                }) .then(response => {
+                    
+                    this.Li.color="blue";})
                     .catch(e => {
                         this.errors.push(e)
                     })
+                }
+              
 
             },addDisLike(){
                 this.datal.status="DISLIKE";
-                console.log(this.datal);
+                
+                
+                if(this.Disl.color==="blue"){
+                   axios.delete(`/portal/rest/rating/delete/${this.idDislike}`, {
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    }
+                }).then( response=>{this.Disl.color='';
+
+                    })
+                }else if(this.Li.color==="blue"){
+                    
+                    this.datal.status="DISLIKE"
+                    this.datal.id=this.idLike;
+                     axios.put('/portal/rest/rating/updaterating', this.datal, {
+                    headers: {
+                        'Content-type': 'application/json',
+                    }
+                }).then(response=>{ 
+                this.Disl.color="blue";
+                this.Li.color="";})
+                }else{
                 axios.post('/portal/rest/rating/addrating', this.datal, {
                     headers: {
                         'Content-type': 'application/json',
                     }
-                }) .then(response => {this.dislike++;
-                    this.okDislike=true;
-                    this.okLike=true;})
+                }) .then(response => {
+                    this.Disl.color="blue";})
                     .catch(e => {
                         this.errors.push(e)
                     })
+                }
+               
 
             },addFavori(){
-                console.log(this.datajsonfav);
-                axios.post('/portal/rest/fav/addfav', this.datajsonfav, {
+                if(this.favColor.color==="red"){
+                      axios.delete(`/portal/rest/fav/delete/${this.idFavS}`, {
+                    headers : {
+                        'Content-Type' : 'application/json'
+                    }
+                }).then( response=>{this.favColor.color='';
+
+                    })
+                }else{
+                    axios.post('/portal/rest/fav/addfav', this.datajsonfav, {
                     headers: {
                         'Content-type': 'application/json',
                     }
-                }) .then(response => {this.favlength++;
-                    this.okFav=true})
+                }) .then(response => {this.favColor.color="red";})
                     .catch(e => {
                         this.errors.push(e)
                     })
+                }
+               
 
-            },
-            openComment(){
-                this.clik=true;
             }
 
-
-
-
-        }
-
     }
+}
 </script>
+
 <style>
-    .dem{
-        width: 755px
-    }
-    .backgroundTop{
-        background:linear-gradient(to bottom, #1867c0, #5CBBF6);
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: justify;
-        color: #2c3e50;
-    }
-    .tet{
-        margin-left: 20px;
-        margin-right: 20px;
-    }
-    .cont{
-        width: 89%;
-
-    }
-    .lin{
-        margin-left: 75%;
-        font-style:italic;
-    }
-    .tl{
-            margin-left: 2%;
-    font-family: monospace;
-    }
-    .des{
-            margin-left: 2%;
-    }
-    .leb{
-        font-family: -webkit-body;
-        font-size: large;
-        font-style: italic;
-    }
-
-    .namec{
-    margin-top: -3%;
-    font-family: -webkit-body;
-    font-size: 131%;
-    color: #476a9c;
-    }
-    .cmt{
-     margin-top: 2%;
-    margin-left: 6%;
-    font-size: 92%;
-    font-family: sans-serif;
-    }
-    .dt{
-    margin-left: 0%;
-    margin-top: 2%;
-    font-size: 75%;
-    font-style: italic;
-    margin-bottom: 3%;
-
-    }
-    .textar{
-        width: 96%;
-
-        margin-left: 1%;
-    }
-
-    .btn-ma{
-        margin-left: 1%;
-
-    }
-    .cmtHeader{
-            font-size: 113%;
-    font-family: cursive;
-    }
-    .lab{
-            font-size: 130%;
-    font-family: auto;
-    color: #476a9c;
-    }
-    .cdtop{
-            margin-top: -4%;
-   
-    }
+.crd{
+    width: 82%;
+    margin-left: 4%;
+}
+.cmt{
+    width: 101%;
+}
 </style>
-
 

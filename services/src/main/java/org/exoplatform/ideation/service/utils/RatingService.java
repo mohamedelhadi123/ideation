@@ -10,6 +10,8 @@ import org.exoplatform.ideation.entities.RatingEntity;
 import org.exoplatform.ideation.service.Mapper.RatingMapper;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.social.core.manager.IdentityManager;
 
 import java.util.List;
 
@@ -19,11 +21,15 @@ public class RatingService {
     private RatingImpDAO ratingdao;
     private RatingMapper ratingMapper;
     private IdeaImpDAO ideaImpDAO;
+    protected IdentityManager identityManager = null;
+
 
     public RatingService(RatingImpDAO ratingdao, RatingMapper ratingMapper,IdeaImpDAO ideaImpDAO) {
         this.ratingdao =  CommonsUtils.getService(RatingImpDAO.class);
         this.ratingMapper =  CommonsUtils.getService(RatingMapper.class);
         this.ideaImpDAO=CommonsUtils.getService(IdeaImpDAO.class);
+        identityManager = CommonsUtils.getService(IdentityManager.class);
+
 
     }
 
@@ -62,6 +68,37 @@ public class RatingService {
         return  ratingMapper.RatingToRatingDTO(ratingEntity);
     }
 
+@ExoTransactional
+public void deleteRating(Long id){
+        RatingEntity ratingEntity=null;
+        ratingEntity=ratingdao.find(id);
+        if(ratingEntity!=null){
+            try {
+                ratingdao.delete(ratingEntity);
+            } catch (Exception e) {
+                LOG.error("Error to delete rating with id {}", id, e);
+            }
+        }
+}
+
+@ExoTransactional
+public RatingDTO updateRating(RatingDTO ratingDTO){
+        try {
+            String user = ConversationState.getCurrent().getIdentity().getUserId();
+            RatingEntity ratingEntity=ratingdao.find(ratingDTO.getId());
+            if(ratingEntity!=null){
+                ratingEntity.setUser(user);
+                ratingEntity.setStatus(ratingDTO.getStatus());
+                ratingEntity.setIdea(ideaImpDAO.find(ratingDTO.getId_idear()));
+                return ratingMapper.RatingToRatingDTO(ratingEntity);
+            }
+
+
+        } catch (Exception e) {
+            LOG.error("Error to update with id {}", ratingDTO.getId() , e);
+        }
+        return null;
+}
 
 
 

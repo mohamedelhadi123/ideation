@@ -109,6 +109,22 @@ public class FavRestService implements ResourceContainer {
 
         }
     }
+    @DELETE
+    @Path("/delete/{id}")
+    public Response deleteFavori(@PathParam("id") Long id){
+        try {
+            favService.deleteFav(id);
+            return Response.ok().build();
+
+        }catch (Exception e) {
+            return Response.serverError()
+                    .entity("Error delete fav")
+                    .build();
+
+        }
+    }
+
+
 }
 
 
