@@ -297,7 +297,7 @@ export default {
         .then((response) => {
           this.altDiag = false;
           axios
-            .get('/portal/rest/idea/AllIdeaByUserAndStatus/DRAFET')
+            .get('/portal/rest/idea/AllIdeaByUserAndStatus/DRAFT')
             .then((response) => {
               this.donnes = response.data;
             })
