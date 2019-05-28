@@ -10,15 +10,11 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.social.core.manager.IdentityManager;
-import org.exoplatform.social.core.space.SpaceUtils;
-import org.exoplatform.social.core.space.impl.DefaultSpaceApplicationHandler;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
 
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 public class IdeaService {
@@ -82,7 +78,7 @@ public class IdeaService {
   public IdeaDTO addIdea(IdeaDTO ideaDTO) {
     IdeaEntity ideaEntity = null;
     try {
-      ideaEntity = ideaDao.create(ideaMapper.IdeadtoToIdea(ideaDTO));
+      ideaEntity = ideaDao.create(ideaMapper.dtoToIdea(ideaDTO));
     } catch (Exception e) {
       LOG.error("Error to create badge with title ", ideaDTO.getUser(), e);
     }
@@ -121,11 +117,10 @@ public class IdeaService {
         ideaEntity.setUser(user);
         ideaEntity.setResume(ideaDTO.getResume());
         ideaEntity.setExplanation(ideaDTO.getExplanation());
-        ideaEntity.setCreatedTime(new Date());
-        ideaEntity.setEtat(ideaDTO.getEtat());
-
+        ideaEntity.setUpdatedTime(System.currentTimeMillis());
+        ideaEntity.setIsProject(ideaDTO.getIsProject());
+        ideaDao.update(ideaEntity);
         return ideaMapper.ideaTOideaDTO(ideaEntity);
-
       }
     } catch (Exception e) {
       LOG.error("Error to update with id {}", ideaDTO.getId(), e);
@@ -135,36 +130,26 @@ public class IdeaService {
   }
 
 
-  public void testCreateSpaceWithManagersAndMembers(String name) throws Exception {
-    String user = ConversationState.getCurrent().getIdentity().getUserId();
-    String[] managers = {
-        user
-    };
-    String[] members = {
-        user
-    };
-    String creator = "root";
-    String invitedGroup = "invited";
+  public void createSpace(Long ideaID, String creator) throws Exception {
+    IdeaDTO idea = ideaMapper.ideaTOideaDTO(ideaDao.find(ideaID));
+    String[] managers = {creator};
+    String[] members = {creator};
     Space space = new Space();
-    space.setDisplayName("Projet " + name);
-    space.setDescription("Espace créé pour le projet de " + name);
-    String shortName = SpaceUtils.cleanString(space.getDisplayName());
+    space.setDisplayName("Projet " + idea.getTitle());
+    space.setDescription("Espace créé à partit de l'idée " + ideaID + "pour le projet de " + idea.getTitle());
     space.setManagers(managers);
     space.setMembers(members);
-    space.setPrettyName(space.getDisplayName());
-    space.setRegistration("validation");
-    space.setType("classic");
-    space.setUrl(shortName);
-    space.setVisibility("public");
-    spaceService.createSpace(space, creator, invitedGroup);
-
+    space.setRegistration(Space.VALIDATION);
+    //TODO choose which template to be used for projects
+    //space.setTemplate("classic");
+    space.setVisibility(Space.PRIVATE);
+    space = spaceService.createSpace(space, creator);
+    idea.setSpaceID(space.getId());
+    ideaDao.update(ideaMapper.dtoToIdea(idea));
   }
-
-
-  public String GetUrlSpace(String name) {
-    Space s = spaceService.getSpaceByDisplayName("Projet " + name);
-    return s.getUrl();
+  
+  public String GetUrlSpace(String spaceID) {
+    Space s = spaceService.getSpaceById(spaceID);
+    return "/portal/g/:spaces" + s.getGroupId() + "/" + s.getPrettyName();
   }
-
-
 }

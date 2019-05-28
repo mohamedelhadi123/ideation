@@ -50,17 +50,8 @@ public class IdeaRestService implements ResourceContainer {
 
 
     try {
-      String pattern = "yyyy-mm-dd hh:mm:ss";
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, new Locale("fr", "FR"));
-      String date = simpleDateFormat.format(new Date());
-      System.out.println(date);
       List<IdeaDTO> allIdeaPublished = ideaService.getIdeaByStatus(status);
-      String authenticatedUser = ConversationState.getCurrent().getIdentity().getUserId();
-
-      Identity currentUser = CommonsUtils.getService(IdentityManager.class).getOrCreateIdentity(OrganizationIdentityProvider.NAME, authenticatedUser, true);
       return Response.ok(allIdeaPublished, MediaType.APPLICATION_JSON).build();
-
-
     } catch (Exception e) {
 
       LOG.error("Error listing all Idea Published ", e);
@@ -75,8 +66,8 @@ public class IdeaRestService implements ResourceContainer {
   @Path("/getideabyid/{id}")
   public Response getone(@PathParam("id") Long id) {
     try {
-      IdeaDTO findoneidea = ideaService.getIdea(id);
-      return Response.ok(findoneidea, MediaType.APPLICATION_JSON).build();
+      IdeaDTO idea = ideaService.getIdea(id);
+      return Response.ok(idea, MediaType.APPLICATION_JSON).build();
 
     } catch (Exception e) {
 
@@ -92,10 +83,7 @@ public class IdeaRestService implements ResourceContainer {
   @Path("AllIdeaByUserAndStatus/{status}")
   public Response getAllPublishedByUser(@PathParam("status") IdeaEntity.Status status) {
     try {
-      String user = ConversationState.getCurrent().getIdentity().getUserId();
-
-
-      List<IdeaDTO> allIdeaPublishedByUser = ideaService.getIdeaByUserAndStatus(status, user);
+      List<IdeaDTO> allIdeaPublishedByUser = ideaService.getIdeaByUserAndStatus(status, getCurrentUser());
       return Response.ok(allIdeaPublishedByUser, MediaType.APPLICATION_JSON).build();
 
     } catch (Exception e) {
@@ -144,37 +132,34 @@ public class IdeaRestService implements ResourceContainer {
   @Path("/update")
   public Response updateIdea(IdeaDTO ideaDTO) {
     try {
-
       ideaService.updateIdea(ideaDTO);
-
       return Response.ok().entity(ideaDTO).build();
-
     } catch (Exception e) {
-
-      LOG.error("Error updating idea {} by {} ", e);
-
+      LOG.error("Error updating idea {} by {} ", ideaDTO.getId(), getCurrentUser(),e);
       return Response.serverError().build();
-
     }
-
   }
 
 
   @POST
-
-  @Path("/addSapace/{name}")
-  public Response AddSapce(@PathParam("name") String name) throws Exception {
-
-    ideaService.testCreateSpaceWithManagersAndMembers(name);
-    return Response.status(Response.Status.ACCEPTED).entity("Create space").build();
+  @Path("/addSapace/{ideaID}")
+  public Response AddSapce(@PathParam("ideaID") Long ideaID) throws Exception {
+    if(getCurrentUser() ==null) {
+      return Response.status(Response.Status.FORBIDDEN).build();
+    }
+    if(ideaID == null){
+      return Response.status(Response.Status.NOT_ACCEPTABLE).build();
+    }
+    ideaService.createSpace(ideaID, getCurrentUser());
+    return Response.status(Response.Status.OK).entity("Create space").build();
   }
 
   @GET
-  @Path("/geturl/{name}")
+  @Path("/geturl/{spaceID}")
 
-  public Response GetUrlSpace(@PathParam("name") String name) {
+  public Response GetUrlSpace(@PathParam("spaceID") String spaceID) {
     try {
-      String url = ideaService.GetUrlSpace(name);
+      String url = ideaService.GetUrlSpace(spaceID);
       JSONObject jo = new JSONObject();
       jo.put("url", url);
       return Response.ok(jo).build();
@@ -184,6 +169,14 @@ public class IdeaRestService implements ResourceContainer {
     }
 
 
+  }
+
+  String getCurrentUser () {
+    org.exoplatform.services.security.Identity currentIdentity = ConversationState.getCurrent().getIdentity();
+    if(currentIdentity != null){
+      return currentIdentity.getUserId();
+    }
+    return null;
   }
 
 

@@ -6,7 +6,6 @@ import javax.persistence.*;
 
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity(name = "idea")
 @ExoEntity
@@ -21,9 +20,7 @@ public class IdeaEntity implements Serializable {
   public enum Status {
     PUBLISHED,
     ARCHIVED,
-    DRAFET;
-
-
+    DRAFT;
   }
 
   @Id
@@ -39,10 +36,13 @@ public class IdeaEntity implements Serializable {
   @Column(name = "USER")
   private String user;
   @Column(name = "CREATED_TIME")
-  private Date createdTime;
-  @Column(name = "ETAT")
-  private Boolean etat;
-
+  private Long createdTime;
+  @Column(name = "UPDATED_TIME")
+  private Long updatedTime;
+  @Column(name = "ISPROJECT")
+  private Boolean isProject;
+  @Column(name="SPACE_ID")
+  private String spaceID;
 
   @Column(name = "RESUME")
   private String resume;
@@ -54,7 +54,7 @@ public class IdeaEntity implements Serializable {
 
   }
 
-  public IdeaEntity(String title, String description, Status status, String user, Date createdTime, String resume, String explanation, Boolean etat) {
+  public IdeaEntity(String title, String description, Status status, String user, Long createdTime, String resume, String explanation, Boolean etat) {
     this.title = title;
     this.description = description;
     this.status = status;
@@ -62,15 +62,15 @@ public class IdeaEntity implements Serializable {
     this.createdTime = createdTime;
     this.resume = resume;
     this.explanation = explanation;
-    this.etat = etat;
+    this.isProject = etat;
   }
 
-  public Boolean getEtat() {
-    return etat;
+  public Boolean getIsProject() {
+    return isProject;
   }
 
-  public void setEtat(Boolean etat) {
-    this.etat = etat;
+  public void setIsProject(Boolean isProject) {
+    this.isProject = isProject;
   }
 
   public Long getId() {
@@ -113,14 +113,21 @@ public class IdeaEntity implements Serializable {
     this.user = user;
   }
 
-  public Date getCreatedTime() {
+  public Long getCreatedTime() {
     return createdTime;
   }
 
-  public void setCreatedTime(Date createdTime) {
+  public void setCreatedTime(Long createdTime) {
     this.createdTime = createdTime;
   }
 
+  public Long getUpdatedTime() {
+    return updatedTime;
+  }
+
+  public void setUpdatedTime(Long updatedTime) {
+    this.updatedTime = updatedTime;
+  }
 
   public String getResume() {
     return resume;
@@ -136,5 +143,21 @@ public class IdeaEntity implements Serializable {
 
   public void setExplanation(String explanation) {
     this.explanation = explanation;
+  }
+
+  public Boolean getProject() {
+    return isProject;
+  }
+
+  public void setProject(Boolean project) {
+    isProject = project;
+  }
+
+  public String getSpaceID() {
+    return spaceID;
+  }
+
+  public void setSpaceID(String spaceID) {
+    this.spaceID = spaceID;
   }
 }

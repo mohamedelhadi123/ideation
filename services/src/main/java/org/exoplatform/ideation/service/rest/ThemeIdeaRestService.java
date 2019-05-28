@@ -101,11 +101,6 @@ public class ThemeIdeaRestService implements ResourceContainer {
       return Response.serverError()
           .entity("Error delete Theme _ idea")
           .build();
-
     }
-
-
   }
-
-
 }

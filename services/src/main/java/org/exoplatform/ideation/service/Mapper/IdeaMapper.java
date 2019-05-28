@@ -35,7 +35,7 @@ public class IdeaMapper {
         .collect(Collectors.toList());
   }
 
-  public IdeaEntity IdeadtoToIdea(IdeaDTO ideaDTO) {
+  public IdeaEntity dtoToIdea(IdeaDTO ideaDTO) {
 
 
     try {
@@ -51,8 +51,8 @@ public class IdeaMapper {
         ideaEntity.setTitle(ideaDTO.getTitle());
         ideaEntity.setExplanation(ideaDTO.getExplanation());
         ideaEntity.setResume(ideaDTO.getResume());
-
-        ideaEntity.setCreatedTime(new Date());
+        ideaEntity.setSpaceID(ideaDTO.getSpaceID());
+        ideaEntity.setCreatedTime(ideaDTO.getCreatedTime());
 
         return ideaEntity;
       }
