@@ -5,9 +5,14 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
 
-
     <!-- Managing both DB that use sequences and db that use auto increment -->
-    <property name="autoIncrement" value="true" dbms="mysql"/>
+    <property name="autoIncrement" value="true" dbms="mysql,mssql,h2,hsqldb"/>
+    <property name="autoIncrement" value="false" dbms="oracle,postgresql"/>
+
+    <!-- Managing auto generation of timestamp by Database -->
+    <property name="now" value="now()" dbms="mysql,hsqldb,postgresql,h2"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+    <property name="now" value="CURRENT_TIMESTAMP" dbms="mssql"/>
 
     <changeSet author="ideation" id="1.0.0-1">
         <!-- Create the table Cowkers -->
@@ -36,8 +41,8 @@
             <column name="EXPLANATION" type="VARCHAR(550)"/>
             <column name="STATUS" type="VARCHAR(20)"/>
             <column name="USER" type="VARCHAR(250)"/>
-            <column name="CREATED_TIME" type="TIMESTAMP"/>
-            <column name="UPDATED_TIME" type="TIMESTAMP"/>
+            <column name="CREATED_TIME" type="BIGINT"/>
+            <column name="UPDATED_TIME" type="BIGINT"/>
             <column name="SPACE_ID" type="VARCHAR(20)"/>
         </createTable>
         <modifySql dbms="mysql">
@@ -60,7 +65,7 @@
     <changeSet author="ideation" id="1.0.0-4">
         <createTable tableName="IDEATION_FAV">
             <column name="FAV_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IDEA_ID"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_FAV_ID"/>
             </column>
             <column name="USER" type="VARCHAR(250)"/>
         </createTable>
@@ -81,7 +86,7 @@
     <changeSet author="ideation" id="1.0.0-6">
         <createTable tableName="IDEATION_RATING">
             <column name="RATE_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IDEA_ID"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_RATING_ID"/>
             </column>
             <column name="USER" type="VARCHAR(250)"/>
             <column name="STATUS" type="VARCHAR(20)"/>
@@ -103,7 +108,7 @@
     <changeSet author="ideation" id="1.0.0-8">
         <createTable tableName="IDEATION_COMMENTS">
             <column name="COMMENT_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IDEA_ID"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_COMMENT_ID"/>
             </column>
             <column name="USER" type="VARCHAR(250)"/>
             <column name="CREATED_TIME" type="TIMESTAMP"/>
@@ -127,7 +132,7 @@
     <changeSet author="stock" id="1.0.0-10">
         <createTable tableName="IDEATION_THEMES">
             <column name="THEME_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IDEA_ID"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_THEME_ID"/>
             </column>
             <column name="USER" type="VARCHAR(250)"/>
             <column name="SUBJECT" type="VARCHAR(250)"/>

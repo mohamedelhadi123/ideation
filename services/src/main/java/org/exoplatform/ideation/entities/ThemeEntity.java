@@ -12,15 +12,15 @@ import java.io.Serializable;
 @Table(name = "IDEATION_THEMES")
 public class ThemeEntity implements Serializable {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue
   @Column(name = "THEME_ID")
-
   private Long id;
+
+
   @Column(name = "SUBJECT")
-
   private String subject;
-  @Column(name = "USER")
 
+  @Column(name = "USER")
   private String user;
 
   public ThemeEntity() {

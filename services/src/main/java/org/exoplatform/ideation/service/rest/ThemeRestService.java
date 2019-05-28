@@ -75,6 +75,4 @@ public class ThemeRestService implements ResourceContainer {
           .build();
     }
   }
-
-
 }
