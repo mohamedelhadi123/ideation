@@ -5,9 +5,6 @@ import UploadButton from 'vuetify-upload-button';
 import '../css/main.less';
 
 Vue.use(Vuetify);
-Vue.use(UploadButton);
-export const bus = new Vue();
-
 new Vue({
     el: '#IdeaApp',
     router,

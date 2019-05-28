@@ -5,7 +5,7 @@ const webpackProductionConfig = require('./webpack.prod.js');
 
 module.exports = merge(webpackProductionConfig, {
   output: {
-    path: path.resolve(`C:/Users/Hp/Desktop/ProjecetAlioua/platform53/webapps/ideation-vue-portlets/`),
+    path: path.resolve(`/home/ali/work/binaries/5.3/ideation/platform-5.3.0-M08/webapps/ideation-vue-portlets/`),
     filename: 'js/[name].bundle.js'
   }
 });
