@@ -136,7 +136,7 @@ public class IdeaService {
     String[] members = {creator};
     Space space = new Space();
     space.setDisplayName("Projet " + idea.getTitle());
-    space.setPrettyName(idea.getId() + "" + idea.getTitle());
+    space.setPrettyName("IDEATION-" + idea.getId());
     space.setDescription("Espace créé à partit de l'idée " + ideaID + "pour le projet de " + idea.getTitle());
     space.setManagers(managers);
     space.setMembers(members);
