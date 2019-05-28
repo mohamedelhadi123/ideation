@@ -2,9 +2,11 @@ package org.exoplatform.ideation.dto;
 
 import org.exoplatform.ideation.entities.IdeaEntity;
 
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+
 /*
  *
  *
@@ -14,103 +16,105 @@ import java.util.Locale;
  *
  */
 public class IdeaDTO implements Serializable {
-    String pattern = "yyyy-mm-dd hh:mm";
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, new Locale("fr", "FR"));
-    private Long id;
-    protected String title;
-    private String createdTime;
-    private String description;
-    private IdeaEntity.Status status;
-    private String user;
-    private String explanation;
-    private String resume;
-    private Boolean etat;
-    public IdeaDTO() {}
+  String pattern = "yyyy-mm-dd hh:mm";
+  SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, new Locale("fr", "FR"));
+  private Long id;
+  protected String title;
+  private String createdTime;
+  private String description;
+  private IdeaEntity.Status status;
+  private String user;
+  private String explanation;
+  private String resume;
+  private Boolean etat;
 
-    public IdeaDTO(IdeaEntity ideaent) {
-        this.id = ideaent.getId();
-        this.title = ideaent.getTitle();
-        if (ideaent.getCreatedTime() != null) {
-            this.createdTime = simpleDateFormat.format(ideaent.getCreatedTime());
-        }
-        this.description = ideaent.getDescription();
-        this.status = ideaent.getStatus();
-        this.user = ideaent.getUser();
-        this.resume = ideaent.getResume();
-        this.explanation = ideaent.getExplanation();
-        this.etat=ideaent.getEtat();
-    }
+  public IdeaDTO() {
+  }
 
-    public Boolean getEtat() {
-        return etat;
+  public IdeaDTO(IdeaEntity ideaent) {
+    this.id = ideaent.getId();
+    this.title = ideaent.getTitle();
+    if (ideaent.getCreatedTime() != null) {
+      this.createdTime = simpleDateFormat.format(ideaent.getCreatedTime());
     }
+    this.description = ideaent.getDescription();
+    this.status = ideaent.getStatus();
+    this.user = ideaent.getUser();
+    this.resume = ideaent.getResume();
+    this.explanation = ideaent.getExplanation();
+    this.etat = ideaent.getEtat();
+  }
 
-    public void setEtat(Boolean etat) {
-        this.etat = etat;
-    }
+  public Boolean getEtat() {
+    return etat;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public void setEtat(Boolean etat) {
+    this.etat = etat;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public String getCreatedTime() {
-        return createdTime;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public void setCreatedTime(String createdTime) {
-        this.createdTime = createdTime;
-    }
+  public String getCreatedTime() {
+    return createdTime;
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public void setCreatedTime(String createdTime) {
+    this.createdTime = createdTime;
+  }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  public String getDescription() {
+    return description;
+  }
 
-    public IdeaEntity.Status getStatus() {
-        return status;
-    }
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    public void setStatus(IdeaEntity.Status status) {
-        this.status = status;
-    }
+  public IdeaEntity.Status getStatus() {
+    return status;
+  }
 
-    public String getUser() {
-        return user;
-    }
+  public void setStatus(IdeaEntity.Status status) {
+    this.status = status;
+  }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
+  public String getUser() {
+    return user;
+  }
 
-    public String getExplanation() {
-        return explanation;
-    }
+  public void setUser(String user) {
+    this.user = user;
+  }
 
-    public void setExplanation(String explanation) {
-        this.explanation = explanation;
-    }
+  public String getExplanation() {
+    return explanation;
+  }
 
-    public String getResume() {
-        return resume;
-    }
+  public void setExplanation(String explanation) {
+    this.explanation = explanation;
+  }
 
-    public void setResume(String resume) {
-        this.resume = resume;
-    }
+  public String getResume() {
+    return resume;
+  }
+
+  public void setResume(String resume) {
+    this.resume = resume;
+  }
 
 }

@@ -5,16 +5,17 @@ import org.exoplatform.ideation.entities.CommentEntity;
 
 
 import javax.persistence.TypedQuery;
+
+
 import java.util.List;
 
-public class CommentImpDAO extends GenericDAOJPAImpl<CommentEntity,Long> {
+public class CommentImpDAO extends GenericDAOJPAImpl<CommentEntity, Long> {
 
-    public List<CommentEntity> getCommentByIdIdea(Long id){
-        TypedQuery<CommentEntity> query = getEntityManager().createNamedQuery("Comment.getCommentByIdea", CommentEntity.class);
-        query.setParameter("id",id);
-        return query.getResultList();
+  public List<CommentEntity> getCommentByIdIdea(Long id) {
+    TypedQuery<CommentEntity> query = getEntityManager().createNamedQuery("Comment.getCommentByIdea", CommentEntity.class);
+    query.setParameter("id", id);
+    return query.getResultList();
 
 
-
-    }
+  }
 }
