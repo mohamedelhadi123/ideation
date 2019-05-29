@@ -3,51 +3,55 @@ package org.exoplatform.ideation.entities;
 import org.exoplatform.commons.api.persistence.ExoEntity;
 
 import javax.persistence.*;
+
+
 import java.io.Serializable;
+
 @Entity(name = "theme")
 @ExoEntity
 @Table(name = "IDEATION_THEMES")
 public class ThemeEntity implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "THEME_ID")
+  @Id
+  @GeneratedValue
+  @Column(name = "THEME_ID")
+  private Long id;
 
-    private Long id;
-    @Column(name = "SUBJECT")
 
-    private String subject;
-    @Column(name = "USER")
+  @Column(name = "SUBJECT")
+  private String subject;
 
-    private String user;
-    public ThemeEntity() {
-    }
+  @Column(name = "USER")
+  private String user;
 
-    public ThemeEntity(String subject, String user) {
-        this.subject = subject;
-        this.user = user;
-    }
+  public ThemeEntity() {
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public ThemeEntity(String subject, String user) {
+    this.subject = subject;
+    this.user = user;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getSubject() {
-        return subject;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
+  public String getSubject() {
+    return subject;
+  }
 
-    public String getUser() {
-        return user;
-    }
+  public void setSubject(String subject) {
+    this.subject = subject;
+  }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
+  public String getUser() {
+    return user;
+  }
+
+  public void setUser(String user) {
+    this.user = user;
+  }
 }

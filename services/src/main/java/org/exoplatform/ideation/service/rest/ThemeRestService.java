@@ -11,66 +11,68 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+
 import java.util.List;
 
 @Path("/theme")
 @Produces(MediaType.APPLICATION_JSON)
 public class ThemeRestService implements ResourceContainer {
-    private static Log LOG = ExoLogger.getLogger(ThemeService.class);
-    @Inject
-    ThemeService themeService;
+  private static Log LOG = ExoLogger.getLogger(ThemeService.class);
+  @Inject
+  ThemeService themeService;
 
-    public ThemeRestService() {
-        themeService= CommonsUtils.getService(ThemeService.class);
+  public ThemeRestService() {
+    themeService = CommonsUtils.getService(ThemeService.class);
+  }
+
+  @GET
+  @Path("/getalltheme")
+  public Response getAllTheme() {
+    try {
+      List<ThemeDTO> allTheme = themeService.getallTheme();
+      return Response.ok(allTheme, MediaType.APPLICATION_JSON).build();
+
+
+    } catch (Exception e) {
+
+      LOG.error("Error listing theme ", e);
+
+      return Response.serverError()
+          .entity("Error listing all theme")
+          .build();
     }
-    @GET
-    @Path("/getalltheme")
-    public Response getAllTheme(){
-        try {
-            List<ThemeDTO> allTheme=themeService.getallTheme();
-            return Response.ok(allTheme, MediaType.APPLICATION_JSON).build();
+  }
 
+  @GET
+  @Path("/getthemebyid/{id}")
+  public Response GetThemeById(@PathParam("id") Long id) {
+    try {
+      ThemeDTO themeDTO = themeService.getThemeById(id);
+      return Response.ok(themeDTO, MediaType.APPLICATION_JSON).build();
 
-        } catch (Exception e) {
+    } catch (Exception e) {
 
-            LOG.error("Error listing theme ", e);
+      LOG.error("Error listing theme ", e);
 
-            return Response.serverError()
-                    .entity("Error listing all theme")
-                    .build();
-        }
+      return Response.serverError()
+          .entity("Error listing  theme by id")
+          .build();
     }
-    @GET
-    @Path("/getthemebyid/{id}")
-    public Response GetThemeById(@PathParam("id") Long id){
-        try {
-            ThemeDTO themeDTO=themeService.getThemeById(id);
-            return Response.ok(themeDTO, MediaType.APPLICATION_JSON).build();
+  }
 
-        } catch (Exception e) {
+  @POST
+  @Path("addtheme")
+  public Response AddTheme(ThemeDTO themeDTO) {
+    try {
+      themeDTO = themeService.addTheme(themeDTO);
+      return Response.ok().entity(themeDTO).build();
 
-            LOG.error("Error listing theme ", e);
 
-            return Response.serverError()
-                    .entity("Error listing  theme by id")
-                    .build();
-        }
+    } catch (Exception e) {
+      return Response.serverError()
+          .entity("Error adding new idea")
+          .build();
     }
-
-    @POST
-    @Path("addtheme")
-    public Response AddTheme(ThemeDTO themeDTO){
-        try {
-            themeDTO=themeService.addTheme(themeDTO);
-            return Response.ok().entity(themeDTO).build();
-
-
-        }catch (Exception e) {
-            return Response.serverError()
-                    .entity("Error adding new idea")
-                    .build();
-        }
-    }
-
-
+  }
 }

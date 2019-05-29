@@ -5,11 +5,16 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
 
-
     <!-- Managing both DB that use sequences and db that use auto increment -->
-    <property name="autoIncrement" value="true" dbms="mysql"/>
+    <property name="autoIncrement" value="true" dbms="mysql,mssql,h2,hsqldb"/>
+    <property name="autoIncrement" value="false" dbms="oracle,postgresql"/>
 
-    <changeSet author="stock" id="1.0.0-1">
+    <!-- Managing auto generation of timestamp by Database -->
+    <property name="now" value="now()" dbms="mysql,hsqldb,postgresql,h2"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+    <property name="now" value="CURRENT_TIMESTAMP" dbms="mssql"/>
+
+    <changeSet author="ideation" id="1.0.0-1">
         <!-- Create the table Cowkers -->
         <createTable tableName="IDEATION_COWORKERS">
             <column name="CWK_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
@@ -23,7 +28,7 @@
     </changeSet>
 
 
-    <changeSet author="stock" id="1.0.0-2">
+    <changeSet author="ideation" id="1.0.0-2">
         <!-- Create the table IDEA -->
         <createTable tableName="IDEA_IDEAS">
             <column name="IDEA_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
@@ -32,18 +37,20 @@
             <column name="TITLE" type="VARCHAR(250)"/>
             <column name="DESCRIPTION" type="VARCHAR(550)"/>
             <column name="RESUME" type="VARCHAR(550)"/>
-            <column name="ETAT" type="BOOLEAN"/>
+            <column name="ISPROJECT" type="BOOLEAN"/>
             <column name="EXPLANATION" type="VARCHAR(550)"/>
-            <column name="STATUS" type="ENUM('PUBLISHED','ARCHIVED','DRAFET')"></column>
-            <column name="USER" type="VARCHAR(250)"></column>
-            <column name="CREATED_TIME" type="TIMESTAMP"></column>
+            <column name="STATUS" type="VARCHAR(20)"/>
+            <column name="USER" type="VARCHAR(250)"/>
+            <column name="CREATED_TIME" type="BIGINT"/>
+            <column name="UPDATED_TIME" type="BIGINT"/>
+            <column name="SPACE_ID" type="VARCHAR(20)"/>
         </createTable>
         <modifySql dbms="mysql">
             <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
         </modifySql>
     </changeSet>
 <!-- add FK -->
-    <changeSet author="stock" id="1.0.0-3">
+    <changeSet author="ideation" id="1.0.0-3">
         <addColumn tableName="IDEATION_COWORKERS">
             <column name="ID_IDEACE" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="FK_COWKER_IDEA_ATTACHMENTS"
@@ -55,10 +62,10 @@
     <!-- add TABLE Favorite -->
 
 
-    <changeSet author="stock" id="1.0.0-4">
+    <changeSet author="ideation" id="1.0.0-4">
         <createTable tableName="IDEATION_FAV">
             <column name="FAV_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IDEA_ID"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_FAV_ID"/>
             </column>
             <column name="USER" type="VARCHAR(250)"/>
         </createTable>
@@ -67,7 +74,7 @@
         </modifySql>
     </changeSet>
     <!-- add FK FAV -->
-    <changeSet author="stock" id="1.0.0-5">
+    <changeSet author="ideation" id="1.0.0-5">
         <addColumn tableName="IDEATION_FAV">
             <column name="ID_IDEAF" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="FK_FAV_IDEA_ATTACHMENTS"
@@ -76,20 +83,20 @@
         </addColumn>
     </changeSet>
     <!-- ADD TABLE RATING -->
-    <changeSet author="stock" id="1.0.0-6">
+    <changeSet author="ideation" id="1.0.0-6">
         <createTable tableName="IDEATION_RATING">
             <column name="RATE_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IDEA_ID"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_RATING_ID"/>
             </column>
             <column name="USER" type="VARCHAR(250)"/>
-            <column name="STATUS" type="ENUM('LIKE','DISLIKE','NONE')"></column>
+            <column name="STATUS" type="VARCHAR(20)"/>
         </createTable>
         <modifySql dbms="mysql">
             <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
         </modifySql>
     </changeSet>
     <!-- ADD FK RATING -->
-    <changeSet author="stock" id="1.0.0-7">
+    <changeSet author="ideation" id="1.0.0-7">
         <addColumn tableName="IDEATION_RATING">
             <column name="ID_IDEAR" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="FK_RATING_IDEA_ATTACHMENTS"
@@ -98,13 +105,13 @@
         </addColumn>
     </changeSet>
     <!-- ADD TABLE COMMENT -->
-    <changeSet author="stock" id="1.0.0-8">
+    <changeSet author="ideation" id="1.0.0-8">
         <createTable tableName="IDEATION_COMMENTS">
             <column name="COMMENT_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IDEA_ID"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_COMMENT_ID"/>
             </column>
             <column name="USER" type="VARCHAR(250)"/>
-            <column name="CREATED_TIME" type="TIMESTAMP"></column>
+            <column name="CREATED_TIME" type="TIMESTAMP"/>
             <column name="CMT" type="VARCHAR(550)"/>
         </createTable>
         <modifySql dbms="mysql">
@@ -112,7 +119,7 @@
         </modifySql>
     </changeSet>
     <!-- ADD TABLE COMMENT -->
-    <changeSet author="stock" id="1.0.0-9">
+    <changeSet author="ideation" id="1.0.0-9">
         <addColumn tableName="IDEATION_COMMENTS">
             <column name="ID_IDEAC" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="FK_COMMENT_IDEA_ATTACHMENTS"
@@ -122,10 +129,10 @@
     </changeSet>
 
     <!-- ADD TABLE THEME -->
-    <changeSet author="stock" id="1.0.0-10">
+    <changeSet author="ideation" id="1.0.0-10">
         <createTable tableName="IDEATION_THEMES">
             <column name="THEME_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IDEA_ID"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_THEME_ID"/>
             </column>
             <column name="USER" type="VARCHAR(250)"/>
             <column name="SUBJECT" type="VARCHAR(250)"/>
@@ -135,7 +142,7 @@
         </modifySql>
     </changeSet>
  <!-- Add Table Theme_Idea-->
-    <changeSet author="stock" id="1.0.0-11">
+    <changeSet author="ideation" id="1.0.0-11">
         <createTable tableName="IDEATION_THEME_IDEA">
             <column name="ID_THEME_IDEA" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IDEA_THEME_THEME_ID"/>

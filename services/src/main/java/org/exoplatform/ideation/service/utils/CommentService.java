@@ -9,51 +9,53 @@ import org.exoplatform.ideation.service.Mapper.CommentMapper;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
+
 import java.util.List;
 
 public class CommentService {
-    private static final Log LOG = ExoLogger.getExoLogger(CommentEntity.class);
+  private static final Log LOG = ExoLogger.getExoLogger(CommentEntity.class);
 
-    private CommentImpDAO commentImpDAO;
-    private CommentMapper commentMapper;
+  private CommentImpDAO commentImpDAO;
+  private CommentMapper commentMapper;
 
-    public CommentService(CommentImpDAO commentImpDAO, CommentMapper commentMapper) {
-        this.commentImpDAO =  CommonsUtils.getService(CommentImpDAO.class);
-        this.commentMapper =  CommonsUtils.getService(CommentMapper.class);
-    }
-    public CommentService() {
+  public CommentService(CommentImpDAO commentImpDAO, CommentMapper commentMapper) {
+    this.commentImpDAO = CommonsUtils.getService(CommentImpDAO.class);
+    this.commentMapper = CommonsUtils.getService(CommentMapper.class);
+  }
 
-    }
+  public CommentService() {
+
+  }
 
 
-    @ExoTransactional
-    public CommentDTO addComment (CommentDTO commentDTO) {
-        CommentEntity commentEntity=null;
+  @ExoTransactional
+  public CommentDTO addComment(CommentDTO commentDTO) {
+    CommentEntity commentEntity = null;
 
-        try {
+    try {
 
-            commentEntity = commentImpDAO.create(commentMapper.CommentdtoToComment(commentDTO));
+      commentEntity = commentImpDAO.create(commentMapper.CommentdtoToComment(commentDTO));
 
-        } catch (Exception e) {
-            LOG.error("Error to create badge with title {}", commentDTO.getUser() , e);
-        }
-
-        return commentMapper.CommentTOcommentDTO(commentEntity);
+    } catch (Exception e) {
+      LOG.error("Error to create badge with title {}", commentDTO.getUser(), e);
     }
 
-    public List<CommentDTO> getAllCommentByIdea(Long id){
-        try {
-            List<CommentEntity> comments=commentImpDAO.getCommentByIdIdea(id);
-            if(comments!=null){
-                return  commentMapper.CommentsToCommentDTOs(comments);
-            }
-        }catch (Exception e){
-            LOG.error("Error to find Comment by idea", e.getMessage());
+    return commentMapper.CommentTOcommentDTO(commentEntity);
+  }
 
-        }
-        return null;
+  public List<CommentDTO> getAllCommentByIdea(Long id) {
+    try {
+      List<CommentEntity> comments = commentImpDAO.getCommentByIdIdea(id);
+      if (comments != null) {
+        return commentMapper.CommentsToCommentDTOs(comments);
+      }
+    } catch (Exception e) {
+      LOG.error("Error to find Comment by idea", e.getMessage());
 
     }
+    return null;
+
+  }
 
 
 }
