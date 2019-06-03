@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+
+    <!-- Managing both DB that use sequences and db that use auto increment -->
+    <property name="autoIncrement" value="true" dbms="mysql,mssql,h2,hsqldb"/>
+    <property name="autoIncrement" value="false" dbms="oracle,postgresql"/>
+
+    <!-- Managing auto generation of timestamp by Database -->
+    <property name="now" value="now()" dbms="mysql,hsqldb,postgresql,h2"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+    <property name="now" value="CURRENT_TIMESTAMP" dbms="mssql"/>
+
+    <changeSet author="ideation" id="1.0.0-1">
+        <!-- Create the table Cowkers -->
+        <createTable tableName="IDEATION_COWORKERS">
+            <column name="CWK_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_COWKER_COWKER_ID"/>
+            </column>
+            <column name="COWORKER" type="VARCHAR(250)"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
+    </changeSet>
+
+
+    <changeSet author="ideation" id="1.0.0-2">
+        <!-- Create the table IDEA -->
+        <createTable tableName="IDEA_IDEAS">
+            <column name="IDEA_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IDEA_ID"/>
+            </column>
+            <column name="TITLE" type="VARCHAR(250)"/>
+            <column name="DESCRIPTION" type="VARCHAR(550)"/>
+            <column name="RESUME" type="VARCHAR(550)"/>
+            <column name="ISPROJECT" type="BOOLEAN"/>
+            <column name="EXPLANATION" type="VARCHAR(550)"/>
+            <column name="STATUS" type="VARCHAR(20)"/>
+            <column name="USER" type="VARCHAR(250)"/>
+            <column name="CREATED_TIME" type="BIGINT"/>
+            <column name="UPDATED_TIME" type="BIGINT"/>
+            <column name="SPACE_ID" type="VARCHAR(20)"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
+    </changeSet>
+<!-- add FK -->
+    <changeSet author="ideation" id="1.0.0-3">
+        <addColumn tableName="IDEATION_COWORKERS">
+            <column name="ID_IDEACE" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="FK_COWKER_IDEA_ATTACHMENTS"
+                             references="IDEA_IDEAS(IDEA_ID)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <!-- add TABLE Favorite -->
+
+
+    <changeSet author="ideation" id="1.0.0-4">
+        <createTable tableName="IDEATION_FAV">
+            <column name="FAV_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_FAV_ID"/>
+            </column>
+            <column name="USER" type="VARCHAR(250)"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
+    </changeSet>
+    <!-- add FK FAV -->
+    <changeSet author="ideation" id="1.0.0-5">
+        <addColumn tableName="IDEATION_FAV">
+            <column name="ID_IDEAF" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="FK_FAV_IDEA_ATTACHMENTS"
+                             references="IDEA_IDEAS(IDEA_ID)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <!-- ADD TABLE RATING -->
+    <changeSet author="ideation" id="1.0.0-6">
+        <createTable tableName="IDEATION_RATING">
+            <column name="RATE_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_RATING_ID"/>
+            </column>
+            <column name="USER" type="VARCHAR(250)"/>
+            <column name="STATUS" type="VARCHAR(20)"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
+    </changeSet>
+    <!-- ADD FK RATING -->
+    <changeSet author="ideation" id="1.0.0-7">
+        <addColumn tableName="IDEATION_RATING">
+            <column name="ID_IDEAR" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="FK_RATING_IDEA_ATTACHMENTS"
+                             references="IDEA_IDEAS(IDEA_ID)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <!-- ADD TABLE COMMENT -->
+    <changeSet author="ideation" id="1.0.0-8">
+        <createTable tableName="IDEATION_COMMENTS">
+            <column name="COMMENT_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_COMMENT_ID"/>
+            </column>
+            <column name="USER" type="VARCHAR(250)"/>
+            <column name="CREATED_TIME" type="TIMESTAMP"/>
+            <column name="CMT" type="VARCHAR(550)"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
+    </changeSet>
+    <!-- ADD TABLE COMMENT -->
+    <changeSet author="ideation" id="1.0.0-9">
+        <addColumn tableName="IDEATION_COMMENTS">
+            <column name="ID_IDEAC" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="FK_COMMENT_IDEA_ATTACHMENTS"
+                             references="IDEA_IDEAS(IDEA_ID)"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <!-- ADD TABLE THEME -->
+    <changeSet author="ideation" id="1.0.0-10">
+        <createTable tableName="IDEATION_THEMES">
+            <column name="THEME_ID" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_THEME_ID"/>
+            </column>
+            <column name="USER" type="VARCHAR(250)"/>
+            <column name="SUBJECT" type="VARCHAR(250)"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
+    </changeSet>
+ <!-- Add Table Theme_Idea-->
+    <changeSet author="ideation" id="1.0.0-11">
+        <createTable tableName="IDEATION_THEME_IDEA">
+            <column name="ID_THEME_IDEA" type="BIGINT" autoIncrement="${autoIncrement}" startWith="1">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_IDEA_THEME_THEME_ID"/>
+            </column>
+            <column name="ID_THEMEI" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="FK_Theme_IDEA_ATTACHMENTS_THEMEIDEA"
+                             references="IDEATION_THEMES(THEME_ID)"/>
+            </column>
+            <column name="ID_IDEAT" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="FK_IDEA_THEME_ATTACHMENTS_THEMEIDEA"
+                             references="IDEA_IDEAS(IDEA_ID)"/>
+            </column>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" ENGINE=INNODB CHARSET=UTF8 COLLATE utf8_general_ci"/>
+        </modifySql>
+    </changeSet>
+
+
+
+
+
+    <changeSet  author="elearning" id="1.0.0-12">
+        <dropForeignKeyConstraint baseTableName="IDEATION_THEME_IDEA"
+                                  constraintName="FK_IDEA_THEME_ATTACHMENTS_THEMEIDEA"
+        />
+        <addForeignKeyConstraint baseColumnNames="ID_IDEAT"
+                                 baseTableName="IDEATION_THEME_IDEA"
+
+                                 constraintName="FK_IDEA_THEME_ATTACHMENTS_THEMEIDEA"
+
+                                 onDelete="CASCADE"
+
+                                 onUpdate="CASCADE"
+
+                                 referencedColumnNames="IDEA_ID"
+
+                                 referencedTableName="IDEA_IDEAS"/>
+    </changeSet>
+    <changeSet  author="ideation" id="1.0.0-13">
+        <dropForeignKeyConstraint baseTableName="IDEATION_COMMENTS"
+                                  constraintName="FK_COMMENT_IDEA_ATTACHMENTS"
+        />
+        <addForeignKeyConstraint baseColumnNames="ID_IDEAC"
+                                 baseTableName="IDEATION_COMMENTS"
+
+                                 constraintName="FK_COMMENT_IDEA_ATTACHMENTS"
+
+                                 onDelete="CASCADE"
+
+                                 onUpdate="CASCADE"
+
+                                 referencedColumnNames="IDEA_ID"
+
+                                 referencedTableName="IDEA_IDEAS"/>
+    </changeSet>
+
+    <changeSet  author="ideation" id="1.0.0-14">
+        <dropForeignKeyConstraint baseTableName="IDEATION_RATING"
+                                  constraintName="FK_RATING_IDEA_ATTACHMENTS"
+        />
+        <addForeignKeyConstraint baseColumnNames="ID_IDEAR"
+                                 baseTableName="IDEATION_RATING"
+
+                                 constraintName="FK_RATING_IDEA_ATTACHMENTS"
+
+                                 onDelete="CASCADE"
+
+                                 onUpdate="CASCADE"
+
+                                 referencedColumnNames="IDEA_ID"
+
+                                 referencedTableName="IDEA_IDEAS"/>
+    </changeSet>
+
+    <changeSet  author="ideation" id="1.0.0-15">
+        <dropForeignKeyConstraint baseTableName="IDEATION_FAV"
+                                  constraintName="FK_FAV_IDEA_ATTACHMENTS"
+        />
+        <addForeignKeyConstraint baseColumnNames="ID_IDEAF"
+                                 baseTableName="IDEATION_FAV"
+
+                                 constraintName="FK_FAV_IDEA_ATTACHMENTS"
+
+                                 onDelete="CASCADE"
+
+                                 onUpdate="CASCADE"
+
+                                 referencedColumnNames="IDEA_ID"
+
+                                 referencedTableName="IDEA_IDEAS"/>
+    </changeSet>
+
+    <changeSet  author="ideation" id="1.0.0-16">
+        <dropForeignKeyConstraint baseTableName="IDEATION_COWORKERS"
+                                  constraintName="FK_COWKER_IDEA_ATTACHMENTS"
+        />
+        <addForeignKeyConstraint baseColumnNames="ID_IDEACE"
+                                 baseTableName="IDEATION_COWORKERS"
+
+                                 constraintName="FK_COWKER_IDEA_ATTACHMENTS"
+
+                                 onDelete="CASCADE"
+
+                                 onUpdate="CASCADE"
+
+                                 referencedColumnNames="IDEA_ID"
+
+                                 referencedTableName="IDEA_IDEAS"/>
+    </changeSet>
+
+
+
+</databaseChangeLog>
