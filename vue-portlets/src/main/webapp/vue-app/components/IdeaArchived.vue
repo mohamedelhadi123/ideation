@@ -25,7 +25,7 @@
                       <div class="dataInfor">
                         <span class="dateTime">
                           <i class="uiIconClock uiIconLightGray"></i>
-                          &nbsp;le {{ new Date(d.createdTime) }}
+                          &nbsp;le {{ d.createdTime }}
                         </span>
                       </div>
                     </div>

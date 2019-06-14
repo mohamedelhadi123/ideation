@@ -145,14 +145,6 @@ public class IdeaEntity implements Serializable {
     this.explanation = explanation;
   }
 
-  public Boolean getProject() {
-    return isProject;
-  }
-
-  public void setProject(Boolean project) {
-    isProject = project;
-  }
-
   public String getSpaceID() {
     return spaceID;
   }

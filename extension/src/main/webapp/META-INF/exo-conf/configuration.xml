@@ -17,14 +17,17 @@
                 </value-param>
                 <object-param>
                     <name>change</name>
-                    <object type="org.exoplatform.container.definition.PortalContainerDefinitionChange$AddDependencies">
+                    <object type="org.exoplatform.container.definition.PortalContainerDefinitionChange$AddDependenciesAfter">
+                        <field name="target">
+                            <string>acme-intranet</string>
+                        </field>
                         <field name="dependencies">
                             <collection type="java.util.ArrayList">
                                 <value>
-                                    <string>ideation-addon-portlets</string>
+                                    <string>ideation-extension</string>
                                 </value>
                                 <value>
-                                    <string>ideation-addon-extension</string>
+                                    <string>ideation-vue-portlets</string>
                                 </value>
                             </collection>
                         </field>

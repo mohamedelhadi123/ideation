@@ -106,6 +106,7 @@ public class FavService {
       int i = 0;
       while (i < favorits.size()) {
         OrderIdeaDTO orderideadto = new OrderIdeaDTO();
+        orderideadto.setStatus(favorits.get(i).getIdea().getStatus());
         orderideadto.setId(favorits.get(i).getIdea().getId());
         orderideadto.setTitle(favorits.get(i).getIdea().getTitle());
         orderideadto.setUser(favorits.get(i).getIdea().getUser());

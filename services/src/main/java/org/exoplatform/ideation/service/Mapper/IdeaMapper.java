@@ -1,6 +1,7 @@
 package org.exoplatform.ideation.service.Mapper;
 
 import org.exoplatform.commons.utils.CommonsUtils;
+import org.exoplatform.ideation.dao.IdeaImpDAO;
 import org.exoplatform.ideation.dto.IdeaDTO;
 import org.exoplatform.ideation.entities.IdeaEntity;
 import org.exoplatform.ideation.entities.ThemeEntity;
@@ -15,13 +16,14 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class IdeaMapper {
+  private final IdeaImpDAO ideaDao;
   protected IdentityManager identityManager = null;
 
   private static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
   public IdeaMapper() {
     identityManager = CommonsUtils.getService(IdentityManager.class);
-
+    ideaDao = CommonsUtils.getService(IdeaImpDAO.class);
   }
 
   public IdeaDTO ideaTOideaDTO(IdeaEntity ideaEntity) {
@@ -36,15 +38,15 @@ public class IdeaMapper {
   }
 
   public IdeaEntity dtoToIdea(IdeaDTO ideaDTO) {
-
-
     try {
       if (ideaDTO == null) {
         return null;
       } else {
         String user = ConversationState.getCurrent().getIdentity().getUserId();
-
         IdeaEntity ideaEntity = new IdeaEntity();
+        if(ideaDTO.getId() != null){
+          ideaEntity = ideaDao.find(ideaDTO.getId());
+        }
         ideaEntity.setUser(user);
         ideaEntity.setStatus(ideaDTO.getStatus());
         ideaEntity.setDescription(ideaDTO.getDescription());
@@ -53,7 +55,7 @@ public class IdeaMapper {
         ideaEntity.setResume(ideaDTO.getResume());
         ideaEntity.setSpaceID(ideaDTO.getSpaceID());
         ideaEntity.setCreatedTime(System.currentTimeMillis());
-
+        ideaEntity.setIsProject(ideaDTO.getIsProject());
         return ideaEntity;
       }
 

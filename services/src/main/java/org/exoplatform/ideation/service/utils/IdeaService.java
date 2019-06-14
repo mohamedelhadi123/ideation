@@ -1,10 +1,15 @@
 package org.exoplatform.ideation.service.utils;
 
+import org.exoplatform.commons.api.notification.NotificationContext;
+import org.exoplatform.commons.api.notification.model.PluginKey;
 import org.exoplatform.commons.api.persistence.ExoTransactional;
+import org.exoplatform.commons.notification.impl.NotificationContextImpl;
 import org.exoplatform.commons.utils.CommonsUtils;
 import org.exoplatform.ideation.dao.IdeaImpDAO;
 import org.exoplatform.ideation.dto.IdeaDTO;
 import org.exoplatform.ideation.entities.IdeaEntity;
+import org.exoplatform.ideation.integration.notification.AddIdeaPlugin;
+import org.exoplatform.ideation.integration.notification.UpdateIdeaPlugin;
 import org.exoplatform.ideation.service.Mapper.IdeaMapper;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -12,7 +17,6 @@ import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.space.model.Space;
 import org.exoplatform.social.core.space.spi.SpaceService;
-
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -73,17 +77,18 @@ public class IdeaService {
     return null;
   }
 
-
   @ExoTransactional
   public IdeaDTO addIdea(IdeaDTO ideaDTO) {
     IdeaEntity ideaEntity = null;
     try {
       ideaEntity = ideaDao.create(ideaMapper.dtoToIdea(ideaDTO));
+
+      // Send Notification
+
     } catch (Exception e) {
       LOG.error("Error to create badge with title ", ideaDTO.getUser(), e);
     }
     return ideaMapper.ideaTOideaDTO(ideaEntity);
-
   }
 
   @ExoTransactional
@@ -111,6 +116,7 @@ public class IdeaService {
 
       IdeaEntity ideaEntity = ideaDao.find(ideaDTO.getId());
       if (ideaEntity != null) {
+        IdeaEntity.Status Value=ideaEntity.getStatus();
         ideaEntity.setDescription(ideaDTO.getDescription());
         ideaEntity.setStatus(ideaDTO.getStatus());
         ideaEntity.setTitle(ideaDTO.getTitle());
@@ -120,6 +126,18 @@ public class IdeaService {
         ideaEntity.setUpdatedTime(System.currentTimeMillis());
         ideaEntity.setIsProject(ideaDTO.getIsProject());
         ideaDao.update(ideaEntity);
+        if((ideaDTO.getStatus().equals(IdeaEntity.Status.PUBLISHED)) & (Value.equals(IdeaEntity.Status.PUBLISHED))){
+          NotificationContext ctx = NotificationContextImpl.cloneInstance().append(UpdateIdeaPlugin.IDEA, ideaDTO);
+         ctx.getNotificationExecutor().with(ctx.makeCommand(PluginKey.key(UpdateIdeaPlugin.ID))).execute(ctx);
+      
+
+       }
+       else  if((ideaDTO.getStatus().equals(IdeaEntity.Status.PUBLISHED)) & (Value.equals(IdeaEntity.Status.DRAFT))){
+         NotificationContext ctx = NotificationContextImpl.cloneInstance().append(AddIdeaPlugin.IDEA, ideaDTO);
+         ctx.getNotificationExecutor().with(ctx.makeCommand(PluginKey.key(AddIdeaPlugin.ID))).execute(ctx);
+      
+       }
+     
         return ideaMapper.ideaTOideaDTO(ideaEntity);
       }
     } catch (Exception e) {
@@ -129,11 +147,10 @@ public class IdeaService {
     return null;
   }
 
-
   public void createSpace(Long ideaID, String creator) throws Exception {
     IdeaDTO idea = ideaMapper.ideaTOideaDTO(ideaDao.find(ideaID));
-    String[] managers = {creator};
-    String[] members = {creator};
+    String[] managers = { creator };
+    String[] members = { creator };
     Space space = new Space();
     space.setDisplayName("Projet " + idea.getTitle());
     space.setPrettyName("IDEATION-" + idea.getId());
@@ -141,16 +158,17 @@ public class IdeaService {
     space.setManagers(managers);
     space.setMembers(members);
     space.setRegistration(Space.VALIDATION);
-    //TODO choose which template to be used for projects
-    //space.setTemplate("classic");
+    // TODO choose which template to be used for projects
+    // space.setTemplate("classic");
     space.setVisibility(Space.PRIVATE);
     space = spaceService.createSpace(space, creator);
     idea.setSpaceID(space.getId());
+    idea.setIsProject(true);
     ideaDao.update(ideaMapper.dtoToIdea(idea));
   }
-  
+
   public String GetUrlSpace(String spaceID) {
     Space s = spaceService.getSpaceById(spaceID);
-    return "/portal/g/:spaces" + s.getGroupId() + "/" + s.getPrettyName();
+    return "/portal/g/:spaces:" + s.getPrettyName() + "/" + s.getPrettyName();
   }
 }

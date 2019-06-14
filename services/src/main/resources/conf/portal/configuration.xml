@@ -146,5 +146,6 @@ for more details. You should have received a copy of the GNU Lesser General Publ
             </init-params>
         </component-plugin>
     </external-component-plugins>
+    <import>notification-configuration.xml</import>
 
 </configuration>

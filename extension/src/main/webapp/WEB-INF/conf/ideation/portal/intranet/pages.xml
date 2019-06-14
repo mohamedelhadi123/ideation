@@ -10,8 +10,8 @@
     <edit-permission>*:/platform/administrators</edit-permission>
     <portlet-application>
       <portlet>
-        <application-ref>ideation</application-ref>
-        <portlet-ref>IdeaFrontPortlet</portlet-ref>
+        <application-ref>ideation-vue-portlets</application-ref>
+        <portlet-ref>Ideation</portlet-ref>
       </portlet>
       <title>Ideation</title>
       <access-permissions>*:/platform/users</access-permissions>

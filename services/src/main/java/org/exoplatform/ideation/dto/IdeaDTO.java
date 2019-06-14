@@ -43,6 +43,7 @@ public class IdeaDTO implements Serializable {
     this.resume = ideaEntity.getResume();
     this.explanation = ideaEntity.getExplanation();
     this.isProject = ideaEntity.getIsProject();
+    this.spaceID = ideaEntity.getSpaceID();
   }
 
   public Boolean getIsProject() {
@@ -127,14 +128,6 @@ public class IdeaDTO implements Serializable {
 
   public void setCreatedTime(long createdTime) {
     this.createdTime = createdTime;
-  }
-
-  public Boolean getProject() {
-    return isProject;
-  }
-
-  public void setProject(Boolean project) {
-    isProject = project;
   }
 
   public String getSpaceID() {

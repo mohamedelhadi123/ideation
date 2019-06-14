@@ -100,6 +100,7 @@ public class IdeaRestService implements ResourceContainer {
   @Path("addIdea")
   public Response addIdea(IdeaDTO ideaDTO) {
     try {
+      ideaDTO.setUser(getCurrentUser());
       ideaDTO = ideaService.addIdea(ideaDTO);
       return Response.ok().entity(ideaDTO).build();
     } catch (Exception e) {
@@ -132,6 +133,8 @@ public class IdeaRestService implements ResourceContainer {
   @Path("/update")
   public Response updateIdea(IdeaDTO ideaDTO) {
     try {
+      ideaDTO.setUser(getCurrentUser());
+
       ideaService.updateIdea(ideaDTO);
       return Response.ok().entity(ideaDTO).build();
     } catch (Exception e) {
@@ -144,15 +147,13 @@ public class IdeaRestService implements ResourceContainer {
   @POST
   @Path("/addSapace/{ideaID}")
   public Response AddSapce(@PathParam("ideaID") Long ideaID) throws Exception {
-    String user = ConversationState.getCurrent().getIdentity().getUserId();
-
     if(getCurrentUser() ==null) {
       return Response.status(Response.Status.FORBIDDEN).build();
     }
     if(ideaID == null){
       return Response.status(Response.Status.NOT_ACCEPTABLE).build();
     }
-    ideaService.createSpace(ideaID, user);
+    ideaService.createSpace(ideaID, getCurrentUser());
     return Response.status(Response.Status.OK).entity("Create space").build();
   }
 

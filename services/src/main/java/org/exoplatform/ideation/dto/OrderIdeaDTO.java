@@ -22,12 +22,13 @@ public class OrderIdeaDTO implements Serializable {
   protected String title;
   private String user;
   private Long nb;
-
+  private IdeaEntity.Status status;
   public OrderIdeaDTO() {
   }
 
   public OrderIdeaDTO(IdeaEntity ideaentity, Long nb) {
     this.id = ideaentity.getId();
+    this.status=ideaentity.getStatus();
     this.title = ideaentity.getTitle();
     this.nb = nb;
   }
@@ -64,5 +65,11 @@ public class OrderIdeaDTO implements Serializable {
     this.nb = nb;
   }
 
+  public IdeaEntity.Status getStatus() {
+    return status;
+  }
 
+  public void setStatus(IdeaEntity.Status status) {
+    this.status = status;
+  }
 }

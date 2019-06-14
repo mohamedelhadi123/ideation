@@ -68,10 +68,12 @@ export default {
       .catch(error => {
         this.errored = true
       })
-    },updated(){
+   
            axios
       .get('/portal/rest/fav/getallordered')
       .then(response => { this.DonneRating=response.data;
+      this.DonneRating=this.DonneRating.filter((d)=>d.status === "PUBLISHED")
+
       
       if(this.DonneRating.length===0){
         this.alt=true;
